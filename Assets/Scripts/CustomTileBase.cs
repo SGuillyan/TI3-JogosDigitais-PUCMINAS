@@ -25,9 +25,29 @@ public class CustomTileBase : TileBase
 
     public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
     {
-        // Inicialize comportamentos específicos aqui
-        // Como exemplo, poderíamos instanciar um GameObject ou configurar parâmetros iniciais
-        return true;  // Retornar true indica que a inicialização foi bem-sucedida
+        // Inicializa o comportamento específico do tile e registra as informações no TilemapManager
+        TilemapManager tilemapManager = Object.FindObjectOfType<TilemapManager>();
+
+        if (tilemapManager != null)
+        {
+            // Cria um objeto TileInfo com os dados deste CustomTileBase
+            TileInfo info = new TileInfo()
+            {
+                isPlantable = this.isPlantable,
+                nutrienteX = this.nutrienteX,
+                nutrienteY = this.nutrienteY
+            };
+
+            // Registra as informações no dicionário do TilemapManager
+            Vector3Int gridPosition = position;
+            tilemapManager.SetTileInfo(gridPosition, info);
+        }
+        else
+        {
+            Debug.LogWarning("TilemapManager não encontrado na cena.");
+        }
+
+        return true;  // Indica que a inicialização foi bem-sucedida
     }
 
     // Método para acessar as informações do tile

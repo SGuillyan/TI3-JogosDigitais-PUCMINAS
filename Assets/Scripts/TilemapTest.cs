@@ -11,7 +11,7 @@ public class TilemapTest : MonoBehaviour
         {
             Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int gridPosition = tilemapManager.tilemap.WorldToCell(worldPoint);
-
+            gridPosition.z = 0;
             // Testa os dados do tile na posição clicada
             tilemapManager.TestTileData(gridPosition);
         }
@@ -20,7 +20,7 @@ public class TilemapTest : MonoBehaviour
         {
             Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int gridPosition = tilemapManager.tilemap.WorldToCell(worldPoint);
-
+            gridPosition.z = 0;
             // Modifica os dados do tile na posição clicada
             TileInfo newInfo = new TileInfo()
             {

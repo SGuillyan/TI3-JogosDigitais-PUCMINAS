@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57b50668be67c68478b08011377c301f, type: 3}
-  m_Name: CustomTile1
+  m_Name: WaterTile
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: ef22b3989e073ef4799e6485426710b2, type: 3}
+  sprite: {fileID: 21300000, guid: c6fa0983a1f68364fa8250407efb6cc2, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   isPlantable: 1
   nutrienteX: 100
