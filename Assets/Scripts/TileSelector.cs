@@ -28,13 +28,13 @@ public class TileSelector : MonoBehaviour
                 CustomTileBase customTile = (CustomTileBase)clickedTile;
 
                 // Exibir informações do tile no console
-                customTile.DisplayTileInfo();
+                // customTile.DisplayTileInfo();
 
                 // Aqui você pode adicionar lógica específica para interagir com o tile
             }
             else if(clickedTile != null)
             {
-                DisplayTileInfo(gridPosition, clickedTile);
+                // DisplayTileInfo(gridPosition, clickedTile);
             }
             else
             {
