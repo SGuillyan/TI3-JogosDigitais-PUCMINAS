@@ -37,7 +37,7 @@ public class PlantTile : Tile
     }
 
     // Método para atualizar o sprite conforme a fase de crescimento
-    private void UpdateSprite(Tilemap tilemap, Vector3Int position)
+    public void UpdateSprite(Tilemap tilemap, Vector3Int position)
     {
         if (growthSprites != null && growthSprites.Length > 0)
         {

@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 136b335a369405b4da23ee97a938482c, type: 3}
+  m_Name: TestPlantTile
+  m_EditorClassIdentifier: 
+  m_Sprite: {fileID: 21300000, guid: aed8d36bf52fb7246ac65b2ee644ff13, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Transform:
+    e00: 1
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 1
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 1
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+  m_InstancedGameObject: {fileID: 0}
+  m_Flags: 1
+  m_ColliderType: 1
+  growthSprites:
+  - {fileID: 21300000, guid: 84d7a02437b955a49a0d7bd41476a13d, type: 3}
+  - {fileID: 21300000, guid: c6fa0983a1f68364fa8250407efb6cc2, type: 3}
+  - {fileID: 21300000, guid: 1a3827539a3b2b44595888e0e05254a3, type: 3}
+  - {fileID: 21300000, guid: 44b79860a66545f4d9ecb5788ba6a36f, type: 3}
+  growthTimes:
+  - 5
+  - 5
+  - 1
+  - 1
+  isPlanted: 0
+  isFullyGrown: 0
