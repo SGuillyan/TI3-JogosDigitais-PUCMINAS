@@ -14,6 +14,7 @@ public class TilemapPlant : MonoBehaviour
             tilemap.SetTile(position, selectedPlantTile);
             selectedPlantTile.Plant(tilemap, position, this);  // Passa o MonoBehaviour (TilemapPlant) como 'caller'
             tilemap.RefreshTile(position);
+            Debug.Log("Semente plantada: " + seedIndex + " em " + position);
         }
         else
         {

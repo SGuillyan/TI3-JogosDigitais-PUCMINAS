@@ -4,7 +4,7 @@ public class InventoryTester : MonoBehaviour
 {
     public Inventory playerInventory;  // Referência ao inventário do jogador
     public Item cornSeed;
-    public Item compostFertilizer;
+    public Item strawberrySeed;
     public Item apple;
 
     // Testa a adição de itens
@@ -14,10 +14,10 @@ public class InventoryTester : MonoBehaviour
         Debug.Log("Adicionou 10 Sementes de Milho ao inventário.");
     }
 
-    public void TestAddFertilizer()
+    public void TestAddStrawberry()
     {
-        playerInventory.AddItem(compostFertilizer, 5);
-        Debug.Log("Adicionou 5 Compostos de Fertilizante ao inventário.");
+        playerInventory.AddItem(strawberrySeed, 5);
+        Debug.Log("Adicionou 5 Sementes de Morango ao inventário.");
     }
 
     public void TestAddApple()
@@ -39,15 +39,15 @@ public class InventoryTester : MonoBehaviour
         }
     }
 
-    public void TestRemoveFertilizer()
+    public void TestRemoveStrawberry()
     {
-        if (playerInventory.RemoveItem(compostFertilizer, 3))
+        if (playerInventory.RemoveItem(strawberrySeed, 3))
         {
-            Debug.Log("Removeu 3 Compostos de Fertilizante do inventário.");
+            Debug.Log("Removeu 3 Sementes de Morango do inventário.");
         }
         else
         {
-            Debug.Log("Falha ao remover 3 Compostos de Fertilizante - quantidade insuficiente.");
+            Debug.Log("Falha ao remover 3 Sementes de Morango - quantidade insuficiente.");
         }
     }
 
@@ -70,10 +70,10 @@ public class InventoryTester : MonoBehaviour
         Debug.Log("Quantidade de Sementes de Milho no inventário: " + quantity);
     }
 
-    public void TestGetFertilizerQuantity()
+    public void TestGetStrawberryQuantity()
     {
-        int quantity = playerInventory.GetItemQuantity(compostFertilizer);
-        Debug.Log("Quantidade de Compostos de Fertilizante no inventário: " + quantity);
+        int quantity = playerInventory.GetItemQuantity(strawberrySeed);
+        Debug.Log("Quantidade de Sementes de Morango no inventário: " + quantity);
     }
 
     public void TestGetAppleQuantity()

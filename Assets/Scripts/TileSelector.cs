@@ -9,54 +9,56 @@ public class TileSelector : MonoBehaviour
     private TileBase previousTile;  // Armazena o tile original
     private bool hasPreviousTile = false;  // Verifica se já houve um tile selecionado
 
+    public InventoryManager inventoryManager;  // Referência ao InventoryManager para verificar sementes selecionadas
+    public TilemapPlant tilemapPlant;  // Referência ao sistema de plantio
+
     void SelectTile()
     {
         if (Input.GetMouseButtonDown(0))  // Detecta clique do mouse
         {
             // Converte a posição do mouse na tela para uma posição no mundo
             Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            worldPoint.z = 0;
-
             // Converte a posição no mundo para uma célula do Tilemap
             Vector3Int gridPosition = tilemap.WorldToCell(worldPoint);
+            gridPosition.z = 0;
 
-            // Obter o TileBase na posição clicada
-            TileBase clickedTile = tilemap.GetTile(gridPosition);
-
-            if (clickedTile != null && clickedTile is CustomTileBase)
+            // Verifica se há uma semente selecionada no inventário
+            if (inventoryManager.HasSelectedSeed())
             {
-                CustomTileBase customTile = (CustomTileBase)clickedTile;
-
-                // Exibir informações do tile no console
-                // customTile.DisplayTileInfo();
-
-                // Aqui você pode adicionar lógica específica para interagir com o tile
-            }
-            else if(clickedTile != null)
-            {
-                // DisplayTileInfo(gridPosition, clickedTile);
+                // Se houver uma semente selecionada, tenta plantar
+                tilemapPlant.PlantSeedAt(gridPosition, inventoryManager.GetSelectedSeedID());
+                inventoryManager.PlantSeedAt(gridPosition);
             }
             else
             {
-               // Debug.Log("Nenhum tile na posição: " + gridPosition);
+                // Se não houver semente selecionada, exibe informações do tile no console
+                DisplayTileInfo(gridPosition);
             }
         }
     }
 
-
-    void DisplayTileInfo(Vector3Int gridPosition, TileBase clickedTile)
+    void DisplayTileInfo(Vector3Int gridPosition)
     {
-        // Exibe as informações básicas do tile no console
-        Debug.Log("Tile selecionado na posição: " + gridPosition);
-        Debug.Log("Nome do Tile: " + clickedTile.name);
+        TileBase clickedTile = tilemap.GetTile(gridPosition);
 
-        // Tenta obter informações adicionais do Tile (se for um Tile 2D do tipo padrão)
-        Tile tileData = tilemap.GetTile<Tile>(gridPosition);
-        if (tileData != null)
+        if (clickedTile != null)
         {
-            Debug.Log("Sprite do Tile: " + tileData.sprite.name);
-            Debug.Log("Cor do Tile: " + tilemap.GetColor(gridPosition));
-            // Adicione aqui qualquer outra propriedade do Tile que você queira exibir
+            // Exibe as informações básicas do tile no console
+            Debug.Log("Tile selecionado na posição: " + gridPosition);
+            Debug.Log("Nome do Tile: " + clickedTile.name);
+
+            // Tenta obter informações adicionais do Tile (se for um Tile 2D do tipo padrão)
+            Tile tileData = tilemap.GetTile<Tile>(gridPosition);
+            if (tileData != null)
+            {
+                Debug.Log("Sprite do Tile: " + tileData.sprite.name);
+                Debug.Log("Cor do Tile: " + tilemap.GetColor(gridPosition));
+                // Adicione aqui qualquer outra propriedade do Tile que você queira exibir
+            }
+        }
+        else
+        {
+            Debug.Log("Nenhum tile na posição: " + gridPosition);
         }
     }
 

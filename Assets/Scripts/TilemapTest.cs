@@ -16,7 +16,7 @@ public class TilemapTest : MonoBehaviour
             // Testa os dados do tile na posição clicada
             //tilemapManager.TestTileData(gridPosition);
             //tilemapPlant.ResetPlantAt(gridPosition);
-            tilemapPlant.PlantSeedAt(gridPosition,0);
+            //tilemapPlant.PlantSeedAt(gridPosition,0);
         }
 
         if (Input.GetMouseButtonDown(1)) // Clique com o botão direito do mouse
@@ -25,7 +25,7 @@ public class TilemapTest : MonoBehaviour
             Vector3Int gridPosition = tilemapManager.tilemap.WorldToCell(worldPoint);
             gridPosition.z = 0;
             // Modifica os dados do tile na posição clicada
-            tilemapPlant.PlantSeedAt(gridPosition,1);
+            //tilemapPlant.PlantSeedAt(gridPosition,1);
         }
     }
 }
