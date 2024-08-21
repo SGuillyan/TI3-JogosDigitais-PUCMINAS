@@ -38,7 +38,7 @@ public class TileSelector : MonoBehaviour
             }
             else
             {
-                Debug.Log("Nenhum tile na posição: " + gridPosition);
+               // Debug.Log("Nenhum tile na posição: " + gridPosition);
             }
         }
     }

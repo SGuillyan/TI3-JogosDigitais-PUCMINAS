@@ -18,18 +18,7 @@ public class TilemapManager : MonoBehaviour
 
     void Start()
     {
-        // Exemplo de inicialização para um tile específico
-        Vector3Int tilePosition = new Vector3Int(0, 0, 0);  // Posição do tile
-        TileInfo info = new TileInfo()
-        {
-            isPlantable = true,
-            nutrienteX = 5,
-            nutrienteY = 10
-        };
-        tileInfoDictionary[tilePosition] = info;
 
-        // Testando se os dados foram armazenados corretamente
-        TestTileData(tilePosition);
     }
 
     public TileInfo GetTileInfo(Vector3Int position)

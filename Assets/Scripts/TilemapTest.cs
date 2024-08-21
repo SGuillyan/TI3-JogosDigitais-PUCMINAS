@@ -4,6 +4,7 @@ using UnityEngine.Tilemaps;
 public class TilemapTest : MonoBehaviour
 {
     public TilemapManager tilemapManager;
+    public TilemapPlant tilemapPlant;
 
     void Update()
     {
@@ -22,16 +23,7 @@ public class TilemapTest : MonoBehaviour
             Vector3Int gridPosition = tilemapManager.tilemap.WorldToCell(worldPoint);
             gridPosition.z = 0;
             // Modifica os dados do tile na posição clicada
-            TileInfo newInfo = new TileInfo()
-            {
-                isPlantable = false,
-                nutrienteX = Random.Range(0, 10),
-                nutrienteY = Random.Range(0, 10)
-            };
-            tilemapManager.SetTileInfo(gridPosition, newInfo);
-
-            // Testa os dados após a modificação
-            tilemapManager.TestTileData(gridPosition);
+            tilemapPlant.PlantSeedAt(gridPosition);
         }
     }
 }
