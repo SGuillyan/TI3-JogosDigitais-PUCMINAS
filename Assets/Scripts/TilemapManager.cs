@@ -41,10 +41,10 @@ public class TilemapManager : MonoBehaviour
         TileInfo info = GetTileInfo(position);
         if (info != null)
         {
-            Debug.Log("Tile na posição " + position + " tem os seguintes dados:");
+            /*Debug.Log("Tile na posição " + position + " tem os seguintes dados:");
             Debug.Log("Is Plantable: " + info.isPlantable);
             Debug.Log("Nutriente X: " + info.nutrienteX);
-            Debug.Log("Nutriente Y: " + info.nutrienteY);
+            Debug.Log("Nutriente Y: " + info.nutrienteY);*/
         }
         else
         {

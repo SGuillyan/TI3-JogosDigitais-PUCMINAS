@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.EventSystems;  // Necessário para detectar cliques em UI
 
 public class TileSelector : MonoBehaviour
 {
@@ -11,9 +12,17 @@ public class TileSelector : MonoBehaviour
 
     public InventoryManager inventoryManager;  // Referência ao InventoryManager para verificar sementes selecionadas
     public TilemapPlant tilemapPlant;  // Referência ao sistema de plantio
+    public InventoryUI inventoryUI;  // Referência ao script de UI do inventário
 
     void SelectTile()
     {
+        // Verifica se o inventário está aberto ou se o clique é na UI
+        if (inventoryUI.inventoryUI.activeSelf || EventSystem.current.IsPointerOverGameObject())
+        {
+            // Se o inventário estiver aberto ou o clique for na UI, não processa o clique
+            return;
+        }
+
         if (Input.GetMouseButtonDown(0))  // Detecta clique do mouse
         {
             // Converte a posição do mouse na tela para uma posição no mundo

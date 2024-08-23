@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;  // Para lidar com UI
 
 public class InventoryManager : MonoBehaviour
 {
@@ -7,19 +8,46 @@ public class InventoryManager : MonoBehaviour
     private int selectedSeedID = -1;  // ID da semente selecionada
     private bool isPlanting = false;  // Flag para verificar se o jogador está no modo de plantio
 
+    public Button shopButton;  // Referência ao botão Shop
+    public Button stopPlantingButton;  // Referência ao botão Stop Planting
+
+    void Start()
+    {
+        // Inicialmente, o botão Stop Planting está desativado
+        stopPlantingButton.gameObject.SetActive(false);
+    }
+
     // Método para selecionar uma semente
     public void SelectSeed(int seedID)
     {
-        selectedSeedID = seedID;
-        inventoryUI.CloseInventory();  // Fecha o inventário ao selecionar uma semente
-        isPlanting = true;  // Ativa o modo de plantio
+        // Verifica se o item selecionado é uma semente (ID entre 0 e 99)
+        if (seedID >= 0 && seedID <= 99)
+        {
+            selectedSeedID = seedID;
+            inventoryUI.CloseInventory();  // Fecha o inventário ao selecionar uma semente
+            isPlanting = true;  // Ativa o modo de plantio
+
+            // Troca os botões
+            shopButton.gameObject.SetActive(false);
+            stopPlantingButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            DeselectSeed();  // Deseleciona se o item não for uma semente
+        }
     }
 
-    // Método para deselecionar a semente
+    // Método para deselecionar a semente e voltar ao inventário
     public void DeselectSeed()
     {
         selectedSeedID = -1;
         isPlanting = false;  // Desativa o modo de plantio
+
+        // Troca os botões
+        shopButton.gameObject.SetActive(true);
+        stopPlantingButton.gameObject.SetActive(false);
+
+        inventoryUI.OpenInventory();  // Reabre o inventário
     }
 
     // Verifica se uma semente está selecionada
@@ -54,7 +82,6 @@ public class InventoryManager : MonoBehaviour
                         // Remove o item do inventário se a quantidade for 0
                         playerInventory.items.Remove(selectedItem);
                         DeselectSeed();
-                        inventoryUI.OpenInventory();  // Reabre o inventário se o item foi removido
                     }
 
                     inventoryUI.UpdateInventoryUI();  // Atualiza o inventário para refletir a nova quantidade
@@ -65,5 +92,11 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    // Método para parar o plantio (associado ao botão Stop Planting)
+    public void StopPlanting()
+    {
+        DeselectSeed();  // Deseleciona a semente e volta ao inventário
     }
 }
