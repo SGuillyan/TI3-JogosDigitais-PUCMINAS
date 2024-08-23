@@ -687,7 +687,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &156615742
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1164,7 +1164,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &401409466
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3370,7 +3370,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1220511885
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3968,6 +3968,7 @@ MonoBehaviour:
   inventoryManager: {fileID: 1615968786}
   tilemapPlant: {fileID: 1462389539}
   inventoryUI: {fileID: 1615968785}
+  tilemapManager: {fileID: 1462389538}
 --- !u!4 &1462389536
 Transform:
   m_ObjectHideFlags: 0
@@ -4044,7 +4045,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1560171348
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5615,7 +5616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1920867845
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8866,7 +8867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1968960377
 RectTransform:
   m_ObjectHideFlags: 0
