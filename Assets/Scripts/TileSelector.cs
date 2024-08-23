@@ -14,6 +14,7 @@ public class TileSelector : MonoBehaviour
     public TilemapPlant tilemapPlant;  // Referência ao sistema de plantio
     public InventoryUI inventoryUI;  // Referência ao script de UI do inventário
     public TilemapManager tilemapManager;  // Referência ao script TilemapManager para verificar informações do tile
+    public Inventory playerInventory;  // Referência ao inventário do jogador
 
     void SelectTile()
     {
@@ -32,8 +33,15 @@ public class TileSelector : MonoBehaviour
             Vector3Int gridPosition = tilemap.WorldToCell(worldPoint);
             gridPosition.z = 0;
 
-            // Verifica se há uma semente selecionada no inventário
-            if (inventoryManager.HasSelectedSeed())
+            TileBase clickedTile = tilemap.GetTile(gridPosition);
+
+            // Verifica se o tile clicado é um PlantTile e está completamente crescido
+            if (clickedTile is PlantTile plantTile && plantTile.isFullyGrown)
+            {
+                // Coleta a planta e restaura o tile original
+                plantTile.Collect(tilemap, gridPosition, playerInventory);
+            }
+            else if (inventoryManager.HasSelectedSeed())
             {
                 // Verifica se o tile na posição é plantável
                 TileInfo tileInfo = tilemapManager.GetTileInfo(gridPosition);

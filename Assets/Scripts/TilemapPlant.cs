@@ -21,23 +21,4 @@ public class TilemapPlant : MonoBehaviour
             Debug.LogError("Índice de semente inválido: " + seedIndex);
         }
     }
-
-    public void CollectPlantAt(Vector3Int position)
-    {
-        PlantTile plantTile = tilemap.GetTile<PlantTile>(position);
-        if (plantTile != null && plantTile.isFullyGrown)
-        {
-            plantTile.Collect(tilemap, position);
-        }
-    }
-
-    public void ResetPlantAt(Vector3Int position)
-    {
-        PlantTile plantTile = tilemap.GetTile<PlantTile>(position);
-        if (plantTile != null)
-        {
-            plantTile.ResetGrowth();
-            tilemap.RefreshTile(position);
-        }
-    }
 }

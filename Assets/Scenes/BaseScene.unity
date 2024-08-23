@@ -3969,6 +3969,7 @@ MonoBehaviour:
   tilemapPlant: {fileID: 1462389539}
   inventoryUI: {fileID: 1615968785}
   tilemapManager: {fileID: 1462389538}
+  playerInventory: {fileID: 1615968783}
 --- !u!4 &1462389536
 Transform:
   m_ObjectHideFlags: 0
@@ -4234,11 +4235,11 @@ MonoBehaviour:
     itemType: 1
     itemID: 1
   apple:
-    itemName: "Ma\xE7\xE3"
+    itemName: Morango
     itemIcon: {fileID: 21300000, guid: 39283445edd0bbc44b79da9e1d3ea002, type: 3}
     maxStackSize: 99
     itemType: 0
-    itemID: 100
+    itemID: 101
 --- !u!114 &1615968785
 MonoBehaviour:
   m_ObjectHideFlags: 0
