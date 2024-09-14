@@ -3,12 +3,18 @@ using UnityEngine.Tilemaps;
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 [CreateAssetMenu(menuName = "Tiles/Plant Tile")]
 public class PlantTile : Tile
 {
     public Sprite[] growthSprites;  // Array para armazenar os sprites de cada fase de crescimento
     public float[] growthTimes;  // Array para armazenar o tempo necessário para cada fase de crescimento
+
+    public Ambient ambient;
+    public Ambient.Temperature idealTemperature;
+    public Ambient.Climate idealClimate;
+
     public GameObject progressBarPrefab;  // Prefab da barra de progresso
     private GameObject progressBarInstance;  // Instância da barra de progresso
     private Image progressBarFill;  // Referência ao preenchimento da barra de progresso
@@ -88,8 +94,9 @@ public class PlantTile : Tile
             while (totalElapsedTime < stageStartTime + stageGrowthTime)
             {
                 yield return null;
-                totalElapsedTime += Time.deltaTime;
-                currentGrowthTime += Time.deltaTime;
+                float additionalTime = Time.deltaTime * VerifyAmbient();
+                totalElapsedTime += additionalTime;
+                currentGrowthTime += additionalTime;
 
                 // Atualiza a barra de progresso com base no tempo total
                 if (progressBarFill != null)
@@ -184,5 +191,30 @@ public class PlantTile : Tile
     {
         tileData.sprite = this.sprite;
         tileData.color = Color.white;
+    }
+
+    private float VerifyAmbient()
+    {
+        float r = 1;
+
+        if(idealTemperature == ambient.currentTemperature)
+        {
+            r *= 1.5f;
+        }
+        else if (Mathf.Abs((int)idealTemperature - (int)ambient.currentTemperature) >= 2)
+        {
+            r *= 0.5f;
+        }
+
+        if (idealClimate == ambient.currentClimate)
+        {
+            r *= 1.5f;
+        }
+        else if (Mathf.Abs((int)idealClimate - (int)ambient.currentClimate) >= 2)
+        {
+            r *= 0.5f;
+        }
+
+        return r;
     }
 }
