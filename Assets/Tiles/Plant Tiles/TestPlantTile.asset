@@ -44,5 +44,16 @@ MonoBehaviour:
   - 5
   - 1
   - 1
+  ambient: {fileID: 11400000, guid: e8f591b14a3ddde4da61770979152007, type: 2}
+  idealTemperature: 3
+  idealClimate: 3
+  progressBarPrefab: {fileID: 0}
   isPlanted: 0
   isFullyGrown: 0
+  harvestedItem:
+    itemName: 
+    itemIcon: {fileID: 0}
+    maxStackSize: 0
+    itemType: 0
+    itemID: 0
+  soilTile: {fileID: 0}
