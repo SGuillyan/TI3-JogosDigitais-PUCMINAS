@@ -21,15 +21,12 @@ public class TileSelector : MonoBehaviour
         // Verifica se o inventário está aberto ou se o clique é na UI
         if (inventoryUI.inventoryUI.activeSelf || EventSystem.current.IsPointerOverGameObject())
         {
-            // Se o inventário estiver aberto ou o clique for na UI, não processa o clique
-            return;
+            return; // Se o inventário estiver aberto ou o clique for na UI, não processa o clique
         }
 
         if (Input.GetMouseButtonDown(0))  // Detecta clique do mouse
         {
-            // Converte a posição do mouse na tela para uma posição no mundo
             Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            // Converte a posição no mundo para uma célula do Tilemap
             Vector3Int gridPosition = tilemap.WorldToCell(worldPoint);
             gridPosition.z = 0;
 
@@ -38,8 +35,7 @@ public class TileSelector : MonoBehaviour
             // Verifica se o tile clicado é um PlantTile e está completamente crescido
             if (clickedTile is PlantTile plantTile && plantTile.isFullyGrown)
             {
-                // Coleta a planta e restaura o tile original
-                plantTile.Collect(tilemap, gridPosition, playerInventory);
+                plantTile.Collect(tilemap, gridPosition, playerInventory); // Coleta a planta e restaura o tile original
             }
             else if (inventoryManager.HasSelectedSeed())
             {
@@ -47,9 +43,30 @@ public class TileSelector : MonoBehaviour
                 TileInfo tileInfo = tilemapManager.GetTileInfo(gridPosition);
                 if (tileInfo != null && tileInfo.isPlantable)
                 {
-                    // Se o tile for plantável, realiza o plantio
-                    tilemapPlant.PlantSeedAt(gridPosition, inventoryManager.GetSelectedSeedID());
-                    inventoryManager.PlantSeedAt(gridPosition);
+                    // Obtém o índice da semente selecionada
+                    int seedIndex = inventoryManager.GetSelectedSeedID();
+
+                    // Verifica se o índice da semente é válido e obtém o PlantTile correspondente
+                    if (seedIndex >= 0 && seedIndex < tilemapPlant.plantTilePrefabs.Length)
+                    {
+                        PlantTile selectedPlantTile = tilemapPlant.plantTilePrefabs[seedIndex];
+
+                        // Verifica se há nutrientes suficientes para plantar
+                        if (HasEnoughNutrients(tileInfo, selectedPlantTile))
+                        {
+                            // Realiza o plantio
+                            tilemapPlant.PlantSeedAt(gridPosition, seedIndex);
+                            inventoryManager.PlantSeedAt(gridPosition);
+                        }
+                        else
+                        {
+                            Debug.LogWarning("Nutrientes insuficientes para plantar na posição " + gridPosition);
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError("Índice de semente inválido: " + seedIndex);
+                    }
                 }
                 else
                 {
@@ -62,6 +79,14 @@ public class TileSelector : MonoBehaviour
                 DisplayTileInfo(gridPosition);
             }
         }
+}
+
+// Função para verificar se o solo tem nutrientes suficientes
+    private bool HasEnoughNutrients(TileInfo tileInfo, PlantTile plantTile)
+    {
+        return tileInfo.nitrogen >= plantTile.requiredNitrogen &&
+            tileInfo.phosphorus >= plantTile.requiredPhosphorus &&
+            tileInfo.potassium >= plantTile.requiredPotassium;
     }
 
     void DisplayTileInfo(Vector3Int gridPosition)
