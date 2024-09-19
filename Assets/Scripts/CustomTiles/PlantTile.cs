@@ -37,6 +37,12 @@ public class PlantTile : Tile
     public int requiredPhosphorus = 5;
     public int requiredPotassium = 5;
 
+    // Valores de NPK que a planta devolve ao solo após ser colhida
+    public int returnNitrogen = 5;
+    public int returnPhosphorus = 3;
+    public int returnPotassium = 4;
+
+
     public void Plant(Tilemap tilemap, Vector3Int position, MonoBehaviour caller)
     {
         TilemapManager tilemapManager = Object.FindObjectOfType<TilemapManager>();
@@ -209,7 +215,7 @@ public class PlantTile : Tile
                 return;
             }
 
-            // Obtém o estado atual dos nutrientes do solo antes de remover o plantTile
+            // Obtém o estado atual dos nutrientes do solo antes de remover o PlantTile
             TileInfo currentTileInfo = tilemapManager.GetTileInfo(position);
 
             if (currentTileInfo == null)
@@ -221,16 +227,21 @@ public class PlantTile : Tile
             // Adiciona o item coletado ao inventário do jogador
             playerInventory.AddItem(harvestedItem, 1);
 
-            // Restaura o tile de solo
-            tilemap.SetTile(position, soilTile);
+            // Devolve os nutrientes ao solo após a colheita
+            currentTileInfo.nitrogen += returnNitrogen;
+            currentTileInfo.phosphorus += returnPhosphorus;
+            currentTileInfo.potassium += returnPotassium;
 
-            // Atualiza o estado para plantável
+            // Atualiza o estado para plantável após a colheita
             currentTileInfo.isPlantable = true;
 
-            // Mantém os nutrientes atuais no dicionário do TilemapManager
+            // Restaura o tile de solo
+            tilemap.SetTile(position, soilTile);
             tilemapManager.SetTileInfo(position, currentTileInfo);
         }
     }
+
+
 
     public void ResetGrowth()
     {

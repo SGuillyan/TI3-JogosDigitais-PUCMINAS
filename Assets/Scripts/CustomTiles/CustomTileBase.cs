@@ -10,9 +10,9 @@ public class CustomTileBase : TileBase
     public bool isPlantable = true;
 
     // Nutrientes NPK no tile
-    public int nitrogen = 100;  // Nível de Nitrogênio (N)
-    public int phosphorus = 100;  // Nível de Fósforo (P)
-    public int potassium = 100;  // Nível de Potássio (K)
+    public int nitrogen = 1000;  // Nível de Nitrogênio (N)
+    public int phosphorus = 1000;  // Nível de Fósforo (P)
+    public int potassium = 1000;  // Nível de Potássio (K)
 
     public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
     {

@@ -3,14 +3,21 @@ using UnityEngine;
 public class InventoryTester : MonoBehaviour
 {
     public Inventory playerInventory;  // Referência ao inventário do jogador
-    public Item cornSeed;
+    public Item[] seeds;
     public Item strawberrySeed;
     public Item apple;
 
     // Testa a adição de itens
+    
+    public void TestAddSeeds()
+    {
+        for(int i = 0;i<seeds.Length; i++){
+            playerInventory.AddItem(seeds[i], 5);
+            }
+    }
     public void TestAddCornSeed()
     {
-        playerInventory.AddItem(cornSeed, 10);
+        playerInventory.AddItem(seeds[0], 10);
         Debug.Log("Adicionou 10 Sementes de Milho ao inventário.");
     }
 
@@ -29,7 +36,7 @@ public class InventoryTester : MonoBehaviour
     // Testa a remoção de itens
     public void TestRemoveCornSeed()
     {
-        if (playerInventory.RemoveItem(cornSeed, 5))
+        if (playerInventory.RemoveItem(seeds[0], 5))
         {
             Debug.Log("Removeu 5 Sementes de Milho do inventário.");
         }
@@ -64,9 +71,9 @@ public class InventoryTester : MonoBehaviour
     }
 
     // Testa a exibição de quantidades
-    public void TestGetCornSeedQuantity()
+    public void TestGetSeedsQuantity()
     {
-        int quantity = playerInventory.GetItemQuantity(cornSeed);
+        int quantity = playerInventory.GetItemQuantity(seeds[0]);
         Debug.Log("Quantidade de Sementes de Milho no inventário: " + quantity);
     }
 

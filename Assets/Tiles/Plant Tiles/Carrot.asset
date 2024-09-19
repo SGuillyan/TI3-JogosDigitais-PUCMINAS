@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 136b335a369405b4da23ee97a938482c, type: 3}
-  m_Name: Corn
+  m_Name: Carrot
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: aed8d36bf52fb7246ac65b2ee644ff13, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -38,28 +38,28 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 84d7a02437b955a49a0d7bd41476a13d, type: 3}
   - {fileID: 21300000, guid: c6fa0983a1f68364fa8250407efb6cc2, type: 3}
   - {fileID: 21300000, guid: 1a3827539a3b2b44595888e0e05254a3, type: 3}
-  - {fileID: 21300000, guid: 511a7be8bfb4df744b6be3aed828c5a6, type: 3}
+  - {fileID: 21300000, guid: 44b79860a66545f4d9ecb5788ba6a36f, type: 3}
   growthTimes:
   - 5
   - 5
-  - 5
+  - 3
   ambient: {fileID: 11400000, guid: e8f591b14a3ddde4da61770979152007, type: 2}
-  idealTemperature: 4
+  idealTemperature: 3
   idealClimate: 3
   progressBarPrefab: {fileID: 5926695452129876053, guid: 583fdf575a31b6e4986acc39a145fea3,
     type: 3}
   isPlanted: 0
   isFullyGrown: 0
   harvestedItem:
-    itemName: Milho
-    itemIcon: {fileID: 21300000, guid: 511a7be8bfb4df744b6be3aed828c5a6, type: 3}
+    itemName: Cenoura
+    itemIcon: {fileID: 0}
     maxStackSize: 99
     itemType: 0
-    itemID: 102
+    itemID: 101
   soilTile: {fileID: 11400000, guid: fb4802db5e5b9c94db6eda50fd1dd23d, type: 2}
-  requiredNitrogen: 90
-  requiredPhosphorus: 80
-  requiredPotassium: 85
-  returnNitrogen: 10
+  requiredNitrogen: 40
+  requiredPhosphorus: 60
+  requiredPotassium: 15
+  returnNitrogen: 0
   returnPhosphorus: 0
-  returnPotassium: 0
+  returnPotassium: 30
