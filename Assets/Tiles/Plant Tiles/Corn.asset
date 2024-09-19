@@ -43,6 +43,9 @@ MonoBehaviour:
   - 5
   - 5
   - 5
+  ambient: {fileID: 11400000, guid: e8f591b14a3ddde4da61770979152007, type: 2}
+  idealTemperature: 4
+  idealClimate: 3
   progressBarPrefab: {fileID: 5926695452129876053, guid: 583fdf575a31b6e4986acc39a145fea3,
     type: 3}
   isPlanted: 0
