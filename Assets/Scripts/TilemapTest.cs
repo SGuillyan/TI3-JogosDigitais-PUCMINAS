@@ -14,7 +14,7 @@ public class TilemapTest : MonoBehaviour
             Vector3Int gridPosition = tilemapManager.tilemap.WorldToCell(worldPoint);
             gridPosition.z = 0;
             // Testa os dados do tile na posição clicada
-            //tilemapManager.TestTileData(gridPosition);
+            tilemapManager.TestTileData(gridPosition);
             //tilemapPlant.ResetPlantAt(gridPosition);
             //tilemapPlant.PlantSeedAt(gridPosition,0);
         }

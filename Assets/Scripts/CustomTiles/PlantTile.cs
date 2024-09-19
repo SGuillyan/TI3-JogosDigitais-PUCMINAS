@@ -7,76 +7,103 @@ using TMPro;
 [CreateAssetMenu(menuName = "Tiles/Plant Tile")]
 public class PlantTile : Tile
 {
-    public Sprite[] growthSprites;  // Array para armazenar os sprites de cada fase de crescimento
-    public float[] growthTimes;  // Array para armazenar o tempo necessário para cada fase de crescimento
-    public GameObject progressBarPrefab;  // Prefab da barra de progresso
-    private GameObject progressBarInstance;  // Instância da barra de progresso
-    private Image progressBarFill;  // Referência ao preenchimento da barra de progresso
-    private TMP_Text progressBarText;  // Referência ao texto da barra de progresso
+    public Sprite[] growthSprites;
+    public float[] growthTimes;
+    public GameObject progressBarPrefab;
+    private GameObject progressBarInstance;
+    private Image progressBarFill;
+    private TMP_Text progressBarText;
 
-    public bool isPlanted = false;  // Indica se a planta foi plantada
-    public bool isFullyGrown = false;  // Indica se a planta atingiu o estágio final de crescimento
+    public bool isPlanted = false;
+    public bool isFullyGrown = false;
 
-    public Item harvestedItem;  // Item a ser adicionado ao inventário ao coletar
-    public TileBase soilTile;  // Tile original para ser restaurado após a colheita
+    public Item harvestedItem;
+    public TileBase soilTile;
 
-    private int growthStage = 0;  // Fase de crescimento atual
+    private int growthStage = 0;
     private float totalGrowthTime;
     private float currentGrowthTime;
 
-    // Método para iniciar o crescimento ao plantar a semente
+    // Requisitos de Nutrientes NPK para crescer
+    public int requiredNitrogen = 10;
+    public int requiredPhosphorus = 5;
+    public int requiredPotassium = 5;
+
     public void Plant(Tilemap tilemap, Vector3Int position, MonoBehaviour caller)
     {
+        TilemapManager tilemapManager = Object.FindObjectOfType<TilemapManager>();
+
+        if (tilemapManager == null)
+        {
+            Debug.LogError("TilemapManager não encontrado!");
+            return;
+        }
+
+        TileInfo tileInfo = tilemapManager.GetTileInfo(position);
+
+        if (tileInfo == null)
+        {
+            Debug.LogError("TileInfo não encontrado para a posição: " + position);
+            return;
+        }
+
+        // Verifica se há nutrientes suficientes no momento do plantio
+        if (tileInfo.nitrogen < requiredNitrogen || tileInfo.phosphorus < requiredPhosphorus || tileInfo.potassium < requiredPotassium)
+        {
+            Debug.LogWarning("Nutrientes insuficientes para plantar!");
+            return;
+        }
+
+        // Consome os nutrientes no momento do plantio
+        tileInfo.nitrogen -= requiredNitrogen;
+        tileInfo.phosphorus -= requiredPhosphorus;
+        tileInfo.potassium -= requiredPotassium;
+
+        // Atualiza o estado para não plantável
+        tileInfo.isPlantable = false;
+        tilemapManager.SetTileInfo(position, tileInfo);
+
+        // Inicia o processo de plantio e crescimento
         isPlanted = true;
         isFullyGrown = false;
         growthStage = 0;
         totalGrowthTime = 0f;
         currentGrowthTime = 0f;
 
-        // Calcula o tempo total de crescimento
         foreach (var time in growthTimes)
         {
             totalGrowthTime += time;
         }
 
-        // Instancia a barra de progresso
         if (progressBarPrefab != null)
         {
-            Vector3 worldPos = tilemap.CellToWorld(position) + new Vector3(0.5f, 1.5f, 0); // Ajusta a posição da barra de progresso
+            Vector3 worldPos = tilemap.CellToWorld(position) + new Vector3(0.5f, 1.5f, 0);
             progressBarInstance = Instantiate(progressBarPrefab, worldPos, Quaternion.identity);
 
-            // Encontra a imagem de preenchimento da barra de progresso
-            progressBarFill = progressBarInstance.GetComponentInChildren<Image>();
+            Transform fillTransform = progressBarInstance.transform.Find("ProgressBarFill"); // Substitua "Fill" pelo nome correto do objeto filho
+            if(fillTransform != null){
+                
+                progressBarFill = fillTransform.GetComponent<Image>();
 
-            if (progressBarFill != null)
-            {
-                progressBarFill.fillAmount = 0f;
-            }
-            else
-            {
-                Debug.LogError("ProgressBarFill not found in the prefab.");
-            }
+                if (progressBarFill != null)
+                {
+                    progressBarFill.fillAmount = 0f;
+                }
 
-            // Encontra o texto da barra de progresso usando GetComponentInChildren
-            progressBarText = progressBarInstance.GetComponentInChildren<TMP_Text>();
+                progressBarText = progressBarInstance.GetComponentInChildren<TMP_Text>();
 
-            if (progressBarText != null)
-            {
-                progressBarText.text = Mathf.CeilToInt(totalGrowthTime).ToString() + "s";
-
-            }
-            else
-            {
-                Debug.LogError("ProgressBarText not found in the prefab.");
+                if (progressBarText != null)
+                {
+                    progressBarText.text = Mathf.CeilToInt(totalGrowthTime).ToString() + "s";
+                }
             }
         }
 
         UpdateSprite(tilemap, position);
-        caller.StartCoroutine(Grow(tilemap, position));  // Inicia a corrotina de crescimento através de um MonoBehaviour
-        caller.StartCoroutine(UpdateProgressBar());  // Inicia a corrotina para atualizar a barra de progresso
+        caller.StartCoroutine(Grow(tilemap, position, caller));
     }
 
-    private IEnumerator Grow(Tilemap tilemap, Vector3Int position)
+    private IEnumerator Grow(Tilemap tilemap, Vector3Int position, MonoBehaviour caller)
     {
         float totalElapsedTime = 0f;
 
@@ -91,59 +118,38 @@ public class PlantTile : Tile
                 totalElapsedTime += Time.deltaTime;
                 currentGrowthTime += Time.deltaTime;
 
-                // Atualiza a barra de progresso com base no tempo total
-                if (progressBarFill != null)
-                {
-                    float progress = totalElapsedTime / totalGrowthTime;
-                    progressBarFill.fillAmount = progress;
-
-                    // Atualiza o texto com o tempo restante
-                    if (progressBarText != null)
-                    {
-                        float timeRemaining = totalGrowthTime - totalElapsedTime;
-                        progressBarText.text = Mathf.CeilToInt(timeRemaining).ToString();
-                    }
-                }
+                // Atualiza a barra de progresso corretamente
+                UpdateProgressBarUI(totalElapsedTime);
             }
 
-            // Avança para o próximo estágio de crescimento
             growthStage++;
             UpdateSprite(tilemap, position);
             tilemap.RefreshTile(position);
         }
 
-        // Quando o crescimento estiver completo
         isFullyGrown = true;
 
-        // Remove a barra de progresso
         if (progressBarInstance != null)
         {
             Destroy(progressBarInstance);
         }
     }
 
-    // Corrotina separada para atualizar a barra de progresso
-    private IEnumerator UpdateProgressBar()
+    private void UpdateProgressBarUI(float totalElapsedTime)
     {
-        while (!isFullyGrown)  // Continua até que a planta esteja completamente crescida
+        if (progressBarFill != null)
         {
-            yield return null;  // Espera um frame
-            if (progressBarFill != null)
-            {
-                float progress = currentGrowthTime / totalGrowthTime;
-                progressBarFill.fillAmount = progress;
+            float progress = currentGrowthTime / totalGrowthTime;
+            progressBarFill.fillAmount = Mathf.Clamp01(progress);
 
-                // Atualiza o texto com o tempo restante
-                if (progressBarText != null)
-                {
-                    float timeRemaining = totalGrowthTime - currentGrowthTime;
-                    progressBarText.text = Mathf.CeilToInt(timeRemaining).ToString();
-                }
+            if (progressBarText != null)
+            {
+                float timeRemaining = totalGrowthTime - totalElapsedTime;
+                progressBarText.text = Mathf.CeilToInt(timeRemaining).ToString() + "s";  // Adiciona "s" à string de segundos
             }
         }
     }
 
-    // Método para atualizar o sprite conforme a fase de crescimento
     public void UpdateSprite(Tilemap tilemap, Vector3Int position)
     {
         if (growthSprites != null && growthSprites.Length > 0)
@@ -152,20 +158,41 @@ public class PlantTile : Tile
         }
     }
 
-    // Método para coletar a planta quando estiver completamente crescida
     public void Collect(Tilemap tilemap, Vector3Int position, Inventory playerInventory)
     {
         if (isFullyGrown)
         {
-            // Adiciona o item correspondente ao inventário do jogador
+            TilemapManager tilemapManager = Object.FindObjectOfType<TilemapManager>();
+
+            if (tilemapManager == null)
+            {
+                Debug.LogError("TilemapManager não encontrado!");
+                return;
+            }
+
+            // Obtém o estado atual dos nutrientes do solo antes de remover o plantTile
+            TileInfo currentTileInfo = tilemapManager.GetTileInfo(position);
+
+            if (currentTileInfo == null)
+            {
+                Debug.LogError("TileInfo não encontrado para a posição: " + position);
+                return;
+            }
+
+            // Adiciona o item coletado ao inventário do jogador
             playerInventory.AddItem(harvestedItem, 1);
 
-            // Restaura o tile original de solo
+            // Restaura o tile de solo
             tilemap.SetTile(position, soilTile);
+
+            // Atualiza o estado para plantável
+            currentTileInfo.isPlantable = true;
+
+            // Mantém os nutrientes atuais no dicionário do TilemapManager
+            tilemapManager.SetTileInfo(position, currentTileInfo);
         }
     }
 
-    // Método para resetar a planta
     public void ResetGrowth()
     {
         isPlanted = false;
@@ -173,7 +200,6 @@ public class PlantTile : Tile
         growthStage = 0;
         currentGrowthTime = 0f;
 
-        // Remove a barra de progresso, se ainda existir
         if (progressBarInstance != null)
         {
             Destroy(progressBarInstance);
