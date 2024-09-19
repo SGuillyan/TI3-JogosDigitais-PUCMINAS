@@ -14,6 +14,7 @@ public class CustomTileBase : TileBase
     public int phosphorus = 1000;  // Nível de Fósforo (P)
     public int potassium = 1000;  // Nível de Potássio (K)
 
+    public int humidity = 1000;
     public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
     {
         tileData.sprite = sprite;
@@ -37,7 +38,8 @@ public class CustomTileBase : TileBase
                 this.isPlantable,    // Parâmetro 'isPlantable'
                 this.nitrogen,       // Parâmetro 'nitrogen'
                 this.phosphorus,     // Parâmetro 'phosphorus'
-                this.potassium       // Parâmetro 'potassium'
+                this.potassium,       // Parâmetro 'potassium'
+                this.humidity
             );
 
             // Registra as informações no dicionário do TilemapManager

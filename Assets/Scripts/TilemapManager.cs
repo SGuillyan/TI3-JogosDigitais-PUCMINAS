@@ -10,14 +10,16 @@ public class TileInfo
     public int nitrogen;
     public int phosphorus;
     public int potassium;
+    public int humidity;
 
     // Construtor para facilitar a criação de TileInfo
-    public TileInfo(bool isPlantable, int nitrogen, int phosphorus, int potassium)
+    public TileInfo(bool isPlantable, int nitrogen, int phosphorus, int potassium, int humidity)
     {
         this.isPlantable = isPlantable;
         this.nitrogen = nitrogen;
         this.phosphorus = phosphorus;
         this.potassium = potassium;
+        this.humidity = humidity;
     }
 }
 

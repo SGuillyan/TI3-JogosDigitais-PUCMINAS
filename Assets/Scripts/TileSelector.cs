@@ -14,6 +14,7 @@ public class TileSelector : MonoBehaviour
     public TilemapPlant tilemapPlant;  // Referência ao sistema de plantio
     public InventoryUI inventoryUI;  // Referência ao script de UI do inventário
     public TilemapManager tilemapManager;  // Referência ao script TilemapManager para verificar informações do tile
+    public UIManager uiManager;  // Referência ao UIManager para exibir as informações
     public Inventory playerInventory;  // Referência ao inventário do jogador
 
     void SelectTile()
@@ -21,12 +22,15 @@ public class TileSelector : MonoBehaviour
         // Verifica se o inventário está aberto ou se o clique é na UI
         if (inventoryUI.inventoryUI.activeSelf || EventSystem.current.IsPointerOverGameObject())
         {
-            return; // Se o inventário estiver aberto ou o clique for na UI, não processa o clique
+            // Se o inventário estiver aberto ou o clique for na UI, não processa o clique
+            return;
         }
 
         if (Input.GetMouseButtonDown(0))  // Detecta clique do mouse
         {
+            // Converte a posição do mouse na tela para uma posição no mundo
             Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            // Converte a posição no mundo para uma célula do Tilemap
             Vector3Int gridPosition = tilemap.WorldToCell(worldPoint);
             gridPosition.z = 0;
 
@@ -35,7 +39,8 @@ public class TileSelector : MonoBehaviour
             // Verifica se o tile clicado é um PlantTile e está completamente crescido
             if (clickedTile is PlantTile plantTile && plantTile.isFullyGrown)
             {
-                plantTile.Collect(tilemap, gridPosition, playerInventory); // Coleta a planta e restaura o tile original
+                // Coleta a planta e restaura o tile original
+                plantTile.Collect(tilemap, gridPosition, playerInventory);
             }
             else if (inventoryManager.HasSelectedSeed())
             {
@@ -43,30 +48,9 @@ public class TileSelector : MonoBehaviour
                 TileInfo tileInfo = tilemapManager.GetTileInfo(gridPosition);
                 if (tileInfo != null && tileInfo.isPlantable)
                 {
-                    // Obtém o índice da semente selecionada
-                    int seedIndex = inventoryManager.GetSelectedSeedID();
-
-                    // Verifica se o índice da semente é válido e obtém o PlantTile correspondente
-                    if (seedIndex >= 0 && seedIndex < tilemapPlant.plantTilePrefabs.Length)
-                    {
-                        PlantTile selectedPlantTile = tilemapPlant.plantTilePrefabs[seedIndex];
-
-                        // Verifica se há nutrientes suficientes para plantar
-                        if (HasEnoughNutrients(tileInfo, selectedPlantTile))
-                        {
-                            // Realiza o plantio
-                            tilemapPlant.PlantSeedAt(gridPosition, seedIndex);
-                            inventoryManager.PlantSeedAt(gridPosition);
-                        }
-                        else
-                        {
-                            Debug.LogWarning("Nutrientes insuficientes para plantar na posição " + gridPosition);
-                        }
-                    }
-                    else
-                    {
-                        Debug.LogError("Índice de semente inválido: " + seedIndex);
-                    }
+                    // Se o tile for plantável, realiza o plantio
+                    tilemapPlant.PlantSeedAt(gridPosition, inventoryManager.GetSelectedSeedID());
+                    inventoryManager.PlantSeedAt(gridPosition);
                 }
                 else
                 {
@@ -79,14 +63,6 @@ public class TileSelector : MonoBehaviour
                 DisplayTileInfo(gridPosition);
             }
         }
-}
-
-// Função para verificar se o solo tem nutrientes suficientes
-    private bool HasEnoughNutrients(TileInfo tileInfo, PlantTile plantTile)
-    {
-        return tileInfo.nitrogen >= plantTile.requiredNitrogen &&
-            tileInfo.phosphorus >= plantTile.requiredPhosphorus &&
-            tileInfo.potassium >= plantTile.requiredPotassium;
     }
 
     void DisplayTileInfo(Vector3Int gridPosition)
@@ -95,17 +71,24 @@ public class TileSelector : MonoBehaviour
 
         if (clickedTile != null)
         {
-            // Exibe as informações básicas do tile no console
-            Debug.Log("Tile selecionado na posição: " + gridPosition);
-            Debug.Log("Nome do Tile: " + clickedTile.name);
+            // Exibe o tipo do tile para depuração
+            Debug.Log("Tipo de tile clicado: " + clickedTile.GetType().Name);
 
-            // Tenta obter informações adicionais do Tile (se for um Tile 2D do tipo padrão)
-            Tile tileData = tilemap.GetTile<Tile>(gridPosition);
-            if (tileData != null)
+            // Obtém o TileInfo do tile clicado
+            TileInfo tileInfo = tilemapManager.GetTileInfo(gridPosition);
+
+            if (tileInfo != null && clickedTile is CustomTileBase tileData)  // Substitua "CustomTileBase" pelo tipo real que você está usando
             {
-                Debug.Log("Sprite do Tile: " + tileData.sprite.name);
-                Debug.Log("Cor do Tile: " + tilemap.GetColor(gridPosition));
-                // Adicione aqui qualquer outra propriedade do Tile que você queira exibir
+                // Atualiza o UIManager com as informações do tile
+                uiManager.UpdateTileInfo(tileData.sprite, tileInfo.nitrogen, tileInfo.phosphorus, tileInfo.potassium, tileInfo.humidity);
+            }
+            else if (tileInfo != null && clickedTile is PlantTile tileData2)
+            {
+                uiManager.UpdateTileInfo(tileData2.sprite, tileInfo.nitrogen, tileInfo.phosphorus, tileInfo.potassium, tileInfo.humidity);
+            }
+            else
+            {
+                Debug.Log("Nenhum dado do tile encontrado ou tipo de tile incompatível.");
             }
         }
         else
@@ -113,6 +96,7 @@ public class TileSelector : MonoBehaviour
             Debug.Log("Nenhum tile na posição: " + gridPosition);
         }
     }
+
 
     private void Update()
     {
