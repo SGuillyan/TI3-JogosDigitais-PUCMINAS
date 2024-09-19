@@ -47,23 +47,43 @@ public class PlantTile : Tile
             return;
         }
 
-        // Verifica se há nutrientes suficientes no momento do plantio
-        if (tileInfo.nitrogen < requiredNitrogen || tileInfo.phosphorus < requiredPhosphorus || tileInfo.potassium < requiredPotassium)
+        // Verifica se há nutrientes suficientes
+        if (!HasEnoughNutrients(tileInfo))
         {
             Debug.LogWarning("Nutrientes insuficientes para plantar!");
-            return;
+            return; // Interrompe o plantio
         }
 
-        // Consome os nutrientes no momento do plantio
+        // Consome os nutrientes
+        ConsumeNutrients(tileInfo, tilemapManager, position);
+
+        // Inicia o plantio e crescimento
+        StartPlanting(tilemap, position, caller);
+    }
+
+// Verifica se há nutrientes suficientes no momento do plantio
+    private bool HasEnoughNutrients(TileInfo tileInfo)
+    {
+        return tileInfo.nitrogen >= requiredNitrogen 
+            && tileInfo.phosphorus >= requiredPhosphorus 
+            && tileInfo.potassium >= requiredPotassium;
+    }
+
+// Consome os nutrientes do solo
+    private void ConsumeNutrients(TileInfo tileInfo, TilemapManager tilemapManager, Vector3Int position)
+    {
         tileInfo.nitrogen -= requiredNitrogen;
         tileInfo.phosphorus -= requiredPhosphorus;
         tileInfo.potassium -= requiredPotassium;
+        tileInfo.isPlantable = false; // Atualiza o estado para não plantável
 
-        // Atualiza o estado para não plantável
-        tileInfo.isPlantable = false;
+        // Atualiza o dicionário no TilemapManager
         tilemapManager.SetTileInfo(position, tileInfo);
+    }
 
-        // Inicia o processo de plantio e crescimento
+// Inicia o processo de plantio e crescimento da planta
+    private void StartPlanting(Tilemap tilemap, Vector3Int position, MonoBehaviour caller)
+    {
         isPlanted = true;
         isFullyGrown = false;
         growthStage = 0;
@@ -75,33 +95,43 @@ public class PlantTile : Tile
             totalGrowthTime += time;
         }
 
+        // Inicializa a barra de progresso
+        InitializeProgressBar(tilemap, position);
+
+        UpdateSprite(tilemap, position);
+        caller.StartCoroutine(Grow(tilemap, position, caller));
+    }
+
+// Inicializa a barra de progresso da planta
+    private void InitializeProgressBar(Tilemap tilemap, Vector3Int position)
+    {
         if (progressBarPrefab != null)
         {
             Vector3 worldPos = tilemap.CellToWorld(position) + new Vector3(0.5f, 1.5f, 0);
             progressBarInstance = Instantiate(progressBarPrefab, worldPos, Quaternion.identity);
 
-            Transform fillTransform = progressBarInstance.transform.Find("ProgressBarFill"); // Substitua "Fill" pelo nome correto do objeto filho
-            if(fillTransform != null){
-                
+            Transform fillTransform = progressBarInstance.transform.Find("ProgressBarFill"); // Substitua "ProgressBarFill" pelo nome correto
+            if (fillTransform != null)
+            {
                 progressBarFill = fillTransform.GetComponent<Image>();
-
                 if (progressBarFill != null)
                 {
                     progressBarFill.fillAmount = 0f;
                 }
 
                 progressBarText = progressBarInstance.GetComponentInChildren<TMP_Text>();
-
                 if (progressBarText != null)
                 {
                     progressBarText.text = Mathf.CeilToInt(totalGrowthTime).ToString() + "s";
                 }
             }
+            else
+            {
+                Debug.LogError("Objeto ProgressBarFill não encontrado no prefab.");
+            }
         }
-
-        UpdateSprite(tilemap, position);
-        caller.StartCoroutine(Grow(tilemap, position, caller));
     }
+
 
     private IEnumerator Grow(Tilemap tilemap, Vector3Int position, MonoBehaviour caller)
     {
