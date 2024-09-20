@@ -1,0 +1,52 @@
+.headerContainer {
+    -unity-font-style: normal;
+}
+
+.headerIcon {
+    align-self: auto;
+    justify-content: flex-start;
+    display: flex;
+    min-width: 50%;
+    max-width: 50%;
+}
+
+.headerText {
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    font-size: 28px;
+    align-self: auto;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    text-overflow: clip;
+}
+
+.footerButton {
+    min-width: 15%;
+    min-height: 70%;
+    max-width: 15%;
+    max-height: 70%;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    -unity-font-style: normal;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    font-size: 28px;
+    -unity-text-align: lower-center;
+    white-space: normal;
+    align-self: auto;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    display: flex;
+    overflow: visible;
+}
