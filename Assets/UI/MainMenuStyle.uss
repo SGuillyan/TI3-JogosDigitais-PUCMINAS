@@ -1,13 +1,24 @@
 .headerContainer {
     -unity-font-style: normal;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-around;
+    align-self: auto;
+    height: 100%;
+    width: 30%;
 }
 
 .headerIcon {
     align-self: auto;
     justify-content: flex-start;
     display: flex;
-    min-width: 50%;
-    max-width: 50%;
+    min-width: auto;
+    max-width: none;
+    -unity-background-scale-mode: scale-to-fit;
+    background-image: url('project://database/Assets/UI/Icons/Calendar.png?fileID=21300000&guid=1445fdf78b976f24c9cdbc7ed107486f&type=3#Calendar');
+    height: 60%;
+    width: 30%;
 }
 
 .headerText {
@@ -19,6 +30,7 @@
     justify-content: center;
     white-space: nowrap;
     text-overflow: clip;
+    background-color: rgba(189, 81, 46, 0.4);
 }
 
 .footerButton {
@@ -49,4 +61,14 @@
     flex-direction: column;
     display: flex;
     overflow: visible;
+    background-image: url('project://database/Assets/UI/UI_01.png?fileID=-1361559398&guid=efedff5bac6a2244da2eccde9f5c9049&type=3#UI_01_3');
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.footerText {
+    -unity-font-style: bold;
+    -unity-text-align: lower-center;
+    white-space: nowrap;
+    text-overflow: clip;
+    font-size: 26px;
 }
