@@ -3,7 +3,9 @@ guid: f8d436b1c4a35ca45ae5a8375072d05c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - moneyText: {instanceID: 0}
+  - visualTreeAsset: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

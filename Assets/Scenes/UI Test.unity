@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1027974940}
   - component: {fileID: 1027974939}
+  - component: {fileID: 1027974941}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -154,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: a6987e10c5252544795454c3d591821f, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 494d3a826c0857d4da20380fedac1393,
+  sourceAsset: {fileID: 9197481963319205126, guid: d8504ee45d0625141ac4486868653216,
     type: 3}
   m_SortingOrder: 0
 --- !u!4 &1027974940
@@ -172,6 +173,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1027974941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027974938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8d436b1c4a35ca45ae5a8375072d05c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualTreeAsset: {fileID: 9197481963319205126, guid: d8504ee45d0625141ac4486868653216,
+    type: 3}
 --- !u!1 &1928958172
 GameObject:
   m_ObjectHideFlags: 0
