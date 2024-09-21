@@ -12,10 +12,23 @@ public class PlantTile : Tile
     public Sprite[] growthSprites;  // Array para armazenar os sprites de cada fase de crescimento
     public float[] growthTimes;  // Array para armazenar o tempo necessário para cada fase de crescimento
 
-    public Ambient ambient;
-    public Ambient.Temperature idealTemperature;
-    public Ambient.Climate idealClimate;
+    [Header("Ambient")]
+    [Tooltip("Ambiente em que a planta eatá")]
+    [SerializeField] private Ambient ambient;
+    [Tooltip("Temperatura ideal para o crescimento da planta")]
+    [SerializeField] private Ambient.Temperature idealTemperature;
+    [Tooltip("Clima ideal para o crescimento da planta")]
+    [SerializeField] private Ambient.Climate idealClimate;
+    [Tooltip("Tolerância máxima para o buff de crescimento, deve ser menor que a 'yellowTolerance'")]
+    [Range(0, 2)]
+    [SerializeField] private int greenTolerance = 0;
+    [Tooltip("Tolerância máxima para o crescimento normal, deve ser maior que a 'greenTolerance'")]
+    [Range(1, 4)]
+    [SerializeField] private int yellowTolerance = 2;
 
+    [Space(5)]
+
+    [Header("Progress Bar")]
     public GameObject progressBarPrefab;  // Prefab da barra de progresso
     private GameObject progressBarInstance;  // Instância da barra de progresso
     private Image progressBarFill;  // Referência ao preenchimento da barra de progresso
@@ -266,20 +279,20 @@ public class PlantTile : Tile
     {
         float r = 1;
 
-        if(idealTemperature == ambient.currentTemperature)
+        if (greenTolerance > 0 && Mathf.Abs((int)idealTemperature - (int)ambient.currentTemperature) <= greenTolerance - 1)
         {
             r *= 1.5f;
         }
-        else if (Mathf.Abs((int)idealTemperature - (int)ambient.currentTemperature) >= 2)
+        else if (Mathf.Abs((int)idealTemperature - (int)ambient.currentTemperature) >= yellowTolerance - 1)
         {
             r *= 0.5f;
         }
 
-        if (idealClimate == ambient.currentClimate)
+        if (greenTolerance > 0 && Mathf.Abs((int)idealClimate - (int)ambient.currentClimate) <= greenTolerance -1)
         {
             r *= 1.5f;
         }
-        else if (Mathf.Abs((int)idealClimate - (int)ambient.currentClimate) >= 2)
+        else if (Mathf.Abs((int)idealClimate - (int)ambient.currentClimate) >= yellowTolerance - 1)
         {
             r *= 0.5f;
         }

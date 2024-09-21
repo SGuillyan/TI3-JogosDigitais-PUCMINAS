@@ -8,21 +8,29 @@ public class Ambient : ScriptableObject
     public enum Temperature
     {
         None,
-        Frio,
+        algido, // álgido
+        Gelado,
+ /*min*/Frio,
         Fresco,
-        Ameno,
-        Aquientado,
+ /*---*/Ameno,
+        Morno,
+ /*max*/Aquientado,
         Calor,
+        Escaldadante,
     }
 
     public enum Climate
     {
         None,
+        Geada,
         Chuvoso,
-        Nublado,
-        Limpo,
-        Semiarido,
+ /*min*/Nublado,
+        Umido,
+ /*---*/Limpo, 
         Seco,
+ /*max*/Mormaco, // mormaço
+        Semiarido, // semiárido
+        Arido, // árido
     }
 
     public Temperature currentTemperature;
