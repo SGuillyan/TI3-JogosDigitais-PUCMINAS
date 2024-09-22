@@ -1,54 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
 {
-
-/*
     public TMP_Text moneyText;  // Referência ao componente TextMeshPro que exibe o dinheiro
 
     private MoneyManager moneyManager;
-*/
+
     public GameObject tileInfoPanel;  // Painel lateral que exibe as informações do tile
     public Image tileSpriteImage;  // Imagem para exibir o sprite do tile
     public TMP_Text nitrogenText;  // Texto para exibir Nitrogênio (N)
     public TMP_Text phosphorusText;  // Texto para exibir Fósforo (P)
     public TMP_Text potassiumText;  // Texto para exibir Potássio (K)
-    public TMP_Text humidityText;  // Texto para exibir Umidade
-    // Reference to your UXML file
-    public VisualTreeAsset visualTreeAsset;
-
-    void OnEnable()
-    {
-        // Get the root VisualElement
-        var root = GetComponent<UIDocument>().rootVisualElement;
-
-        // Find the button by name and register a click event on the button
-        Button inventoryButton = root.Q<Button>("btnInventory");
-
-        inventoryButton.clicked += () =>
-        {
-            Debug.Log("Inventory opened!");
-        };
-        
-        Button shopButton = root.Q<Button>("btnShop");
-
-        shopButton.clicked += () =>
-        {
-            Debug.Log("Shop opened!");
-        };
-
-        Button configButton = root.Q<Button>("btnConfig");
-
-        configButton.clicked += () =>
-        {
-            Debug.Log("Config Screen opened!");
-        };
-    }
-
-    
+    public TMP_Text humidityText;  // Texto para exibir Umidade   
 
 
     void Start()
