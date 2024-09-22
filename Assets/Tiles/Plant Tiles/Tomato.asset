@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 136b335a369405b4da23ee97a938482c, type: 3}
-  m_Name: TestPlantTile
+  m_Name: Tomato
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: aed8d36bf52fb7246ac65b2ee644ff13, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -42,18 +42,26 @@ MonoBehaviour:
   growthTimes:
   - 5
   - 5
-  - 1
-  - 1
+  - 3
   ambient: {fileID: 11400000, guid: e8f591b14a3ddde4da61770979152007, type: 2}
-  idealTemperature: 3
+  idealTemperature: 6
   idealClimate: 3
-  progressBarPrefab: {fileID: 0}
+  greenTolerance: 0
+  yellowTolerance: 1
+  progressBarPrefab: {fileID: 5926695452129876053, guid: 583fdf575a31b6e4986acc39a145fea3,
+    type: 3}
   isPlanted: 0
   isFullyGrown: 0
   harvestedItem:
-    itemName: 
+    itemName: Tomate
     itemIcon: {fileID: 0}
-    maxStackSize: 0
+    maxStackSize: 99
     itemType: 0
-    itemID: 0
-  soilTile: {fileID: 0}
+    itemID: 105
+  soilTile: {fileID: 11400000, guid: fb4802db5e5b9c94db6eda50fd1dd23d, type: 2}
+  requiredNitrogen: 80
+  requiredPhosphorus: 70
+  requiredPotassium: 90
+  returnNitrogen: 0
+  returnPhosphorus: 0
+  returnPotassium: 0

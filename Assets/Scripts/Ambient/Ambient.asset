@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 772a080329b8c104989d23def96c1e1d, type: 3}
   m_Name: Ambient
   m_EditorClassIdentifier: 
-  currentTemperature: 5
-  currentClimate: 5
+  currentTemperature: 4
+  currentClimate: 3
   modifyTemperature: 0
   modifyClimate: 0

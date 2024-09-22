@@ -15,5 +15,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: c6fa0983a1f68364fa8250407efb6cc2, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   isPlantable: 0
-  nutrienteX: 0
-  nutrienteY: 0
+  nitrogen: 0
+  phosphorus: 0
+  potassium: 0
+  humidity: 1000

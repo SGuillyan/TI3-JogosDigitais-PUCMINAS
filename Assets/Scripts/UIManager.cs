@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using UnityEngine.UIElements;
 
@@ -10,7 +11,12 @@ public class UIManager : MonoBehaviour
 
     private MoneyManager moneyManager;
 */
-
+    public GameObject tileInfoPanel;  // Painel lateral que exibe as informações do tile
+    public Image tileSpriteImage;  // Imagem para exibir o sprite do tile
+    public TMP_Text nitrogenText;  // Texto para exibir Nitrogênio (N)
+    public TMP_Text phosphorusText;  // Texto para exibir Fósforo (P)
+    public TMP_Text potassiumText;  // Texto para exibir Potássio (K)
+    public TMP_Text humidityText;  // Texto para exibir Umidade
     // Reference to your UXML file
     public VisualTreeAsset visualTreeAsset;
 
@@ -42,7 +48,9 @@ public class UIManager : MonoBehaviour
         };
     }
 
-/*
+    
+
+
     void Start()
     {
         // Encontra o MoneyManager no jogo
@@ -62,6 +70,29 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void UpdateTileInfo(Sprite tileSprite, int nitrogen, int phosphorus, int potassium, int humidity)
+    {
+        // Exibe o painel de informações
+        tileInfoPanel.SetActive(true);
+
+        // Atualiza o sprite do tile
+        if (tileSpriteImage != null)
+        {
+            tileSpriteImage.sprite = tileSprite;
+        }
+
+        // Atualiza os textos dos nutrientes NPK e umidade
+        nitrogenText.text = "Nitrogênio (N): " + nitrogen.ToString();
+        phosphorusText.text = "Fósforo (P): " + phosphorus.ToString();
+        potassiumText.text = "Potássio (K): " + potassium.ToString();
+        humidityText.text = "Umidade: " + humidity.ToString();
+    }
+
+    public void HideTileInfo()
+    {
+        tileInfoPanel.SetActive(false);
+    }
+
     // Atualiza o texto do dinheiro na UI
     void UpdateMoneyUI(int newAmount)
     {
@@ -74,5 +105,5 @@ public class UIManager : MonoBehaviour
             Debug.LogError("moneyText não está atribuído no UIManager.");
         }
     }
-*/
+
 }
