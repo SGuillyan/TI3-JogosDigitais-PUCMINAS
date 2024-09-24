@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3181534104518182854
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6292070264515580301}
+  - component: {fileID: 1022065325439666699}
+  - component: {fileID: 5547882219821402839}
+  - component: {fileID: 6820444140835852034}
+  - component: {fileID: 7846143058671094131}
+  m_Layer: 0
+  m_Name: Tile Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6292070264515580301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3181534104518182854}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1022065325439666699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3181534104518182854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474cafcdbe644ce4a84d4bc1aad329a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 0}
+  highlightTile: {fileID: 11400000, guid: 40fb8f719957473419d7080064c2f2b5, type: 2}
+  inventoryManager: {fileID: 0}
+  tilemapPlant: {fileID: 7846143058671094131}
+  inventoryUI: {fileID: 0}
+  tilemapManager: {fileID: 5547882219821402839}
+  uiManager: {fileID: 0}
+  playerInventory: {fileID: 0}
+--- !u!114 &5547882219821402839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3181534104518182854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a39379f12562fe941a9b3e59fdc34abf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 0}
+--- !u!114 &6820444140835852034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3181534104518182854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecffe0090ae329343a71d75501a11436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemapManager: {fileID: 5547882219821402839}
+  tilemapPlant: {fileID: 7846143058671094131}
+--- !u!114 &7846143058671094131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3181534104518182854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f836e79c0c19d1d4ba8fc88e0676681a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 0}
+  plantTilePrefabs:
+  - {fileID: 11400000, guid: ef1f6eb5d0bda774bb3642c6fddb148c, type: 2}
+  - {fileID: 11400000, guid: 3f31ca6d06f7ae34cb01b5f6996212ec, type: 2}
+  - {fileID: 11400000, guid: d7d97b9add6c3a247b0dec256d953757, type: 2}
+  - {fileID: 11400000, guid: 4975ae52f959ae04c8bed0f1bf6ca8a2, type: 2}
+  - {fileID: 11400000, guid: 5f032dfee3eb1284b8c765149d025455, type: 2}
+  - {fileID: 11400000, guid: 77472794d692fc642bd925818c5aa5c4, type: 2}
