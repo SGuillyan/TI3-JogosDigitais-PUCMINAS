@@ -3,17 +3,15 @@ using UnityEngine.Tilemaps;
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
 
-[CreateAssetMenu(menuName = "Tiles/Plant Tile")]
+[CreateAssetMenu(menuName = "Tiles/Plant Tile2")]
 public class PlantTile : Tile
 {
-
-    public Sprite[] growthSprites;  // Array para armazenar os sprites de cada fase de crescimento
+    public GameObject[] growthPrefabs;  // Prefabs para cada fase de crescimento da planta
     public float[] growthTimes;  // Array para armazenar o tempo necessário para cada fase de crescimento
 
     [Header("Ambient")]
-    [Tooltip("Ambiente em que a planta eatá")]
+    [Tooltip("Ambiente em que a planta está")]
     [SerializeField] private Ambient ambient;
     [Tooltip("Temperatura ideal para o crescimento da planta")]
     [SerializeField] private Ambient.Temperature idealTemperature;
@@ -33,7 +31,6 @@ public class PlantTile : Tile
     private GameObject progressBarInstance;  // Instância da barra de progresso
     private Image progressBarFill;  // Referência ao preenchimento da barra de progresso
     private TMP_Text progressBarText;  // Referência ao texto da barra de progresso
-
 
     public bool isPlanted = false;
     public bool isFullyGrown = false;
@@ -55,6 +52,7 @@ public class PlantTile : Tile
     public int returnPhosphorus = 3;
     public int returnPotassium = 4;
 
+    private GameObject currentGrowthInstance; // Instância atual do estágio de crescimento
 
     public void Plant(Tilemap tilemap, Vector3Int position, MonoBehaviour caller)
     {
@@ -88,7 +86,7 @@ public class PlantTile : Tile
         StartPlanting(tilemap, position, caller);
     }
 
-// Verifica se há nutrientes suficientes no momento do plantio
+    // Verifica se há nutrientes suficientes no momento do plantio
     private bool HasEnoughNutrients(TileInfo tileInfo)
     {
         return tileInfo.nitrogen >= requiredNitrogen 
@@ -96,7 +94,7 @@ public class PlantTile : Tile
             && tileInfo.potassium >= requiredPotassium;
     }
 
-// Consome os nutrientes do solo
+    // Consome os nutrientes do solo
     private void ConsumeNutrients(TileInfo tileInfo, TilemapManager tilemapManager, Vector3Int position)
     {
         tileInfo.nitrogen -= requiredNitrogen;
@@ -108,7 +106,7 @@ public class PlantTile : Tile
         tilemapManager.SetTileInfo(position, tileInfo);
     }
 
-// Inicia o processo de plantio e crescimento da planta
+    // Inicia o processo de plantio e crescimento da planta
     private void StartPlanting(Tilemap tilemap, Vector3Int position, MonoBehaviour caller)
     {
         isPlanted = true;
@@ -125,16 +123,16 @@ public class PlantTile : Tile
         // Inicializa a barra de progresso
         InitializeProgressBar(tilemap, position);
 
-        UpdateSprite(tilemap, position);
+        UpdateGrowthInstance(tilemap, position);
         caller.StartCoroutine(Grow(tilemap, position, caller));
     }
 
-// Inicializa a barra de progresso da planta
+    // Inicializa a barra de progresso da planta
     private void InitializeProgressBar(Tilemap tilemap, Vector3Int position)
     {
         if (progressBarPrefab != null)
         {
-            Vector3 worldPos = tilemap.CellToWorld(position) + new Vector3(0.5f, 1.5f, 0);
+            Vector3 worldPos = tilemap.CellToWorld(position) + new Vector3(0.5f, 2.5f, 0);
             progressBarInstance = Instantiate(progressBarPrefab, worldPos, Quaternion.identity);
 
             Transform fillTransform = progressBarInstance.transform.Find("ProgressBarFill"); // Substitua "ProgressBarFill" pelo nome correto
@@ -159,7 +157,6 @@ public class PlantTile : Tile
         }
     }
 
-
     private IEnumerator Grow(Tilemap tilemap, Vector3Int position, MonoBehaviour caller)
     {
         float totalElapsedTime = 0f;
@@ -181,7 +178,7 @@ public class PlantTile : Tile
             }
 
             growthStage++;
-            UpdateSprite(tilemap, position);
+            UpdateGrowthInstance(tilemap, position);
             tilemap.RefreshTile(position);
         }
 
@@ -208,11 +205,20 @@ public class PlantTile : Tile
         }
     }
 
-    public void UpdateSprite(Tilemap tilemap, Vector3Int position)
+    // Substitui a lógica de sprites por instâncias de GameObjects para cada estágio de crescimento
+    private void UpdateGrowthInstance(Tilemap tilemap, Vector3Int position)
     {
-        if (growthSprites != null && growthSprites.Length > 0)
+        // Destruir a instância anterior, se existir
+        if (currentGrowthInstance != null)
         {
-            this.sprite = growthSprites[growthStage];
+            Destroy(currentGrowthInstance);
+        }
+
+        // Instancia o prefab correspondente ao estágio de crescimento
+        if (growthPrefabs != null && growthStage < growthPrefabs.Length)
+        {
+            Vector3 worldPos = tilemap.CellToWorld(position) + new Vector3(0.5f, 0, 0.5f);  // Ajuste a posição do prefab
+            currentGrowthInstance = Instantiate(growthPrefabs[growthStage], worldPos, Quaternion.identity);
         }
     }
 
@@ -251,10 +257,14 @@ public class PlantTile : Tile
             // Restaura o tile de solo
             tilemap.SetTile(position, soilTile);
             tilemapManager.SetTileInfo(position, currentTileInfo);
+
+            // Destroi a instância da planta
+            if (currentGrowthInstance != null)
+            {
+                Destroy(currentGrowthInstance);
+            }
         }
     }
-
-
 
     public void ResetGrowth()
     {
@@ -267,11 +277,15 @@ public class PlantTile : Tile
         {
             Destroy(progressBarInstance);
         }
+
+        if (currentGrowthInstance != null)
+        {
+            Destroy(currentGrowthInstance);
+        }
     }
 
     public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
     {
-        tileData.sprite = this.sprite;
         tileData.color = Color.white;
     }
 
@@ -288,7 +302,7 @@ public class PlantTile : Tile
             r *= 0.5f;
         }
 
-        if (greenTolerance > 0 && Mathf.Abs((int)idealClimate - (int)ambient.currentClimate) <= greenTolerance -1)
+        if (greenTolerance > 0 && Mathf.Abs((int)idealClimate - (int)ambient.currentClimate) <= greenTolerance - 1)
         {
             r *= 1.5f;
         }

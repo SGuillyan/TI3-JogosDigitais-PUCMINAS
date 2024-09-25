@@ -23,15 +23,15 @@ public class TileInfo
     }
 }
 
-
 public class TilemapManager : MonoBehaviour
 {
     public Tilemap tilemap;
     private Dictionary<Vector3Int, TileInfo> tileInfoDictionary = new Dictionary<Vector3Int, TileInfo>();
+    private Dictionary<Vector3Int, GameObject> instantiatedTileDictionary = new Dictionary<Vector3Int, GameObject>(); // Adiciona controle de objetos instanciados
 
     void Start()
     {
-        // Aqui você pode inicializar o tilemap ou adicionar outras configurações iniciais
+        // Inicializações necessárias para o tilemap ou outras configurações
     }
 
     // Obtém as informações do tile a partir de sua posição
@@ -48,6 +48,25 @@ public class TilemapManager : MonoBehaviour
     public void SetTileInfo(Vector3Int position, TileInfo info)
     {
         tileInfoDictionary[position] = info;
+    }
+
+    // Associa um objeto instanciado a uma posição de tile
+    public void SetInstantiatedTile(Vector3Int position, GameObject tileObject)
+    {
+        instantiatedTileDictionary[position] = tileObject;
+    }
+
+    // Obtém o objeto instanciado em uma posição de tile
+    public GameObject GetInstantiatedTile(Vector3Int position)
+    {
+        instantiatedTileDictionary.TryGetValue(position, out GameObject tileObject);
+        return tileObject;
+    }
+
+    // Verifica se existe um objeto instanciado em um tile
+    public bool HasInstantiatedTile(Vector3Int position)
+    {
+        return instantiatedTileDictionary.ContainsKey(position);
     }
 
     // Método para verificar e exibir os dados de um tile
