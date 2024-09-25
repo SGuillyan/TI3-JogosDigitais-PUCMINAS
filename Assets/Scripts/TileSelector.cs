@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 public class TileSelector : MonoBehaviour
 {
     public Tilemap tilemap;  // Referência ao Tilemap
-    public Sprite debugSprite;  // Sprite de debug para colorir o tile
+    public GameObject debugObjectPrefab;  // Prefab do GameObject de debug
     public InventoryManager inventoryManager;  // Referência ao InventoryManager para verificar sementes selecionadas
     public TilemapPlant tilemapPlant;  // Referência ao sistema de plantio
     public InventoryUI inventoryUI;  // Referência ao script de UI do inventário
@@ -23,36 +23,58 @@ public class TileSelector : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))  // Detecta clique do mouse
         {
-            // Converte a posição do mouse na tela para uma posição no mundo
-            Vector3 screenPoint = Input.mousePosition;
-            Vector3 worldPoint = Camera.main.ScreenToWorldPoint(screenPoint);
-            
-            // Depuração detalhada da posição
-            Debug.Log("ScreenPoint: " + screenPoint);
-            Debug.Log("WorldPoint: " + " X " + worldPoint.x + " Y " + worldPoint.y + " Z " + worldPoint.z);
+            // Captura a posição do mouse na tela (Screen Space)
+            Vector3 mousePosition = Input.mousePosition;
 
-            // Se o Tilemap está no plano XZ, definimos o Y para 0 (plano horizontal) e mantemos o X e Z
-            worldPoint.y = 0f;  // Como o Tilemap está no plano XZ, y deve ser ajustado para 0
+            // Cria um plano no eixo XZ, com Y = 0 (plano horizontal)
+            Plane plane = new Plane(Vector3.up, Vector3.zero);
 
-            // Converte a posição do mundo ajustada para uma célula do Tilemap
-            Vector3Int gridPosition = tilemap.WorldToCell(worldPoint);
-            Debug.Log("gridPosition" + " X " + gridPosition.x + " Y " + gridPosition.y + " Z " + gridPosition.z);
+            // Cria um raio da câmera para o ponto onde o mouse está clicando
+            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
 
-            // Verifica se há um tile na posição clicada
-            TileBase clickedTile = tilemap.GetTile(gridPosition);
+            float rayDistance;
 
-            if (clickedTile != null)
+            // Verifica onde o raio intersecta o plano (plano XZ)
+            if (plane.Raycast(ray, out rayDistance))
             {
-                DisplayTileInfo(gridPosition);
-            }
-            else
-            {
-                Debug.Log("Nenhum tile encontrado na posição. Criando tile de debug.");
-                CreateDebugTile(gridPosition);
+                // Converte o ponto de interseção para o ponto no mundo
+                Vector3 worldPoint = ray.GetPoint(rayDistance);
+
+                // Converte a posição do mundo para uma célula do Tilemap
+                Vector3Int gridPosition = tilemap.WorldToCell(worldPoint);
+                gridPosition.z = 0; // Garante que o Z da célula seja 0, já que estamos no plano XZ
+
+                // Verifica se há um tile na posição clicada
+                TileBase clickedTile = tilemap.GetTile(gridPosition);
+
+                // Se o tile for uma planta completamente crescida, faça a colheita
+                if (clickedTile is PlantTile plantTile && plantTile.isFullyGrown)
+                {
+                    plantTile.Collect(tilemap, gridPosition, playerInventory); // Coleta a planta
+                }
+                // Verifica se o jogador tem uma semente selecionada e se o tile é plantável
+                else if (inventoryManager.HasSelectedSeed())
+                {
+                    TileInfo tileInfo = tilemapManager.GetTileInfo(gridPosition);
+                    if (tileInfo != null && tileInfo.isPlantable)
+                    {
+                        tilemapPlant.PlantSeedAt(gridPosition, inventoryManager.GetSelectedSeedID());
+                        inventoryManager.PlantSeedAt(gridPosition); // Atualiza o inventário após o plantio
+                    }
+                    else
+                    {
+                        Debug.Log("O tile na posição " + gridPosition + " não é plantável.");
+                    }
+                }
+                // Caso contrário, exibe as informações do tile
+                else
+                {
+                    DisplayTileInfo(gridPosition);
+                    CreateDebugTile(gridPosition);
+                }
             }
         }
     }
-
 
     void DisplayTileInfo(Vector3Int gridPosition)
     {
@@ -66,12 +88,12 @@ public class TileSelector : MonoBehaviour
             // Obtém o TileInfo do tile clicado
             TileInfo tileInfo = tilemapManager.GetTileInfo(gridPosition);
 
-            if (tileInfo != null && clickedTile is CustomTileBase tileData)  // Substitua "CustomTileBase" pelo tipo real que você está usando
+            if (tileInfo != null && clickedTile is CustomTileBase tileData)  // Verifica se o tile é um CustomTileBase
             {
                 // Atualiza o UIManager com as informações do tile
                 uiManager.UpdateTileInfo(tileData.sprite, tileInfo.nitrogen, tileInfo.phosphorus, tileInfo.potassium, tileInfo.humidity);
             }
-            else if (tileInfo != null && clickedTile is PlantTile tileData2)
+            else if (tileInfo != null && clickedTile is PlantTile tileData2)  // Verifica se o tile é uma PlantTile
             {
                 uiManager.UpdateTileInfo(tileData2.sprite, tileInfo.nitrogen, tileInfo.phosphorus, tileInfo.potassium, tileInfo.humidity);
             }
@@ -86,23 +108,22 @@ public class TileSelector : MonoBehaviour
         }
     }
 
-    // Função para criar um tile temporário de debug
+    // Função para instanciar um GameObject de debug na posição do tile
     void CreateDebugTile(Vector3Int gridPosition)
     {
-        // Cria um novo Tile para substituir o tile original com o sprite de debug
-        Tile tempTile = ScriptableObject.CreateInstance<Tile>();
-        tempTile.sprite = debugSprite;  // Usa o sprite de debug fornecido
+        // Converte a posição da célula do grid para uma posição no mundo
+        Vector3 worldPosition = tilemap.CellToWorld(gridPosition);
 
-        Vector3Int NewGridPosition = gridPosition;
-        NewGridPosition.x = 0;
-        NewGridPosition.y = 0;
-        NewGridPosition.z = 0;
-
-        // Colore o tile de debug
-        tilemap.SetTile(gridPosition, tempTile);
-        tilemap.SetTile(NewGridPosition, tempTile);
-
-        Debug.Log("Tile de debug criado na posição: " + gridPosition);
+        // Instancia o GameObject de debug na posição do mundo
+        if (debugObjectPrefab != null)
+        {
+            Instantiate(debugObjectPrefab, worldPosition, Quaternion.identity);
+            Debug.Log("GameObject de debug instanciado na posição: " + worldPosition);
+        }
+        else
+        {
+            Debug.LogWarning("Prefab de debugObject não atribuído!");
+        }
     }
 
     private void Update()

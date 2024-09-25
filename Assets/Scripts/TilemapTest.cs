@@ -8,7 +8,7 @@ public class TilemapTest : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) // Clique com o botão esquerdo do mouse
+        /*if (Input.GetMouseButtonDown(0)) // Clique com o botão esquerdo do mouse
         {
             Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int gridPosition = tilemapManager.tilemap.WorldToCell(worldPoint);
@@ -26,6 +26,6 @@ public class TilemapTest : MonoBehaviour
             gridPosition.z = 0;
             // Modifica os dados do tile na posição clicada
             //tilemapPlant.PlantSeedAt(gridPosition,1);
-        }
+        }*/
     }
 }
