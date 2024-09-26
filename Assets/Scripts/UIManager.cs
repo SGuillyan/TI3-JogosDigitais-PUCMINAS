@@ -13,8 +13,8 @@ public class UIManager : MonoBehaviour
     public TMP_Text nitrogenText;  // Texto para exibir Nitrogênio (N)
     public TMP_Text phosphorusText;  // Texto para exibir Fósforo (P)
     public TMP_Text potassiumText;  // Texto para exibir Potássio (K)
-    public TMP_Text humidityText;  // Texto para exibir Umidade   
-
+    public TMP_Text humidityText;  // Texto para exibir Umidade
+    public TMP_Text plantableText;  // Texto para exibir se o tile é plantável ou não
 
     void Start()
     {
@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void UpdateTileInfo(Sprite tileSprite, int nitrogen, int phosphorus, int potassium, int humidity)
+    public void UpdateTileInfo(Sprite tileSprite, int nitrogen, int phosphorus, int potassium, int humidity, bool isPlantable)
     {
         // Exibe o painel de informações
         tileInfoPanel.SetActive(true);
@@ -51,6 +51,18 @@ public class UIManager : MonoBehaviour
         phosphorusText.text = "Fósforo (P): " + phosphorus.ToString();
         potassiumText.text = "Potássio (K): " + potassium.ToString();
         humidityText.text = "Umidade: " + humidity.ToString();
+
+        // Atualiza o status de plantabilidade
+        if (isPlantable)
+        {
+            plantableText.text = "Plantável";
+            plantableText.color = Color.green;  // Cor verde se o tile for plantável
+        }
+        else
+        {
+            plantableText.text = "Não Plantável";
+            plantableText.color = Color.red;  // Cor vermelha se o tile não for plantável
+        }
     }
 
     public void HideTileInfo()
@@ -70,5 +82,4 @@ public class UIManager : MonoBehaviour
             Debug.LogError("moneyText não está atribuído no UIManager.");
         }
     }
-
 }
