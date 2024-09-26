@@ -34,11 +34,11 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  growthSprites:
-  - {fileID: 21300000, guid: 84d7a02437b955a49a0d7bd41476a13d, type: 3}
-  - {fileID: 21300000, guid: c6fa0983a1f68364fa8250407efb6cc2, type: 3}
-  - {fileID: 21300000, guid: 1a3827539a3b2b44595888e0e05254a3, type: 3}
-  - {fileID: 21300000, guid: 39283445edd0bbc44b79da9e1d3ea002, type: 3}
+  growthPrefabs:
+  - {fileID: 4009283022203266034, guid: f5ee46b62b1108b42af0e22abc6c1ff5, type: 3}
+  - {fileID: 4009283022203266034, guid: f656789692b68384fadf52b001907067, type: 3}
+  - {fileID: 4009283022203266034, guid: 7015374fc1912f34fbaf8f5798c04f6b, type: 3}
+  - {fileID: 4009283022203266034, guid: dc675654b83dac44d9fe65cc0c70a5a7, type: 3}
   growthTimes:
   - 1
   - 1
