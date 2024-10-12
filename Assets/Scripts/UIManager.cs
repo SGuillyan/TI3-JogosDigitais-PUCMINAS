@@ -75,7 +75,7 @@ public class UIManager : MonoBehaviour
     {
         if (moneyText != null)
         {
-            moneyText.text = "Cash: " + newAmount.ToString();
+            moneyText.text = newAmount.ToString();
         }
         else
         {

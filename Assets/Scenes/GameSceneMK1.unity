@@ -6149,6 +6149,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8313574315339248098, guid: c5053f4c4eb9a7440aee09d7816f8d5f,
         type: 3}
+      propertyPath: moneyText
+      value: 
+      objectReference: {fileID: 593301029}
+    - target: {fileID: 8313574315339248098, guid: c5053f4c4eb9a7440aee09d7816f8d5f,
+        type: 3}
       propertyPath: humidityText
       value: 
       objectReference: {fileID: 4810584679886213304}
@@ -11491,16 +11496,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1465641209}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Close
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &823962375
@@ -22462,6 +22467,7 @@ GameObject:
   - component: {fileID: 1465641208}
   - component: {fileID: 1465641207}
   - component: {fileID: 1465641206}
+  - component: {fileID: 1465641209}
   m_Layer: 5
   m_Name: Footer
   m_TagString: Untagged
@@ -22556,6 +22562,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1465641204}
   m_CullTransparentMesh: 1
+--- !u!95 &1465641209
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465641204}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 08de3635d6cf1654aa0d3d3f0b9775af, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1466936388
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30245,6 +30272,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1465641209}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Open
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1902208055
