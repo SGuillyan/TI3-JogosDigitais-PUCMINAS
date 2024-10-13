@@ -4,29 +4,29 @@ using UnityEngine.EventSystems;
 
 public class TileSelector : MonoBehaviour
 {
-    public Tilemap tilemap;  // Referência ao Tilemap
-    public GameObject debugObjectPrefab;  // Prefab do GameObject de debug
-    public InventoryManager inventoryManager;  // Referência ao InventoryManager para verificar sementes selecionadas
-    public TilemapPlant tilemapPlant;  // Referência ao sistema de plantio
-    public InventoryUI inventoryUI;  // Referência ao script de UI do inventário
-    public TilemapManager tilemapManager;  // Referência ao script TilemapManager para verificar informações do tile
-    public UIManager uiManager;  // Referência ao UIManager para exibir as informações
-    public Inventory playerInventory;  // Referência ao inventário do jogador
+    public Tilemap tilemap;
+    public GameObject debugObjectPrefab;
+    public InventoryManager inventoryManager;
+    public TilemapPlant tilemapPlant;
+    public InventoryUI inventoryUI;
+    public TilemapManager tilemapManager;
+    public UIManager uiManager;
+    public Inventory playerInventory;
+    public Animator tileInfoAnimator;  // Animator para a janela de informações
 
     void SelectTile()
     {
-        // Verifica se o inventário está aberto ou se o clique é na UI
         if (inventoryUI.inventoryUI.activeSelf || EventSystem.current.IsPointerOverGameObject())
         {
-            return; // Se o inventário estiver aberto ou o clique for na UI, não processa o clique
+            return;
         }
 
-        if (Input.GetMouseButtonDown(0))  // Detecta clique do botão esquerdo do mouse
+        if (Input.GetMouseButtonDown(0))
         {
             ProcessLeftClick();
         }
 
-        if (Input.GetMouseButtonDown(1))  // Detecta clique do botão direito do mouse
+        if (Input.GetMouseButtonDown(1))
         {
             ProcessRightClick();
         }
@@ -34,50 +34,35 @@ public class TileSelector : MonoBehaviour
 
     void ProcessLeftClick()
     {
-        // Captura a posição do mouse na tela (Screen Space)
         Vector3 mousePosition = Input.mousePosition;
-
-        // Cria um plano no eixo XZ, com Y = 0 (plano horizontal)
         Plane plane = new Plane(Vector3.up, Vector3.zero);
-
-        // Cria um raio da câmera para o ponto onde o mouse está clicando
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
 
-        float rayDistance;
-
-        // Verifica onde o raio intersecta o plano (plano XZ)
-        if (plane.Raycast(ray, out rayDistance))
+        if (plane.Raycast(ray, out float rayDistance))
         {
-            // Converte o ponto de interseção para o ponto no mundo
             Vector3 worldPoint = ray.GetPoint(rayDistance);
-
-            // Converte a posição do mundo para uma célula do Tilemap
             Vector3Int gridPosition = tilemap.WorldToCell(worldPoint);
-            gridPosition.z = 0; // Garante que o Z da célula seja 0, já que estamos no plano XZ
+            gridPosition.z = 0;
 
-            // Verifica se há um tile na posição clicada
             TileBase clickedTile = tilemap.GetTile(gridPosition);
 
-            // Se o tile for uma planta completamente crescida, faça a colheita
             if (clickedTile is PlantTile plantTile && plantTile.isFullyGrown)
             {
-                plantTile.Collect(tilemap, gridPosition, playerInventory); // Coleta a planta
+                plantTile.Collect(tilemap, gridPosition, playerInventory);
             }
-            // Verifica se o jogador tem uma semente selecionada e se o tile é plantável
             else if (inventoryManager.HasSelectedSeed())
             {
                 TileInfo tileInfo = tilemapManager.GetTileInfo(gridPosition);
                 if (tileInfo != null && tileInfo.isPlantable)
                 {
                     tilemapPlant.PlantSeedAt(gridPosition, inventoryManager.GetSelectedSeedID());
-                    inventoryManager.PlantSeedAt(gridPosition); // Atualiza o inventário após o plantio
+                    inventoryManager.PlantSeedAt(gridPosition);
                 }
                 else
                 {
                     Debug.Log("O tile na posição " + gridPosition + " não é plantável.");
                 }
             }
-            // Caso contrário, exibe as informações do tile
             else
             {
                 DisplayTileInfo(gridPosition);
@@ -87,31 +72,18 @@ public class TileSelector : MonoBehaviour
 
     void ProcessRightClick()
     {
-        // Captura a posição do mouse na tela (Screen Space)
         Vector3 mousePosition = Input.mousePosition;
-
-        // Cria um plano no eixo XZ, com Y = 0 (plano horizontal)
         Plane plane = new Plane(Vector3.up, Vector3.zero);
-
-        // Cria um raio da câmera para o ponto onde o mouse está clicando
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
 
-        float rayDistance;
-
-        // Verifica onde o raio intersecta o plano (plano XZ)
-        if (plane.Raycast(ray, out rayDistance))
+        if (plane.Raycast(ray, out float rayDistance))
         {
-            // Converte o ponto de interseção para o ponto no mundo
             Vector3 worldPoint = ray.GetPoint(rayDistance);
-
-            // Converte a posição do mundo para uma célula do Tilemap
             Vector3Int gridPosition = tilemap.WorldToCell(worldPoint);
-            gridPosition.z = 0; // Garante que o Z da célula seja 0, já que estamos no plano XZ
+            gridPosition.z = 0;
 
-            // Verifica se há um tile na posição clicada
             TileBase clickedTile = tilemap.GetTile(gridPosition);
 
-            // Verifica se o tile é do tipo CustomTileBase e, em caso afirmativo, chama o método para arar o solo
             if (clickedTile is CustomTileBase customTile)
             {
                 customTile.ChangeToPlowedState(gridPosition);
@@ -130,30 +102,33 @@ public class TileSelector : MonoBehaviour
 
         if (clickedTile != null)
         {
-            // Exibe o tipo do tile para depuração
             Debug.Log("Tipo de tile clicado: " + clickedTile.GetType().Name);
 
-            // Obtém o TileInfo do tile clicado
             TileInfo tileInfo = tilemapManager.GetTileInfo(gridPosition);
 
-            if (tileInfo != null && clickedTile is CustomTileBase tileData)  // Verifica se o tile é um CustomTileBase
+            if (tileInfo != null)
             {
-                // Atualiza o UIManager com as informações do tile
-                uiManager.UpdateTileInfo(tileData.sprite, tileInfo.nitrogen, tileInfo.phosphorus, tileInfo.potassium, tileInfo.humidity, tileInfo.isPlantable);
-            }
-            else if (tileInfo != null && clickedTile is PlantTile tileData2)  // Verifica se o tile é uma PlantTile
-            {
-                uiManager.UpdateTileInfo(tileData2.sprite, tileInfo.nitrogen, tileInfo.phosphorus, tileInfo.potassium, tileInfo.humidity, tileInfo.isPlantable);
-            }
-            else
-            {
-                Debug.Log("Nenhum dado do tile encontrado ou tipo de tile incompatível.");
+                if (clickedTile is CustomTileBase tileData)
+                {
+                    uiManager.UpdateTileInfo(tileData.sprite, tileInfo.nitrogen, tileInfo.phosphorus, tileInfo.potassium, tileInfo.humidity, tileInfo.isPlantable);
+                }
+                else if (clickedTile is PlantTile tileData2)
+                {
+                    uiManager.UpdateTileInfo(tileData2.sprite, tileInfo.nitrogen, tileInfo.phosphorus, tileInfo.potassium, tileInfo.humidity, tileInfo.isPlantable);
+                }
+
+                tileInfoAnimator.SetBool("OpenInfo", true);  // Ativa a animação de abertura
             }
         }
         else
         {
             Debug.Log("Nenhum tile na posição: " + gridPosition);
         }
+    }
+
+    public void HideTileInfo()
+    {
+        tileInfoAnimator.SetBool("OpenInfo", false);  // Ativa a animação de fechamento
     }
 
     private void Update()
