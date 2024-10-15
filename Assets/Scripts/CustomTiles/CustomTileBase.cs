@@ -15,9 +15,8 @@ public class CustomTileBase : TileBase
     public int nitrogen = 1000;  // Nível de Nitrogênio (N)
     public int phosphorus = 1000;  // Nível de Fósforo (P)
     public int potassium = 1000;  // Nível de Potássio (K)
-    public int humidity = 1000;
+    public int humidity = 1000;  // Nível de umidade
 
-    // Instancia o GameObject ao invés de usar um sprite
     public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
     {
         if (!Application.isPlaying)
@@ -29,27 +28,35 @@ public class CustomTileBase : TileBase
 
         if (tilemapManager != null)
         {
-            // Cria um objeto TileInfo com os dados deste CustomTileBase
+            // Cria e registra as informações do tile no TilemapManager
             TileInfo info = new TileInfo(
-                false,    // Inicialmente não plantável
-                this.nitrogen,       // Parâmetro 'nitrogen'
-                this.phosphorus,     // Parâmetro 'phosphorus'
-                this.potassium,      // Parâmetro 'potassium'
-                this.humidity        // Parâmetro 'humidity'
+                isPlantable,
+                nitrogen,
+                phosphorus,
+                potassium,
+                humidity
             );
 
-            // Registra as informações no dicionário do TilemapManager
             tilemapManager.SetTileInfo(position, info);
 
-            // Instancia o GameObject associado ao tile se ainda não estiver no dicionário
             if (!tilemapManager.HasInstantiatedTile(position) && customTilePrefab != null)
             {
-                Vector3 worldPosition = tilemapManager.tilemap.CellToWorld(position) + new Vector3(0.5f, 0, 0.5f);  // Ajusta para centralizar o objeto
-                GameObject instantiatedTile = Instantiate(customTilePrefab, worldPosition, Quaternion.identity);
+                Vector3 worldPosition = tilemapManager.tilemap.CellToWorld(position) + new Vector3(0.5f, 0, 0.5f);
+
+                // Define o Transform pai (se disponível)
+                Transform parent = tilemapManager.parentTransform != null ? 
+                    tilemapManager.parentTransform : 
+                    tilemapManager.transform;
+
+                // Instancia o GameObject como filho do objeto pai
+                GameObject instantiatedTile = Instantiate(customTilePrefab, worldPosition, Quaternion.identity, parent);
+
+                // Garante a posição correta no mundo
+                instantiatedTile.transform.position = worldPosition;
 
                 instantiatedTile.name = $"CustomTile_{position.x}_{position.y}_{position.z}";
 
-                // Armazena a referência ao objeto instanciado
+                // Armazena a referência do objeto instanciado
                 tilemapManager.SetInstantiatedTile(position, instantiatedTile);
             }
         }
@@ -58,14 +65,14 @@ public class CustomTileBase : TileBase
             Debug.LogWarning("TilemapManager não encontrado na cena.");
         }
 
-        return true;  // Indica que a inicialização foi bem-sucedida
+        return true;
     }
 
     public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
     {
-        // Mesmo que este Tile use um GameObject, ainda é necessário definir algumas propriedades do TileBase
+        // Define propriedades básicas para o TileBase
         tileData.sprite = sprite;
-        tileData.color = color;  // Defina a cor do tile no Tilemap
+        tileData.color = color;
     }
 
     public override void RefreshTile(Vector3Int position, ITilemap tilemap)
@@ -73,13 +80,11 @@ public class CustomTileBase : TileBase
         tilemap.RefreshTile(position);
     }
 
-    // Exibe informações do tile para depuração
     public void DisplayTileInfo()
     {
-        Debug.Log($"Tile Info: Plantable = {isPlantable}, Nitrogênio = {nitrogen}, Fósforo = {phosphorus}, Potássio = {potassium}, Humidade = {humidity}");
+        Debug.Log($"Tile Info: Plantable = {isPlantable}, Nitrogênio = {nitrogen}, Fósforo = {phosphorus}, Potássio = {potassium}, Umidade = {humidity}");
     }
 
-    // Método para consumir nutrientes do solo
     public void ConsumeNutrients(int nAmount, int pAmount, int kAmount)
     {
         nitrogen = Mathf.Max(0, nitrogen - nAmount);
@@ -87,37 +92,42 @@ public class CustomTileBase : TileBase
         potassium = Mathf.Max(0, potassium - kAmount);
     }
 
-    // Método para alternar para o estado de solo arado
     public void ChangeToPlowedState(Vector3Int position)
     {
         TilemapManager tilemapManager = Object.FindObjectOfType<TilemapManager>();
 
         if (plowedTilePrefab != null && tilemapManager != null)
         {
-            // Obtém o GameObject associado ao tile atual
+            // Destrói o GameObject atual associado ao tile, se existir
             GameObject currentTile = tilemapManager.GetInstantiatedTile(position);
-
             if (currentTile != null)
             {
-                // Destrói o GameObject atual
                 Destroy(currentTile);
             }
 
-            // Converte a posição da célula do grid para uma posição no mundo
-            Vector3 worldPosition = tilemapManager.tilemap.CellToWorld(position) + new Vector3(0.5f, 0, 0.5f);  // Ajusta para centralizar o objeto
+            Vector3 worldPosition = tilemapManager.tilemap.CellToWorld(position) + new Vector3(0.5f, 0, 0.5f);
 
-            // Instancia o GameObject do solo arado
-            GameObject plowedTile = Instantiate(plowedTilePrefab, worldPosition, Quaternion.identity);
+            // Define o Transform pai (se disponível)
+            Transform parent = tilemapManager.parentTransform != null ? 
+                tilemapManager.parentTransform : 
+                tilemapManager.transform;
+
+            // Instancia o GameObject do solo arado como filho do pai especificado
+            GameObject plowedTile = Instantiate(plowedTilePrefab, worldPosition, Quaternion.identity, parent);
+
+            // Garante a posição correta no mundo
+            plowedTile.transform.position = worldPosition;
+
             plowedTile.name = $"PlowedTile_{position.x}_{position.y}_{position.z}";
 
-            // Atualiza a referência ao objeto instanciado no TilemapManager
+            // Armazena a referência ao novo tile no TilemapManager
             tilemapManager.SetInstantiatedTile(position, plowedTile);
 
-            // Atualiza o estado para plantável após arar o solo
+            // Atualiza o estado do tile para plantável
             TileInfo tileInfo = tilemapManager.GetTileInfo(position);
             if (tileInfo != null)
             {
-                tileInfo.isPlantable = true;  // Agora o tile é plantável
+                tileInfo.isPlantable = true;
                 tilemapManager.SetTileInfo(position, tileInfo);
             }
         }

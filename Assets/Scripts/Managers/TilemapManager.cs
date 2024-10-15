@@ -26,6 +26,7 @@ public class TileInfo
 public class TilemapManager : MonoBehaviour
 {
     public Tilemap tilemap;
+    public Transform parentTransform;  // Referência ao objeto pai na hierarquia
     private Dictionary<Vector3Int, TileInfo> tileInfoDictionary = new Dictionary<Vector3Int, TileInfo>();
     private Dictionary<Vector3Int, GameObject> instantiatedTileDictionary = new Dictionary<Vector3Int, GameObject>(); // Adiciona controle de objetos instanciados
 
