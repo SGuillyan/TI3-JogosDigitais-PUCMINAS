@@ -21,7 +21,19 @@ public class TileSelector : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if(Input.touchCount > 0)
+        {
+            if (EditMode.activeMode)
+            {
+                ProcessRightClick();
+            }
+            else
+            {
+                ProcessLeftClick();
+            }
+        }
+
+        /*if (Input.GetMouseButtonDown(0))
         {
             ProcessLeftClick();
         }
@@ -29,7 +41,7 @@ public class TileSelector : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             ProcessRightClick();
-        }
+        }*/
     }
 
     void ProcessLeftClick()
