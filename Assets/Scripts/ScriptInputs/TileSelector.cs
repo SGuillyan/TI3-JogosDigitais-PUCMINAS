@@ -23,7 +23,7 @@ public class TileSelector : MonoBehaviour
 
         if(Input.touchCount > 0)
         {
-            if (EditMode.activeMode)
+            if (ToolsManager.activeTool == ToolsManager.Tools.Plow)
             {
                 ProcessRightClick();
             }
