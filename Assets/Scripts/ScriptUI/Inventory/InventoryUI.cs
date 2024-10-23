@@ -19,6 +19,7 @@ public class InventoryUI : MonoBehaviour
     void Start()
     {
         playerInventory.onInventoryChanged += UpdateInventoryUI;
+        ShowSeeds();
         UpdateInventoryUI();
     }
 
