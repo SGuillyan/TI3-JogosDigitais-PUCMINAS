@@ -19,8 +19,6 @@ public class ToolController : MonoBehaviour
     {
         if (ToolsManager.isToolBoxOpen)
         {
-            ToolsManager.SetIsToolBoxOpen(false);
-
             if (tool.isOn)
             {
                 ToolsManager.ChangeTool(tool);
@@ -31,7 +29,7 @@ public class ToolController : MonoBehaviour
                 ToolsManager.SetActiveTool(ToolsManager.Tools.None);
             }
 
-            ToolsManager.CloseToolBox();
+            ToolsManager.ToolBoxAnim();
         }
     }
 }

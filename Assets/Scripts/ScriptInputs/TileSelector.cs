@@ -38,15 +38,16 @@ public class TileSelector : MonoBehaviour
                     case ToolsManager.Tools.Plow:
                         UsePlowTool(clickedTile,gridPosition);
                         break;
-                    case ToolsManager.Tools.Info:
-                        UseInfoTool(gridPosition);
-                        break;
+                    case ToolsManager.Tools.Flatten:
+                        //Logica de flatten//
+                        break; 
                     case ToolsManager.Tools.Harvest:
                         UseHarvestTool(clickedTile,gridPosition);
                         break;
-                    case ToolsManager.Tools.Flatten:
-                        //Logica de flatten//
+                    case ToolsManager.Tools.Info:
+                        UseInfoTool(gridPosition);
                         break;
+
                     default:
                         UsePlantTool(gridPosition);
                         break;

@@ -57,13 +57,18 @@ public class ToolsManager : MonoBehaviour
         activeTool = tool;
     }
 
-    public static void CloseToolBox()
+    public static void ToolBoxAnim()
     {
-        animator.Play("Close_ToolBox");
-    }
-
-    public static void SetIsToolBoxOpen(bool value)
-    {
-        isToolBoxOpen = value;
+        if (isToolBoxOpen)
+        {
+            animator.Play("Close_ToolBox");
+            isToolBoxOpen = false;
+        }
+        else
+        {
+            animator.Play("Open_ToolBox");
+            isToolBoxOpen = true;
+        }
+        
     }
 }
