@@ -13,7 +13,8 @@ public class ToolsManager : MonoBehaviour
         None,
         Plow,
         Flatten,
-        Harvest
+        Harvest,
+        Info
     }
 
     public static Tools activeTool = 0;
