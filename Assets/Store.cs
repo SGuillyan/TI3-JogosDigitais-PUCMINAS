@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Store : MonoBehaviour
 {
-    // Lista de itens da loja configurados no Inspector
     [Header("Itens Disponíveis na Loja")]
-    public List<ShopItem> defaultShopItems;  // Lista de itens à venda, preenchida no Inspector
+    public List<Item> defaultShopItems;  // Lista de itens à venda, preenchida no Inspector
 
-    private List<ShopItem> shopItems = new List<ShopItem>();
+    public Inventory playerInventory;
+    public MoneyManager moneyManager;
 
     void Start()
     {
@@ -17,41 +17,75 @@ public class Store : MonoBehaviour
     // Inicializa a loja com os itens configurados no Inspector
     private void InitializeStore()
     {
-        foreach (ShopItem item in defaultShopItems)
-        {
-            shopItems.Add(new ShopItem(item.item, item.price));
-        }
-
-        Debug.Log("Loja inicializada com " + shopItems.Count + " itens.");
+        Debug.Log("Loja inicializada com " + defaultShopItems.Count + " itens.");
     }
 
     // Método para obter todos os itens da loja
-    public List<ShopItem> GetAllShopItems()
+    public List<Item> GetAllShopItems()
     {
-        return shopItems;
-    }
-
-    // Método para obter um item da loja por ID
-    public ShopItem GetShopItemByID(int itemID)
-    {
-        return shopItems.Find(i => i.item.itemID == itemID);
+        return defaultShopItems;  // Retorna a lista de itens na loja
     }
 
     // Método para comprar um item
-    public bool BuyItem(int itemID, int quantity, Inventory playerInventory, ref int playerCoins)
+    public bool BuyItem(int itemID, int quantity)
     {
-        ShopItem shopItem = GetShopItemByID(itemID);
-        if (shopItem != null && playerCoins >= (shopItem.price * quantity))
+        Item shopItem = defaultShopItems.Find(i => i.itemID == itemID);
+        int totalCost = shopItem.price * quantity;
+
+        // Verifica se o item está disponível e se o jogador tem dinheiro suficiente
+        if (shopItem != null && moneyManager.SpendMoney(totalCost))  // Usar o MoneyManager como singleton
         {
-            playerCoins -= shopItem.price * quantity;  // Deduz o valor dos itens das moedas do jogador
-            playerInventory.AddItem(shopItem.item, quantity);  // Adiciona o item ao inventário do jogador
-            Debug.Log("Item comprado: " + shopItem.item.itemName + " x" + quantity);
+            playerInventory.AddItem(shopItem, quantity);  // Adiciona o item ao inventário do jogador
+            Debug.Log("Item comprado: " + shopItem.itemName + " x" + quantity);
             return true;
         }
         else
         {
-            Debug.Log("Moedas insuficientes ou item não encontrado.");
+            Debug.Log("Dinheiro insuficiente ou item não encontrado.");
             return false;
         }
+    }
+
+    public bool SellItem(int itemID, int quantity)
+    {
+        // Encontra o item no inventário do jogador
+        InventoryItem inventoryItem = playerInventory.items.Find(i => i.item.itemID == itemID);
+
+        if (inventoryItem != null && inventoryItem.quantity >= quantity)
+        {
+            // Calcula o valor total da venda com base no preço do item e a quantidade
+            int totalSaleValue = inventoryItem.item.price * quantity;
+
+            // Remove o item do inventário
+            if (playerInventory.RemoveItem(itemID, quantity))
+            {
+                // Adiciona o dinheiro ao jogador usando o MoneyManager
+                moneyManager.AddMoney(totalSaleValue);
+
+                Debug.Log("Item vendido: " + inventoryItem.item.itemName + " x" + quantity);
+                return true;
+            }
+        }
+
+        Debug.Log("Não foi possível vender o item ou quantidade insuficiente.");
+        return false;
+    }
+
+    
+    // Função para converter InventoryItems em vendáveis diretamente, usando o preço do item
+    public List<Item> GetSellableItemsFromInventory()
+    {
+        List<Item> sellableItems = new List<Item>();
+        
+        // Pega todos os itens do inventário do jogador que são do tipo coletável (ou outros tipos relevantes)
+        List<InventoryItem> playerItems = playerInventory.GetCollectedItems();
+        
+        foreach (InventoryItem inventoryItem in playerItems)
+        {
+            // Não precisa de conversão adicional, apenas usa o preço do próprio item
+            sellableItems.Add(inventoryItem.item);
+        }
+
+        return sellableItems;
     }
 }

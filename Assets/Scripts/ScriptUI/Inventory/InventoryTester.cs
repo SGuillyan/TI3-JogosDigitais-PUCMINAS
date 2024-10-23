@@ -36,7 +36,7 @@ public class InventoryTester : MonoBehaviour
     // Testa a remoção de itens
     public void TestRemoveCornSeed()
     {
-        if (playerInventory.RemoveItem(seeds[0], 5))
+        if (playerInventory.RemoveItem(0, 5))
         {
             Debug.Log("Removeu 5 Sementes de Milho do inventário.");
         }
@@ -48,7 +48,7 @@ public class InventoryTester : MonoBehaviour
 
     public void TestRemoveStrawberry()
     {
-        if (playerInventory.RemoveItem(strawberrySeed, 3))
+        if (playerInventory.RemoveItem(1, 3))
         {
             Debug.Log("Removeu 3 Sementes de Morango do inventário.");
         }
@@ -60,7 +60,7 @@ public class InventoryTester : MonoBehaviour
 
     public void TestRemoveApple()
     {
-        if (playerInventory.RemoveItem(apple, 10))
+        if (playerInventory.RemoveItem(2, 10))
         {
             Debug.Log("Removeu 10 Maçãs do inventário.");
         }

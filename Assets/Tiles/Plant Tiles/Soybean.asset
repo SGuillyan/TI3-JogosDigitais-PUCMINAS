@@ -34,11 +34,7 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  growthSprites:
-  - {fileID: 21300000, guid: 84d7a02437b955a49a0d7bd41476a13d, type: 3}
-  - {fileID: 21300000, guid: c6fa0983a1f68364fa8250407efb6cc2, type: 3}
-  - {fileID: 21300000, guid: 1a3827539a3b2b44595888e0e05254a3, type: 3}
-  - {fileID: 21300000, guid: 44b79860a66545f4d9ecb5788ba6a36f, type: 3}
+  growthPrefabs: []
   growthTimes:
   - 5
   - 5
@@ -58,6 +54,7 @@ MonoBehaviour:
     maxStackSize: 99
     itemType: 0
     itemID: 103
+    price: 80
   soilTile: {fileID: 11400000, guid: fb4802db5e5b9c94db6eda50fd1dd23d, type: 2}
   requiredNitrogen: 50
   requiredPhosphorus: 70

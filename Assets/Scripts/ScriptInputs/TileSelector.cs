@@ -9,6 +9,7 @@ public class TileSelector : MonoBehaviour
     public InventoryManager inventoryManager;
     public TilemapPlant tilemapPlant;
     public InventoryUI inventoryUI;
+    public StoreUI storeUI; // Adicionada referência para a UI da loja
     public TilemapManager tilemapManager;
     public UIManager uiManager;
     public Inventory playerInventory;
@@ -16,7 +17,8 @@ public class TileSelector : MonoBehaviour
 
     void SelectTile()
     {
-        if (inventoryUI.inventoryUI.activeSelf || EventSystem.current.IsPointerOverGameObject())
+        // Verifica se qualquer UI está visível
+        if (inventoryUI.inventoryUI.activeSelf || storeUI.storeUI.activeSelf || EventSystem.current.IsPointerOverGameObject())
         {
             return;
         }

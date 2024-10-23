@@ -31,9 +31,10 @@ public class Inventory : MonoBehaviour
     }
 
     // Método para remover um item do inventário
-    public bool RemoveItem(Item item, int quantity)
+    public bool RemoveItem(int itemID, int quantity)
     {
-        InventoryItem existingItem = items.Find(i => i.item.itemName == item.itemName);
+        // Encontra o item no inventário com base no itemID
+        InventoryItem existingItem = items.Find(i => i.item.itemID == itemID);
 
         if (existingItem != null)
         {
@@ -55,6 +56,7 @@ public class Inventory : MonoBehaviour
         // Retorna falso se não foi possível remover a quantidade desejada
         return false;
     }
+
 
     // Método para obter a quantidade de um item específico
     public int GetItemQuantity(Item item)
