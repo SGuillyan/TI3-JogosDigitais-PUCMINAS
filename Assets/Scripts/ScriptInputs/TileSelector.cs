@@ -9,7 +9,6 @@ public class TileSelector : MonoBehaviour
     public InventoryManager inventoryManager;
     public TilemapPlant tilemapPlant;
     public InventoryUI inventoryUI;
-    public StoreUI storeUI; // Adicionada referência para a UI da loja
     public TilemapManager tilemapManager;
     public UIManager uiManager;
     public Inventory playerInventory;
@@ -17,24 +16,83 @@ public class TileSelector : MonoBehaviour
 
     void SelectTile()
     {
-        // Verifica se qualquer UI está visível
-        if (inventoryUI.inventoryUI.activeSelf || storeUI.storeUI.activeSelf || EventSystem.current.IsPointerOverGameObject())
+        if (inventoryUI.inventoryUI.activeSelf || EventSystem.current.IsPointerOverGameObject())
         {
             return;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if(Input.touchCount > 0)
         {
-            ProcessLeftClick();
-        }
+            Vector3 mousePosition = Input.mousePosition;
+            Plane plane = new Plane(Vector3.up, Vector3.zero);
+            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+            if (plane.Raycast(ray, out float rayDistance))
+            {
+                Vector3 worldPoint = ray.GetPoint(rayDistance);
+                Vector3Int gridPosition = tilemap.WorldToCell(worldPoint);
+                gridPosition.z = 0;
+                TileBase clickedTile = tilemap.GetTile(gridPosition);
 
-        if (Input.GetMouseButtonDown(1))
+                switch(ToolsManager.activeTool)
+                {
+                    case ToolsManager.Tools.Plow:
+                        UsePlowTool(clickedTile,gridPosition);
+                        break;
+                    case ToolsManager.Tools.Flatten:
+                        //Logica de flatten//
+                        break; 
+                    case ToolsManager.Tools.Harvest:
+                        UseHarvestTool(clickedTile,gridPosition);
+                        break;
+                    case ToolsManager.Tools.Info:
+                        UseInfoTool(gridPosition);
+                        break;
+
+                    default:
+                        UsePlantTool(gridPosition);
+                        break;
+                }
+            }
+        }
+    }
+    void UsePlowTool(TileBase tile, Vector3Int gridPosition){
+        if (tile is CustomTileBase customTile)
+            {
+                customTile.ChangeToPlowedState(gridPosition);
+                Debug.Log($"Solo arado na posição: {gridPosition}");
+            }
+    }
+    void UseInfoTool(Vector3Int gridPosition){
+        DisplayTileInfo(gridPosition);
+    }
+
+    void UseHarvestTool(TileBase tile, Vector3Int gridPosition){
+        if (tile is PlantTile plantTile && plantTile.isFullyGrown)
         {
-            ProcessRightClick();
+            plantTile.Collect(tilemap, gridPosition, playerInventory);
+        }
+        else{
+            Debug.Log("Tile Não Harvestable");
         }
     }
 
-    void ProcessLeftClick()
+    void UsePlantTool(Vector3Int gridPosition){
+        if (inventoryManager.HasSelectedSeed())
+            {
+                TileInfo tileInfo = tilemapManager.GetTileInfo(gridPosition);
+                if (tileInfo != null && tileInfo.isPlantable)
+                {
+                    tilemapPlant.PlantSeedAt(gridPosition, inventoryManager.GetSelectedSeedID());
+                    inventoryManager.PlantSeedAt(gridPosition);
+                }
+                else
+                {
+                    Debug.Log("O tile na posição " + gridPosition + " não é plantável.");
+                }
+            }
+    }
+
+    /*void ProcessLeftClick()
     {
         Vector3 mousePosition = Input.mousePosition;
         Plane plane = new Plane(Vector3.up, Vector3.zero);
@@ -47,6 +105,7 @@ public class TileSelector : MonoBehaviour
             gridPosition.z = 0;
 
             TileBase clickedTile = tilemap.GetTile(gridPosition);
+
 
             if (clickedTile is PlantTile plantTile && plantTile.isFullyGrown)
             {
@@ -96,7 +155,7 @@ public class TileSelector : MonoBehaviour
                 Debug.Log("O tile clicado não é um CustomTileBase.");
             }
         }
-    }
+    }*/
 
     void DisplayTileInfo(Vector3Int gridPosition)
     {
