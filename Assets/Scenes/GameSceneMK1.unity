@@ -3853,37 +3853,37 @@ MonoBehaviour:
     maxStackSize: 99
     itemType: 1
     itemID: 0
-    price: 0
+    price: 20
   - itemName: Carrot Seed
     itemIcon: {fileID: 21300000, guid: 9f47d9ee527c1d742b4f6961994f3028, type: 3}
     maxStackSize: 99
     itemType: 1
     itemID: 1
-    price: 0
+    price: 20
   - itemName: Corn Seed
     itemIcon: {fileID: 21300000, guid: ff6bc2994a328a345a5f712910d5e2f5, type: 3}
     maxStackSize: 99
     itemType: 1
     itemID: 2
-    price: 0
+    price: 40
   - itemName: Soybean Seed
     itemIcon: {fileID: 0}
     maxStackSize: 99
     itemType: 1
     itemID: 3
-    price: 0
+    price: 40
   - itemName: Strawberry Seed
     itemIcon: {fileID: 21300000, guid: efb228fdb596ad644be27aa32a145aa3, type: 3}
     maxStackSize: 99
     itemType: 1
     itemID: 4
-    price: 0
+    price: 60
   - itemName: Tomato Seed
     itemIcon: {fileID: 21300000, guid: 39283445edd0bbc44b79da9e1d3ea002, type: 3}
     maxStackSize: 99
     itemType: 1
     itemID: 5
-    price: 0
+    price: 60
   playerInventory: {fileID: 1807522566}
   moneyManager: {fileID: 917966509}
 --- !u!4 &473759902

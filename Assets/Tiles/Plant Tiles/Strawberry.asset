@@ -54,11 +54,11 @@ MonoBehaviour:
   isFullyGrown: 0
   harvestedItem:
     itemName: Morango
-    itemIcon: {fileID: 21300000, guid: 39283445edd0bbc44b79da9e1d3ea002, type: 3}
+    itemIcon: {fileID: 21300000, guid: efb228fdb596ad644be27aa32a145aa3, type: 3}
     maxStackSize: 99
     itemType: 0
     itemID: 104
-    price: 100
+    price: 120
   soilTile: {fileID: 11400000, guid: fb4802db5e5b9c94db6eda50fd1dd23d, type: 2}
   requiredNitrogen: 60
   requiredPhosphorus: 65

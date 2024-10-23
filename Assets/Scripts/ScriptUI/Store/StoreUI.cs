@@ -119,6 +119,7 @@ public class StoreUI : MonoBehaviour
         Image itemIcon = itemInstance.transform.Find("ItemIcon").GetComponent<Image>();
         TextMeshProUGUI itemName = itemInstance.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI itemPrice = itemInstance.transform.Find("ItemPrice").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI itemQuantity = itemInstance.transform.Find("ItemQuantity").GetComponent<TextMeshProUGUI>();
 
         // Exibe as informações do item
         itemIcon.sprite = item.itemIcon;  // Ícone do item
@@ -127,12 +128,14 @@ public class StoreUI : MonoBehaviour
         if (isBuyTab)
         {
             itemPrice.text = item.price.ToString() + " coins";  // Exibe o preço na aba de compra
+            itemQuantity.text = "";
         }
         else
         {
             // Exibe a quantidade de itens no inventário do jogador
             int quantity = playerInventory.GetItemQuantity(item);
-            itemPrice.text = "x" + quantity.ToString();  // Exibe a quantidade do item que o jogador possui
+            itemPrice.text = "$" + item.price.ToString();  // Exibe a quantidade do item que o jogador possui
+            itemQuantity.text = "x" + quantity.ToString();
         }
 
         Button selectButton = itemInstance.GetComponentInChildren<Button>();
