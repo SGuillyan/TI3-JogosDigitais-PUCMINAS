@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "TI3-JogosDigitais-PUCMINAS.sln"
+    "dotnet.defaultSolution": "TI3-Fazenda Sustentavel.sln"
 }
