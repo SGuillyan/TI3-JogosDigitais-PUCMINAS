@@ -1,9 +1,34 @@
 fileFormatVersion: 2
-guid: fa60ec479c2835345807944cfba21f95
+guid: b4419f998b12a9e4fba8929b6cc20564
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FlorMiolo
+    second: {fileID: 2100000, guid: eefa1820cd748d940a7d084b9f58574f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Green
+    second: {fileID: 2100000, guid: eefa1820cd748d940a7d084b9f58574f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf
+    second: {fileID: 2100000, guid: eefa1820cd748d940a7d084b9f58574f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Morango
+    second: {fileID: 2100000, guid: eefa1820cd748d940a7d084b9f58574f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Petalas
+    second: {fileID: 2100000, guid: eefa1820cd748d940a7d084b9f58574f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
