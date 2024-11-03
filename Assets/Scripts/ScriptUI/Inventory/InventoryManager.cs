@@ -23,6 +23,8 @@ public class InventoryManager : MonoBehaviour
         // Verifica se o item selecionado é uma semente (ID entre 0 e 99)
         if (seedID >= 0 && seedID <= 99)
         {
+            Debug.Log("Selecionando semente de id " + seedID);
+            ToolsManager.SetActiveTool(ToolsManager.Tools.None);
             selectedSeedID = seedID;
             inventoryUI.CloseInventory();  // Fecha o inventário ao selecionar uma semente
             isPlanting = true;  // Ativa o modo de plantio
