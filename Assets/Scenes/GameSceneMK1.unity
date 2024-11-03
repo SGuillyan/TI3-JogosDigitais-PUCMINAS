@@ -12245,7 +12245,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0.20454544, y: 0.20454544, z: 0}
+  m_ChunkCullingBounds: {x: 0.9090909, y: 0.9090909, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 1
@@ -15786,8 +15786,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpd: 1
   zoomRate: 1
-  maxZoom: 5
-  minZoom: 15
+  maxZoom: 15
+  minZoom: 5
 --- !u!1001 &1576356537
 PrefabInstance:
   m_ObjectHideFlags: 0
