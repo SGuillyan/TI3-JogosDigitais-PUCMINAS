@@ -62,7 +62,7 @@ public class InventoryUI : MonoBehaviour
     public void OnSeedSelected(int itemID)
     {
         inventoryManager.SelectSeed(itemID);
-        CloseInventory();
+        //CloseInventory();
     }
 
     public void OnAbaClicked()
