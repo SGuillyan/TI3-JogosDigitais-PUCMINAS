@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MoneyManager : MonoBehaviour
 {
-    public static int currentMoney;  // Armazena o dinheiro atual do jogador
+    private int currentMoney;  // Armazena o dinheiro atual do jogador
 
     // Evento que pode ser usado para notificar mudanças no dinheiro (ex: para atualizar a UI)
     public delegate void OnMoneyChanged(int newAmount);
