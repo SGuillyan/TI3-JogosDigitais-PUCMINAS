@@ -18,7 +18,7 @@ public class TileSelector : MonoBehaviour
 
     private bool isTouchProcessed = false;  // Variável para controlar o processamento do toque
 
-    void SelectTile()
+    public void SelectTile()
     {
         // Verifica se algum painel de UI está ativo ou se o painel de informações está aberto
         if (IsAnyUIPanelActive() || tileInfoAnimator.GetBool("OpenInfo"))
@@ -168,8 +168,8 @@ public class TileSelector : MonoBehaviour
         uiManager.HideTileInfo();
     }
 
-    private void Update()
+    /*private void Update()
     {
         SelectTile();
-    }
+    }*/
 }
