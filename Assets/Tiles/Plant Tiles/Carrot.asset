@@ -35,9 +35,10 @@ MonoBehaviour:
   m_Flags: 1
   m_ColliderType: 1
   growthPrefabs:
-  - {fileID: 6422526243089981554, guid: eddd972ad56f4ab428530ce923897718, type: 3}
-  - {fileID: 6422526243089981554, guid: eddd972ad56f4ab428530ce923897718, type: 3}
-  - {fileID: 6422526243089981554, guid: eddd972ad56f4ab428530ce923897718, type: 3}
+  - {fileID: 4895000988734243222, guid: 06275c9c5d6ed6b42bf677155bb3c132, type: 3}
+  - {fileID: 4895000988734243222, guid: 37d21926615920746b2fb12d1b8c741e, type: 3}
+  - {fileID: 4895000988734243222, guid: 849d6e23addac7a47a7177f989e4f88d, type: 3}
+  - {fileID: 4895000988734243222, guid: cff191410866c4343be1329493d6e545, type: 3}
   growthTimes:
   - 2
   - 2

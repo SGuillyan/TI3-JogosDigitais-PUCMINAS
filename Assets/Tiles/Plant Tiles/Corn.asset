@@ -34,7 +34,11 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  growthPrefabs: []
+  growthPrefabs:
+  - {fileID: 1648989520575376384, guid: 6b549fe981400bc4db98c8797e155547, type: 3}
+  - {fileID: 1648989520575376384, guid: 62e75fbc11feafa45afda4f23b6c4e96, type: 3}
+  - {fileID: 1648989520575376384, guid: cdb88df21e86726448564153d0d0c3f3, type: 3}
+  - {fileID: 1648989520575376384, guid: 994e011794a178d4ab18d54e79a64deb, type: 3}
   growthTimes:
   - 5
   - 5
