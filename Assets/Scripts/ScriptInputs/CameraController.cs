@@ -11,12 +11,15 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] private float moveSpd;
     [SerializeField] private float zoomRate;
+    [SerializeField] private float maxZoom;
+    [SerializeField] private float minZoom;
 
     private Vector2 lastPosition;
 
     private void Start()
     {
         m_camera = GetComponent<Camera>();
+        m_camera.orthographicSize = (minZoom + maxZoom) / 2;
     }
 
     public void CameraInput()
@@ -74,12 +77,12 @@ public class CameraController : MonoBehaviour
         if (m_camera.orthographic)
         {
             // Projeção ortográfica: ajusta o tamanho ortográfico
-            m_camera.orthographicSize = Mathf.Clamp(m_camera.orthographicSize - zoomChange * zoomRate, 10, 30);
+            m_camera.orthographicSize = Mathf.Clamp(m_camera.orthographicSize - zoomChange * zoomRate, minZoom, maxZoom);
         }
         else
         {
             // Projeção em perspectiva: ajusta o campo de visão
-            m_camera.fieldOfView = Mathf.Clamp(m_camera.fieldOfView - zoomChange * zoomRate, 10, 30);
+            m_camera.fieldOfView = Mathf.Clamp(m_camera.fieldOfView - zoomChange * zoomRate, minZoom, maxZoom);
         }
     }
 }
