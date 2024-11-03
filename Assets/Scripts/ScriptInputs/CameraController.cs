@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
@@ -9,9 +5,13 @@ public class CameraController : MonoBehaviour
 {
     private Camera m_camera;
 
+    [Tooltip("Velocidade de movimento da tela")]
     [SerializeField] private float moveSpd;
+    [Tooltip("Velocidade com que se dá zoom")]
     [SerializeField] private float zoomRate;
+    [Tooltip("'Size' da câmera máximo alcançado pelo zoom-out")]
     [SerializeField] private float maxZoom;
+    [Tooltip("'Size' da câmera mínimo alcançado pelo zoom-in")]
     [SerializeField] private float minZoom;
 
     private Vector2 lastPosition;
@@ -24,6 +24,12 @@ public class CameraController : MonoBehaviour
 
     public void CameraInput()
     {
+        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
+        if (scrollInput != 0f)
+        {
+            AdjustZoom(scrollInput);
+        }
+
         if (Input.touchCount > 0)
         {
             if (Input.touchCount == 2)
