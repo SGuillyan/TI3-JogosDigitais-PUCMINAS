@@ -14,7 +14,7 @@ public class TileSelector : MonoBehaviour
     public Inventory playerInventory;
     public Animator tileInfoAnimator;  // Animator para a janela de informações
 
-    void SelectTile()
+    public void SelectTile()
     {
         if (inventoryUI.inventoryUI.activeSelf || EventSystem.current.IsPointerOverGameObject())
         {
@@ -192,8 +192,8 @@ public class TileSelector : MonoBehaviour
         tileInfoAnimator.SetBool("OpenInfo", false);  // Ativa a animação de fechamento
     }
 
-    private void Update()
+    /*private void Update()
     {
         SelectTile();
-    }
+    }*/
 }
