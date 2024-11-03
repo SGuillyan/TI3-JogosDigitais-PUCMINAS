@@ -34,6 +34,7 @@ public class ToolsManager : MonoBehaviour
         }
 
         animator = GetComponent<Animator>();
+        activeTool = Tools.None;
     }
 
 
