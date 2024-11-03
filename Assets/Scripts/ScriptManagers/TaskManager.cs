@@ -5,6 +5,7 @@ using UnityEngine;
 public class TaskManager : MonoBehaviour
 {
     public List<Quest> quests;
+    public MoneyManager moneyManager;
 
     public void AddQuest(Quest newQuest)
     {
@@ -19,5 +20,10 @@ public class TaskManager : MonoBehaviour
     public void CompleteQuest(Quest quest)
     {
         quest.isCompleted = true;
+
+        if (quest.reward != null && moneyManager != null)
+        {
+            quest.reward.GiveReward(moneyManager);
+        }
     }
 }
