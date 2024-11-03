@@ -15784,10 +15784,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5bd849f36a0d2342942990a9630f20c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpd: 1
-  zoomRate: 1
-  maxZoom: 15
-  minZoom: 5
+  moveSpd: 0.05
+  zoomRate: 0.5
+  maxZoom: 12
+  minZoom: 8
 --- !u!1001 &1576356537
 PrefabInstance:
   m_ObjectHideFlags: 0
