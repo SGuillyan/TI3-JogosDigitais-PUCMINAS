@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro; // Certifique-se de incluir este namespace para usar TextMeshPro
 
 public class TaskManager : MonoBehaviour
 {
@@ -35,9 +36,33 @@ public class TaskManager : MonoBehaviour
         AddQuest(simpleQuest);
     }
 
-    void OnEnable()
+    public void ShowQuestCanvas()
     {
-        Instantiate(questUIPrefab, spawnTask.transform);
+        questCanvas.gameObject.SetActive(true); // Ativa o Canvas
+
+        // Instancia o prefab no spawnTask
+        GameObject questUIInstance = Instantiate(questUIPrefab, spawnTask.transform);
+
+        // Atribui o título da tarefa ao texto de EventName do prefab de UI
+        if (quests.Count > 0)
+        {
+            Quest currentQuest = quests[0]; // Seleciona a primeira quest ou altere conforme necessário
+
+            // Referencia o componente TextMeshProUGUI do prefab instanciado
+            TextMeshProUGUI questTitleText = questUIInstance.transform.Find("EventName").GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI questDescriText = questUIInstance.transform.Find("EventDescription").GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI questRewardText = questUIInstance.transform.Find("EventReward").GetComponent<TextMeshProUGUI>();
+
+            // Atribui o título da quest
+            questTitleText.text = currentQuest.title;
+            questDescriText.text = currentQuest.description;
+
+        }
+    }
+
+    public void HideQuestCanvas()
+    {
+        questCanvas.gameObject.SetActive(false); // Desativa o Canvas
     }
 
     public void AddQuest(Quest newQuest)
@@ -59,15 +84,5 @@ public class TaskManager : MonoBehaviour
         {
             quest.reward.GiveReward(moneyManager);
         }
-    }
-
-    public void ShowQuestCanvas()
-    {
-        questCanvas.gameObject.SetActive(true); // Ativa o Canvas
-    }
-
-    public void HideQuestCanvas()
-    {
-        questCanvas.gameObject.SetActive(false); // Desativa o Canvas
     }
 }
