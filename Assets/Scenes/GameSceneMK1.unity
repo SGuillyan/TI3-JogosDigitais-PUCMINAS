@@ -3287,7 +3287,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quests: []
-  moneyManager: {fileID: 0}
+  moneyManager: {fileID: 3326253208403477119, guid: c3f1c59c8e34c8a489ca67f78d659349,
+    type: 3}
   questCanvas: {fileID: 1482243824}
   questUIPrefab: {fileID: 557466118674115861, guid: 1ab2f35bbdfa549468ed17da52be143f,
     type: 3}
@@ -5400,7 +5401,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quests: []
-  moneyManager: {fileID: 0}
+  moneyManager: {fileID: 3326253208403477119, guid: c3f1c59c8e34c8a489ca67f78d659349,
+    type: 3}
   questCanvas: {fileID: 1482243824}
   questUIPrefab: {fileID: 557466118674115861, guid: 1ab2f35bbdfa549468ed17da52be143f,
     type: 3}
