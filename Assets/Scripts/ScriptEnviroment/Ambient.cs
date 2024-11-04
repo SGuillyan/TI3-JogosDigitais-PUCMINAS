@@ -8,7 +8,7 @@ public class Ambient : ScriptableObject
     public enum Temperature
     {
         None,
-        algido, // álgido
+        Algido, // álgido
         Gelado,
  /*min*/Frio,
         Fresco,
@@ -44,13 +44,13 @@ public class Ambient : ScriptableObject
         currentTemperature = mainAmbient.currentTemperature + modifyTemperature;
         if (currentTemperature == 0)
         {
-            currentTemperature = Temperature.Frio;
+            currentTemperature = Temperature.Algido;
         }
 
         currentClimate = mainAmbient.currentClimate + modifyClimate;
         if (currentClimate == 0)
         {
-            currentClimate = Climate.Chuvoso;
+            currentClimate = Climate.Limpo;
         }
     }
 }
