@@ -3152,6 +3152,7 @@ GameObject:
   - component: {fileID: 360136999}
   - component: {fileID: 360136998}
   - component: {fileID: 360136997}
+  - component: {fileID: 360137000}
   m_Layer: 5
   m_Name: btn_Quest
   m_TagString: Untagged
@@ -3222,7 +3223,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 360136998}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 360137000}
+        m_TargetAssemblyTypeName: TaskManager, Assembly-CSharp
+        m_MethodName: ShowQuestCanvas
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &360136998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3261,6 +3274,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 360136995}
   m_CullTransparentMesh: 1
+--- !u!114 &360137000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360136995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f0b6f11741cdac4ea752c17c6054559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quests: []
+  moneyManager: {fileID: 0}
+  questCanvas: {fileID: 1482243824}
+  questUIPrefab: {fileID: 557466118674115861, guid: 1ab2f35bbdfa549468ed17da52be143f,
+    type: 3}
+  spawnTask: {fileID: 966624991}
 --- !u!114 &386475372 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1022065325439666699, guid: 99fe0b5b782ead34094d2835abbae21b,
@@ -5234,6 +5265,7 @@ GameObject:
   - component: {fileID: 567922431}
   - component: {fileID: 567922430}
   - component: {fileID: 567922429}
+  - component: {fileID: 567922432}
   m_Layer: 5
   m_Name: Exit
   m_TagString: Untagged
@@ -5304,7 +5336,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 567922430}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 567922432}
+        m_TargetAssemblyTypeName: TaskManager, Assembly-CSharp
+        m_MethodName: HideQuestCanvas
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &567922430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5343,6 +5387,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 567922427}
   m_CullTransparentMesh: 1
+--- !u!114 &567922432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567922427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f0b6f11741cdac4ea752c17c6054559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quests: []
+  moneyManager: {fileID: 0}
+  questCanvas: {fileID: 1482243824}
+  questUIPrefab: {fileID: 557466118674115861, guid: 1ab2f35bbdfa549468ed17da52be143f,
+    type: 3}
+  spawnTask: {fileID: 966624991}
 --- !u!1001 &588575531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6051,7 +6113,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 769760286}
   m_HandleRect: {fileID: 769760285}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -8327,6 +8389,41 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 965654338}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &966624991
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 966624992}
+  m_Layer: 5
+  m_Name: SpawnTask
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &966624992
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966624991}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1482243825}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -35, y: 594}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &973043126
 GameObject:
   m_ObjectHideFlags: 0
@@ -15043,6 +15140,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 614539453}
+  - {fileID: 966624992}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
