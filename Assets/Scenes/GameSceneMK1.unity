@@ -6505,7 +6505,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &704685277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15764,7 +15764,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpd: 0.05
   zoomRate: 0.5
-  maxZoom: 12
+  maxZoom: 20
   minZoom: 8
 --- !u!1001 &1576356537
 PrefabInstance:
@@ -19078,7 +19078,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1949110644
 RectTransform:
   m_ObjectHideFlags: 0
