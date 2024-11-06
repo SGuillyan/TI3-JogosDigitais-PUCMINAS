@@ -10,11 +10,15 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        tileSelector.SelectTile();        
+        tileSelector.SelectTile();
+        Debug.Log(ToolsManager.activeTool);
     }
 
     private void FixedUpdate()
     {
-        cameraController.CameraInput();
+        if (ToolsManager.activeTool == ToolsManager.Tools.None)
+        {
+            cameraController.CameraInput();
+        }        
     }
 }
