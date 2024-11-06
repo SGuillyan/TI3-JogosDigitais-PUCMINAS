@@ -1694,9 +1694,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 473759903}
-        m_TargetAssemblyTypeName: StoreUI, Assembly-CSharp
-        m_MethodName: OpenStore
+      - m_Target: {fileID: 1762352557}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: TabShop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1706,10 +1706,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+<<<<<<< HEAD
+=======
       - m_Target: {fileID: 1465641209}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1718,6 +1720,7 @@ MonoBehaviour:
           m_StringArgument: Close
           m_BoolArgument: 0
         m_CallState: 2
+>>>>>>> b8d037cb17b4073b4ff20f5d6ec2c5ac42224633
 --- !u!114 &213822526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3152,7 +3155,6 @@ GameObject:
   - component: {fileID: 360136999}
   - component: {fileID: 360136998}
   - component: {fileID: 360136997}
-  - component: {fileID: 360137000}
   m_Layer: 5
   m_Name: btn_Quest
   m_TagString: Untagged
@@ -3224,9 +3226,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 360137000}
-        m_TargetAssemblyTypeName: TaskManager, Assembly-CSharp
-        m_MethodName: ShowQuestCanvas
+      - m_Target: {fileID: 1762352557}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: TabQuestList
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3274,25 +3276,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 360136995}
   m_CullTransparentMesh: 1
---- !u!114 &360137000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 360136995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f0b6f11741cdac4ea752c17c6054559, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  quests: []
-  moneyManager: {fileID: 3326253208403477119, guid: c3f1c59c8e34c8a489ca67f78d659349,
-    type: 3}
-  questCanvas: {fileID: 1482243824}
-  questUIPrefab: {fileID: 557466118674115861, guid: 1ab2f35bbdfa549468ed17da52be143f,
-    type: 3}
-  spawnTask: {fileID: 966624991}
 --- !u!114 &386475372 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1022065325439666699, guid: 99fe0b5b782ead34094d2835abbae21b,
@@ -5332,9 +5315,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 567922432}
-        m_TargetAssemblyTypeName: TaskManager, Assembly-CSharp
-        m_MethodName: HideQuestCanvas
+      - m_Target: {fileID: 1762352557}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: TabQuestList
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7492,9 +7475,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1807522564}
-        m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: OpenInventory
+      - m_Target: {fileID: 1762352557}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: TabInventory
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7504,10 +7487,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+<<<<<<< HEAD
+=======
       - m_Target: {fileID: 1465641209}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7516,6 +7501,7 @@ MonoBehaviour:
           m_StringArgument: Close
           m_BoolArgument: 0
         m_CallState: 2
+>>>>>>> b8d037cb17b4073b4ff20f5d6ec2c5ac42224633
 --- !u!114 &823962375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7823,9 +7809,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1968517974}
-        m_TargetAssemblyTypeName: ToolsManager, Assembly-CSharp
-        m_MethodName: ToolBoxAnim
+      - m_Target: {fileID: 1762352557}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: TabToolBox
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14823,7 +14809,6 @@ GameObject:
   - component: {fileID: 1465641208}
   - component: {fileID: 1465641207}
   - component: {fileID: 1465641206}
-  - component: {fileID: 1465641209}
   m_Layer: 5
   m_Name: Footer
   m_TagString: Untagged
@@ -14918,27 +14903,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1465641204}
   m_CullTransparentMesh: 1
---- !u!95 &1465641209
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1465641204}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 08de3635d6cf1654aa0d3d3f0b9775af, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1475968229
 GameObject:
   m_ObjectHideFlags: 0
@@ -17068,6 +17032,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1752948597}
   m_CullTransparentMesh: 1
+--- !u!1 &1762352556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1762352558}
+  - component: {fileID: 1762352557}
+  m_Layer: 0
+  m_Name: MenuManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1762352557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762352556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3a661735ecd0864c83913a4603785af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toolsManager: {fileID: 1968517974}
+  taskManager: {fileID: 1946661189}
+  inventoryUI: {fileID: 1807522564}
+  storeUI: {fileID: 473759903}
+  questCanvas: {fileID: 1482243821}
+  inventory: {fileID: 1949110643}
+  shop: {fileID: 1065880391}
+--- !u!4 &1762352558
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762352556}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1763600724
 GameObject:
   m_ObjectHideFlags: 0
@@ -18476,9 +18491,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1807522564}
-        m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: CloseInventory
+      - m_Target: {fileID: 1762352557}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: TabInventory
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18488,10 +18503,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1465641209}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -19064,6 +19079,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1943612497}
   m_CullTransparentMesh: 1
+--- !u!1 &1946661188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1946661190}
+  - component: {fileID: 1946661189}
+  m_Layer: 0
+  m_Name: TaskManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1946661189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946661188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f0b6f11741cdac4ea752c17c6054559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quests: []
+  moneyManager: {fileID: 3326253208403477119, guid: c3f1c59c8e34c8a489ca67f78d659349,
+    type: 3}
+  questCanvas: {fileID: 1482243824}
+  questUIPrefab: {fileID: 557466118674115861, guid: 1ab2f35bbdfa549468ed17da52be143f,
+    type: 3}
+  spawnTask: {fileID: 966624991}
+--- !u!4 &1946661190
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946661188}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1947514643
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19530,7 +19596,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: -0.10300001, y: 0.22628859}
   m_AnchorMax: {x: 0.42100003, y: 0.29500002}
-  m_AnchoredPosition: {x: 0, y: -872}
+  m_AnchoredPosition: {x: 0, y: -949}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1968517970
@@ -20022,9 +20088,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 473759903}
-        m_TargetAssemblyTypeName: StoreUI, Assembly-CSharp
-        m_MethodName: CloseStore
+      - m_Target: {fileID: 1762352557}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: TabShop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -20034,10 +20100,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1465641209}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -22449,13 +22515,15 @@ SceneRoots:
   m_Roots:
   - {fileID: 1865090289}
   - {fileID: 18571958}
-  - {fileID: 1807522563}
   - {fileID: 1614788057}
   - {fileID: 2141833698}
   - {fileID: 404321928}
   - {fileID: 1258853893}
   - {fileID: 1971415365}
+  - {fileID: 1946661190}
+  - {fileID: 1807522563}
   - {fileID: 473759902}
+  - {fileID: 1762352558}
   - {fileID: 1387194065}
   - {fileID: 1970292021}
   - {fileID: 1322342604}
