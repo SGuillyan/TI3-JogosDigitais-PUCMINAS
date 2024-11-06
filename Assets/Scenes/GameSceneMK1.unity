@@ -4735,12 +4735,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultShopItems:
-  - itemName: Alfafa Seed
-    itemIcon: {fileID: 21300000, guid: efb228fdb596ad644be27aa32a145aa3, type: 3}
-    maxStackSize: 99
-    itemType: 1
-    itemID: 0
-    price: 20
   - itemName: Carrot Seed
     itemIcon: {fileID: 21300000, guid: 5e4341849d50d3347912e30bd867caee, type: 3}
     maxStackSize: 99
@@ -7224,6 +7218,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2725359407219702978}
   - {fileID: 973043127}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10711,7 +10706,6 @@ RectTransform:
   - {fileID: 1691973922}
   - {fileID: 1776568941}
   - {fileID: 1968517969}
-  - {fileID: 2725359407219702978}
   - {fileID: 1465641205}
   - {fileID: 702113045}
   m_Father: {fileID: 0}
@@ -21258,11 +21252,11 @@ RectTransform:
   - {fileID: 3132589350681531266}
   - {fileID: 8310191708352254192}
   - {fileID: 6266997743507687239}
-  m_Father: {fileID: 1192120122}
+  m_Father: {fileID: 779741250}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -530.1, y: 29.2}
+  m_AnchoredPosition: {x: -392.66663, y: 21.629639}
   m_SizeDelta: {x: 184.3, y: 280.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3129396560793384171
@@ -22058,7 +22052,7 @@ GameObject:
   - component: {fileID: 7182996671644948067}
   - component: {fileID: 7182996671644948066}
   m_Layer: 5
-  m_Name: InfoPanel
+  m_Name: InfoPanel --- Placeholder ---
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
