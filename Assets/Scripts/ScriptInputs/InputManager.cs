@@ -11,7 +11,7 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         tileSelector.SelectTile();
-        Debug.Log(ToolsManager.activeTool);
+        //Debug.Log(ToolsManager.activeTool);
     }
 
     private void FixedUpdate()
