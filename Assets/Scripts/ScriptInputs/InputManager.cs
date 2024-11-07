@@ -19,6 +19,6 @@ public class InputManager : MonoBehaviour
         if (ToolsManager.activeTool == ToolsManager.Tools.None)
         {
             cameraController.CameraInput();
-        }        
+        }
     }
 }

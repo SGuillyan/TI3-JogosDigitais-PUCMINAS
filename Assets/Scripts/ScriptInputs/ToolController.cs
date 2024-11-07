@@ -23,13 +23,17 @@ public class ToolController : MonoBehaviour
             {
                 ToolsManager.ChangeTool(tool);
                 ToolsManager.SetActiveTool(type);
+
+                //MenuManager.openedMenu = true;
             }
             else
             {
                 ToolsManager.SetActiveTool(ToolsManager.Tools.None);
+
+                //MenuManager.openedMenu = false;
             }
 
-            ToolsManager.ToolBoxAnim();
+            //ToolsManager.ToolBoxAnim();
         }
     }
 }

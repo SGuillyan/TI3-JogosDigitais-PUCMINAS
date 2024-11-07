@@ -17,6 +17,13 @@ public class TileSelector : MonoBehaviour
     public Animator tileInfoAnimator;  // Animator para a janela de informações
 
     private bool isTouchProcessed = false;  // Variável para controlar o processamento do toque
+    private float continuoMenuTimer = 0.3f; // Verifica se o toque processado está ativo desde o memonto em que algum menu estava ativo
+    private float continuott;
+
+    private void Start()
+    {
+        continuott = continuoMenuTimer;
+    }
 
     public void SelectTile()
     {
@@ -28,6 +35,18 @@ public class TileSelector : MonoBehaviour
 
         if (Input.touchCount > 0)
         {
+            if (MenuManager.openedMenu)
+            {
+                continuoMenuTimer = continuott;
+                return;
+            }
+            if (continuoMenuTimer > 0f)
+            {
+                continuoMenuTimer -= Time.deltaTime;
+                return;
+            }
+
+
             Vector3 mousePosition = Input.mousePosition;
             Plane plane = new Plane(Vector3.up, Vector3.zero);
             Ray ray = Camera.main.ScreenPointToRay(mousePosition);

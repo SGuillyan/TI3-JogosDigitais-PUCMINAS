@@ -27,24 +27,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject inventory;
     [SerializeField] private GameObject shop;
 
-    //private ToolsManager toolBoxScript;
-    //private GameObject questListScript;
-    //private GameObject inventoryScript;
-    //private GameObject shopScript;
-
-    private void Start()
-    {
-        /*if (toolBoxUI != null)
-        {
-            toolBoxScript = toolBoxUI.GetComponent<ToolsManager>();
-        }
-        else
-        {
-            Debug.LogError("ToolBox ausente!");
-        }*/
-
-
-    }
+    public static bool openedMenu = false;
 
     public void TabToolBox()
     {
@@ -102,24 +85,36 @@ public class MenuManager : MonoBehaviour
     {
         VerifyTabs(Menu.ToolBox);
         ToolsManager.ToolBoxAnim();
+
+        openedMenu = true;
+        CameraController.lockCamera = true;
     }
 
     private void OpenQuestList()
     {
         VerifyTabs(Menu.QuestList);
         taskManager.ShowQuestCanvas();
+
+        openedMenu = true;
+        CameraController.lockCamera = true;
     }
 
     private void OpenInventory()
     {
         VerifyTabs(Menu.Inventory);
         inventoryUI.OpenInventory();
+
+        openedMenu = true;
+        CameraController.lockCamera = true;
     }
 
     private void OpenShop()
     {
         VerifyTabs(Menu.Shop);
         storeUI.OpenStore();
+
+        openedMenu = true;
+        CameraController.lockCamera = true;
     }
 
     #endregion
@@ -129,21 +124,33 @@ public class MenuManager : MonoBehaviour
     private void CloseToolBox()
     {
         ToolsManager.ToolBoxAnim();
+
+        openedMenu = false;
+        CameraController.lockCamera = false;
     }
 
     private void CloseQuestList()
     {
         taskManager.HideQuestCanvas();
+
+        openedMenu = false;
+        CameraController.lockCamera = false;
     }
 
     private void CloseInventory()
     {
         inventoryUI.CloseInventory();
+
+        openedMenu = false;
+        CameraController.lockCamera = false;
     }
 
     private void CloseShop()
     {
         storeUI.CloseStore();
+
+        openedMenu = false;
+        CameraController.lockCamera = false;
     }
 
     #endregion
