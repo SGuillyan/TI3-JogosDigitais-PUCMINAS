@@ -19,7 +19,7 @@ public class InventoryUI : MonoBehaviour
     void Start()
     {
         playerInventory.onInventoryChanged += UpdateInventoryUI;
-        ShowSeeds();
+        //ShowSeeds();
         UpdateInventoryUI();
     }
 
@@ -141,18 +141,51 @@ public class InventoryUI : MonoBehaviour
         UpdateInventoryUI();
     }
 
-    public void ShowCollectedItems()
+    #region // Private comentado
+
+    /*private void ShowCollectedItems()
     {
+
         UpdateInventoryUIByType(ItemType.CollectedItem);
     }
 
-    public void ShowSeeds()
+    private void ShowSeeds()
     {
         UpdateInventoryUIByType(ItemType.Seed);
     }
 
-    public void ShowFertilizers()
+    private void ShowFertilizers()
     {
         UpdateInventoryUIByType(ItemType.Fertilizer);
+    }*/
+
+    #endregion
+
+    #region // Toggle
+
+    public void ShowCollectedItems(Toggle toggle)
+    {
+        if (toggle.isOn)
+        {
+            UpdateInventoryUIByType(ItemType.CollectedItem);
+        }
     }
+
+    public void ShowSeeds(Toggle toggle)
+    {
+        if (toggle.isOn)
+        {
+            UpdateInventoryUIByType(ItemType.Seed);
+        }
+    }
+
+    public void ShowFertilizers(Toggle toggle)
+    {
+        if (toggle.isOn)
+        {
+            UpdateInventoryUIByType(ItemType.Fertilizer);
+        }
+    }
+
+    #endregion
 }

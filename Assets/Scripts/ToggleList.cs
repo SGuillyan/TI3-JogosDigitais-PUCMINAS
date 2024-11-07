@@ -9,13 +9,14 @@ public class ToggleList : MonoBehaviour
 
     private bool active = false;
 
-    /*private void Start()
+    private void Start()
     {
-        for (int i = 0; i < list.Length; i++)
+        list[0].isOn = true;
+        /*for (int i = 0; i < list.Length; i++)
         {
             list[i].onValueChanged.AddListener(() => ChangeSelect(list[i]));
-        }
-    }*/
+        }*/
+    }
 
     public void VerifySelect(Toggle ignore)
     {
@@ -27,20 +28,22 @@ public class ToggleList : MonoBehaviour
                 {
                     if (list[i].isOn && list[i] != ignore)
                     {
-                        list[i].isOn = false;  
+                        list[i].isOn = false;
+                        list[i].interactable = true;
                     }                   
                 }
                 active = true;
+                ignore.interactable = false;
             }
             else
             {
                 active = true;
+                ignore.interactable = false;
             }
         }
         else
         {
             active = false;
-        }
-        
+        }        
     }
 }

@@ -102,6 +102,43 @@ public class StoreUI : MonoBehaviour
         }
     }
 
+    #region // Toggle
+
+    public void ShowBuyItems(Toggle toggle)
+    {
+        if (toggle.isOn)
+        {
+            ClearStoreUI();
+
+            // Agora utiliza diretamente o List<Item> para exibir os itens
+            List<Item> shopItems = storeInventory.GetAllShopItems();
+
+            foreach (Item item in shopItems)
+            {
+                CreateStoreItemUI(item, true);  // Passa true para indicar que estamos na aba de compra
+            }
+        } 
+    }
+
+    public void ShowSellItems(Toggle toggle)
+    {
+        if (toggle.isOn)
+        {
+            ClearStoreUI();
+
+            // Aqui pegamos os itens que o jogador tem no inventário e que podem ser vendidos
+            List<Item> sellableItems = storeInventory.GetSellableItemsFromInventory();
+
+            foreach (Item item in sellableItems)
+            {
+                // Usamos a função de criação de UI para mostrar os itens à venda
+                CreateStoreItemUI(item, false);  // Passa false para indicar que estamos na aba de venda
+            }
+        }
+    }
+
+    #endregion
+
     private void ClearStoreUI()
     {
         foreach (var item in storeItemInstances)
