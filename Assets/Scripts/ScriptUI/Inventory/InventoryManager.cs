@@ -30,7 +30,7 @@ public class InventoryManager : MonoBehaviour
             isPlanting = true;  // Ativa o modo de plantio
 
             // Troca os botões
-            shopButton.gameObject.SetActive(false);
+            // shopButton.gameObject.SetActive(false);
             stopPlantingButton.gameObject.SetActive(true);
         }
         else
@@ -46,7 +46,7 @@ public class InventoryManager : MonoBehaviour
         isPlanting = false;  // Desativa o modo de plantio
 
         // Troca os botões
-        shopButton.gameObject.SetActive(true);
+        // shopButton.gameObject.SetActive(true);
         stopPlantingButton.gameObject.SetActive(false);
 
         inventoryUI.OpenInventory();  // Reabre o inventário
