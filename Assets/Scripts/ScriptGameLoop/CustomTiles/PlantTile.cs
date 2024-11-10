@@ -121,7 +121,7 @@ public class PlantTile : Tile
         }
 
         // Inicializa a barra de progresso
-        InitializeProgressBar(tilemap, position);
+        // InitializeProgressBar(tilemap, position);
 
         UpdateGrowthInstance(tilemap, position);
         caller.StartCoroutine(Grow(tilemap, position, caller));
@@ -174,7 +174,7 @@ public class PlantTile : Tile
                 currentGrowthTime += additionalTime;
 
                 // Atualiza a barra de progresso corretamente
-                UpdateProgressBarUI(totalElapsedTime);
+                // UpdateProgressBarUI(totalElapsedTime);
             }
 
             growthStage++;
