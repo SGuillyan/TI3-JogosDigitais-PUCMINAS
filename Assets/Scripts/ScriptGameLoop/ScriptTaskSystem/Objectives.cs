@@ -11,5 +11,6 @@ public class Objective
 public enum ObjectiveType
 {
     Collect,
-    Build
+    Build,
+    Plow
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6060,6 +6060,8 @@ MonoBehaviour:
   questUIPrefab: {fileID: 557466118674115861, guid: 1ab2f35bbdfa549468ed17da52be143f,
     type: 3}
   spawnTask: {fileID: 966624991}
+  spawnTask2: {fileID: 0}
+  spawnTask3: {fileID: 0}
 --- !u!1001 &588575531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7413,7 +7415,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -35, y: -12}
+  m_AnchoredPosition: {x: -35, y: -6}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &726847363
@@ -7856,7 +7858,7 @@ RectTransform:
   m_Father: {fileID: 1012818204}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15654,7 +15656,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1482243822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16654,7 +16656,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -35, y: -570}
+  m_AnchoredPosition: {x: -35, y: -494}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1613443592
@@ -17529,9 +17531,9 @@ RectTransform:
   m_Father: {fileID: 669565397}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -45.790344, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1752249210
 MonoBehaviour:
@@ -20132,6 +20134,8 @@ MonoBehaviour:
   questUIPrefab: {fileID: 557466118674115861, guid: 1ab2f35bbdfa549468ed17da52be143f,
     type: 3}
   spawnTask: {fileID: 966624991}
+  spawnTask2: {fileID: 712211951}
+  spawnTask3: {fileID: 1600733931}
 --- !u!4 &1946661190
 Transform:
   m_ObjectHideFlags: 0
