@@ -19,7 +19,62 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 5505344696320
-    m_Localized: Tutorial - en
+    m_Localized: Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1113289603772416
+    m_Localized: Next
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1114819950112768
+    m_Localized: We will learn how to play the game (test text)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1120827988602880
+    m_Localized: To interact with the soil, select the toolbox!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1120851141160960
+    m_Localized: Select to get soil informations
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1120895466565632
+    m_Localized: Let's buy some seeds! Click on the store
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1120908720566272
+    m_Localized: Buy some carrots seeds to start planting!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1120919961300992
+    m_Localized: Ok, let's go back to the toolbox!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1120951062065152
+    m_Localized: Select the hoe to prepare the soil to planting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1121067865042944
+    m_Localized: Exelent! Now, open your inventory and select the desired seed to
+      plant!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1121141886119936
+    m_Localized: Select the carrot seed we purchesed!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1121156788482048
+    m_Localized: Finally, select a piece of plantable soil to accommodate our carrots.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1121174098374656
+    m_Localized: When the plant grows, harvest it with the appropriate tool in the
+      toolbox.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1121187587256320
+    m_Localized: After  harvesting the plant with the appropriate toom, sell it at
+      the store!
     m_Metadata:
       m_Items: []
   references:
