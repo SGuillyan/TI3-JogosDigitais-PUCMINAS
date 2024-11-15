@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: MenusTable_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 87c431e7c0b998a44ba3b9fd93ab40a9, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 29718573056
+    m_Localized: Inventory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 252121542656
+    m_Localized: Seeds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 393352146944
+    m_Localized: Fertilizes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 570653765632
+    m_Localized: Crops
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2102069653504
+    m_Localized: Shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2144616673280
+    m_Localized: Buy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2239173062656
+    m_Localized: Sell
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3482427682816
+    m_Localized: Quest
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

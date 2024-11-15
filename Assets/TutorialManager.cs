@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.Localization.Components;
+using UnityEngine.Localization.Tables;
+using UnityEngine.Localization;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -9,6 +12,7 @@ public class TutorialManager : MonoBehaviour
     public class TutorialStep
     {
         public string dialogueText;           // Texto que será exibido para o jogador
+        public LocalizedString localizeKey;
         public RectTransform targetUIElement; // Elemento de UI que a seta deve apontar
         public List<Button> buttonsToClick = new List<Button>();   // Lista de botões que devem ser clicados antes de prosseguir
         public List<Toggle> togglesToActivate = new List<Toggle>(); // Lista de toggles que devem ser ativados antes de prosseguir
@@ -22,6 +26,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] public TutorialStep[] tutorialSteps;       // Lista dos passos do tutorial
     public GameObject tutorialGameObject;
     public TextMeshProUGUI dialogueTextUI;     // UI do texto do tutorial (pode ser um Text ou TextMeshProUGUI)
+    public LocalizeStringEvent localizeText;
     public RectTransform arrowImage;           // Referência para a imagem da seta
     public Button nextButton;                  // Botão para avançar no tutorial
 
@@ -50,7 +55,9 @@ public class TutorialManager : MonoBehaviour
             TutorialStep currentStep = tutorialSteps[index];
 
             // Atualiza o texto do tutorial
-            dialogueTextUI.text = currentStep.dialogueText;
+            //dialogueTextUI.text = currentStep.dialogueText;
+            localizeText.StringReference = currentStep.localizeKey;
+            
 
             // Atualiza a posição do pop-up do tutorial
             if (currentStep.popupPosition == Vector2.zero)
