@@ -31,7 +31,7 @@ public class SaveSystem : MonoBehaviour
 		mainCamera = accesses.mainCamera;
 		tutorialManager = accesses.tutorialManager;
 
-		Save("Assets/SaveData.json");
+		Save("Assets/Scripts/ScriptSave/SaveData.json");
     }
 
 	public static void Save(string path)
