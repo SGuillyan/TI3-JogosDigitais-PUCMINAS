@@ -4,7 +4,7 @@ using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class IDS : MonoBehaviour
+public static class IDS
 {
     [Header("Índicie de Desenvolvimento Sustentável")]
     [SerializeField] private static int ids;
@@ -13,11 +13,11 @@ public class IDS : MonoBehaviour
 
     [Header("Índicies")]
     [Range(0, 100)]
-    [SerializeField] private static int ecologico;
+    [SerializeField] private static int ecologico = 3;
     [Range(0, 100)]
-    [SerializeField] private static int economico;
+    [SerializeField] private static int economico = 4;
     [Range(0, 100)]
-    [SerializeReference] private static int social;
+    [SerializeReference] private static int social = 5;
 
     [Space(5)]
 
@@ -103,7 +103,7 @@ public class IDS : MonoBehaviour
 
     #endregion
 
-    private static void CalcularIDS()
+    public static void CalcularIDS()
     {
         // Soma Ponderada: soma considerando o peso de cada termo
         int pesoTotal = pesoEcologico + pesoEconomico + pesoSocial;

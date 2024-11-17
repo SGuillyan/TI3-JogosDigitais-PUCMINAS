@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -645,7 +645,7 @@ MonoBehaviour:
     togglesActivated: 0
   tutorialGameObject: {fileID: 1328312040}
   dialogueTextUI: {fileID: 1206776053}
-  localizeText: {fileID: 0}
+  localizeText: {fileID: 1206776055}
   arrowImage: {fileID: 702113045}
   nextButton: {fileID: 404738442}
   arrowOffsetY: 50
@@ -8912,6 +8912,55 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 870857869}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &875290589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 875290591}
+  - component: {fileID: 875290590}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &875290590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875290589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41522f05f54505c4cbbf285a0b267b2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  accesses:
+    moneyManager: {fileID: 917966509}
+    inventoryManager: {fileID: 1807522567}
+    mainCamera: {fileID: 1566377471}
+    tutorialManager: {fileID: 18571957}
+--- !u!4 &875290591
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875290589}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &886458207
 GameObject:
   m_ObjectHideFlags: 0
@@ -12884,7 +12933,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1322342601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20690,7 +20739,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0b6f11741cdac4ea752c17c6054559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quests: []
+  quests:
+  - title: 
+    description: 
+    isCompleted: 0
+    objectives: []
+    reward:
+      moneyAmount: 0
+      ecologicoValor: 0
+      economicoValor: 0
+      socialValor: 0
   moneyManager: {fileID: 3326253208403477119, guid: c3f1c59c8e34c8a489ca67f78d659349,
     type: 3}
   questCanvas: {fileID: 1482243824}
@@ -23917,6 +23975,7 @@ SceneRoots:
   - {fileID: 1807522563}
   - {fileID: 473759902}
   - {fileID: 1762352558}
+  - {fileID: 875290591}
   - {fileID: 1387194065}
   - {fileID: 1970292021}
   - {fileID: 1322342604}

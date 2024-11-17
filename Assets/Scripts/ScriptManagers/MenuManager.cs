@@ -45,6 +45,7 @@ public class MenuManager : MonoBehaviour
 
     public void TabQuestList()
     {
+#pragma warning disable CS0618 // O tipo ou membro é obsoleto
         if (questCanvas.active)
         {
             CloseQuestList();

@@ -11,8 +11,8 @@ public class PlantTile : Tile
     public float[] growthTimes;  // Array para armazenar o tempo necessário para cada fase de crescimento
 
     [Header("Ambient")]
-    [Tooltip("Ambiente em que a planta está")]
-    [SerializeField] private Ambient ambient;
+    //[Tooltip("Ambiente em que a planta está")]
+    //[SerializeField] private Ambient ambient;
     [Tooltip("Temperatura ideal para o crescimento da planta")]
     [SerializeField] private Ambient.Temperature idealTemperature;
     [Tooltip("Clima ideal para o crescimento da planta")]
@@ -293,20 +293,20 @@ public class PlantTile : Tile
     {
         float r = 1;
 
-        if (greenTolerance > 0 && Mathf.Abs((int)idealTemperature - (int)ambient.currentTemperature) <= greenTolerance - 1)
+        if (greenTolerance > 0 && Mathf.Abs((int)idealTemperature - (int)Ambient.currentTemperature) <= greenTolerance - 1)
         {
             r *= 1.5f;
         }
-        else if (Mathf.Abs((int)idealTemperature - (int)ambient.currentTemperature) >= yellowTolerance - 1)
+        else if (Mathf.Abs((int)idealTemperature - (int)Ambient.currentTemperature) >= yellowTolerance - 1)
         {
             r *= 0.5f;
         }
 
-        if (greenTolerance > 0 && Mathf.Abs((int)idealClimate - (int)ambient.currentClimate) <= greenTolerance - 1)
+        if (greenTolerance > 0 && Mathf.Abs((int)idealClimate - (int)Ambient.currentClimate) <= greenTolerance - 1)
         {
             r *= 1.5f;
         }
-        else if (Mathf.Abs((int)idealClimate - (int)ambient.currentClimate) >= yellowTolerance - 1)
+        else if (Mathf.Abs((int)idealClimate - (int)Ambient.currentClimate) >= yellowTolerance - 1)
         {
             r *= 0.5f;
         }

@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Ambient")]
-public class Ambient : ScriptableObject
+public static class Ambient
 {
     public enum Temperature
     {
@@ -33,10 +32,10 @@ public class Ambient : ScriptableObject
         Arido, // árido
     }
 
-    public Temperature currentTemperature;
-    public Climate currentClimate;
+    public static Temperature currentTemperature;
+    public static Climate currentClimate;
 
-    [SerializeField] private int modifyTemperature;
+    /*[SerializeField] private int modifyTemperature;
     [SerializeField] private int modifyClimate;
 
     public void ModifyAmbient(Ambient mainAmbient)
@@ -52,5 +51,5 @@ public class Ambient : ScriptableObject
         {
             currentClimate = Climate.Limpo;
         }
-    }
+    }*/
 }
