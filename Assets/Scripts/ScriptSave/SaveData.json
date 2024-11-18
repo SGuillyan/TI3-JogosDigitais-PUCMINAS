@@ -1,0 +1,8 @@
+{
+    "idsJson": "{\"ecologico\":3,\"economico\":4,\"social\":5}",
+    "ambientJson": "{\"currentTemperature\":0,\"currentClimate\":0}",
+    "moneyJson": "{\"money\":1000}",
+    "inventoryJson": "{\"itens\":[]}",
+    "cameraJson": "{\"position\":{\"x\":70.0,\"y\":30.0,\"z\":-60.0},\"size\":15.0}",
+    "tutorialJson": "{\"isDone\":false}"
+}

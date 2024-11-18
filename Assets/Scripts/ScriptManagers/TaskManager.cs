@@ -141,6 +141,36 @@ public class TaskManager : MonoBehaviour
         };
         AddQuest(harvestWildflowers);
     }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            CompleteAllQuests();
+        }
+    }
+
+    public void CompleteAllQuests()
+    {
+        foreach (Quest quest in quests)
+        {
+            if (!quest.isCompleted)
+            {
+                // Completa a quest e aplica as recompensas
+                CompleteQuest(quest);
+
+                // Atualiza os valores no IDS
+                IDS.AddEcologico(quest.reward.ecologicoValor);
+                IDS.AddEconomico(quest.reward.economicoValor);
+                IDS.AddSocial(quest.reward.socialValor);
+
+                // Exibe informações no console
+                Debug.Log($"Quest '{quest.title}' completada!");
+                Debug.Log($"Dinheiro atual: {moneyManager.GetCurrentMoney()}");
+            }
+        }
+    }
+
     public void ShowQuestCanvas()
     {
         questCanvas.gameObject.SetActive(true); // Ativa o Canvas
@@ -175,6 +205,8 @@ public class TaskManager : MonoBehaviour
                                    $"Econômico: {randomQuest.reward.economicoValor}, " +
                                    $"Social: {randomQuest.reward.socialValor}";
         }
+
+        CompleteAllQuests();
     }
     public void HideQuestCanvas()
     {
