@@ -40,7 +40,7 @@ public class SaveSystem : MonoBehaviour
 
 		// TileData
         new IDS_Data(IDS.GetEcologico(), IDS.GetEconomico(), IDS.GetSocial());
-		new AmbientData(Ambient.currentTemperature, Ambient.currentClimate);
+		new AmbientData(Ambient.GetCurrentTemperature(), Ambient.GetCurrentClimate(), AmbientManager.GetCurrentSeason(), AmbientManager.GetSeasonalFactor());
 		new MoneyData(moneyManager.GetCurrentMoney());
 		new InventoryData(inventoryManager.playerInventory.items);
 		// QuestData
@@ -102,12 +102,16 @@ public class SaveSystem : MonoBehaviour
 	{
 		public Ambient.Temperature currentTemperature;
 		public Ambient.Climate currentClimate;
+		public AmbientManager.Season currentSeason;
+		public float seasonalFactor;
 
 		// Construtor
-		public AmbientData(Ambient.Temperature currentTemperature, Ambient.Climate currentClimate)
+		public AmbientData(Ambient.Temperature currentTemperature, Ambient.Climate currentClimate, AmbientManager.Season currentSeason, float seasonalFactor)
 		{
 			this.currentTemperature = currentTemperature;
 			this.currentClimate = currentClimate;
+			this.currentSeason = currentSeason;
+			this.seasonalFactor = seasonalFactor;
 		}
 	}
 

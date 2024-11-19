@@ -21,7 +21,7 @@ public static class Ambient
     public enum Climate
     {
         None,
-        Geada,
+        Tempestuoso,
         Chuvoso,
  /*min*/Nublado,
         Umido,
@@ -32,8 +32,36 @@ public static class Ambient
         Arido, // árido
     }
 
-    public static Temperature currentTemperature;
-    public static Climate currentClimate;
+    private static Temperature currentTemperature;
+    private static Climate currentClimate;
+
+    public static Temperature GetCurrentTemperature()
+    {
+        return currentTemperature;
+    }
+
+    public static Climate GetCurrentClimate()
+    {
+        return currentClimate;
+    }
+
+    public static void ChangeTemperature(int modify)
+    {
+        currentTemperature = currentTemperature + modify;
+        if (currentTemperature == 0)
+        {
+            currentTemperature = Temperature.Algido;
+        }
+    }
+
+    public static void ChangeClimate(int modify)
+    {
+        currentClimate = currentClimate + modify;
+        if (currentClimate == 0)
+        {
+            currentClimate = Climate.Limpo;
+        }
+    }
 
     /*[SerializeField] private int modifyTemperature;
     [SerializeField] private int modifyClimate;

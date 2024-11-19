@@ -293,20 +293,20 @@ public class PlantTile : Tile
     {
         float r = 1;
 
-        if (greenTolerance > 0 && Mathf.Abs((int)idealTemperature - (int)Ambient.currentTemperature) <= greenTolerance - 1)
+        if (greenTolerance > 0 && Mathf.Abs((int)idealTemperature - (int)Ambient.GetCurrentTemperature()) <= greenTolerance - 1)
         {
             r *= 1.5f;
         }
-        else if (Mathf.Abs((int)idealTemperature - (int)Ambient.currentTemperature) >= yellowTolerance - 1)
+        else if (Mathf.Abs((int)idealTemperature - (int)Ambient.GetCurrentTemperature()) >= yellowTolerance - 1)
         {
             r *= 0.5f;
         }
 
-        if (greenTolerance > 0 && Mathf.Abs((int)idealClimate - (int)Ambient.currentClimate) <= greenTolerance - 1)
+        if (greenTolerance > 0 && Mathf.Abs((int)idealClimate - (int)Ambient.GetCurrentClimate()) <= greenTolerance - 1)
         {
             r *= 1.5f;
         }
-        else if (Mathf.Abs((int)idealClimate - (int)Ambient.currentClimate) >= yellowTolerance - 1)
+        else if (Mathf.Abs((int)idealClimate - (int)Ambient.GetCurrentClimate()) >= yellowTolerance - 1)
         {
             r *= 0.5f;
         }
