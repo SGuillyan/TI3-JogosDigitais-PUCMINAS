@@ -13,11 +13,11 @@ public static class IDS
 
     [Header("Índicies")]
     [Range(0, 100)]
-    [SerializeField] private static int ecologico = 10;
+    [SerializeField] private static int ecologico = 20;
     [Range(0, 100)]
     [SerializeField] private static int economico = 20;
     [Range(0, 100)]
-    [SerializeReference] private static int social = 40;
+    [SerializeReference] private static int social = 20;
 
     [Space(5)]
 

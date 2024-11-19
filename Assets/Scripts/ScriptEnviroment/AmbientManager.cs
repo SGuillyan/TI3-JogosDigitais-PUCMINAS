@@ -20,17 +20,23 @@ public class AmbientManager : MonoBehaviour
     [Min(1)]
     [SerializeField] private float temperatureUpdateTime = 60;
     [Tooltip("Quanto maior o valor menor a chance de atualizar a temperatura, chance = 100 / updateChance")]
+    [Min(1)]
     [SerializeField] private int updateChange = 1;
+
+    private int lastUpdate = 0;
 
     private void Start()
     {
         currentSeason = Season.Summer;
         seasonalFactor = 0f;
+
+        Debug.Log("Está " + Ambient.GetCurrentTemperature());
+        Debug.Log("Está " + Ambient.GetCurrentClimate());
     }
 
     private void Update()
     {
-        if (Time.realtimeSinceStartup % temperatureUpdateTime == 0)
+        if ((int)Time.realtimeSinceStartup % temperatureUpdateTime == 0 && (int)Time.realtimeSinceStartup != lastUpdate)
         {
             if (Random.Range(0, updateChange) == 0)
             {
@@ -38,11 +44,15 @@ public class AmbientManager : MonoBehaviour
             }
 
             UpdateClimate();
+            lastUpdate = (int)Time.realtimeSinceStartup;
         }
-        else if (Time.realtimeSinceStartup % Mathf.RoundToInt(temperatureUpdateTime / 2) == 0)
+        else if ((int)Time.realtimeSinceStartup % Mathf.RoundToInt(temperatureUpdateTime / 2) == 0 && (int)Time.realtimeSinceStartup != lastUpdate)
         {
             UpdateClimate();
+            lastUpdate = (int)Time.realtimeSinceStartup;
         }
+
+        //Debug.Log(Time.realtimeSinceStartup);
     }
 
     #region // Get & Set
@@ -67,16 +77,16 @@ public class AmbientManager : MonoBehaviour
         switch (Ambient.GetCurrentTemperature())
         {
             case Ambient.Temperature.Algido:
-                variableFactor += 1;
+                variableFactor += 2;
                 break;
             case Ambient.Temperature.Gelado:
-                variableFactor += 0.5f;
+                variableFactor += 1f;
                 break;
             case Ambient.Temperature.Calor:
-                variableFactor -= 0.5f;
+                variableFactor -= 1f;
                 break;
             case Ambient.Temperature.Escaldadante:
-                variableFactor -= 1;
+                variableFactor -= 2;
                 break;
         }
 
@@ -91,6 +101,8 @@ public class AmbientManager : MonoBehaviour
         {
             Ambient.ChangeTemperature(-instabilityFactor);
         }
+
+        Debug.Log("Agora está " + Ambient.GetCurrentTemperature());
     }
 
     private void UpdateClimate()
@@ -115,16 +127,16 @@ public class AmbientManager : MonoBehaviour
         switch (Ambient.GetCurrentClimate())
         {
             case Ambient.Climate.Tempestuoso:
-                changeFactor += 1;
+                changeFactor += 2;
                 break;
             case Ambient.Climate.Chuvoso:
-                changeFactor += 0.5f;
+                changeFactor += 1f;
                 break;
             case Ambient.Climate.Semiarido:
-                changeFactor += 0.5f;
+                changeFactor += 1f;
                 break;
             case Ambient.Climate.Arido:
-                changeFactor -= 1;
+                changeFactor -= 2;
                 break;
         }
 
@@ -136,6 +148,8 @@ public class AmbientManager : MonoBehaviour
         {
             Ambient.ChangeClimate(-ClimateInstabilityLevel());
         }
+
+        Debug.Log("Agora está " + Ambient.GetCurrentClimate());
     }
 
     private void UpdateSeasonalFactor()
@@ -218,11 +232,11 @@ public class AmbientManager : MonoBehaviour
         switch (IDS.GetEcologico() / GlobalWarmingScale())
         {
             case > 0.75f:
-                return Random.Range(1, 3);
+                return Random.Range(1, 4);
             case > 0.5f:
                 return 1;
             case > 0.25f:
-                return Random.Range(1, 4);
+                return Random.Range(1, 3);
             default: 
                 return Random.Range(2, 4);
         }

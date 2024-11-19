@@ -6,7 +6,9 @@
     },
     "ambientData": {
         "currentTemperature": 0,
-        "currentClimate": 0
+        "currentClimate": 0,
+        "currentSeason": 0,
+        "seasonalFactor": 0.0
     },
     "moneyData": {
         "money": 0

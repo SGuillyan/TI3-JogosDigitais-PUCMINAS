@@ -32,8 +32,8 @@ public static class Ambient
         Arido, // árido
     }
 
-    private static Temperature currentTemperature;
-    private static Climate currentClimate;
+    private static Temperature currentTemperature = Temperature.Ameno;
+    private static Climate currentClimate = Climate.Limpo;
 
     public static Temperature GetCurrentTemperature()
     {
@@ -48,18 +48,26 @@ public static class Ambient
     public static void ChangeTemperature(int modify)
     {
         currentTemperature = currentTemperature + modify;
-        if (currentTemperature == 0)
+        if (currentTemperature <= 0)
         {
             currentTemperature = Temperature.Algido;
+        }
+        if ((int)currentTemperature >= 10)
+        {
+            currentTemperature = Temperature.Escaldadante;
         }
     }
 
     public static void ChangeClimate(int modify)
     {
         currentClimate = currentClimate + modify;
-        if (currentClimate == 0)
+        if (currentClimate <= 0)
         {
             currentClimate = Climate.Limpo;
+        }
+        if ((int)currentClimate >= 10)
+        {
+            currentClimate = Climate.Arido;
         }
     }
 
