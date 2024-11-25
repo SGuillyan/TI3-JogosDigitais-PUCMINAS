@@ -36,59 +36,32 @@ public class SaveSystem : MonoBehaviour
 
 	public static void Save(string path)
 	{
-        string json = JsonUtility.ToJson(GenerateSaveJsonFiles(), true);
+		SaveData save = new SaveData();
+
+		// TileData
+        new IDS_Data(IDS.GetEcologico(), IDS.GetEconomico(), IDS.GetSocial());
+		new AmbientData(Ambient.GetCurrentTemperature(), Ambient.GetCurrentClimate(), AmbientManager.GetCurrentSeason(), AmbientManager.GetSeasonalFactor());
+		new MoneyData(moneyManager.GetCurrentMoney());
+		new InventoryData(inventoryManager.playerInventory.items);
+		// QuestData
+		new CameraData(mainCamera.transform.position, mainCamera.orthographicSize);
+		new TutorialData(false);
+
+		string json = JsonUtility.ToJson(save, true);
 
 		File.WriteAllText(path, json);
-	}
-
-	public static void Load(string path)
-	{
-		SaveData save = GenerateSaveData(path);
     }
 
-	#region // Métodos Privados
-
-	private static SaveJsonFiles GenerateSaveJsonFiles()
+    public static void Load(string path)
 	{
-        SaveJsonFiles jsonFiles = new SaveJsonFiles();
+		string json = File.ReadAllText(path);
 
-        // TileData
-        //@
-        jsonFiles.idsJson = JsonUtility.ToJson(new IDS_Data(IDS.GetEcologico(), IDS.GetEconomico(), IDS.GetSocial()));
-        jsonFiles.ambientJson = JsonUtility.ToJson(new AmbientData(Ambient.currentTemperature, Ambient.currentClimate));
-        jsonFiles.moneyJson = JsonUtility.ToJson(new MoneyData(moneyManager.GetCurrentMoney()));
-        jsonFiles.inventoryJson = JsonUtility.ToJson(new InventoryData(inventoryManager.playerInventory.items));
-        // QuestData
-        //@
-        jsonFiles.cameraJson = JsonUtility.ToJson(new CameraData(mainCamera.transform.position, mainCamera.orthographicSize));
-        jsonFiles.tutorialJson = JsonUtility.ToJson(new TutorialData(false));
-
-		return jsonFiles;
+		SaveData load = JsonUtility.FromJson<SaveData>(json);
     }
-
-	private static SaveData GenerateSaveData(string path)
-	{
-        SaveData save = new SaveData();
-
-        string json = File.ReadAllText(path);
-        SaveJsonFiles jsonFiles = JsonUtility.FromJson<SaveJsonFiles>(json);
-
-        //save.tileData = JsonUtility.FromJson<TileData>(jsonFiles.tileJson);
-        save.idsData = JsonUtility.FromJson<IDS_Data>(jsonFiles.idsJson);
-        save.ambientData = JsonUtility.FromJson<AmbientData>(jsonFiles.ambientJson);
-        save.moneyData = JsonUtility.FromJson<MoneyData>(jsonFiles.moneyJson);
-        save.inventoryData = JsonUtility.FromJson<InventoryData>(jsonFiles.inventoryJson);
-        //save.questData = JsonUtility.FromJson<QuestData>(jsonFiles.questJson);
-        save.cameraData = JsonUtility.FromJson<CameraData>(jsonFiles.cameraJson);
-        save.tutorialData = JsonUtility.FromJson<TutorialData>(jsonFiles.tutorialJson);
-
-		return save;
-    }
-
-    #endregion
 
     #region // Data Classes
 
+	[Serializable]
     private class SaveData
     {
 		//public TileData tileData;
@@ -101,18 +74,6 @@ public class SaveSystem : MonoBehaviour
 		public TutorialData tutorialData;
     }
 
-	private class SaveJsonFiles
-	{
-		//public string tileJson;
-		public string idsJson;
-		public string ambientJson;
-		public string moneyJson;
-		public string inventoryJson;
-		//public string questJson;
-		public string cameraJson;
-		public string tutorialJson;
-	}
-
 	/*implement
 	private class TileData
 	{
@@ -120,6 +81,7 @@ public class SaveSystem : MonoBehaviour
 	}
 	*/
 
+	[Serializable]
 	private class IDS_Data
 	{
 		public int ecologico;
@@ -135,19 +97,25 @@ public class SaveSystem : MonoBehaviour
 		}
 	}
 
+	[Serializable]
 	private class AmbientData
 	{
 		public Ambient.Temperature currentTemperature;
 		public Ambient.Climate currentClimate;
+		public AmbientManager.Season currentSeason;
+		public float seasonalFactor;
 
 		// Construtor
-		public AmbientData(Ambient.Temperature currentTemperature, Ambient.Climate currentClimate)
+		public AmbientData(Ambient.Temperature currentTemperature, Ambient.Climate currentClimate, AmbientManager.Season currentSeason, float seasonalFactor)
 		{
 			this.currentTemperature = currentTemperature;
 			this.currentClimate = currentClimate;
+			this.currentSeason = currentSeason;
+			this.seasonalFactor = seasonalFactor;
 		}
 	}
 
+	[Serializable]
 	private class MoneyData
 	{
 		public int money;
@@ -160,6 +128,7 @@ public class SaveSystem : MonoBehaviour
 	}
 
 	//implement
+	[Serializable]
 	private class InventoryData
 	{
 		public List<InventoryItem> itens;
@@ -184,6 +153,7 @@ public class SaveSystem : MonoBehaviour
 	}
 	*/
 
+	[Serializable]
 	private class CameraData
 	{
 		public Vector3 position;
@@ -197,6 +167,7 @@ public class SaveSystem : MonoBehaviour
 		}
 	}
 
+	[Serializable]
     private class TutorialData
     {
 		public bool isDone;
@@ -221,7 +192,7 @@ public class SaveSystem : MonoBehaviour
 		Quests
 		Camera
 		Tutorial
-
+		Config
 	*/
 
 	#region // Tile
@@ -333,6 +304,15 @@ public class SaveSystem : MonoBehaviour
 		Tutorial:
 			isDone
     */
+
+	#endregion
+	#region // Config
+
+	/*
+		{???}
+		Config:
+			//@
+	*/
 
 	#endregion
 

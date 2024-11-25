@@ -13,11 +13,11 @@ public static class IDS
 
     [Header("Índicies")]
     [Range(0, 100)]
-    [SerializeField] private static int ecologico = 3;
+    [SerializeField] private static int ecologico = 20;
     [Range(0, 100)]
-    [SerializeField] private static int economico = 4;
+    [SerializeField] private static int economico = 20;
     [Range(0, 100)]
-    [SerializeReference] private static int social = 5;
+    [SerializeReference] private static int social = 20;
 
     [Space(5)]
 
@@ -30,6 +30,11 @@ public static class IDS
     [SerializeField] private static int pesoSocial;
 
     #region // Get & Set
+
+    public static int GetIDS()
+    {
+        return ids;
+    }
 
     public static int GetEcologico()
     {
@@ -106,23 +111,41 @@ public static class IDS
     public static void CalcularIDS()
     {
         // Soma Ponderada: soma considerando o peso de cada termo
-        int pesoTotal = pesoEcologico + pesoEconomico + pesoSocial;
-        float pe = pesoEcologico / (float)pesoTotal;
-        float pc = pesoEconomico / (float)pesoTotal;
-        float ps = pesoSocial / (float)pesoTotal;
-        float somaPonderada = (pe * ecologico) + (pc * economico) + (ps * social);
+        float indiciesSoma = IndiciesSoma();
 
         // Desvio padrão: média da disperção termos
-        float media = (ecologico + economico + social) / 3f;
-        float de = Mathf.Pow(pesoEcologico - media, 2);
-        float dc = Mathf.Pow(pesoEconomico - media, 2);
-        float ds = Mathf.Pow(pesoSocial - media, 2);
-        float desvioPadrao = Mathf.Sqrt((de + dc + ds) / 3);
+        float desvioPadrao = DesvioPadrao();
 
         // Equilíbrio: usando o desvio padrão dividido pelo valor máximo possível de um termo pode-se determinar o quão próximos, equilibrados, eles estão
-        float penalizacao = 1 - (desvioPadrao / 100);
+        float penalizacao = 1 - (desvioPadrao / 50);
 
         // a soma ponderada indica o quanto o jogador consegue deixar os índicies altos e a penalização o quanto ele deixou os índicies equilibrados, multiplicando os dois nós temos o IDS
-        ids = (int)(somaPonderada * penalizacao);
+        ids = (int)(indiciesSoma * penalizacao);
+    }
+
+    public static float IndiciesSoma()
+    {
+        // Soma Ponderada: soma considerando o peso de cada termo
+        /*int pesoTotal = pesoEcologico + pesoEconomico + pesoSocial;
+        float pe = pesoEcologico / pesoTotal;
+        float pc = pesoEconomico / pesoTotal;
+        float ps = pesoSocial / pesoTotal;
+        float somaPonderada = (pe * ecologico) + (pc * economico) + (ps * social);*/
+
+        float indiciesSoma = ecologico + economico + social;
+
+        return indiciesSoma;
+    }
+
+    public static float DesvioPadrao()
+    {
+        // Desvio padrão: média da disperção termos
+        float media = (ecologico + economico + social) / 3f;
+        float de = Mathf.Pow(ecologico - media, 2);
+        float dc = Mathf.Pow(economico - media, 2);
+        float ds = Mathf.Pow(social - media, 2);
+        float desvioPadrao = Mathf.Sqrt((de + dc + ds) / 3);
+
+        return desvioPadrao;
     }
 }
