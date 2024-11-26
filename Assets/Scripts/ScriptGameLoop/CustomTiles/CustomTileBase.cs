@@ -12,10 +12,10 @@ public class CustomTileBase : TileBase
     public bool isPlantable = false;  // O tile começa não plantável
 
     // Nutrientes NPK no tile
-    public int nitrogen = 1000;  // Nível de Nitrogênio (N)
-    public int phosphorus = 1000;  // Nível de Fósforo (P)
-    public int potassium = 1000;  // Nível de Potássio (K)
-    public int humidity = 1000;  // Nível de umidade
+    public int nitrogen = 1000;
+    public int phosphorus = 1000;
+    public int potassium = 1000;
+    public int humidity = 1000;
 
     public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
     {
@@ -28,7 +28,6 @@ public class CustomTileBase : TileBase
 
         if (tilemapManager != null)
         {
-            // Cria e registra as informações do tile no TilemapManager
             TileInfo info = new TileInfo(
                 isPlantable,
                 nitrogen,
@@ -43,20 +42,12 @@ public class CustomTileBase : TileBase
             {
                 Vector3 worldPosition = tilemapManager.tilemap.CellToWorld(position) + new Vector3(0.5f, 0, 0.5f);
 
-                // Define o Transform pai (se disponível)
-                Transform parent = tilemapManager.parentTransform != null ? 
-                    tilemapManager.parentTransform : 
-                    tilemapManager.transform;
+                Transform parent = tilemapManager.parentTransform != null ? tilemapManager.parentTransform : tilemapManager.transform;
 
-                // Instancia o GameObject como filho do objeto pai
                 GameObject instantiatedTile = Instantiate(customTilePrefab, worldPosition, Quaternion.identity, parent);
-
-                // Garante a posição correta no mundo
                 instantiatedTile.transform.position = worldPosition;
-
                 instantiatedTile.name = $"CustomTile_{position.x}_{position.y}_{position.z}";
 
-                // Armazena a referência do objeto instanciado
                 tilemapManager.SetInstantiatedTile(position, instantiatedTile);
             }
         }
@@ -70,7 +61,6 @@ public class CustomTileBase : TileBase
 
     public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
     {
-        // Define propriedades básicas para o TileBase
         tileData.sprite = sprite;
         tileData.color = color;
     }
@@ -98,7 +88,6 @@ public class CustomTileBase : TileBase
 
         if (plowedTilePrefab != null && tilemapManager != null)
         {
-            // Destrói o GameObject atual associado ao tile, se existir
             GameObject currentTile = tilemapManager.GetInstantiatedTile(position);
             if (currentTile != null)
             {
@@ -107,23 +96,14 @@ public class CustomTileBase : TileBase
 
             Vector3 worldPosition = tilemapManager.tilemap.CellToWorld(position) + new Vector3(0.5f, 0, 0.5f);
 
-            // Define o Transform pai (se disponível)
-            Transform parent = tilemapManager.parentTransform != null ? 
-                tilemapManager.parentTransform : 
-                tilemapManager.transform;
+            Transform parent = tilemapManager.parentTransform != null ? tilemapManager.parentTransform : tilemapManager.transform;
 
-            // Instancia o GameObject do solo arado como filho do pai especificado
             GameObject plowedTile = Instantiate(plowedTilePrefab, worldPosition, Quaternion.identity, parent);
-
-            // Garante a posição correta no mundo
             plowedTile.transform.position = worldPosition;
-
             plowedTile.name = $"PlowedTile_{position.x}_{position.y}_{position.z}";
 
-            // Armazena a referência ao novo tile no TilemapManager
             tilemapManager.SetInstantiatedTile(position, plowedTile);
 
-            // Atualiza o estado do tile para plantável
             TileInfo tileInfo = tilemapManager.GetTileInfo(position);
             if (tileInfo != null)
             {
@@ -136,4 +116,42 @@ public class CustomTileBase : TileBase
             Debug.LogWarning("PlowedTilePrefab ou TilemapManager não atribuído!");
         }
     }
+
+    public bool HasAdjacentWaterTile(Vector3Int position)
+    {
+        TilemapManager tilemapManager = Object.FindObjectOfType<TilemapManager>();
+        if (tilemapManager == null)
+        {
+            Debug.LogError("TilemapManager não encontrado!");
+            return false;
+        }
+
+        Vector3Int[] adjacentPositions =
+        {
+            new Vector3Int(position.x - 1, position.y, position.z),
+            new Vector3Int(position.x + 1, position.y, position.z),
+            new Vector3Int(position.x, position.y - 1, position.z),
+            new Vector3Int(position.x, position.y + 1, position.z),
+            new Vector3Int(position.x - 1, position.y - 1, position.z),
+            new Vector3Int(position.x + 1, position.y + 1, position.z),
+            new Vector3Int(position.x - 1, position.y + 1, position.z),
+            new Vector3Int(position.x + 1, position.y - 1, position.z)
+        };
+
+        foreach (var adjPos in adjacentPositions)
+        {
+            TileBase adjacentTile = tilemapManager.tilemap.GetTile(adjPos);
+            if (adjacentTile is CustomTileBase customTile)
+            {
+                // Verifica uma propriedade específica ou uma tag para identificar um "WaterTile"
+                if (customTile.name == "WaterTile") // Substitua "WaterTile" pelo nome ou critério que identifica o WaterTile
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
 }
