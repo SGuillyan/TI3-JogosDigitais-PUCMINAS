@@ -117,7 +117,7 @@ public class CustomTileBase : TileBase
         }
     }
 
-    public bool HasAdjacentWaterTile(Vector3Int position)
+    public bool HasNearbyWaterTile(Vector3Int position)
     {
         TilemapManager tilemapManager = Object.FindObjectOfType<TilemapManager>();
         if (tilemapManager == null)
@@ -126,25 +126,18 @@ public class CustomTileBase : TileBase
             return false;
         }
 
-        Vector3Int[] adjacentPositions =
+        // Verifica 2 tiles acima e abaixo no eixo Y
+        for (int yOffset = -2; yOffset <= 2; yOffset++)
         {
-            new Vector3Int(position.x - 1, position.y, position.z),
-            new Vector3Int(position.x + 1, position.y, position.z),
-            new Vector3Int(position.x, position.y - 1, position.z),
-            new Vector3Int(position.x, position.y + 1, position.z),
-            new Vector3Int(position.x - 1, position.y - 1, position.z),
-            new Vector3Int(position.x + 1, position.y + 1, position.z),
-            new Vector3Int(position.x - 1, position.y + 1, position.z),
-            new Vector3Int(position.x + 1, position.y - 1, position.z)
-        };
+            if (yOffset == 0) continue; // Ignora a posição central
 
-        foreach (var adjPos in adjacentPositions)
-        {
-            TileBase adjacentTile = tilemapManager.tilemap.GetTile(adjPos);
-            if (adjacentTile is CustomTileBase customTile)
+            Vector3Int checkPosition = new Vector3Int(position.x, position.y + yOffset, position.z);
+            TileBase nearbyTile = tilemapManager.tilemap.GetTile(checkPosition);
+
+            if (nearbyTile is CustomTileBase customTile)
             {
-                // Verifica uma propriedade específica ou uma tag para identificar um "WaterTile"
-                if (customTile.name == "WaterTile") // Substitua "WaterTile" pelo nome ou critério que identifica o WaterTile
+                // Verifica se é um "WaterTile" com base no nome ou em outro critério
+                if (customTile.name == "WaterTile") // Substitua "WaterTile" pelo critério que identifica os tiles de água
                 {
                     return true;
                 }
@@ -153,5 +146,6 @@ public class CustomTileBase : TileBase
 
         return false;
     }
+
 
 }

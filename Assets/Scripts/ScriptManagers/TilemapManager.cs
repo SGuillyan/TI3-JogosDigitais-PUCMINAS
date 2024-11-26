@@ -27,6 +27,8 @@ public class TilemapManager : MonoBehaviour
 {
     public Tilemap tilemap;
     public Transform parentTransform;  // Referência ao objeto pai na hierarquia
+    public CustomTileBase defaultTile;  // Tile padrão para o terreno expandido
+    public CustomTileBase riverTile;  // Tile padrão para o terreno expandido
     private Dictionary<Vector3Int, TileInfo> tileInfoDictionary = new Dictionary<Vector3Int, TileInfo>();
     private Dictionary<Vector3Int, GameObject> instantiatedTileDictionary = new Dictionary<Vector3Int, GameObject>(); // Adiciona controle de objetos instanciados
 
@@ -34,6 +36,47 @@ public class TilemapManager : MonoBehaviour
     {
         // Inicializações necessárias para o tilemap ou outras configurações
     }
+
+    public void ExpandTerrain(Vector3Int bottomLeft, Vector3Int topRight)
+    {
+        if (defaultTile == null)
+        {
+            Debug.LogError("Default Tile não atribuído!");
+            return;
+        }
+
+        // Define o retângulo para expandir o terreno baseado nos limites fornecidos
+        for (int x = bottomLeft.x; x <= topRight.x; x++)
+        {
+            for (int y = bottomLeft.y; y <= topRight.y; y++)
+            {
+                Vector3Int position = new Vector3Int(x, y, 0);
+
+                // Verifica a faixa onde o rio deve ser instanciado
+                if (y == -5) // Exemplo: Coluna fixa para o rio
+                {
+                    tilemap.SetTile(position, riverTile);
+                }
+                else
+                {
+                    tilemap.SetTile(position, defaultTile);
+                }
+
+                // Atualiza as informações no dicionário do TilemapManager
+                TileInfo tileInfo = new TileInfo(
+                    defaultTile.isPlantable,
+                    defaultTile.nitrogen,
+                    defaultTile.phosphorus,
+                    defaultTile.potassium,
+                    defaultTile.humidity
+                );
+                SetTileInfo(position, tileInfo);
+            }
+        }
+
+        Debug.Log($"Terreno expandido entre ({bottomLeft.x}, {bottomLeft.y}) e ({topRight.x}, {topRight.y})");
+    }
+
 
     // Obtém as informações do tile a partir de sua posição
     public TileInfo GetTileInfo(Vector3Int position)

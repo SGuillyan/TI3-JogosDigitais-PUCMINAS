@@ -105,6 +105,13 @@ public class TileSelector : MonoBehaviour
     {
         if (tile is CustomTileBase customTile)
         {
+            // Verifica se há WaterTile adjacente
+            if (customTile.HasNearbyWaterTile(gridPosition))
+            {
+                Debug.Log($"Há um rio próximo à posição {gridPosition}. Solo não pode ser arado.");
+                return; // Interrompe se não houver um WaterTile próximo
+            }
+
             customTile.ChangeToPlowedState(gridPosition);
             Debug.Log($"Solo arado na posição: {gridPosition}");
         }
@@ -135,14 +142,6 @@ public class TileSelector : MonoBehaviour
         if (inventoryManager.HasSelectedSeed())
         {
             TileInfo tileInfo = tilemapManager.GetTileInfo(gridPosition);
-            
-            // Verifica se há WaterTile adjacente
-            TileBase clickedTile = tilemap.GetTile(gridPosition);
-            if (clickedTile is CustomTileBase customTile && customTile.HasAdjacentWaterTile(gridPosition))
-            {
-                Debug.Log("Existe um rio proximo à " + gridPosition);
-                return; // Interrompe se não houver um WaterTile adjacente
-            }
 
             // Verifica se o tile é plantável
             if (tileInfo != null && tileInfo.isPlantable)
@@ -156,6 +155,7 @@ public class TileSelector : MonoBehaviour
             }
         }
     }
+
 
 
     void DisplayTileInfo(Vector3Int gridPosition)
