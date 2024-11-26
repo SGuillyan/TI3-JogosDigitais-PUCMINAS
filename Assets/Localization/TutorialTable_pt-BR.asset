@@ -79,6 +79,12 @@ MonoBehaviour:
       loja!
     m_Metadata:
       m_Items: []
+  - m_Id: 5618618312695808
+    m_Localized: 'Pular
+
+'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

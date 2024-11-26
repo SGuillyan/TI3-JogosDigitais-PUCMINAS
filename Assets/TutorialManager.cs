@@ -208,4 +208,49 @@ public class TutorialManager : MonoBehaviour
         nextButton.gameObject.SetActive(false);
         tutorialGameObject.SetActive(false);
     }
+
+    // Método para encerrar o tutorial completamente, para ser chamado por um botão
+    public void ExitTutorial()
+    {
+        // Desativa o jogo do tutorial e seus elementos visuais
+        tutorialGameObject.SetActive(false);
+        dialogueTextUI.gameObject.SetActive(false);
+        arrowImage.gameObject.SetActive(false);
+        nextButton.gameObject.SetActive(false);
+
+        // Remove os listeners de todos os elementos associados ao tutorial
+        foreach (var step in tutorialSteps)
+        {
+            foreach (var button in step.buttonsToClick)
+            {
+                button.onClick.RemoveAllListeners();
+            }
+
+            foreach (var toggle in step.togglesToActivate)
+            {
+                toggle.onValueChanged.RemoveAllListeners();
+            }
+
+            if (step.targetUIElement != null)
+            {
+                Button targetButton = step.targetUIElement.GetComponent<Button>();
+                if (targetButton != null)
+                {
+                    targetButton.onClick.RemoveAllListeners();
+                }
+
+                Toggle targetToggle = step.targetUIElement.GetComponent<Toggle>();
+                if (targetToggle != null)
+                {
+                    targetToggle.onValueChanged.RemoveAllListeners();
+                }
+            }
+        }
+
+        // Redefine o progresso do tutorial
+        currentStepIndex = 0;
+
+        Debug.Log("Tutorial encerrado completamente.");
+    }
+
 }
