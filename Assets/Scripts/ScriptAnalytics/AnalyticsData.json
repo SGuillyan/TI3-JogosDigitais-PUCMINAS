@@ -1,0 +1,66 @@
+{
+    "data1": [
+        {
+            "sender": "Level",
+            "time": "0:0:3:1",
+            "track": "N° of obstacles",
+            "value": 12
+        }
+    ],
+    "data2": [
+        {
+            "sender": "Player",
+            "time": "0:0:3:1",
+            "track": "Avalable to walk",
+            "value": true
+        },
+        {
+            "sender": "Enemy",
+            "time": "0:0:3:1",
+            "track": "Alive",
+            "value": true
+        },
+        {
+            "sender": "Player",
+            "time": "0:0:9:10",
+            "track": "Jump",
+            "value": true
+        },
+        {
+            "sender": "Enemy",
+            "time": "0:0:9:10",
+            "track": "Alive",
+            "value": false
+        }
+    ],
+    "saveData": {
+        "idsData": {
+            "ecologico": 0,
+            "economico": 0,
+            "social": 0
+        },
+        "ambientData": {
+            "currentTemperature": 0,
+            "currentClimate": 0,
+            "currentSeason": 0,
+            "seasonalFactor": 0.0
+        },
+        "moneyData": {
+            "money": 0
+        },
+        "inventoryData": {
+            "itens": []
+        },
+        "cameraData": {
+            "position": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "size": 0.0
+        },
+        "tutorialData": {
+            "isDone": false
+        }
+    }
+}
