@@ -12,8 +12,8 @@ public class TutorialManager : MonoBehaviour
     public class TutorialStep
     {
         public string dialogueText;           // Texto que será exibido para o jogador
-        public LocalizedString localizeKey;
-        public RectTransform targetUIElement; // Elemento de UI que a seta deve apontar
+        public LocalizedString localizeKey;   // Chave de localização
+        public RectTransform targetUIElement; // Elemento de UI que será o alvo do passo
         public List<Button> buttonsToClick = new List<Button>();   // Lista de botões que devem ser clicados antes de prosseguir
         public List<Toggle> togglesToActivate = new List<Toggle>(); // Lista de toggles que devem ser ativados antes de prosseguir
         public Vector2 popupPosition = Vector2.zero;         // Posição na tela para exibir o pop-up do tutorial
@@ -49,20 +49,16 @@ public class TutorialManager : MonoBehaviour
     // Método para mostrar um passo específico do tutorial
     void ShowStep(int index)
     {
-        nextButton.interactable = false; // Desativa o nextButton inicialmente
         if (index >= 0 && index < tutorialSteps.Length)
         {
             TutorialStep currentStep = tutorialSteps[index];
 
             // Atualiza o texto do tutorial
-            //dialogueTextUI.text = currentStep.dialogueText;
             localizeText.StringReference = currentStep.localizeKey;
-            
 
             // Atualiza a posição do pop-up do tutorial
             if (currentStep.popupPosition == Vector2.zero)
             {
-                // Se a posição não for especificada, mantenha a posição padrão
                 tutorialGameObject.GetComponent<RectTransform>().anchoredPosition = tutorialGameObject.GetComponent<RectTransform>().anchoredPosition;
             }
             else
@@ -77,13 +73,15 @@ public class TutorialManager : MonoBehaviour
 
                 // Calcula a posição da seta alguns pixels acima do elemento alvo
                 Vector3 targetPosition = currentStep.targetUIElement.position;
-                targetPosition.y += arrowOffsetY; // Adiciona o offset vertical para posicionar a seta acima
+                targetPosition.y += arrowOffsetY;
 
                 arrowImage.position = targetPosition;
+
+                // Adiciona evento ao targetUIElement para trocar de passo
+                AddTargetListener(currentStep.targetUIElement);
             }
             else
             {
-                // Se não houver um elemento para apontar, esconda a seta
                 arrowImage.gameObject.SetActive(false);
             }
 
@@ -99,14 +97,38 @@ public class TutorialManager : MonoBehaviour
                 toggle.onValueChanged.AddListener((isOn) => OnToggleActivated(currentStep, isOn));
             }
 
-                        if (currentStep.buttonsToClick.Count == 0 && currentStep.togglesToActivate.Count == 0)
+            // Ativa o nextButton apenas se não houver outras condições
+            if (currentStep.buttonsToClick.Count == 0 && currentStep.togglesToActivate.Count == 0 && currentStep.targetUIElement == null)
             {
-                nextButton.interactable = true; // Ativa o nextButton se não houver botões ou toggles para clicar
+                nextButton.interactable = true;
             }
             else
             {
-                UpdateNextButtonState(currentStep);
+                nextButton.interactable = false;
             }
+        }
+    }
+
+    // Método para adicionar listener ao targetUIElement
+    void AddTargetListener(RectTransform targetElement)
+    {
+        Button targetButton = targetElement.GetComponent<Button>();
+        if (targetButton != null)
+        {
+            targetButton.onClick.AddListener(NextStep);
+            return;
+        }
+
+        Toggle targetToggle = targetElement.GetComponent<Toggle>();
+        if (targetToggle != null)
+        {
+            targetToggle.onValueChanged.AddListener((isOn) =>
+            {
+                if (isOn)
+                {
+                    NextStep();
+                }
+            });
         }
     }
 
@@ -140,21 +162,41 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    // Método chamado ao clicar no botão "Próximo"
+    // Método chamado ao clicar no botão "Próximo" ou no targetUIElement
     void NextStep()
     {
+        // Remove o listener do targetUIElement do passo atual
+        RemoveTargetListener();
+
         currentStepIndex++;
 
         // Se houver mais passos, exiba o próximo passo
         if (currentStepIndex < tutorialSteps.Length)
         {
-            nextButton.interactable = false; // Desativa o nextButton para o próximo passo
             ShowStep(currentStepIndex);
         }
         else
         {
             // Se não houver mais passos, finalize o tutorial
             EndTutorial();
+        }
+    }
+
+    void RemoveTargetListener()
+    {
+        if (tutorialSteps[currentStepIndex].targetUIElement != null)
+        {
+            Button targetButton = tutorialSteps[currentStepIndex].targetUIElement.GetComponent<Button>();
+            if (targetButton != null)
+            {
+                targetButton.onClick.RemoveListener(NextStep);
+            }
+
+            Toggle targetToggle = tutorialSteps[currentStepIndex].targetUIElement.GetComponent<Toggle>();
+            if (targetToggle != null)
+            {
+                targetToggle.onValueChanged.RemoveAllListeners();
+            }
         }
     }
 
