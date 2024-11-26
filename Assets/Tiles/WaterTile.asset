@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b50668be67c68478b08011377c301f, type: 3}
   m_Name: WaterTile
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: c6fa0983a1f68364fa8250407efb6cc2, type: 3}
+  sprite: {fileID: 21300000, guid: 524180a3893097149b03af740aa92f5e, type: 3}
+  customTilePrefab: {fileID: 5596873383589714348, guid: 0758034d024d2b845a8945251312531f,
+    type: 3}
+  plowedTilePrefab: {fileID: 0}
   color: {r: 1, g: 1, b: 1, a: 1}
   isPlantable: 0
   nitrogen: 0
