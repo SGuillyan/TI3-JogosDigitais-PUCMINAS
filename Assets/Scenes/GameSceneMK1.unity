@@ -16588,7 +16588,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.11957215}
-  m_AnchoredPosition: {x: 0, y: -10.999985}
+  m_AnchoredPosition: {x: 0, y: -11}
   m_SizeDelta: {x: 0, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1465641206
@@ -23773,6 +23773,12 @@ PrefabInstance:
       propertyPath: tilemap
       value: 
       objectReference: {fileID: 1342796939}
+    - target: {fileID: 5547882219821402839, guid: 99fe0b5b782ead34094d2835abbae21b,
+        type: 3}
+      propertyPath: riverTile
+      value: 
+      objectReference: {fileID: 11400000, guid: 212f541fa7c1b474ea319f7694251d31,
+        type: 2}
     - target: {fileID: 5547882219821402839, guid: 99fe0b5b782ead34094d2835abbae21b,
         type: 3}
       propertyPath: defaultTile
