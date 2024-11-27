@@ -11,11 +11,11 @@ public class SaveSystem : MonoBehaviour
 	public class SaveAccesses
 	{
 		public MoneyManager moneyManager;
-        public InventoryManager inventoryManager;
-        public Camera mainCamera;
-        public TutorialManager tutorialManager;
+		public InventoryManager inventoryManager;
+		public Camera mainCamera;
+		public TutorialManager tutorialManager;
 
-    }
+	}
 
 	[SerializeField] private SaveAccesses accesses;
 
@@ -24,118 +24,164 @@ public class SaveSystem : MonoBehaviour
 	private static Camera mainCamera;
 	private static TutorialManager tutorialManager;
 
-    private void Start()
-    {
+	private void Start()
+	{
 		moneyManager = accesses.moneyManager;
 		inventoryManager = accesses.inventoryManager;
 		mainCamera = accesses.mainCamera;
 		tutorialManager = accesses.tutorialManager;
 
 		//Save("Assets/Scripts/ScriptSave/SaveData.json");
-    }
+	}
 
 	public static void Save(string path)
 	{
 		string json = JsonUtility.ToJson(GenerateSaveData(), true);
 
 		File.WriteAllText(path, json);
-    }
+	}
 
-    public static void Load(string path)
+	public static SaveData Load(string path)
 	{
 		string json = File.ReadAllText(path);
 
-		SaveData load = JsonUtility.FromJson<SaveData>(json);
-    }
+		return JsonUtility.FromJson<SaveData>(json);
+	}
 
 	public static SaveData GenerateSaveData()
 	{
-        SaveData save = new SaveData();
+		SaveData save = new SaveData();
 
-        // TileData
-        new IDS_Data(IDS.GetIDS(), IDS.GetEcologico(), IDS.GetEconomico(), IDS.GetSocial());
-        new AmbientData(Ambient.GetCurrentTemperature(), Ambient.GetCurrentClimate(), AmbientManager.GetCurrentSeason(), AmbientManager.GetSeasonalFactor());
-        new MoneyData(moneyManager.GetCurrentMoney());
-        new InventoryData(inventoryManager.playerInventory.items);
+		save.configData = new ConfigData("nome", "lingua", 5.3f, 8.1f);
+        save.tutorialData = new TutorialData(false);
+        save.cameraData = new CameraData(mainCamera.transform.position, mainCamera.orthographicSize);
+        save.moneyData = new MoneyData(moneyManager.GetCurrentMoney());
+        save.ambientData = new AmbientData(Ambient.GetCurrentTemperature(), Ambient.GetCurrentClimate(), AmbientManager.GetCurrentSeason(), AmbientManager.GetSeasonalFactor());
+        save.idsData = new IDS_Data(IDS.GetIDS(), IDS.GetEcologico(), IDS.GetEconomico(), IDS.GetSocial());
+        // TileData       
+        save.inventoryData = new InventoryData(inventoryManager.playerInventory.items);
         // QuestData
-        new CameraData(mainCamera.transform.position, mainCamera.orthographicSize);
-        new TutorialData(false);
 
         return save;
-    }
+	}
 
-    #region // Data Classes
+	#region // Data Classes
 
 	[Serializable]
-    public class SaveData
+	public class SaveData
+	{
+		public ConfigData configData;
+        public TutorialData tutorialData;
+        public CameraData cameraData;
+        public MoneyData moneyData;
+        public AmbientData ambientData;
+        public IDS_Data idsData;
+        //public TileData tileData;
+        public InventoryData inventoryData;
+		//public QuestData questData;		
+	}
+
+    [Serializable]
+    public class ConfigData
     {
-		//public TileData tileData;
-		public IDS_Data idsData;
-		public AmbientData ambientData;
-		public MoneyData moneyData;
-		public InventoryData inventoryData;
-		//public QuestData questData;
-		public CameraData cameraData;
-		public TutorialData tutorialData;
+        public string name;
+        public string lengague;
+        public float musicVolume;
+        public float sfxVolume;
+
+        // Construtor
+        public ConfigData(string name, string lenguage, float musicVolume, float sfxVolume)
+        {
+            this.name = name;
+            this.lengague = lenguage;
+            this.musicVolume = musicVolume;
+            this.sfxVolume = sfxVolume;
+        }
     }
 
-	/*implement
+    [Serializable]
+    public class TutorialData
+    {
+        public bool isDone;
+
+        // Costrutor
+        public TutorialData(bool isDone)
+        {
+            this.isDone = isDone;
+        }
+    }
+
+    [Serializable]
+    public class CameraData
+    {
+        public Vector3 position;
+        public float size;
+
+        // Construtor
+        public CameraData(Vector3 position, float size)
+        {
+            this.position = position;
+            this.size = size;
+        }
+    }
+
+    [Serializable]
+    public class MoneyData
+    {
+        public int money;
+
+        // Construtor
+        public MoneyData(int money)
+        {
+            this.money = money;
+        }
+    }
+
+    [Serializable]
+    public class AmbientData
+    {
+        public Ambient.Temperature currentTemperature;
+        public Ambient.Climate currentClimate;
+        public AmbientManager.Season currentSeason;
+        public float seasonalFactor;
+
+        // Construtor
+        public AmbientData(Ambient.Temperature currentTemperature, Ambient.Climate currentClimate, AmbientManager.Season currentSeason, float seasonalFactor)
+        {
+            this.currentTemperature = currentTemperature;
+            this.currentClimate = currentClimate;
+            this.currentSeason = currentSeason;
+            this.seasonalFactor = seasonalFactor;
+        }
+    }
+
+    [Serializable]
+    public class IDS_Data
+    {
+        public int ids;
+        public int ecologico;
+        public int economico;
+        public int social;
+
+        // Construtor
+        public IDS_Data(int ids, int ecologico, int economico, int social)
+        {
+            this.ids = ids;
+            this.ecologico = ecologico;
+            this.economico = economico;
+            this.social = social;
+        }
+    }
+
+    /*implement
 	public class TileData
 	{
 
 	}
 	*/
 
-	[Serializable]
-	public class IDS_Data
-	{
-		public int ids;
-		public int ecologico;
-		public int economico;
-		public int social;
-
-		// Construtor
-		public IDS_Data(int ids, int ecologico, int economico, int social)
-		{
-			this.ids = ids;
-			this.ecologico = ecologico;
-			this.economico = economico;
-			this.social = social;
-		}
-	}
-
-	[Serializable]
-	public class AmbientData
-	{
-		public Ambient.Temperature currentTemperature;
-		public Ambient.Climate currentClimate;
-		public AmbientManager.Season currentSeason;
-		public float seasonalFactor;
-
-		// Construtor
-		public AmbientData(Ambient.Temperature currentTemperature, Ambient.Climate currentClimate, AmbientManager.Season currentSeason, float seasonalFactor)
-		{
-			this.currentTemperature = currentTemperature;
-			this.currentClimate = currentClimate;
-			this.currentSeason = currentSeason;
-			this.seasonalFactor = seasonalFactor;
-		}
-	}
-
-	[Serializable]
-	public class MoneyData
-	{
-		public int money;
-
-		// Construtor
-		public MoneyData(int money)
-		{
-			this.money = money;
-		}
-	}
-
-	//implement
-	[Serializable]
+    //implement
+    [Serializable]
 	public class InventoryData
 	{
 		public List<InventoryItem> itens;
@@ -160,51 +206,27 @@ public class SaveSystem : MonoBehaviour
 	}
 	*/
 
-	[Serializable]
-	public class CameraData
-	{
-		public Vector3 position;
-		public float size;
 
-		// Construtor
-		public CameraData(Vector3 position, float size)
-		{
-			this.position = position;
-			this.size = size;
-		}
-	}
 
-	[Serializable]
-    public class TutorialData
-    {
-		public bool isDone;
+    #endregion
 
-		// Costrutor
-		public TutorialData(bool isDone)
-		{
-			this.isDone = isDone;
-		}
-    }
+    #region // Save List Guide
 
-	#endregion
-
-	#region // Save List Guide
-
-	/*
-		Tile[]
-		IDS
-		Ambient
+    /*
+		Config
+		Tutorial
+		Camera
 		Money
+		Ambient
+		Ids
+		Tile []
 		Inventory
 		Quests
-		Camera
-		Tutorial
-		Config
 	*/
 
-	#region // Tile
+    #region // Tile
 
-	/*
+    /*
 		{CustomTileBase, PalntTile}
 		Tile:
 			position
@@ -220,10 +242,10 @@ public class SaveSystem : MonoBehaviour
 				currentGrowthInstance
 	*/
 
-	#endregion
-	#region // IDS
+    #endregion
+    #region // IDS
 
-	/*
+    /*
 		{IDS}
 		IDS:
 			ecologico
@@ -232,29 +254,29 @@ public class SaveSystem : MonoBehaviour
 			CalcularIDS()
 	*/
 
-	#endregion
-	#region // Ambient
+    #endregion
+    #region // Ambient
 
-	/*
+    /*
 		{Ambient: Sriptableobject}
 		Ambient:
 			currentTemperature
 			currentClimate
 	*/
 
-	#endregion
-	#region // Money
+    #endregion
+    #region // Money
 
-	/*
+    /*
 		{MoneyManager}
 		Money:
 			currentMoney
 	*/
 
-	#endregion
-	#region // Invetory
+    #endregion
+    #region // Invetory
 
-	/*
+    /*
 		{Inventory, InventoryItem}
 		Inventory:
 			items: List<InventoryItem>
@@ -264,10 +286,10 @@ public class SaveSystem : MonoBehaviour
 				quantity
 	*/
 
-	#endregion
-	#region // Quest
+    #endregion
+    #region // Quest
 
-	/*
+    /*
 		{TaskManager, Task/Quest, Objective, Reward}
 		Quests:
 			quests: List<Quest>
@@ -293,39 +315,39 @@ public class SaveSystem : MonoBehaviour
 					socialValor
 	*/
 
-	#endregion
-	#region // Camera
+    #endregion
+    #region // Camera
 
-	/*
+    /*
 		{CameraController}	
 		Camera:
 			position
 			size
 	*/
 
-	#endregion
-	#region // Tutorial
+    #endregion
+    #region // Tutorial
 
-	/*
+    /*
 		{???}
 		Tutorial:
 			isDone
     */
 
-	#endregion
-	#region // Config
+    #endregion
+    #region // Config
 
-	/*
+    /*
 		{???}
 		Config:
 			//@
 	*/
 
-	#endregion
+    #endregion
 
-	#region // CompleteList
+    #region // CompleteList
 
-	/*
+    /*
 		Tile[]
 		IDS
 		Ambient
@@ -408,7 +430,7 @@ public class SaveSystem : MonoBehaviour
 			isDone
 	*/
 
-	#endregion
+    #endregion
 
-	#endregion
+    #endregion
 }
