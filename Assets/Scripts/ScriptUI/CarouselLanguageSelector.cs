@@ -6,9 +6,9 @@ using TMPro;
 public class CarouselLanguageSelector : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI text;
-    [SerializeField] private Image image;
+    //[SerializeField] private Image image;
     [SerializeField] private string[] languageList;
-    [SerializeField] private Sprite[] flagSprits;
+    //[SerializeField] private Sprite[] flagSprits;
     private int page = 0;
 
     private void Start()
@@ -19,7 +19,7 @@ public class CarouselLanguageSelector : MonoBehaviour
     void AtualizarPagina()
     {
         text.text = languageList[page];
-        image.sprite = flagSprits[page];
+    //  image.sprite = flagSprits[page];
     }
 
     public void Anterior()
