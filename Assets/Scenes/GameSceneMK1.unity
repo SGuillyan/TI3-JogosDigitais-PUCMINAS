@@ -8452,6 +8452,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1192120122}
     m_Modifications:
+    - target: {fileID: 936609064965232104, guid: cc0bd48e2ba1e6344af9b38281e1aa9c,
+        type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1030631554533164915, guid: cc0bd48e2ba1e6344af9b38281e1aa9c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3098110251016589999, guid: cc0bd48e2ba1e6344af9b38281e1aa9c,
         type: 3}
       propertyPath: m_Pivot.x
@@ -8494,6 +8504,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3098110251016589999, guid: cc0bd48e2ba1e6344af9b38281e1aa9c,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098110251016589999, guid: cc0bd48e2ba1e6344af9b38281e1aa9c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098110251016589999, guid: cc0bd48e2ba1e6344af9b38281e1aa9c,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098110251016589999, guid: cc0bd48e2ba1e6344af9b38281e1aa9c,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -8530,12 +8555,12 @@ PrefabInstance:
     - target: {fileID: 3098110251016589999, guid: cc0bd48e2ba1e6344af9b38281e1aa9c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 55
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3098110251016589999, guid: cc0bd48e2ba1e6344af9b38281e1aa9c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -422.74316
+      value: -490
       objectReference: {fileID: 0}
     - target: {fileID: 3098110251016589999, guid: cc0bd48e2ba1e6344af9b38281e1aa9c,
         type: 3}
@@ -8567,10 +8592,20 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6377420746999989295, guid: cc0bd48e2ba1e6344af9b38281e1aa9c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6881852046992731232, guid: cc0bd48e2ba1e6344af9b38281e1aa9c,
         type: 3}
       propertyPath: m_Name
       value: Thermometer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6881852046992731232, guid: cc0bd48e2ba1e6344af9b38281e1aa9c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10748,7 +10783,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &704685280
 RectTransform:
@@ -12524,7 +12559,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &859782485
 RectTransform:
@@ -14970,7 +15005,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &1060339478
 RectTransform:
@@ -17549,11 +17584,11 @@ RectTransform:
   - {fileID: 1904608414}
   - {fileID: 1776568941}
   - {fileID: 1968517969}
+  - {fileID: 534589318}
   - {fileID: 1465641205}
   - {fileID: 1167549134}
   - {fileID: 702113045}
   - {fileID: 1280692321}
-  - {fileID: 534589318}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -19308,7 +19343,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &1322342604
 RectTransform:
@@ -25489,7 +25524,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &1662327258
 RectTransform:
@@ -35060,6 +35095,7 @@ SceneRoots:
   - {fileID: 1387194065}
   - {fileID: 1210661611}
   - {fileID: 1970292021}
+  - {fileID: 1192120122}
   - {fileID: 1060339478}
   - {fileID: 859782485}
   - {fileID: 1322342604}
@@ -35067,7 +35103,6 @@ SceneRoots:
   - {fileID: 704685280}
   - {fileID: 1482243825}
   - {fileID: 984963548}
-  - {fileID: 1192120122}
   - {fileID: 1475968233}
   - {fileID: 779741250}
   - {fileID: 1620217357}
