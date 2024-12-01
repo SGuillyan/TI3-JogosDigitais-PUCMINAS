@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3012455634678657795}
   - component: {fileID: 5225977314028485123}
   - component: {fileID: 2240183401129215158}
-  - component: {fileID: 5992021418010540880}
   m_Layer: 5
   m_Name: InvItemPrefab 1
   m_TagString: Untagged
@@ -96,18 +95,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveTime: 0.1
   scaleAmount: 1.05
---- !u!114 &5992021418010540880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 65435054638470716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 390b9395311d09f46815b10e29b865c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2400358337125341516
 GameObject:
   m_ObjectHideFlags: 0
