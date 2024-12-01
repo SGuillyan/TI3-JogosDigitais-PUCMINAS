@@ -39,11 +39,12 @@ MonoBehaviour:
   - {fileID: 4895000988734243222, guid: 37d21926615920746b2fb12d1b8c741e, type: 3}
   - {fileID: 4895000988734243222, guid: 849d6e23addac7a47a7177f989e4f88d, type: 3}
   - {fileID: 4895000988734243222, guid: cff191410866c4343be1329493d6e545, type: 3}
+  - {fileID: 4895000988734243222, guid: 8ba5c6f0763e38d4f9a8b693f6468be2, type: 3}
   growthTimes:
   - 2
   - 2
   - 2
-  ambient: {fileID: 11400000, guid: e8f591b14a3ddde4da61770979152007, type: 2}
+  - 2
   idealTemperature: 4
   idealClimate: 5
   greenTolerance: 0
@@ -52,6 +53,7 @@ MonoBehaviour:
     type: 3}
   isPlanted: 0
   isFullyGrown: 0
+  isRotten: 0
   harvestedItem:
     itemName: Cenoura
     itemIcon: {fileID: 21300000, guid: 9f47d9ee527c1d742b4f6961994f3028, type: 3}

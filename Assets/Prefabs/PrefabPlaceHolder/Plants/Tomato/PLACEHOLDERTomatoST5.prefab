@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4883906056329421060}
   m_Layer: 0
-  m_Name: TomatoST5
+  m_Name: PLACEHOLDERTomatoST5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
