@@ -34,6 +34,7 @@ public class PlantTile : Tile
 
     public bool isPlanted = false;
     public bool isFullyGrown = false;
+    public bool isRotten = false;
 
     public Item harvestedItem;
     public TileBase soilTile;
@@ -178,11 +179,18 @@ public class PlantTile : Tile
             }
 
             growthStage++;
+
+            if (growthStage == 4)
+            {
+                isFullyGrown = true;
+            }
+
             UpdateGrowthInstance(tilemap, position);
             tilemap.RefreshTile(position);
         }
 
-        isFullyGrown = true;
+        isFullyGrown = false;
+        isRotten = true;
 
         if (progressBarInstance != null)
         {
@@ -263,6 +271,44 @@ public class PlantTile : Tile
             {
                 Destroy(currentGrowthInstance);
             }
+        }
+        else if (isRotten) 
+        {
+            TilemapManager tilemapManager = Object.FindObjectOfType<TilemapManager>();
+
+            if (tilemapManager == null)
+            {
+                Debug.LogError("TilemapManager não encontrado!");
+                return;
+            }
+
+            // Obtém o estado atual dos nutrientes do solo antes de remover o PlantTile
+            TileInfo currentTileInfo = tilemapManager.GetTileInfo(position);
+
+            if (currentTileInfo == null)
+            {
+                Debug.LogError("TileInfo não encontrado para a posição: " + position);
+                return;
+            }
+
+            // Devolve os nutrientes ao solo após a colheita
+            currentTileInfo.nitrogen += returnNitrogen;
+            currentTileInfo.phosphorus += returnPhosphorus;
+            currentTileInfo.potassium += returnPotassium;
+
+            // Atualiza o estado para plantável após a colheita
+            currentTileInfo.isPlantable = true;
+
+            // Restaura o tile de solo
+            tilemap.SetTile(position, soilTile);
+            tilemapManager.SetTileInfo(position, currentTileInfo);
+
+            // Destroi a instância da planta
+            if (currentGrowthInstance != null)
+            {
+                Destroy(currentGrowthInstance);
+            }
+
         }
     }
 
