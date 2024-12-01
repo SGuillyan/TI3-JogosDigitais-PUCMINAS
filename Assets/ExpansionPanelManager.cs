@@ -30,13 +30,19 @@ public class ExpansionPanelManager : MonoBehaviour
     // Mostra o painel de expansão
     public void ShowExpansionPanel()
     {
-        expansionPanel.SetActive(true);
 
-        // Ativa ou desativa os botões com base nas áreas já expandidas
-        for (int i = 0; i < directionButtons.Length; i++)
+        if(expansionPanel.activeSelf)
         {
-            Vector3Int expansionArea = GetExpansionArea(i);
-            directionButtons[i].interactable = !expandedAreas.Contains(expansionArea);
+            expansionPanel.SetActive(false);
+        }
+        else
+        {
+            expansionPanel.SetActive(true);
+            for (int i = 0; i < directionButtons.Length; i++)
+            {
+                Vector3Int expansionArea = GetExpansionArea(i);
+                directionButtons[i].interactable = !expandedAreas.Contains(expansionArea);
+            }
         }
     }
 

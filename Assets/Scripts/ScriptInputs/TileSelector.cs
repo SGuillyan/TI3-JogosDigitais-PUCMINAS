@@ -109,7 +109,8 @@ public class TileSelector : MonoBehaviour
             if (customTile.HasNearbyWaterTile(gridPosition))
             {
                 Debug.Log($"Há um rio próximo à posição {gridPosition}. Solo não pode ser arado.");
-                return; // Interrompe se não houver um WaterTile próximo
+                return; 
+                // Aqui precisa de um feedback pro jogador //
             }
 
             customTile.ChangeToPlowedState(gridPosition);
