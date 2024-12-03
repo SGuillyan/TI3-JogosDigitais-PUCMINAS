@@ -180,13 +180,15 @@ public class StoreUI : MonoBehaviour
 
         // Configura os botões
         Button selectButton = itemInstance.GetComponentInChildren<Button>();
-        Button leftArrow = quantityControls.transform.Find("LeftArrow").GetComponent<Button>();
+        Button leftArrow = quantityControls.transform.Find("Lefty").GetComponent<Button>();
         Button rightArrow = quantityControls.transform.Find("RightArrow").GetComponent<Button>();
         Button confirmButton = quantityControls.transform.Find("ConfirmButton").GetComponent<Button>();
         TextMeshProUGUI selectedQuantityText = quantityControls.transform.Find("SelectedQuantity").GetComponent<TextMeshProUGUI>();
 
         int itemID = item.itemID;
 
+
+        // Atribuindo funções para os botões
         selectButton.onClick.AddListener(() =>
         {
             SelectItem(itemInstance, itemID, isBuyTab);
@@ -194,11 +196,13 @@ public class StoreUI : MonoBehaviour
 
         leftArrow.onClick.AddListener(() =>
         {
+            // Debug.Log("Botão LeftArrow pressionado para o item " + item.itemName); // Log para verificar o clique
             AdjustQuantity(-1, selectedQuantityText);
         });
 
         rightArrow.onClick.AddListener(() =>
         {
+            // Debug.Log("Botão RightArrow pressionado para o item " + item.itemName); // Log para verificar o clique
             AdjustQuantity(1, selectedQuantityText);
         });
 
@@ -215,39 +219,74 @@ public class StoreUI : MonoBehaviour
     }
 
 
+
     private void SelectItem(GameObject itemInstance, int itemID, bool isBuyTab)
     {
-        // Desativa os controles do item anteriormente selecionado
-        if (selectedItem != null)
+        // Verifica se o item selecionado é o mesmo que o item já selecionado
+        if (selectedItem != itemInstance)
         {
-            selectedItem.transform.Find("QuantityControls").gameObject.SetActive(false);
-            // Remove o estado visual de seleção do item anterior
-            var previousButton = selectedItem.GetComponentInChildren<Button>();
-            if (previousButton != null)
+            // Desativa os controles do item anteriormente selecionado
+            if (selectedItem != null)
             {
-                previousButton.image.color = Color.white; // Cor padrão
+                selectedItem.transform.Find("QuantityControls").gameObject.SetActive(false);
+                // Remove o estado visual de seleção do item anterior
+                var previousButton = selectedItem.GetComponentInChildren<Button>();
+                if (previousButton != null)
+                {
+                    previousButton.image.color = Color.white; // Cor padrão
+                }
+            }
+
+            // Ativa os controles para o novo item selecionado
+            selectedItem = itemInstance;
+            selectedQuantity = 1; // Reseta a quantidade selecionada para 1
+            var quantityControls = selectedItem.transform.Find("QuantityControls").gameObject;
+            quantityControls.SetActive(true);
+
+            // Atualiza o texto da quantidade inicial para o controle selecionado
+            TextMeshProUGUI selectedQuantityText = quantityControls.transform.Find("SelectedQuantity").GetComponent<TextMeshProUGUI>();
+            if (selectedQuantityText != null)
+            {
+                selectedQuantityText.text = selectedQuantity.ToString(); // Garante que começa em 1
+            }
+
+            // Aplica o estado visual de seleção ao botão do item atual
+            var currentButton = selectedItem.GetComponentInChildren<Button>();
+            if (currentButton != null)
+            {
+                currentButton.image.color = Color.red; // Cor para destacar o botão selecionado
             }
         }
-
-        // Ativa os controles para o novo item selecionado
-        selectedItem = itemInstance;
-        selectedQuantity = 1; // Reseta a quantidade selecionada
-        selectedItem.transform.Find("QuantityControls").gameObject.SetActive(true);
-
-        // Aplica o estado visual de seleção ao botão do item atual
-        var currentButton = selectedItem.GetComponentInChildren<Button>();
-        if (currentButton != null)
+        else
         {
-            currentButton.image.color = Color.red; // Cor para destacar o botão selecionado
+            // Caso o item selecionado já esteja selecionado, não altera a quantidade
+            var quantityControls = selectedItem.transform.Find("QuantityControls").gameObject;
+            if (quantityControls.activeSelf)
+            {
+                quantityControls.SetActive(false); // Desativa os controles, se necessário
+            }
+            else
+            {
+                quantityControls.SetActive(true); // Caso contrário, ativa os controles
+            }
         }
     }
 
 
-    private void AdjustQuantity(int amount, TextMeshProUGUI selectedQuantityText)
+
+   private void AdjustQuantity(int amount, TextMeshProUGUI selectedQuantityText)
     {
-        selectedQuantity = Mathf.Max(1, selectedQuantity + amount); // Garante que não seja menor que 1
-        selectedQuantityText.text = selectedQuantity.ToString();
+        // Ajusta a quantidade, mas nunca permite que seja menor que 1
+        selectedQuantity = Mathf.Max(1, selectedQuantity + amount);
+
+        // Atualiza o texto no controle de quantidade
+        if (selectedQuantityText != null)
+        {
+            Debug.Log("Ajustando a quanidade para " + selectedQuantity);
+            selectedQuantityText.text = selectedQuantity.ToString();
+        }
     }
+
 
     private void OnBuyItemConfirmed(int itemID, int quantity)
     {
