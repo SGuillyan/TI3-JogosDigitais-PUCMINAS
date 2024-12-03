@@ -62,6 +62,7 @@ public class SaveSystem : MonoBehaviour
         save.inventoryData = new InventoryData(inventoryManager.playerInventory.items);
         // QuestData
 
+        Debug.Log("Relatório de salvamento gerado!");
         return save;
 	}
 

@@ -44,6 +44,9 @@ public class TutorialManager : MonoBehaviour
 
         // Adiciona listener ao botão "Próximo"
         nextButton.onClick.AddListener(NextStep);
+
+        // Analytics
+        AnalyticsManager.SetStartTutorial(true);
     }
 
     // Método para mostrar um passo específico do tutorial
@@ -137,6 +140,10 @@ public class TutorialManager : MonoBehaviour
     {
         step.buttonsClicked++;
         UpdateNextButtonState(step);
+
+        // Alalytics
+        AnalyticsSystem.AddAnalyticTutorialTime_Seconds(this.name, "Next step tutorial", AnalyticsManager.GetTutorialTime());
+        AnalyticsSystem.AddAnalyticTutorialTime_Formated(this.name, "Next step tutorial", AnalyticsManager.GetTutorialTime());
     }
 
     // Método chamado ao ativar um dos toggles do passo
@@ -160,6 +167,8 @@ public class TutorialManager : MonoBehaviour
         {
             nextButton.interactable = true; // Ativa o nextButton quando todos os botões e toggles forem acionados
         }
+
+
     }
 
     // Método chamado ao clicar no botão "Próximo" ou no targetUIElement
@@ -207,6 +216,11 @@ public class TutorialManager : MonoBehaviour
         arrowImage.gameObject.SetActive(false);
         nextButton.gameObject.SetActive(false);
         tutorialGameObject.SetActive(false);
+
+        // Alalytics
+        AnalyticsManager.SetStartTutorial(false);
+        AnalyticsSystem.AddAnalyticTutorialTime_Seconds(this.name, "End tutorial", AnalyticsManager.GetTutorialTime());
+        AnalyticsSystem.AddAnalyticTutorialTime_Formated(this.name, "End tutorial", AnalyticsManager.GetTutorialTime());
     }
 
     // Método para encerrar o tutorial completamente, para ser chamado por um botão
@@ -249,6 +263,11 @@ public class TutorialManager : MonoBehaviour
 
         // Redefine o progresso do tutorial
         currentStepIndex = 0;
+
+        // Alalytics
+        AnalyticsManager.SetStartTutorial(false);
+        AnalyticsSystem.AddAnalyticTutorialTime_Seconds(this.name, "Tutorial skiped", AnalyticsManager.GetTutorialTime());
+        AnalyticsSystem.AddAnalyticTutorialTime_Formated(this.name, "Tutorial skiped", AnalyticsManager.GetTutorialTime());
 
         Debug.Log("Tutorial encerrado completamente.");
     }
