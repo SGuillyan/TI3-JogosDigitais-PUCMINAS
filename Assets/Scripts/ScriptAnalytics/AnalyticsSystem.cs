@@ -1,15 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
-using System.Runtime.CompilerServices;
-using System.Xml.Schema;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class AnalyticsSystem : MonoBehaviour
 {
     [HideInInspector]
-    public AnalyticsFile file;
+    public static AnalyticsFile file;
     
     public static AnalyticsSystem instance { get; private set; }
 
@@ -55,13 +56,13 @@ public class AnalyticsSystem : MonoBehaviour
     #region // Add Analytics
 
     #region // Tutorial Time
-    public void AddAnalyticTutorialTime_Seconds(string sender, string track, float value)
+    public static void AddAnalyticTutorialTime_Seconds(string sender, string track, float value)
     {
         AnalyticsData<float> data = new AnalyticsData<float>(sender, track, value);
         file.tutorialTime_Seconds.Add(data);
     }
 
-    public void AddAnalyticTutorialTime_Formated(string sender, string track, float value)
+    public static void AddAnalyticTutorialTime_Formated(string sender, string track, float value)
     {
         AnalyticsData<string> data = new AnalyticsData<string>(sender, track, FormatTimeFromSeconds(value));
         file.tutorialTime_Formated.Add(data);
@@ -69,13 +70,13 @@ public class AnalyticsSystem : MonoBehaviour
     #endregion
 
     #region // Inative Time
-    public void AddAnalyticInativeTime_Seconds(string sender, string track, float value)
+    public static void AddAnalyticInativeTime_Seconds(string sender, string track, float value)
     {
         AnalyticsData<float> data = new AnalyticsData<float>(sender, track, value);
         file.inativeTime_Seconds.Add(data);
     }
 
-    public void AddAnalyticInativeTime_Formated(string sender, string track, float value)
+    public static void AddAnalyticInativeTime_Formated(string sender, string track, float value)
     {
         AnalyticsData<string> data = new AnalyticsData<string>(sender, track, FormatTimeFromSeconds(value));
         file.inativeTime_Formated.Add(data);
@@ -83,28 +84,28 @@ public class AnalyticsSystem : MonoBehaviour
     #endregion
 
     #region // Plants
-    public void AddAnalyticPlants_Bought(string sender, string plant, int value)
+    public static void AddAnalyticPlants_Bought(string sender, string plant, int value)
     {
         file.totalPlantsBought += value;
         AnalyticsData<int> data = new AnalyticsData<int>(sender, plant + " bought", value);
         file.plants.Add(data);
     }
 
-    public void AddAnalyticPlants_Planted(string sender, string plant, int value)
+    public static void AddAnalyticPlants_Planted(string sender, string plant, int value)
     {
         file.totalPlantsPlanted += value;
         AnalyticsData<int> data = new AnalyticsData<int>(sender, plant + " planted", value);
         file.plants.Add(data);
     }
 
-    public void AddAnalyticPlants_Harvested(string sender, string plant, int value)
+    public static void AddAnalyticPlants_Harvested(string sender, string plant, int value)
     {
         file.totalPlantsHarvested += value;
         AnalyticsData<int> data = new AnalyticsData<int>(sender, plant + " harvested", value);
         file.plants.Add(data);
     }
 
-    public void AddAnalyticPlants_Sold(string sender, string plant, int value)
+    public static void AddAnalyticPlants_Sold(string sender, string plant, int value)
     {
         file.totalPlantsSold += value;
         AnalyticsData<int> data = new AnalyticsData<int>(sender, plant + " sold", value);
@@ -113,7 +114,7 @@ public class AnalyticsSystem : MonoBehaviour
     #endregion
 
     #region // Lands
-    public void AddAnalyticLands_Plowed(string sender, Vector3 position)
+    public static void AddAnalyticLands_Plowed(string sender, Vector3 position)
     {
         file.totalLandsPlowed += 1;
         file.currentLandsPlowed += 1;
@@ -121,7 +122,8 @@ public class AnalyticsSystem : MonoBehaviour
         file.lands.Add(data);
     }
 
-    public void AddAnalyticLands_Flated(string sender, Vector3 position)
+    // não chamado ainda
+    public static void AddAnalyticLands_Flated(string sender, Vector3 position)
     {
         file.totalLandsFlated += 1;
         file.currentLandsPlowed -= 1;
@@ -129,14 +131,15 @@ public class AnalyticsSystem : MonoBehaviour
         file.lands.Add(data);
     }
 
-    public void AddAnalyticLands_Hectare(string sender, Vector3 position)
+    public static void AddAnalyticLands_Hectare(string sender, Vector3 position)
     {
+        file.hectaresBought += 1;
         AnalyticsData<Vector3> data = new AnalyticsData<Vector3>(sender, "Hectare bought", position);
         file.lands.Add(data);
     }
     #endregion
 
-    public void AddAnalyticInfo(string sender, string track, int[] value)
+    public static void AddAnalyticInfo(string sender, string track, int[] value)
     {
         file.infosConsulted += 1;
         AnalyticsData<int[]> data = new AnalyticsData<int[]>(sender, track, value);
@@ -144,14 +147,15 @@ public class AnalyticsSystem : MonoBehaviour
     }
 
     #region // Devastation
-    public void AddAnalyticDevastation_Tree(string sender, Vector3 position)
+    // não chamado ainda
+    public static void AddAnalyticDevastation_Tree(string sender, Vector3 position)
     {
         file.totalTreesCuted += 1;
         AnalyticsData<Vector3> data = new AnalyticsData<Vector3>(sender, "Tree cuted", position);
         file.devastation.Add(data);
     }
-
-    public void AddAnalyticDevastation_River(string sender, Vector3 position)
+    // não chamado ainda
+    public static void AddAnalyticDevastation_River(string sender, Vector3 position)
     {
         file.timesRiverPolluted += 1;
         AnalyticsData<Vector3> data = new AnalyticsData<Vector3>(sender, "River polluted", position);
@@ -163,13 +167,18 @@ public class AnalyticsSystem : MonoBehaviour
 
     #region // Report
 
-    public string GenerateAnalyticsJsonReport()
+    public static string GenerateAnalyticsJsonReport()
     {
+        file.gameTime_Seconds = Time.realtimeSinceStartup;
+        file.gameTime_Formated = FormatTimeFromSeconds(file.gameTime_Seconds);
+
         file.saveData = SaveSystem.GenerateSaveData();
+
+        Debug.Log("Relatório json gerado!");
         return JsonUtility.ToJson(file, true);
     }
 
-    public void SaveAnalyticsFile(string path)
+    public static void SaveAnalyticsFile(string path)
     {
         string json = GenerateAnalyticsJsonReport();
         File.WriteAllText(path, json);
@@ -177,8 +186,65 @@ public class AnalyticsSystem : MonoBehaviour
 
     #endregion
 
+    // Métodos Públicos
+    public static void SendEmail(string message)
+    {
+        /*var client = new SmtpClient("smtp.gmail.com", 587)
+        {
+            Credentials = new NetworkCredential("bazonsamuel@gmail", "bubo dcqi uxcx gsiv"),
+            EnableSsl = true
+        };
+        client.Send("bazonsamuel@gmail", "jordandlyon@gmail.com", "Analytics " + DateTime.Now.ToString("cc/MM/yyyy HH:mm"), mensage);
+        Debug.Log("Email de analytics enviado!");*/
+
+        var client = new SmtpClient("smtp.gmail.com", 587);
+        MailMessage mail = new MailMessage();
+
+        client.Timeout = 10000;
+        client.DeliveryMethod = SmtpDeliveryMethod.Network;
+        client.UseDefaultCredentials = false;
+        client.Port = 587;
+
+        mail.From = new MailAddress("bazonsamuel@gmail");
+        mail.To.Add(new MailAddress("jordandlyon@gmail.com"));
+        mail.Subject = "Analytics " + DateTime.Now.ToString("cc/MM/yyyy HH:mm");
+        mail.Body = message;
+
+        client.Credentials = new NetworkCredential("bazonsamuel@gmail", "ulmy gxsk sgbl qcpf");
+        client.EnableSsl = true;
+
+        ServicePointManager.ServerCertificateValidationCallback = 
+            delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+            { return true; };
+
+        mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+
+        client.Send(mail);
+        Debug.Log("Email de analytics enviado!");
+
+        
+
+        /*mail.From = new MailAddress(sender);
+        mail.To.Add(receiver);
+        mail.Subject = "R4UL " + title;
+        mail.Body = textBody;
+
+        Debug.Log("Connecting to SMTP server");
+        SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
+        smtpServer.Port = 587;
+        smtpServer.Credentials = new System.Net.NetworkCredential(sender, password) as ICredentialsByHost;
+
+        smtpServer.EnableSsl = true;
+        ServicePointManager.ServerCertificateValidationCallback =
+                delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+                { return true; };
+        Debug.Log("Sending message");
+
+        smtpServer.Send(mail);*/
+    }
+
     // Métodos Privados
-    private string FormatTimeFromSeconds(float seconds)
+    private static string FormatTimeFromSeconds(float seconds)
     {
         int minutes = (int)seconds / 60;
         int intseconds = (int)seconds % 60;

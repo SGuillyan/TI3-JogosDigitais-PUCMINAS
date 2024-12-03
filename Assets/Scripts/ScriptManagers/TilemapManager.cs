@@ -74,6 +74,9 @@ public class TilemapManager : MonoBehaviour
             }
         }
 
+        // Analytics
+        AnalyticsSystem.AddAnalyticLands_Hectare(this.name, (bottomLeft + topRight) / 2);
+
         Debug.Log($"Terreno expandido entre ({bottomLeft.x}, {bottomLeft.y}) e ({topRight.x}, {topRight.y})");
     }
 

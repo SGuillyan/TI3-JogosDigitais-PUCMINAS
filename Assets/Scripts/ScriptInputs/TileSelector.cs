@@ -115,6 +115,9 @@ public class TileSelector : MonoBehaviour
 
             customTile.ChangeToPlowedState(gridPosition);
             Debug.Log($"Solo arado na posição: {gridPosition}");
+
+            // Analytics
+            AnalyticsSystem.AddAnalyticLands_Plowed(this.name, gridPosition);
         }
     }
 
@@ -131,6 +134,9 @@ public class TileSelector : MonoBehaviour
         if (tile is PlantTile plantTile && plantTile.isFullyGrown)
         {
             plantTile.Collect(tilemap, gridPosition, playerInventory);
+
+            // Analytics
+            AnalyticsSystem.AddAnalyticPlants_Harvested(this.name, plantTile.name, 1);
         }
         else
         {
@@ -183,6 +189,9 @@ public class TileSelector : MonoBehaviour
                 tileInfoAnimator.SetBool("OpenInfo", true);  // Ativa a animação de abertura
                 Debug.Log("Setting openinfo true");
                 //ToolsManager.SetActiveTool(ToolsManager.Tools.None);
+
+                // Analytics
+                AnalyticsSystem.AddAnalyticInfo(this.name, "Consult INFO", new int[4] { tileInfo.nitrogen, tileInfo.phosphorus, tileInfo.potassium, tileInfo.humidity });
             }
         }
         else

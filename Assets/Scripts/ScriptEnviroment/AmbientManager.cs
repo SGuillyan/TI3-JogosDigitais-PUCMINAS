@@ -30,8 +30,8 @@ public class AmbientManager : MonoBehaviour
         currentSeason = Season.Summer;
         seasonalFactor = 0f;
 
-        Debug.Log("Está " + Ambient.GetCurrentTemperature());
-        Debug.Log("Está " + Ambient.GetCurrentClimate());
+        //Debug.Log("Está " + Ambient.GetCurrentTemperature());
+        //Debug.Log("Está " + Ambient.GetCurrentClimate());
     }
 
     private void Update()
@@ -102,7 +102,7 @@ public class AmbientManager : MonoBehaviour
             Ambient.ChangeTemperature(-instabilityFactor);
         }
 
-        Debug.Log("Agora está " + Ambient.GetCurrentTemperature());
+        //Debug.Log("Agora está " + Ambient.GetCurrentTemperature());
     }
 
     private void UpdateClimate()
@@ -149,7 +149,7 @@ public class AmbientManager : MonoBehaviour
             Ambient.ChangeClimate(-ClimateInstabilityLevel());
         }
 
-        Debug.Log("Agora está " + Ambient.GetCurrentClimate());
+        //Debug.Log("Agora está " + Ambient.GetCurrentClimate());
     }
 
     private void UpdateSeasonalFactor()
