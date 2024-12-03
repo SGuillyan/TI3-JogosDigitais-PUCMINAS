@@ -9,11 +9,11 @@ public class CameraController : MonoBehaviour
 
     [Tooltip("Velocidade de movimento da tela")]
     [SerializeField] private float moveSpd;
-    [Tooltip("Velocidade com que se dá zoom")]
+    [Tooltip("Velocidade com que se dï¿½ zoom")]
     [SerializeField] private float zoomRate;
-    [Tooltip("'Size' da câmera máximo alcançado pelo zoom-out")]
+    [Tooltip("'Size' da cï¿½mera mï¿½ximo alcanï¿½ado pelo zoom-out")]
     [SerializeField] private float maxZoom;
-    [Tooltip("'Size' da câmera mínimo alcançado pelo zoom-in")]
+    [Tooltip("'Size' da cï¿½mera mï¿½nimo alcanï¿½ado pelo zoom-in")]
     [SerializeField] private float minZoom;
 
     private Vector2 lastPosition;
@@ -41,15 +41,15 @@ public class CameraController : MonoBehaviour
                     Touch touch1 = Input.GetTouch(0);
                     Touch touch2 = Input.GetTouch(1);
 
-                    // Diferença de distância entre os toques de um frame para o outro
+                    // Diferenï¿½a de distï¿½ncia entre os toques de um frame para o outro
                     float prevTouchDeltaMag = (touch1.position - touch1.deltaPosition - (touch2.position - touch2.deltaPosition)).magnitude;
                     float touchDeltaMag = (touch1.position - touch2.position).magnitude;
 
-                    // Diferença de distância entre os toques (zoom-in ou zoom-out)
+                    // Diferenï¿½a de distï¿½ncia entre os toques (zoom-in ou zoom-out)
                     float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
 
-                    // Ajusta o zoom baseado na diferença de magnitude do gesto
-                    AdjustZoom(deltaMagnitudeDiff * -0.01f);  // Ajuste para controlar a sensibilidade do zoom por pinça
+                    // Ajusta o zoom baseado na diferenï¿½a de magnitude do gesto
+                    AdjustZoom(deltaMagnitudeDiff * -0.01f);  // Ajuste para controlar a sensibilidade do zoom por pinï¿½a
                 }
                 else
                 {
@@ -63,7 +63,7 @@ public class CameraController : MonoBehaviour
                     {
                         Vector2 aux = (touch.position - lastPosition);
 
-                        // angulo 45°
+                        // angulo 45ï¿½
                         float angle = Mathf.PI / 4;
                         // Rotacionar vetor
                         float newX = aux.x * Mathf.Cos(angle) - aux.y * Mathf.Sin(angle);
@@ -87,12 +87,12 @@ public class CameraController : MonoBehaviour
     {
         if (m_camera.orthographic)
         {
-            // Projeção ortográfica: ajusta o tamanho ortográfico
+            // Projeï¿½ï¿½o ortogrï¿½fica: ajusta o tamanho ortogrï¿½fico
             m_camera.orthographicSize = Mathf.Clamp(m_camera.orthographicSize - zoomChange * zoomRate, minZoom, maxZoom);
         }
         else
         {
-            // Projeção em perspectiva: ajusta o campo de visão
+            // Projeï¿½ï¿½o em perspectiva: ajusta o campo de visï¿½o
             m_camera.fieldOfView = Mathf.Clamp(m_camera.fieldOfView - zoomChange * zoomRate, minZoom, maxZoom);
         }
     }

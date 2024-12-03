@@ -56,7 +56,7 @@ public class ToolsManager : MonoBehaviour
     public static void SetActiveTool(Tools tool)
     {
         activeTool = tool;
-        //Debug.Log(activeTool);
+        Debug.Log(activeTool);
     }
 
     public static void ToolBoxAnim()

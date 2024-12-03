@@ -5,6 +5,8 @@ public class InventoryManager : MonoBehaviour
 {
     public Inventory playerInventory;  // Referência ao inventário do jogador
     public InventoryUI inventoryUI;  // Referência ao script de UI do inventário
+
+    public MenuManager menuManager;
     private int selectedSeedID = -1;  // ID da semente selecionada
     private bool isPlanting = false;  // Flag para verificar se o jogador está no modo de plantio
 
@@ -26,7 +28,7 @@ public class InventoryManager : MonoBehaviour
             Debug.Log("Selecionando semente de id " + seedID);
             ToolsManager.SetActiveTool(ToolsManager.Tools.None);
             selectedSeedID = seedID;
-            inventoryUI.CloseInventory();  // Fecha o inventário ao selecionar uma semente
+            menuManager.CloseInventoryToPlant();  // Fecha o inventário ao selecionar uma semente
             isPlanting = true;  // Ativa o modo de plantio
 
             // Troca os botões
@@ -49,7 +51,7 @@ public class InventoryManager : MonoBehaviour
         // shopButton.gameObject.SetActive(true);
         stopPlantingButton.gameObject.SetActive(false);
 
-        inventoryUI.OpenInventory();  // Reabre o inventário
+        menuManager.OpenInventory();  // Reabre o inventário
     }
 
     // Verifica se uma semente está selecionada

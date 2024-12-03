@@ -45,7 +45,7 @@ public class MenuManager : MonoBehaviour
 
     public void TabQuestList()
     {
-#pragma warning disable CS0618 // O tipo ou membro é obsoleto
+#pragma warning disable CS0618 // O tipo ou membro ï¿½ obsoleto
         if (questCanvas.active)
         {
             CloseQuestList();
@@ -100,7 +100,7 @@ public class MenuManager : MonoBehaviour
         CameraController.lockCamera = true;
     }
 
-    private void OpenInventory()
+    public void OpenInventory()
     {
         VerifyTabs(Menu.Inventory);
         inventoryUI.OpenInventory();
@@ -144,6 +144,14 @@ public class MenuManager : MonoBehaviour
 
         openedMenu = false;
         CameraController.lockCamera = false;
+    }
+
+    public void CloseInventoryToPlant()
+    {
+        inventoryUI.CloseInventory();
+
+        openedMenu = false;
+        CameraController.lockCamera = true;
     }
 
     private void CloseShop()

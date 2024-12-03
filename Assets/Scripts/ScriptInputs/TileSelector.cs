@@ -72,8 +72,7 @@ public class TileSelector : MonoBehaviour
                         UseInfoTool(gridPosition);
                         //Debug.Log("USING INFO");
                         break;
-
-                    default:
+                    case ToolsManager.Tools.None:
                         UsePlantTool(gridPosition);
                         break;
                 }
