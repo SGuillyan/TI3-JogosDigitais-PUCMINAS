@@ -11,7 +11,20 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         tileSelector.SelectTile();
-        //Debug.Log(ToolsManager.activeTool);
+        
+        // Analytics
+        if (Input.touchCount > 0)
+        {
+            if (AnalyticsManager.GetInativeTime() > 1f)
+            {
+                AnalyticsSystem.AddAnalyticInativeTime_Seconds(this.name, "Inative time", AnalyticsManager.GetInativeTime());
+                AnalyticsSystem.AddAnalyticInativeTime_Formated(this.name, "Inative time", AnalyticsManager.GetInativeTime());
+            }
+        }
+        else
+        {
+            AnalyticsManager.AddInativeTime();
+        }
     }
 
     private void FixedUpdate()

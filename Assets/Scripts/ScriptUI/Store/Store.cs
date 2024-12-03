@@ -37,6 +37,10 @@ public class Store : MonoBehaviour
         {
             playerInventory.AddItem(shopItem, quantity);  // Adiciona o item ao inventário do jogador
             Debug.Log("Item comprado: " + shopItem.itemName + " x" + quantity);
+
+            // Analytics
+            AnalyticsSystem.AddAnalyticPlants_Bought(this.name, shopItem.itemName, quantity);
+
             return true;
         }
         else
@@ -61,6 +65,9 @@ public class Store : MonoBehaviour
             {
                 // Adiciona o dinheiro ao jogador usando o MoneyManager
                 moneyManager.AddMoney(totalSaleValue);
+
+                // Analytics
+                AnalyticsSystem.AddAnalyticPlants_Sold(this.name, inventoryItem.item.itemName, quantity);
 
                 Debug.Log("Item vendido: " + inventoryItem.item.itemName + " x" + quantity);
                 return true;
