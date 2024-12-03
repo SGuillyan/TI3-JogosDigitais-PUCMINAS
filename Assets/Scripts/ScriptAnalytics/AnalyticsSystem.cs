@@ -40,7 +40,7 @@ public class AnalyticsSystem : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        /*if(Input.GetKeyDown(KeyCode.Space))
         {
             //AddAnalyticData2("Player", "Jump", true);
             //AddAnalyticData2("Enemy", "Alive", false);
@@ -50,7 +50,7 @@ public class AnalyticsSystem : MonoBehaviour
         {
             SaveAnalyticsFile("Assets/Scripts/ScriptAnalytics/AnalyticsData.json");
             Debug.Log("Salvo");
-        }
+        }*/
     }
 
     #region // Add Analytics
@@ -210,6 +210,8 @@ public class AnalyticsSystem : MonoBehaviour
         mail.Subject = "Analytics " + DateTime.Now.ToString("cc/MM/yyyy HH:mm");
         mail.Body = message;
 
+        // bubo dcqi uxcx gsiv
+        // ulmy gxsk sgbl qcpf
         client.Credentials = new NetworkCredential("bazonsamuel@gmail", "ulmy gxsk sgbl qcpf");
         client.EnableSsl = true;
 
