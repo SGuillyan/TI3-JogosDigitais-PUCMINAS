@@ -100,12 +100,19 @@ public class InventoryUI : MonoBehaviour
         Image itemIcon = itemInstance.transform.Find("ItemIcon").GetComponent<Image>();
         TextMeshProUGUI itemName = itemInstance.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI itemQuantity = itemInstance.transform.Find("ItemQuantity").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI ItemInfoN = itemInstance.transform.Find("Panel/ItemInfoN").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI ItemInfoP = itemInstance.transform.Find("Panel/ItemInfoP").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI ItemInfoK = itemInstance.transform.Find("Panel/ItemInfoK").GetComponent<TextMeshProUGUI>();
+
 
         if (itemIcon != null && itemName != null && itemQuantity != null)
         {
             itemIcon.sprite = inventoryItem.item.itemIcon;
             itemName.text = inventoryItem.item.itemName;
             itemQuantity.text = "x" + inventoryItem.quantity.ToString();
+            ItemInfoN.text = "N - " + inventoryItem.item.reqNitro.ToString();
+            ItemInfoP.text = "P - " + inventoryItem.item.reqPhosf.ToString();
+            ItemInfoK.text = "K - " + inventoryItem.item.reqK.ToString();
         }
         else
         {
