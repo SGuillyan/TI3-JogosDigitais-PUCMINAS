@@ -7,7 +7,8 @@ using TMPro;
 [CreateAssetMenu(menuName = "Tiles/Plant Tile2")]
 public class PlantTile : Tile
 {
-    public GameObject[] growthPrefabs;  // Prefabs para cada fase de crescimento da planta
+    public GameObject[] growthPrefabs;  // Prefabs para cada fase de crescimento da planta]
+    public GameObject rotPrefab;
     public float[] growthTimes;  // Array para armazenar o tempo necessário para cada fase de crescimento
 
     [Header("Ambient")]
@@ -35,6 +36,8 @@ public class PlantTile : Tile
     public bool isPlanted = false;
     public bool isFullyGrown = false;
     public bool isRotten = false;
+    private bool isCollected = false; // Indica se a planta foi colhida
+
 
     public Item harvestedItem;
     public TileBase soilTile;
@@ -54,6 +57,7 @@ public class PlantTile : Tile
     public int returnPotassium = 4;
 
     private GameObject currentGrowthInstance; // Instância atual do estágio de crescimento
+
 
     public void Plant(Tilemap tilemap, Vector3Int position, MonoBehaviour caller)
     {
@@ -124,7 +128,7 @@ public class PlantTile : Tile
         // Inicializa a barra de progresso
         // InitializeProgressBar(tilemap, position);
 
-        UpdateGrowthInstance(tilemap, position);
+        UpdateGrowthInstance(tilemap, position, growthPrefabs[0]);
         caller.StartCoroutine(Grow(tilemap, position, caller));
     }
 
@@ -162,11 +166,13 @@ public class PlantTile : Tile
     {
         float totalElapsedTime = 0f;
 
+        // Itera sobre os estágios de crescimento
         while (growthStage < growthTimes.Length)
         {
             float stageGrowthTime = growthTimes[growthStage];
             float stageStartTime = totalElapsedTime;
 
+            // Cresce a planta enquanto o tempo não passar para o próximo estágio
             while (totalElapsedTime < stageStartTime + stageGrowthTime)
             {
                 yield return null;
@@ -175,28 +181,73 @@ public class PlantTile : Tile
                 currentGrowthTime += additionalTime;
 
                 // Atualiza a barra de progresso corretamente
-                // UpdateProgressBarUI(totalElapsedTime);
+                UpdateProgressBarUI(totalElapsedTime);
             }
 
+            // Passa para o próximo estágio de crescimento
             growthStage++;
 
-            if (growthStage == 4)
+            // Atualiza o prefab do estágio atual
+            GameObject growthPrefab = (growthStage < growthPrefabs.Length) ? growthPrefabs[growthStage] : null;
+            UpdateGrowthInstance(tilemap, position, growthPrefab);
+
+            tilemap.RefreshTile(position);
+
+            // Verifica se a planta está completamente crescida
+            if (growthStage == growthTimes.Length - 1)
             {
                 isFullyGrown = true;
-            }
 
-            UpdateGrowthInstance(tilemap, position);
-            tilemap.RefreshTile(position);
+                // Após o crescimento completo, chama o método de apodrecimento
+                caller.StartCoroutine(Rot(tilemap, position));
+                yield break; // Interrompe a execução do método Grow, já que o apodrecimento foi iniciado
+            }
+        }
+    }
+
+    private IEnumerator Rot(Tilemap tilemap, Vector3Int position)
+    {
+        // Soma o tempo total de crescimento
+        float totalGrowthTime = 0f;
+        foreach (float time in growthTimes)
+        {
+            totalGrowthTime += time;
         }
 
-        isFullyGrown = false;
-        isRotten = true;
+        // Define o tempo de apodrecimento (após o crescimento completo)
+        float timeToRot = totalGrowthTime;
 
+        // Aguarda o tempo de apodrecimento após o crescimento completo
+        while (timeToRot > 0)
+        {
+            if (isCollected)
+            {
+                // Interrompe a rotina de apodrecimento se a planta foi colhida
+                yield break;
+            }
+
+            yield return null;
+            timeToRot -= Time.deltaTime;  // Reduz o tempo restante até apodrecer
+        }
+
+        // Se o tempo de apodrecimento passar, a planta apodrece
+        if (!isCollected && isFullyGrown)
+        {
+            isRotten = true;
+            // Atualiza o prefab para o rotPrefab (em vez de destruir)
+            UpdateGrowthInstance(tilemap, position, rotPrefab);  // Muda para o prefab de apodrecimento
+        }
+
+        // Opcional: Se houver uma barra de progresso, destruí-la após o apodrecimento
         if (progressBarInstance != null)
         {
             Destroy(progressBarInstance);
         }
     }
+
+
+
+
 
     private void UpdateProgressBarUI(float totalElapsedTime)
     {
@@ -214,7 +265,7 @@ public class PlantTile : Tile
     }
 
     // Substitui a lógica de sprites por instâncias de GameObjects para cada estágio de crescimento
-    private void UpdateGrowthInstance(Tilemap tilemap, Vector3Int position)
+    private void UpdateGrowthInstance(Tilemap tilemap, Vector3Int position, GameObject growthPrefab)
     {
         // Destruir a instância anterior, se existir
         if (currentGrowthInstance != null)
@@ -223,17 +274,20 @@ public class PlantTile : Tile
         }
 
         // Instancia o prefab correspondente ao estágio de crescimento
-        if (growthPrefabs != null && growthStage < growthPrefabs.Length)
+        if (growthPrefab != null)
         {
             Vector3 worldPos = tilemap.CellToWorld(position) + new Vector3(0.5f, 0, 0.5f);  // Ajuste a posição do prefab
-            currentGrowthInstance = Instantiate(growthPrefabs[growthStage], worldPos, Quaternion.identity);
+            currentGrowthInstance = Instantiate(growthPrefab, worldPos, Quaternion.identity);
         }
     }
 
-    public void Collect(Tilemap tilemap, Vector3Int position, Inventory playerInventory)
+
+   public void Collect(Tilemap tilemap, Vector3Int position, Inventory playerInventory)
     {
         if (isFullyGrown)
         {
+            isCollected = true; // Sinaliza que a planta foi colhida
+
             TilemapManager tilemapManager = Object.FindObjectOfType<TilemapManager>();
 
             if (tilemapManager == null)
@@ -272,8 +326,9 @@ public class PlantTile : Tile
                 Destroy(currentGrowthInstance);
             }
         }
-        else if (isRotten) 
+        else if (isRotten)
         {
+            // Mesma lógica para plantas apodrecidas
             TilemapManager tilemapManager = Object.FindObjectOfType<TilemapManager>();
 
             if (tilemapManager == null)
@@ -292,9 +347,9 @@ public class PlantTile : Tile
             }
 
             // Devolve os nutrientes ao solo após a colheita
-            currentTileInfo.nitrogen += returnNitrogen;
-            currentTileInfo.phosphorus += returnPhosphorus;
-            currentTileInfo.potassium += returnPotassium;
+            currentTileInfo.nitrogen += returnNitrogen/2;
+            currentTileInfo.phosphorus += returnPhosphorus/2;
+            currentTileInfo.potassium += returnPotassium/2;
 
             // Atualiza o estado para plantável após a colheita
             currentTileInfo.isPlantable = true;
@@ -308,9 +363,9 @@ public class PlantTile : Tile
             {
                 Destroy(currentGrowthInstance);
             }
-
         }
     }
+
 
     public void ResetGrowth()
     {

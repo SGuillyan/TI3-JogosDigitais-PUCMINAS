@@ -39,6 +39,7 @@ MonoBehaviour:
   - {fileID: 1648989520575376384, guid: 62e75fbc11feafa45afda4f23b6c4e96, type: 3}
   - {fileID: 1648989520575376384, guid: cdb88df21e86726448564153d0d0c3f3, type: 3}
   - {fileID: 1648989520575376384, guid: 994e011794a178d4ab18d54e79a64deb, type: 3}
+  rotPrefab:
   - {fileID: 1648989520575376384, guid: bb688f16c05e34b4abd0eeb7915db95d, type: 3}
   growthTimes:
   - 5
@@ -61,6 +62,9 @@ MonoBehaviour:
     itemType: 0
     itemID: 102
     price: 80
+    reqNitro: 0
+    reqPhosf: 0
+    reqK: 0
   soilTile: {fileID: 11400000, guid: fb4802db5e5b9c94db6eda50fd1dd23d, type: 2}
   requiredNitrogen: 90
   requiredPhosphorus: 80
