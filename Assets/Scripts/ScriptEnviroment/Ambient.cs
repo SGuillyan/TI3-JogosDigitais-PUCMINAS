@@ -40,9 +40,19 @@ public static class Ambient
         return currentTemperature;
     }
 
+    public static void SetCurrentTemperature(Temperature temperature)
+    {
+        currentTemperature = temperature;
+    }
+
     public static Climate GetCurrentClimate()
     {
         return currentClimate;
+    }
+
+    public static void SetCurrentClimate(Climate climate)
+    {
+        currentClimate = climate;
     }
 
     public static void ChangeTemperature(int modify)

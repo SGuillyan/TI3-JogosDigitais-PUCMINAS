@@ -51,6 +51,22 @@ public static class IDS
         return social;
     }
 
+
+    public static void SetEcologico(int value)
+    {
+        ecologico = value;
+    }
+
+    public static void SetEconomico(int value)
+    {
+        economico = value;
+    }
+
+    public static void SetSocial(int value)
+    {
+        social = value;
+    }
+
     #endregion
 
     #region // Add & Reduce

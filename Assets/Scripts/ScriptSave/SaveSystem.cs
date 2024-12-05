@@ -10,38 +10,91 @@ public class SaveSystem : MonoBehaviour
 	[Serializable]
 	public class SaveAccesses
 	{
-		public MoneyManager moneyManager;
-		public InventoryManager inventoryManager;
-		public Camera mainCamera;
-		public TutorialManager tutorialManager;
-
+        public TutorialManager tutorialManager;
+        public Camera mainCamera;
+        public MoneyManager moneyManager;
+		public Transform tilesParent;
+        public InventoryManager inventoryManager;      
 	}
 
 	[SerializeField] private SaveAccesses accesses;
 
-	private static MoneyManager moneyManager;
+    private static TutorialManager tutorialManager;
+    private static Camera mainCamera;
+    private static MoneyManager moneyManager;
+	private static Transform tilesParent;
 	private static InventoryManager inventoryManager;
-	private static Camera mainCamera;
-	private static TutorialManager tutorialManager;
+	
 
 	private void Start()
 	{
-		moneyManager = accesses.moneyManager;
+        tutorialManager = accesses.tutorialManager;
+        mainCamera = accesses.mainCamera;
+        moneyManager = accesses.moneyManager;
+		tilesParent = accesses.tilesParent;
 		inventoryManager = accesses.inventoryManager;
-		mainCamera = accesses.mainCamera;
-		tutorialManager = accesses.tutorialManager;
-
+		
 		//Save("Assets/Scripts/ScriptSave/SaveData.json");
 	}
 
-	public static void Save(string path)
+
+	public static void Save()
+	{
+		Save(Application.persistentDataPath + "/SaveData.json");
+	}
+
+	public static void Load()
+	{
+		SaveData load = GenerateLoadData(Application.persistentDataPath + "/SaveData.json");
+
+        #region // ConfigData
+
+        #endregion
+        #region // TutorialData
+
+        #endregion
+        #region // CameraData
+		mainCamera.transform.position = load.cameraData.position;
+		mainCamera.orthographicSize = load.cameraData.size;
+		#endregion
+		#region // MoneyData
+		moneyManager.SetCurrentMoney(load.moneyData.money);
+		#endregion
+		#region // AmbientData
+		Ambient.SetCurrentTemperature(load.ambientData.currentTemperature);
+		Ambient.SetCurrentClimate(load.ambientData.currentClimate);
+		AmbientManager.SetCurrentSeason(load.ambientData.currentSeason);
+		AmbientManager.SetSeasonalFactor(load.ambientData.seasonalFactor);
+		#endregion
+		#region // IDS_Data
+		IDS.SetEcologico(load.idsData.ecologico);
+		IDS.SetEconomico(load.idsData.economico);
+		IDS.SetSocial(load.idsData.social);
+		IDS.CalcularIDS();
+        #endregion
+        #region // TileData
+
+        #endregion
+        #region // InventoryData
+		for (int i = 0; i < load.inventoryData.itens.Count; i++)
+		{
+			inventoryManager.playerInventory.items.Add(load.inventoryData.itens[i]);
+		}
+        #endregion
+        #region // QuestData
+
+        #endregion
+    }
+
+
+    private static void Save(string path)
 	{
 		string json = JsonUtility.ToJson(GenerateSaveData(), true);
 
 		File.WriteAllText(path, json);
 	}
 
-	public static SaveData Load(string path)
+	private static SaveData GenerateLoadData(string path)
 	{
 		string json = File.ReadAllText(path);
 
@@ -58,7 +111,7 @@ public class SaveSystem : MonoBehaviour
         save.moneyData = new MoneyData(moneyManager.GetCurrentMoney());
         save.ambientData = new AmbientData(Ambient.GetCurrentTemperature(), Ambient.GetCurrentClimate(), AmbientManager.GetCurrentSeason(), AmbientManager.GetSeasonalFactor());
         save.idsData = new IDS_Data(IDS.GetIDS(), IDS.GetEcologico(), IDS.GetEconomico(), IDS.GetSocial());
-        // TileData       
+		save.tileData = new TileData(tilesParent);
         save.inventoryData = new InventoryData(inventoryManager.playerInventory.items);
         // QuestData
 
@@ -77,7 +130,7 @@ public class SaveSystem : MonoBehaviour
         public MoneyData moneyData;
         public AmbientData ambientData;
         public IDS_Data idsData;
-        //public TileData tileData;
+        public TileData tileData;
         public InventoryData inventoryData;
 		//public QuestData questData;		
 	}
@@ -174,12 +227,20 @@ public class SaveSystem : MonoBehaviour
         }
     }
 
-    /*implement
+    //implement
 	public class TileData
 	{
+		public List<GameObject> tiles;
 
+		//Construtor
+		public TileData(Transform tilesParent)
+		{
+			for(int i = 0; i < tilesParent.childCount; i++)
+			{
+				tiles.Add(tilesParent.GetChild(i).gameObject);
+			}
+		}
 	}
-	*/
 
     //implement
     [Serializable]

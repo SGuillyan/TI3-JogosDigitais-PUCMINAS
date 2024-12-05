@@ -62,9 +62,19 @@ public class AmbientManager : MonoBehaviour
         return currentSeason;
     }
 
+    public static void SetCurrentSeason(Season season)
+    {
+        currentSeason = season;
+    }
+
     public static float GetSeasonalFactor()
     {
         return seasonalFactor;
+    }
+
+    public static void SetSeasonalFactor(float value)
+    {
+        seasonalFactor = value;
     }
 
     #endregion
