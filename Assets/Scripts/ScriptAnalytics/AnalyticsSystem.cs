@@ -189,60 +189,13 @@ public class AnalyticsSystem : MonoBehaviour
     // Métodos Públicos
     public static void SendEmail(string message)
     {
-        /*var client = new SmtpClient("smtp.gmail.com", 587)
+        var client = new SmtpClient("smtp.gmail.com", 587)
         {
-            Credentials = new NetworkCredential("bazonsamuel@gmail", "bubo dcqi uxcx gsiv"),
+            Credentials = new NetworkCredential("bazonsamuel@gmail.com", "bubodcqiuxcxgsiv"),
             EnableSsl = true
         };
-        client.Send("bazonsamuel@gmail", "jordandlyon@gmail.com", "Analytics " + DateTime.Now.ToString("cc/MM/yyyy HH:mm"), mensage);
-        Debug.Log("Email de analytics enviado!");*/
-
-        var client = new SmtpClient("smtp.gmail.com", 587);
-        MailMessage mail = new MailMessage();
-
-        client.Timeout = 10000;
-        client.DeliveryMethod = SmtpDeliveryMethod.Network;
-        client.UseDefaultCredentials = false;
-        client.Port = 587;
-
-        mail.From = new MailAddress("bazonsamuel@gmail");
-        mail.To.Add(new MailAddress("jordandlyon@gmail.com"));
-        mail.Subject = "Analytics " + DateTime.Now.ToString("cc/MM/yyyy HH:mm");
-        mail.Body = message;
-
-        // bubo dcqi uxcx gsiv
-        // ulmy gxsk sgbl qcpf
-        client.Credentials = new NetworkCredential("bazonsamuel@gmail", "ulmy gxsk sgbl qcpf");
-        client.EnableSsl = true;
-
-        ServicePointManager.ServerCertificateValidationCallback = 
-            delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
-            { return true; };
-
-        mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
-
-        client.Send(mail);
+        client.Send("bazonsamuel@gmail.com", "jordandlyon@gmail.com", "Analytics " + DateTime.Now.ToString("cc/MM/yyyy HH:mm"), message);
         Debug.Log("Email de analytics enviado!");
-
-        
-
-        /*mail.From = new MailAddress(sender);
-        mail.To.Add(receiver);
-        mail.Subject = "R4UL " + title;
-        mail.Body = textBody;
-
-        Debug.Log("Connecting to SMTP server");
-        SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
-        smtpServer.Port = 587;
-        smtpServer.Credentials = new System.Net.NetworkCredential(sender, password) as ICredentialsByHost;
-
-        smtpServer.EnableSsl = true;
-        ServicePointManager.ServerCertificateValidationCallback =
-                delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
-                { return true; };
-        Debug.Log("Sending message");
-
-        smtpServer.Send(mail);*/
     }
 
     // Métodos Privados
