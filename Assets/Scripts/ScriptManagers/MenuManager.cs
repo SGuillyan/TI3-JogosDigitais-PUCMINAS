@@ -12,6 +12,9 @@ public class MenuManager : MonoBehaviour
         QuestList,
         Inventory,
         Shop,
+        IDS_Menu,
+        Config,
+        Credit,
     }
 
     [Header("Scripts")]
@@ -27,7 +30,14 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject inventory;
     [SerializeField] private GameObject shop;
 
+    [SerializeField] private GameObject idsMenu;
+    [SerializeField] private GameObject config;
+    [SerializeField] private GameObject credit;
+
+
     public static bool openedMenu = false;
+
+    #region // Tab
 
     public void TabToolBox()
     {
@@ -45,40 +55,41 @@ public class MenuManager : MonoBehaviour
 
     public void TabQuestList()
     {
-#pragma warning disable CS0618 // O tipo ou membro � obsoleto
-        if (questCanvas.active)
-        {
-            CloseQuestList();
-        }
-        else
-        {
-            OpenQuestList();
-        }
+        if (questCanvas.activeSelf) CloseQuestList(); 
+        else OpenQuestList(); 
     }
 
     public void TabInventory()
     {
-        if (inventory.active)
-        {
-            CloseInventory();
-        }
-        else
-        {
-            OpenInventory();
-        }
+        if (inventory.activeSelf) CloseInventory(); 
+        else OpenInventory(); 
     }
 
     public void TabShop()
     {
-        if (shop.active)
-        {
-            CloseShop();
-        }
-        else
-        {
-            OpenShop();
-        }
+        if (shop.activeSelf) CloseShop(); 
+        else OpenShop(); 
     }
+
+    public void TabIDS_Menu()
+    {
+        if (idsMenu.activeSelf) CloseIDS_Menu();
+        else OpenIDS_Menu();
+    }
+
+    public void TabConfig()
+    {
+        if (config.activeSelf) CloseConfig();
+        else OpenConfig();
+    }
+
+    public void TabCredit()
+    {
+        if (credit.activeSelf) CloseCredit();
+        else OpenCredit();
+    }
+
+    #endregion
 
     #region // Open
 
@@ -113,6 +124,33 @@ public class MenuManager : MonoBehaviour
     {
         VerifyTabs(Menu.Shop);
         storeUI.OpenStore();
+
+        openedMenu = true;
+        CameraController.lockCamera = true;
+    }
+
+    private void OpenIDS_Menu()
+    {
+        VerifyTabs(Menu.IDS_Menu);
+        idsMenu.SetActive(true);
+
+        openedMenu = true;
+        CameraController.lockCamera = true;
+    }
+
+    private void OpenConfig()
+    {
+        VerifyTabs(Menu.Config);
+        config.SetActive(true);
+
+        openedMenu = true;
+        CameraController.lockCamera = true;
+    }
+
+    private void OpenCredit()
+    {
+        VerifyTabs(Menu.Config);
+        credit.SetActive(true);
 
         openedMenu = true;
         CameraController.lockCamera = true;
@@ -162,6 +200,31 @@ public class MenuManager : MonoBehaviour
         CameraController.lockCamera = false;
     }
 
+    private void CloseIDS_Menu()
+    {
+        idsMenu.SetActive(false);
+
+        openedMenu = false;
+        CameraController.lockCamera = false;
+    }
+
+    private void CloseConfig()
+    {
+        VerifyTabs(Menu.Config);
+        config.SetActive(false);
+
+        openedMenu = false;
+        CameraController.lockCamera = false;
+    }
+
+    private void CloseCredit()
+    {
+        credit.SetActive(false);
+
+        openedMenu = false;
+        CameraController.lockCamera = false;
+    }
+
     #endregion
 
     private void VerifyTabs(Menu tab)
@@ -179,16 +242,38 @@ public class MenuManager : MonoBehaviour
         }
         if (tab != Menu.Inventory)
         {
-            if (inventory.active)
+            if (inventory.activeSelf)
             {
                 CloseInventory();
             }
         }
         if (tab != Menu.Shop)
         {
-            if (shop.active)
+            if (shop.activeSelf)
             {
                 CloseShop();
+            }
+        }
+
+        if (tab != Menu.IDS_Menu)
+        {
+            if (idsMenu.activeSelf)
+            {
+                CloseIDS_Menu();
+            }
+        }
+        if (tab != Menu.Config)
+        {
+            if (config.activeSelf)
+            {
+                CloseConfig();
+            }
+        }
+        if (tab != Menu.Credit)
+        {
+            if (credit.activeSelf)
+            {
+                CloseCredit();
             }
         }
     }
