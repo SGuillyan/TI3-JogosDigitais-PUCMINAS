@@ -21,11 +21,11 @@ public class AnalyticsManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        /*if (Input.GetKeyDown(KeyCode.T))
         {
             Debug.Log("Input verificado!");
             AnalyticsSystem.SendEmail(AnalyticsSystem.GenerateAnalyticsJsonReport());
-        }
+        }*/
 
         // Tutorial
         if (startTutorial)

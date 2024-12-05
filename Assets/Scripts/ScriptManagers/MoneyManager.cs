@@ -44,6 +44,11 @@ public class MoneyManager : MonoBehaviour
         return currentMoney;
     }
 
+    public void SetCurrentMoney(int value)
+    {
+        currentMoney = value;
+    }
+
     // Método para notificar que o dinheiro mudou (para atualizar a UI, por exemplo)
     private void NotifyMoneyChanged()
     {
