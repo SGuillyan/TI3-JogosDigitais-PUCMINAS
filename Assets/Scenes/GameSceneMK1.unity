@@ -15278,10 +15278,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   accesses:
-    moneyManager: {fileID: 917966509}
-    inventoryManager: {fileID: 1807522567}
-    mainCamera: {fileID: 1566377471}
     tutorialManager: {fileID: 18571957}
+    mainCamera: {fileID: 1566377471}
+    moneyManager: {fileID: 917966509}
+    tilesParent: {fileID: 1342796937}
+    inventoryManager: {fileID: 1807522567}
 --- !u!4 &875290591
 Transform:
   m_ObjectHideFlags: 0
