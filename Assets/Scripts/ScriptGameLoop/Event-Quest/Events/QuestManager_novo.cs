@@ -90,6 +90,7 @@ public class QuestManager_novo : MonoBehaviour
         for (int i = activeQuests.Count; i < maxActiveQuests; i++)
         {
             RandomInstanceQuests();
+            AtualizeAvailableQuests();
         }
     }
 
