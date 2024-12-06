@@ -39,13 +39,13 @@ MonoBehaviour:
   - {fileID: 4009283022203266034, guid: f656789692b68384fadf52b001907067, type: 3}
   - {fileID: 4009283022203266034, guid: 7015374fc1912f34fbaf8f5798c04f6b, type: 3}
   - {fileID: 4009283022203266034, guid: dc675654b83dac44d9fe65cc0c70a5a7, type: 3}
-  rotPrefab:
-  - {fileID: 4009283022203266034, guid: a3cdf25f907bd3a45948471ca535db54, type: 3}
+  rotPrefab: {fileID: 4009283022203266034, guid: a3cdf25f907bd3a45948471ca535db54,
+    type: 3}
   growthTimes:
   - 1
   - 1
-  - 10
-  - 10
+  - 3
+  - 3
   idealTemperature: 4
   idealClimate: 4
   greenTolerance: 0

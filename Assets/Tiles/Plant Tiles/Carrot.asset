@@ -39,8 +39,8 @@ MonoBehaviour:
   - {fileID: 4895000988734243222, guid: 37d21926615920746b2fb12d1b8c741e, type: 3}
   - {fileID: 4895000988734243222, guid: 849d6e23addac7a47a7177f989e4f88d, type: 3}
   - {fileID: 4895000988734243222, guid: cff191410866c4343be1329493d6e545, type: 3}
-  rotPrefab:
-  - {fileID: 4895000988734243222, guid: 8ba5c6f0763e38d4f9a8b693f6468be2, type: 3}
+  rotPrefab: {fileID: 4895000988734243222, guid: 8ba5c6f0763e38d4f9a8b693f6468be2,
+    type: 3}
   growthTimes:
   - 2
   - 2
