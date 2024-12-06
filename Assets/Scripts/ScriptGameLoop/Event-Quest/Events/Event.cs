@@ -8,7 +8,7 @@ public class Event : ScriptableObject
     public bool warning = false;
 
     [Header("Components")]
-    [TextArea] public string body;
+    [TextArea] public string description;
     public string text1;
     public string text2;
 
