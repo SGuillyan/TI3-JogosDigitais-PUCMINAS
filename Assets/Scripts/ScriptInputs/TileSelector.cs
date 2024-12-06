@@ -67,10 +67,7 @@ public class TileSelector : MonoBehaviour
                         UsePlowTool(clickedTile, gridPosition);
                         break;
                     case ToolsManager.Tools.Flatten:
-                        // Logica de flatten //
-                        break;
-                    case ToolsManager.Tools.Water:
-                        UseWaterTool(gridPosition);
+                        UseFlattenTool(clickedTile, gridPosition);
                         break;
                     case ToolsManager.Tools.Harvest:
                         UseHarvestTool(clickedTile, gridPosition);
@@ -139,12 +136,16 @@ public class TileSelector : MonoBehaviour
         }       
     }
 
-    void UseWaterTool(Vector3Int gridPosition)
+    void UseFlattenTool(TileBase tile, Vector3Int gridPosition)
     {
-        if (!tileInfoAnimator.GetBool("OpenInfo") && !isTouchProcessed)
+        if (tile is CustomTileBase customTile)
         {
-            DisplayTileInfo(gridPosition);
-        }       
+            customTile.RevertToCustomTileState(gridPosition);
+            Debug.Log($"Solo alisado na posição: {gridPosition}");
+
+            // Analytics
+            // AnalyticsSystem.AddAnalyticLands_Plowed(this.name, gridPosition);
+        }    
     }
 
     void UseFertilizeTool(Vector3Int gridPosition)

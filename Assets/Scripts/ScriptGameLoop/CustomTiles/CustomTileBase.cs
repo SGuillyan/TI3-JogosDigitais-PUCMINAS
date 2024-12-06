@@ -117,6 +117,45 @@ public class CustomTileBase : TileBase
         }
     }
 
+    public void RevertToCustomTileState(Vector3Int position)
+    {
+        TilemapManager tilemapManager = Object.FindObjectOfType<TilemapManager>();
+
+        if (customTilePrefab != null && tilemapManager != null)
+        {
+            GameObject currentTile = tilemapManager.GetInstantiatedTile(position);
+            if (currentTile != null)
+            {
+                Destroy(currentTile);  // Remove o tile atual (o arado)
+            }
+
+            Vector3 worldPosition = tilemapManager.tilemap.CellToWorld(position) + new Vector3(0.5f, 0, 0.5f);
+
+            Transform parent = tilemapManager.parentTransform != null ? tilemapManager.parentTransform : tilemapManager.transform;
+
+            // Cria o tile customizado novamente
+            GameObject customTile = Instantiate(customTilePrefab, worldPosition, Quaternion.identity, parent);
+            customTile.transform.position = worldPosition;
+            customTile.name = $"CustomTile_{position.x}_{position.y}_{position.z}";
+
+            tilemapManager.SetInstantiatedTile(position, customTile);
+
+            // Atualiza as informações do tile para refletir que ele voltou ao estado original (não arado)
+            TileInfo tileInfo = tilemapManager.GetTileInfo(position);
+            if (tileInfo != null)
+            {
+                tileInfo.isPlantable = this.isPlantable;  // Restaura o valor de plantabilidade
+                tilemapManager.SetTileInfo(position, tileInfo);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("CustomTilePrefab ou TilemapManager não atribuído!");
+        }
+    }
+
+
+
     public bool HasNearbyWaterTile(Vector3Int position)
     {
         TilemapManager tilemapManager = Object.FindObjectOfType<TilemapManager>();
