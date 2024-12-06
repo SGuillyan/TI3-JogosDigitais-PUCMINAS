@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
         if (moneyManager != null)
         {
             // Conecta a função UpdateMoneyUI ao evento onMoneyChanged do MoneyManager
-            moneyManager.onMoneyChanged += UpdateMoneyUI;
+            MoneyManager.onMoneyChanged += UpdateMoneyUI;
 
             // Atualiza o texto da UI imediatamente para refletir o saldo inicial
             UpdateMoneyUI(moneyManager.GetCurrentMoney());
