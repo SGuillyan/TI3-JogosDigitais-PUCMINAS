@@ -21,19 +21,25 @@ public class ToolController : MonoBehaviour
         {
             if (tool.isOn)
             {
-                ToolsManager.ChangeTool(tool);
-                ToolsManager.SetActiveTool(type);
+                // Desativa os outros toggles e ativa a ferramenta correspondente
+                ToolsManager.ChangeTool(this);
 
-                //MenuManager.openedMenu = true;
+                // Se a ferramenta não for Plant ou Fertilize, ativa a ferramenta correspondente
+                if (type != ToolsManager.Tools.Plant && type != ToolsManager.Tools.Fertilize)
+                {
+                    ToolsManager.SetActiveTool(type);
+                }
+                else
+                {
+                    // Para Plant e Fertilize, apenas ativa a ferramenta sem alterar o toggle
+                    ToolsManager.SetActiveTool(type);
+                }
             }
             else
             {
+                // Se o toggle foi desmarcado, desativa a ferramenta correspondente
                 ToolsManager.SetActiveTool(ToolsManager.Tools.None);
-
-                //MenuManager.openedMenu = false;
             }
-
-            //ToolsManager.ToolBoxAnim();
         }
     }
 }

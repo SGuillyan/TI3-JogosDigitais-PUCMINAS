@@ -9,6 +9,7 @@ public class TileSelector : MonoBehaviour
     public GameObject debugObjectPrefab;
     public InventoryManager inventoryManager;
     public TilemapPlant tilemapPlant;
+    public TilemapFertilize tilemapFertilize;
     public InventoryUI inventoryUI;
     public TilemapManager tilemapManager;
     public UIManager uiManager;
@@ -30,6 +31,7 @@ public class TileSelector : MonoBehaviour
         // Verifica se algum painel de UI está ativo ou se o painel de informações está aberto
         if (IsAnyUIPanelActive() )//|| tileInfoAnimator.GetBool("OpenInfo"))
         {
+            Debug.Log("UI ABERTA TOQUE INTERROMPIDO");
             return;
         }
 
@@ -37,11 +39,13 @@ public class TileSelector : MonoBehaviour
         {
             if (MenuManager.openedMenu)
             {
+                Debug.Log("UI ABERTA TOQUE INTERROMPIDO 2");
                 continuoMenuTimer = continuott;
                 return;
             }
             if (continuoMenuTimer > 0f)
             {
+                Debug.Log("UI ABERTA TOQUE INTERROMPIDO 3");
                 continuoMenuTimer -= Time.deltaTime;
                 return;
             }
@@ -65,6 +69,9 @@ public class TileSelector : MonoBehaviour
                     case ToolsManager.Tools.Flatten:
                         // Logica de flatten //
                         break;
+                    case ToolsManager.Tools.Water:
+                        UseWaterTool(gridPosition);
+                        break;
                     case ToolsManager.Tools.Harvest:
                         UseHarvestTool(clickedTile, gridPosition);
                         break;
@@ -72,9 +79,13 @@ public class TileSelector : MonoBehaviour
                         UseInfoTool(gridPosition);
                         //Debug.Log("USING INFO");
                         break;
-                    case ToolsManager.Tools.None:
+                    case ToolsManager.Tools.Plant:
                         UsePlantTool(gridPosition);
                         break;
+                    case ToolsManager.Tools.Fertilize:
+                        UseFertilizeTool(gridPosition);
+                        break;
+                    
                 }
             }
 
@@ -128,6 +139,39 @@ public class TileSelector : MonoBehaviour
         }       
     }
 
+    void UseWaterTool(Vector3Int gridPosition)
+    {
+        if (!tileInfoAnimator.GetBool("OpenInfo") && !isTouchProcessed)
+        {
+            DisplayTileInfo(gridPosition);
+        }       
+    }
+
+    void UseFertilizeTool(Vector3Int gridPosition)
+    {
+        if (inventoryManager.HasSelectedItem())
+        {
+            int itemID = inventoryManager.GetSelectedItemID();
+            {
+                if(itemID>= 200 && itemID <= 299){
+                    TileInfo tileInfo = tilemapManager.GetTileInfo(gridPosition);
+
+                    // Verifica se o tile é plantável
+                    if (tileInfo != null && tileInfo.isPlantable)
+                    {
+                        tilemapFertilize.FertilizeAt(gridPosition, itemID);
+                        inventoryManager.UseItemAt(gridPosition);                   
+                    }
+
+                    else
+                    {
+                        Debug.Log("O tile na posição " + gridPosition + " não é plantável.");
+                    } 
+                }          
+            }
+        }     
+    }
+
     void UseHarvestTool(TileBase tile, Vector3Int gridPosition)
     {
         if (tile is PlantTile plantTile && plantTile.isFullyGrown)
@@ -145,19 +189,24 @@ public class TileSelector : MonoBehaviour
 
     void UsePlantTool(Vector3Int gridPosition)
     {
-        if (inventoryManager.HasSelectedSeed())
+        if (inventoryManager.HasSelectedItem())
         {
-            TileInfo tileInfo = tilemapManager.GetTileInfo(gridPosition);
+            int itemID = inventoryManager.GetSelectedItemID();
+            {
+                if(itemID>= 0 && itemID <= 99){
+                    TileInfo tileInfo = tilemapManager.GetTileInfo(gridPosition);
 
-            // Verifica se o tile é plantável
-            if (tileInfo != null && tileInfo.isPlantable)
-            {
-                tilemapPlant.PlantSeedAt(gridPosition, inventoryManager.GetSelectedSeedID());
-                inventoryManager.PlantSeedAt(gridPosition);
-            }
-            else
-            {
-                Debug.Log("O tile na posição " + gridPosition + " não é plantável.");
+                    // Verifica se o tile é plantável
+                    if (tileInfo != null && tileInfo.isPlantable)
+                    {
+                        tilemapPlant.PlantSeedAt(gridPosition, itemID);
+                        inventoryManager.UseItemAt(gridPosition);
+                    }
+                    else
+                    {
+                        Debug.Log("O tile na posição " + gridPosition + " não é plantável.");
+                    } 
+                }          
             }
         }
     }
@@ -170,7 +219,7 @@ public class TileSelector : MonoBehaviour
 
         if (clickedTile != null)
         {
-            Debug.Log("Tipo de tile clicado: " + clickedTile.GetType().Name);
+            //Debug.Log("Tipo de tile clicado: " + clickedTile.GetType().Name);
 
             TileInfo tileInfo = tilemapManager.GetTileInfo(gridPosition);
 
@@ -186,7 +235,7 @@ public class TileSelector : MonoBehaviour
                 }
 
                 tileInfoAnimator.SetBool("OpenInfo", true);  // Ativa a animação de abertura
-                Debug.Log("Setting openinfo true");
+                //Debug.Log("Setting openinfo true");
                 //ToolsManager.SetActiveTool(ToolsManager.Tools.None);
 
                 // Analytics
@@ -201,7 +250,7 @@ public class TileSelector : MonoBehaviour
 
     public void HideTileInfo()
     {
-        Debug.Log("Setting openinfo false");
+        //Debug.Log("Setting openinfo false");
         tileInfoAnimator.SetBool("OpenInfo", false);  // Ativa a animação de fechamento
         //ToolsManager.SetActiveTool(ToolsManager.Tools.Info);
         uiManager.HideTileInfo();

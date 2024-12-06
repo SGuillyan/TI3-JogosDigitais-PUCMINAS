@@ -7,8 +7,9 @@ public class InventoryManager : MonoBehaviour
     public InventoryUI inventoryUI;  // Referência ao script de UI do inventário
 
     public MenuManager menuManager;
-    private int selectedSeedID = -1;  // ID da semente selecionada
+    private int selectedItemID = -1;  // ID do item selecionado (genérico)
     private bool isPlanting = false;  // Flag para verificar se o jogador está no modo de plantio
+    private bool isAnotherItemSelected = false;  // Flag para verificar se outro tipo de item foi selecionado
 
     public Button shopButton;  // Referência ao botão Shop
     public Button stopPlantingButton;  // Referência ao botão Stop Planting
@@ -19,80 +20,126 @@ public class InventoryManager : MonoBehaviour
         stopPlantingButton.gameObject.SetActive(false);
     }
 
-    // Método para selecionar uma semente
-    public void SelectSeed(int seedID)
+    // Método para selecionar um item qualquer
+    public void SelectItem(int itemID)
     {
         // Verifica se o item selecionado é uma semente (ID entre 0 e 99)
-        if (seedID >= 0 && seedID <= 99)
+        if (itemID >= 0 && itemID <= 99)
         {
-            Debug.Log("Selecionando semente de id " + seedID);
-            ToolsManager.SetActiveTool(ToolsManager.Tools.None);
-            selectedSeedID = seedID;
+            Debug.Log("Selecionando semente de id " + itemID);
+            ToolsManager.SetActiveTool(ToolsManager.Tools.Plant);
+            selectedItemID = itemID;
             menuManager.CloseInventoryToPlant();  // Fecha o inventário ao selecionar uma semente
             isPlanting = true;  // Ativa o modo de plantio
+            isAnotherItemSelected = false;  // Reset para outro item
 
             // Troca os botões
-            // shopButton.gameObject.SetActive(false);
             stopPlantingButton.gameObject.SetActive(true);
+        }
+        // Verifica se o item está entre 200 e 299 (exemplo de outro tipo de item)
+        else if (itemID >= 200 && itemID <= 299)
+        {
+            Debug.Log("Selecionando fertilizer de id " + itemID);
+            ToolsManager.SetActiveTool(ToolsManager.Tools.Fertilize);  // Define o tipo de ferramenta de acordo
+            selectedItemID = itemID;
+            menuManager.CloseInventoryToPlant();  // Fecha o inventário ao selecionar uma semente
+            isAnotherItemSelected = true;  // Marca como outro tipo de item
+            // Lógica adicional para outro tipo de item (exemplo)
+            // TODO: Adicionar lógica para o uso do item de id entre 200-299
+
+            stopPlantingButton.gameObject.SetActive(true);  // Desativa o botão de parar plantio
         }
         else
         {
-            DeselectSeed();  // Deseleciona se o item não for uma semente
+            DeselectItem();  // Deseleciona qualquer item
         }
     }
 
-    // Método para deselecionar a semente e voltar ao inventário
-    public void DeselectSeed()
+    // Método para deselecionar o item e voltar ao inventário
+    public void DeselectItem()
     {
-        selectedSeedID = -1;
+        selectedItemID = -1;
+        ToolsManager.SetActiveTool(ToolsManager.Tools.None);
         isPlanting = false;  // Desativa o modo de plantio
+        isAnotherItemSelected = false;  // Reset para outro tipo de item
 
         // Troca os botões
-        // shopButton.gameObject.SetActive(true);
         stopPlantingButton.gameObject.SetActive(false);
 
         menuManager.OpenInventory();  // Reabre o inventário
     }
 
-    // Verifica se uma semente está selecionada
-    public bool HasSelectedSeed()
+    // Verifica se um item está selecionado
+    public bool HasSelectedItem()
     {
-        return selectedSeedID != -1;
+        return selectedItemID != -1;
     }
 
-    // Retorna o ID da semente selecionada
-    public int GetSelectedSeedID()
+    // Retorna o ID do item selecionado
+    public int GetSelectedItemID()
     {
-        return selectedSeedID;
+        return selectedItemID;
     }
 
-    // Método para plantar uma semente e remover do inventário
-    public void PlantSeedAt(Vector3Int gridPosition)
+    // Método para usar o item selecionado (exemplo para sementes ou outro tipo de item)
+    public void UseItemAt(Vector3Int gridPosition)
     {
-        if (isPlanting && selectedSeedID != -1)
+        if (selectedItemID != -1)
         {
-            InventoryItem selectedItem = playerInventory.items.Find(item => item.item.itemID == selectedSeedID);
-            if (selectedItem != null)
+            // Se for uma semente (ID entre 0 e 99)
+            if (selectedItemID >= 0 && selectedItemID <= 99)
             {
-                bool quantityRemoved = selectedItem.RemoveQuantity(1);  // Remove 1 unidade da semente
-
-                if (quantityRemoved)
+                InventoryItem selectedItem = playerInventory.items.Find(item => item.item.itemID == selectedItemID);
+                if (selectedItem != null)
                 {
-                    // Plantar no gridPosition aqui (adapte isso ao seu jogo)
-                    Debug.Log("Planted at: " + gridPosition);
+                    bool quantityRemoved = selectedItem.RemoveQuantity(1);  // Remove 1 unidade da semente
 
-                    if (selectedItem.quantity <= 0)
+                    if (quantityRemoved)
                     {
-                        // Remove o item do inventário se a quantidade for 0
-                        playerInventory.items.Remove(selectedItem);
-                        DeselectSeed();
-                    }
+                        // Plantar no gridPosition aqui (adapte isso ao seu jogo)
+                        Debug.Log("Planted at: " + gridPosition);
 
-                    inventoryUI.UpdateInventoryUI();  // Atualiza o inventário para refletir a nova quantidade
+                        if (selectedItem.quantity <= 0)
+                        {
+                            // Remove o item do inventário se a quantidade for 0
+                            playerInventory.items.Remove(selectedItem);
+                            DeselectItem();  // Deseleciona o item
+                        }
+
+                        inventoryUI.UpdateInventoryUI();  // Atualiza o inventário
+                    }
+                    else
+                    {
+                        Debug.LogError("Não foi possível remover a quantidade desejada.");
+                    }
                 }
-                else
+            }
+            // Se for outro tipo de item (ID entre 200 e 299)
+            else if (selectedItemID >= 200 && selectedItemID <= 299)
+            {
+                InventoryItem selectedItem = playerInventory.items.Find(item => item.item.itemID == selectedItemID);
+                if (selectedItem != null)
                 {
-                    Debug.LogError("Não foi possível remover a quantidade desejada.");
+                    bool quantityRemoved = selectedItem.RemoveQuantity(1);  // Remove 1 unidade da semente
+
+                    if (quantityRemoved)
+                    {
+                        // Plantar no gridPosition aqui (adapte isso ao seu jogo)
+                        Debug.Log("Fertilized: " + gridPosition);
+
+                        if (selectedItem.quantity <= 0)
+                        {
+                            // Remove o item do inventário se a quantidade for 0
+                            playerInventory.items.Remove(selectedItem);
+                            DeselectItem();  // Deseleciona o item
+                        }
+
+                        inventoryUI.UpdateInventoryUI();  // Atualiza o inventário
+                    }
+                    else
+                    {
+                        Debug.LogError("Não foi possível remover a quantidade desejada.");
+                    }
                 }
             }
         }
@@ -101,6 +148,6 @@ public class InventoryManager : MonoBehaviour
     // Método para parar o plantio (associado ao botão Stop Planting)
     public void StopPlanting()
     {
-        DeselectSeed();  // Deseleciona a semente e volta ao inventário
+        DeselectItem();  // Deseleciona o item e volta ao inventário
     }
 }

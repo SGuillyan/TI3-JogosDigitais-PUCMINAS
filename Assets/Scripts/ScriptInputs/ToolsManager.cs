@@ -1,10 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection.Emit;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-
 
 public class ToolsManager : MonoBehaviour
 {
@@ -12,21 +9,23 @@ public class ToolsManager : MonoBehaviour
     {
         None,
         Plow,
-        Flatten,
         Harvest,
-        Info
+        Info,
+        Plant,
+        Fertilize,
+        Flatten,
+        Water,
     }
 
-    public static Tools activeTool = 0;
+    [SerializeField] public static Tools activeTool = Tools.None;
     private static Toggle[] toolList;
 
     public static bool isToolBoxOpen = false;
     private static Animator animator;
 
-
-
     private void Start()
     {
+        // Pega todos os toggles na caixa de ferramentas
         toolList = new Toggle[transform.childCount];
         for (int i = 0; i < toolList.Length; i++)
         {
@@ -34,29 +33,43 @@ public class ToolsManager : MonoBehaviour
         }
 
         animator = GetComponent<Animator>();
-        activeTool = Tools.None;
     }
 
+    public void Update(){
+        Debug.Log(activeTool);
+    }
 
-
-    public static void ChangeTool(Toggle ignore)
+    // Método para desmarcar todos os toggles, exceto o que foi passado
+    public static void ChangeTool(ToolController currentToolController)
     {
-        if (activeTool != Tools.None)
+        for (int i = 0; i < toolList.Length; i++)
         {
-            for (int i = 0; i < toolList.Length; i++)
+            // Se o Toggle não for o atual (que está sendo ativado), desmarque
+            if (toolList[i].isOn && toolList[i] != currentToolController.GetComponent<Toggle>())
             {
-                if (toolList[i].isOn && toolList[i] != ignore)
-                {
-                    toolList[i].isOn = false;
-                }
+                toolList[i].isOn = false;
             }
         }
     }
 
+    // Método para ativar ou desativar a ferramenta
     public static void SetActiveTool(Tools tool)
     {
-        activeTool = tool;
-        Debug.Log(activeTool);
+        // Se a ferramenta ativa for diferente da ferramenta que está sendo ativada/desativada
+        if (activeTool != tool)
+        {
+            activeTool = tool;
+            Debug.Log("Ferramenta Ativada: " + activeTool);
+        }
+    }
+
+    // Desativa todos os toggles
+    public static void DeactivateAllTools()
+    {
+        for (int i = 0; i < toolList.Length; i++)
+        {
+            toolList[i].isOn = false;
+        }
     }
 
     public static void ToolBoxAnim()
@@ -71,6 +84,5 @@ public class ToolsManager : MonoBehaviour
             animator.Play("Open_ToolBox");
             isToolBoxOpen = true;
         }
-        
     }
 }
