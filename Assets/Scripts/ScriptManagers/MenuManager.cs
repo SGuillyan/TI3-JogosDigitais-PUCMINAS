@@ -20,7 +20,7 @@ public class MenuManager : MonoBehaviour
     [Header("Scripts")]
 
     [SerializeField] private ToolsManager toolsManager;
-    [SerializeField] private TaskManager taskManager;
+    //[SerializeField] private TaskManager taskManager;
     [SerializeField] private InventoryUI inventoryUI;
     [SerializeField] private StoreUI storeUI;
 
@@ -105,7 +105,8 @@ public class MenuManager : MonoBehaviour
     private void OpenQuestList()
     {
         VerifyTabs(Menu.QuestList);
-        taskManager.ShowQuestCanvas();
+        //taskManager.ShowQuestCanvas();
+        questCanvas.SetActive(true);
 
         openedMenu = true;
         CameraController.lockCamera = true;
@@ -170,7 +171,8 @@ public class MenuManager : MonoBehaviour
 
     private void CloseQuestList()
     {
-        taskManager.HideQuestCanvas();
+        //taskManager.HideQuestCanvas();
+        questCanvas.SetActive(false);
 
         openedMenu = false;
         CameraController.lockCamera = false;

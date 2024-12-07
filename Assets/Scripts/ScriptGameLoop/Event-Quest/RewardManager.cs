@@ -40,7 +40,7 @@ public class RewardManager : MonoBehaviour
         if (item != null) inventoryManager.playerInventory.AddItem(item, quantity);
     }
 
-    public static void GiveReward(Reward_novo reward)
+    public static void GiveReward(Reward reward)
     {
         if (reward.money != 0) GiveMoney(reward.money);
 

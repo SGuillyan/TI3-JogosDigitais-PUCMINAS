@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class QuestManager_novo : MonoBehaviour
+public class QuestManager : MonoBehaviour
 {
-    public List<Quest_novo> availableQuests = new List<Quest_novo>();
-    public List<Quest_novo> activeQuests = new List<Quest_novo>();
-    public List<Quest_novo> completedQuests = new List<Quest_novo>();
+    public List<Quest> availableQuests = new List<Quest>();
+    public List<Quest> activeQuests = new List<Quest>();
+    public List<Quest> completedQuests = new List<Quest>();
 
     private const int maxActiveQuests = 3;
 
@@ -18,7 +18,7 @@ public class QuestManager_novo : MonoBehaviour
     // event quest
     private bool countEventQuest = false;
     private float eventQuestTime;
-    private Reward_novo eventQuestReward;
+    private Reward eventQuestReward;
 
     private void Start()
     {
@@ -38,33 +38,11 @@ public class QuestManager_novo : MonoBehaviour
         }
     }
 
-    /*public void ActivateQuest(QuestSO quest)
+    // Get & Set
+    public bool GetCountEventQuest()
     {
-        if (activeQuests.Count >= maxActiveQuests)
-        {
-            return;
-        }
-
-        if (availableQuests.Contains(quest))
-        {
-            availableQuests.Remove(quest);
-            activeQuests.Add(quest);
-        }
+        return countEventQuest;
     }
-
-    public void CompleteQuest(QuestSO quest)
-    {
-        if (activeQuests.Contains(quest))
-        {
-            activeQuests.Remove(quest);
-            completedQuests.Add(quest);
-
-            IDS.AddEcologico(quest.ecologicReward);
-            IDS.AddEconomico(quest.economicReward);
-            IDS.AddSocial(quest.socialReward);
-            MoneyManager.AddMoney_Static(quest.moneyReward);
-        }
-    }*/
 
 
     private void RandomInstanceQuests()
@@ -94,13 +72,21 @@ public class QuestManager_novo : MonoBehaviour
         }
     }
 
+    public void AddQuest(Quest quest)
+    {
+        // conferir a necessidade de se usar o prefeb básico de quest
+        Instantiate(quest.gameObject, questButtomContent.transform);
+        activeQuests.Add(quest);
+        StartEventQuest(quest.gapTime, quest.reward);
+    }
+
 
     public void ResetEventQuest()
     {
         countEventQuest = false;
     }
 
-    public void StartEventQuest(float time, Reward_novo reward)
+    public void StartEventQuest(float time, Reward reward)
     {
         countEventQuest = true;
         eventQuestTime = time;

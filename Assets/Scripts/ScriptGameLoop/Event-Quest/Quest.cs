@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Quest_novo : MonoBehaviour
+public class Quest : MonoBehaviour
 {
     public bool daily = true;
 
     //[Header("Access")]
     //[SerializeField] private RewardManager rewardManager;
-    private QuestManager_novo manager;
+    private QuestManager manager;
 
     [Header("Components")]
     public string title;
@@ -17,14 +17,14 @@ public class Quest_novo : MonoBehaviour
     public Sprite image;
     public PlantTile require;
     public int quantityRequire;
-    public Reward_novo reward;
+    public Reward reward;
 
     [Header("Event")]
     [Tooltip("Tempo habil para finalizar a tarefa (segundos)"), Min(10)] public float gapTime = 10;
 
     private void Start()
     {
-        manager = transform.GetComponentInParent<QuestManager_novo>();
+        manager = transform.GetComponentInParent<QuestManager>();
     }
 
     public void CheckRequire()
