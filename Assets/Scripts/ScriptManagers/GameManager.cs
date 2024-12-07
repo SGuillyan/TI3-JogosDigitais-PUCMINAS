@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        UpdateMaterialColor();
+        //UpdateMaterialColor();
     }
 
     public void UpdateMaterialColor()

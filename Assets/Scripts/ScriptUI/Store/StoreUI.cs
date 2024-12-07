@@ -156,10 +156,12 @@ public class StoreUI : MonoBehaviour
         GameObject itemInstance = Instantiate(storeItemPrefab, contentParent);
         storeItemInstances.Add(itemInstance);
 
-        Image itemIcon = itemInstance.transform.Find("ItemIcon").GetComponent<Image>();
+        Image itemIcon = itemInstance.transform.Find("Icon").Find("ItemIcon").GetComponent<Image>();
+        //var itemIcon = itemInstance;
+        //Debug.Log(itemIcon);
         TextMeshProUGUI itemName = itemInstance.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI itemPrice = itemInstance.transform.Find("ItemPrice").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI itemQuantity = itemInstance.transform.Find("ItemQuantity").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI itemPrice = itemInstance.transform.Find("Price").Find("text_Price").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI itemQuantity = itemIcon.transform.Find("ItemQuantity").GetComponent<TextMeshProUGUI>();
         GameObject quantityControls = itemInstance.transform.Find("QuantityControls").gameObject;
 
         // Exibe as informações do item
@@ -180,10 +182,10 @@ public class StoreUI : MonoBehaviour
 
         // Configura os botões
         Button selectButton = itemInstance.GetComponentInChildren<Button>();
-        Button leftArrow = quantityControls.transform.Find("Lefty").GetComponent<Button>();
-        Button rightArrow = quantityControls.transform.Find("RightArrow").GetComponent<Button>();
+        Button leftArrow = quantityControls.transform.Find("Quantity").Find("LeftArrow").GetComponent<Button>();
+        Button rightArrow = quantityControls.transform.Find("Quantity").Find("RightArrow").GetComponent<Button>();
         Button confirmButton = quantityControls.transform.Find("ConfirmButton").GetComponent<Button>();
-        TextMeshProUGUI selectedQuantityText = quantityControls.transform.Find("SelectedQuantity").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI selectedQuantityText = quantityControls.transform.Find("Quantity").Find("SelectedQuantity").GetComponent<TextMeshProUGUI>();
 
         int itemID = item.itemID;
 
