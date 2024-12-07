@@ -10,12 +10,31 @@ public class PlantingFeeback : MonoBehaviour
     [SerializeField] private TextMeshProUGUI display;
     [SerializeField] private Image image;
 
+    private int id;
+
     private void Update()
     {
-        if(inventoryManager.HasSelectedSeed())
+        if (id > -1)
         {
-            display.text = inventoryManager.playerInventory.items[inventoryManager.GetSelectedSeedID()].quantity.ToString();
-            image.sprite = inventoryManager.playerInventory.items[inventoryManager.GetSelectedSeedID()].item.itemIcon;
-        }
+            if (inventoryManager.HasSelectedSeed())
+            {
+                Debug.Log(id);
+                display.text = inventoryManager.playerInventory.items[id].quantity.ToString();
+                image.sprite = inventoryManager.playerInventory.items[id].item.itemIcon;
+                
+            }
+        }  
+    }
+
+    public void ActiveFeedback(int ID)
+    {
+        id = ID;
+        gameObject.SetActive(true);
+    }
+
+    public void DisableFeedback()
+    {
+        id = -2;
+        gameObject.SetActive(false);
     }
 }
