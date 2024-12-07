@@ -9,7 +9,7 @@ public class Test_AddPlants : MonoBehaviour
 
     private void Update()
     {
-        if (Input.touchCount >= 2)
+        if (Input.GetMouseButtonDown(0))
         {
             playerInventory.AddItem(item.harvestedItem, 5);
             Debug.Log(item.harvestedItem.itemName + "ADICIONADO (5)");
