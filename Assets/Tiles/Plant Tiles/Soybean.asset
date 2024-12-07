@@ -40,6 +40,7 @@ MonoBehaviour:
   - {fileID: 4925785748164349182, guid: 76130f610033e4c4a829feff1a487e90, type: 3}
   - {fileID: 4925785748164349182, guid: ec8b57863040a6042b4d170bd14febdd, type: 3}
   - {fileID: 4925785748164349182, guid: 705e8a78a66096d42935c380627b0c28, type: 3}
+  rotPrefab: {fileID: 0}
   growthTimes:
   - 5
   - 5
@@ -59,7 +60,7 @@ MonoBehaviour:
     maxStackSize: 99
     itemType: 0
     itemID: 103
-    price: 80
+    price: 20
     reqNitro: 0
     reqPhosf: 0
     reqK: 0

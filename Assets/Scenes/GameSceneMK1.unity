@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028386, g: 0.22571427, b: 0.3069231, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9383,7 +9383,7 @@ MonoBehaviour:
     maxStackSize: 99
     itemType: 1
     itemID: 1
-    price: 20
+    price: 15
     reqNitro: 40
     reqPhosf: 60
     reqK: 15
@@ -9392,7 +9392,7 @@ MonoBehaviour:
     maxStackSize: 99
     itemType: 1
     itemID: 2
-    price: 40
+    price: 70
     reqNitro: 90
     reqPhosf: 80
     reqK: 85
@@ -9401,7 +9401,7 @@ MonoBehaviour:
     maxStackSize: 99
     itemType: 1
     itemID: 3
-    price: 40
+    price: 10
     reqNitro: 50
     reqPhosf: 70
     reqK: 60
@@ -9410,7 +9410,7 @@ MonoBehaviour:
     maxStackSize: 99
     itemType: 1
     itemID: 4
-    price: 60
+    price: 250
     reqNitro: 60
     reqPhosf: 65
     reqK: 70
@@ -9419,7 +9419,7 @@ MonoBehaviour:
     maxStackSize: 99
     itemType: 1
     itemID: 5
-    price: 60
+    price: 150
     reqNitro: 80
     reqPhosf: 70
     reqK: 90
