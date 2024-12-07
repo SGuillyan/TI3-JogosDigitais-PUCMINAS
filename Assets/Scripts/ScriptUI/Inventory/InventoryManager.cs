@@ -24,7 +24,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     // Método para selecionar uma semente
-    public void SelectItem(int seedID, int feedbackID)
+    public void SelectItem(int itemID, int feedbackID)
     {
         // Verifica se o item selecionado é uma semente (ID entre 0 e 99)
         if (itemID >= 0 && itemID <= 99)
