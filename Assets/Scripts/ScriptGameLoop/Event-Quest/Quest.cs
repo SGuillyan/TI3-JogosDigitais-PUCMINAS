@@ -57,6 +57,47 @@ public class Quest : MonoBehaviour
         }
     }
 
+    public void CompostingRequire()
+    {
+        InventoryItem[] aux = manager.inventoryManager.playerInventory.items.ToArray();
+        int quantity = 0;
+
+        for (int i = 0; i < aux.Length; i++)
+        {
+            quantity += aux[i].quantity;
+
+            if (quantity >= quantityRequire)
+            {
+                for (int j = 0; j < aux.Length; j++)
+                {
+                    if (quantity - aux[j].quantity >= 0)
+                    {
+                        manager.inventoryManager.playerInventory.items.Remove(aux[j]);
+                        quantity -= aux[j].quantity;
+                    }
+                    else
+                    {
+                        aux[j].quantity -= quantity;
+                    }
+                }
+
+                GiveReward();
+
+                foreach (Quest q in manager.activeQuests)
+                {
+                    if (q.questName == this.questName)
+                    {
+                        manager.activeQuests.Remove(q);
+                        manager.availableQuests.Add(q);
+                        break;
+                    }
+                }
+
+                Destroy(gameObject);
+            }
+        }
+    }
+
     private void GiveReward()
     {
         RewardManager.GiveReward(reward);
