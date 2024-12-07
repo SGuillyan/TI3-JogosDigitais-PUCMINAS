@@ -176,7 +176,7 @@ public class StoreUI : MonoBehaviour
         else
         {
             int quantity = playerInventory.GetItemQuantity(item);
-            itemPrice.text = "$" + item.price.ToString();
+            itemPrice.text = item.price.ToString();
             itemQuantity.text = "x" + quantity.ToString();
         }
 
@@ -200,14 +200,14 @@ public class StoreUI : MonoBehaviour
         {
             // Debug.Log("Botão LeftArrow pressionado para o item " + item.itemName); // Log para verificar o clique
             AdjustQuantity(-1, selectedQuantityText);
-            itemPrice.text = "$" + (item.price * selectedQuantity).ToString();
+            itemPrice.text = (item.price * selectedQuantity).ToString();
         });
 
         rightArrow.onClick.AddListener(() =>
         {
             // Debug.Log("Botão RightArrow pressionado para o item " + item.itemName); // Log para verificar o clique
             AdjustQuantity(1, selectedQuantityText);
-            itemPrice.text = "$" + (item.price * selectedQuantity).ToString();
+            itemPrice.text = (item.price * selectedQuantity).ToString();
         });
 
         confirmButton.onClick.AddListener(() =>
