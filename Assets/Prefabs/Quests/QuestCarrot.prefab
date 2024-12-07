@@ -52,10 +52,10 @@ MonoBehaviour:
   questName: QuestCarrot
   daily: 1
   require: {fileID: 11400000, guid: 3f31ca6d06f7ae34cb01b5f6996212ec, type: 2}
-  quantityRequire: 5
+  quantityRequire: 10
   reward:
-    money: 20
-    ids: 0a0000000000000000000000
+    money: 50
+    ids: 00000000000000000a000000
     plant: {fileID: 0}
     quantity: 0
   gapTime: 10
@@ -325,7 +325,7 @@ PrefabInstance:
     - target: {fileID: 4981762072800119927, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
       propertyPath: m_text
-      value: Do you wanna a cake?
+      value: For Cakes and Bunnies
       objectReference: {fileID: 0}
     - target: {fileID: 6084584016326658490, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
@@ -335,8 +335,7 @@ PrefabInstance:
     - target: {fileID: 6271194660264164097, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
       propertyPath: m_text
-      value: Farmer Joe wants 5 carrots to make a cake for his wife. Such a nice
-        guy!
+      value: Alice, the city baker need 10 carrots to make her delicious cakes.
       objectReference: {fileID: 0}
     - target: {fileID: 6847652457961384972, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
@@ -348,7 +347,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 43c43c411a530474fa18d0b6b5663c62,
+      objectReference: {fileID: 21300000, guid: 18f1776fff65144448555b4fb605b1ae,
         type: 3}
     - target: {fileID: 8427188289168594843, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}

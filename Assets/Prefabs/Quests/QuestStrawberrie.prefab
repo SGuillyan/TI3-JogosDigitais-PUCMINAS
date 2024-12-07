@@ -52,10 +52,10 @@ MonoBehaviour:
   questName: QuestStrawberrie
   daily: 1
   require: {fileID: 11400000, guid: 5f032dfee3eb1284b8c765149d025455, type: 2}
-  quantityRequire: 5
+  quantityRequire: 10
   reward:
-    money: 20
-    ids: 00000000000000000a000000
+    money: 800
+    ids: 000000000000000000000000
     plant: {fileID: 0}
     quantity: 0
   gapTime: 10
@@ -325,14 +325,25 @@ PrefabInstance:
     - target: {fileID: 6084584016326658490, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
       propertyPath: m_text
-      value: + 10
+      value: + 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084584016326658490, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 65.95
       objectReference: {fileID: 0}
     - target: {fileID: 6271194660264164097, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
       propertyPath: m_text
-      value: Farmer Joe wants 5 strawberries to make some jam for his wife. Such
+      value: Farmer Joe wants 10 strawberries to make some jam for his wife. Such
         a nice guy!
       objectReference: {fileID: 0}
+    - target: {fileID: 7121990996841498913, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d2352ee7da370bd4d9167d0888e018de,
+        type: 3}
     - target: {fileID: 8427188289168594843, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
       propertyPath: m_AnchorMax.y

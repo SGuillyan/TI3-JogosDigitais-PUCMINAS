@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 282190097460664112}
-  - component: {fileID: 3050964784897884486}
+  - component: {fileID: 5949323907447680471}
   m_Layer: 5
-  m_Name: QuestCorn
+  m_Name: Event_Tomato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +37,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 840, y: 428}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3050964784897884486
+--- !u!114 &5949323907447680471
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,16 +49,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 760b04de0efb8d649aa489174327b9f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questName: QuestCorn
-  daily: 1
-  require: {fileID: 11400000, guid: d7d97b9add6c3a247b0dec256d953757, type: 2}
-  quantityRequire: 8
+  questName: Queste_Base
+  daily: 0
+  require: {fileID: 11400000, guid: 77472794d692fc642bd925818c5aa5c4, type: 2}
+  quantityRequire: 30
   reward:
-    money: 100
-    ids: 00000000000000000a000000
+    money: 0
+    ids: 0000000000000000e2ffffff
     plant: {fileID: 0}
     quantity: 0
-  gapTime: 10
+  gapTime: 1500
 --- !u!1001 &3212171428759820700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -236,7 +236,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 3050964784897884486}
+      objectReference: {fileID: 5949323907447680471}
     - target: {fileID: 2174787577744740921, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -261,6 +261,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4002587943161321769, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
+        type: 3}
+      propertyPath: m_text
+      value: 'Penalty:'
       objectReference: {fileID: 0}
     - target: {fileID: 4273745118062969868, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
@@ -325,37 +330,29 @@ PrefabInstance:
     - target: {fileID: 4981762072800119927, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
       propertyPath: m_text
-      value: 'Did you say popcorn?
-
-'
+      value: Urban Flood
       objectReference: {fileID: 0}
     - target: {fileID: 6084584016326658490, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
       propertyPath: m_text
-      value: + 10
+      value: '- 30'
       objectReference: {fileID: 0}
     - target: {fileID: 6271194660264164097, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
       propertyPath: m_text
-      value: There's a movie night planned and you just can't watch movies without
-        popcorns right?? Deliver 8 fresh corns to this noble case.
+      value: "There was a flood in a far away city and the people need all the help
+        they can take. \r\nSend 30 tomatoes to help."
       objectReference: {fileID: 0}
     - target: {fileID: 6271194660264164097, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
       propertyPath: m_fontSize
-      value: 31.5
+      value: 32.85
       objectReference: {fileID: 0}
     - target: {fileID: 6847652457961384972, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 7f6420ac340aeed43ae91bd8a9030da3,
-        type: 3}
-    - target: {fileID: 7121990996841498913, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 18f1776fff65144448555b4fb605b1ae,
+      objectReference: {fileID: 21300000, guid: 649cb28fd875e594e8ea8ef8deab3900,
         type: 3}
     - target: {fileID: 8427188289168594843, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
@@ -376,27 +373,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514496679681433876, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
-        type: 3}
-      propertyPath: require
-      value: 
-      objectReference: {fileID: 11400000, guid: d7d97b9add6c3a247b0dec256d953757,
-        type: 2}
-    - target: {fileID: 8514496679681433876, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
-        type: 3}
-      propertyPath: reward.money
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514496679681433876, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
-        type: 3}
-      propertyPath: quantityRequire
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514496679681433876, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
-        type: 3}
-      propertyPath: reward.ids.Array.data[1]
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8514496679681433876, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad, type: 3}
