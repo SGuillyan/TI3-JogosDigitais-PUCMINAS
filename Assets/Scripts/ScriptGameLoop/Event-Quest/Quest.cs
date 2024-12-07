@@ -68,9 +68,10 @@ public class Quest : MonoBehaviour
 
             if (quantity >= quantityRequire)
             {
+                quantity = quantityRequire;
                 for (int j = 0; j < aux.Length; j++)
                 {
-                    if (quantity - aux[j].quantity >= 0)
+                    /*if (quantity - aux[j].quantity >= 0)
                     {
                         manager.inventoryManager.playerInventory.items.Remove(aux[j]);
                         quantity -= aux[j].quantity;
@@ -78,6 +79,22 @@ public class Quest : MonoBehaviour
                     else
                     {
                         aux[j].quantity -= quantity;
+                        break;
+                    }*/
+
+                    if (quantity >= aux[j].quantity)
+                    {
+                        quantity -= aux[j].quantity;
+                        manager.inventoryManager.playerInventory.items.Remove(aux[j]);
+
+                        Debug.Log("(1) " + quantity.ToString() + " " + aux[j].quantity.ToString());
+                    }
+                    else if (quantity < aux[j].quantity)
+                    {
+                        aux[j].quantity -= quantity;
+                        quantity = 0;
+                        Debug.Log("(2) " + quantity.ToString() + " " + aux[j].quantity.ToString());
+                        break;
                     }
                 }
 

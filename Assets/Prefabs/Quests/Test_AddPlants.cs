@@ -5,14 +5,18 @@ using UnityEngine;
 public class Test_AddPlants : MonoBehaviour
 {
     [SerializeField] private Inventory playerInventory;
-    [SerializeField] private PlantTile item;
+    [SerializeField] private PlantTile item1;
+    [SerializeField] private PlantTile item2;
+    [SerializeField] private PlantTile item3;
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.touchCount >= 2)
         {
-            playerInventory.AddItem(item.harvestedItem, 5);
-            Debug.Log(item.harvestedItem.itemName + "ADICIONADO (5)");
+            playerInventory.AddItem(item1.harvestedItem, 1);
+            playerInventory.AddItem(item2.harvestedItem, 1);
+            playerInventory.AddItem(item3.harvestedItem, 1);
+            Debug.Log(item1.harvestedItem.itemName + "ADICIONADO (5)");
         }
     }
 }
