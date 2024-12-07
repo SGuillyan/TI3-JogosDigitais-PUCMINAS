@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 282190097460664112}
+  - component: {fileID: 962082493421946576}
   m_Layer: 5
   m_Name: QuestCarrot
   m_TagString: Untagged
@@ -34,8 +35,30 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 840, y: 428}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &962082493421946576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6061788033138740447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 760b04de0efb8d649aa489174327b9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questName: QuestCarrot
+  daily: 1
+  require: {fileID: 11400000, guid: 3f31ca6d06f7ae34cb01b5f6996212ec, type: 2}
+  quantityRequire: 5
+  reward:
+    money: 20
+    ids: 0a0000000000000000000000
+    plant: {fileID: 0}
+    quantity: 0
+  gapTime: 10
 --- !u!1001 &3212171428759820700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -122,22 +145,22 @@ PrefabInstance:
     - target: {fileID: 1804660727242757470, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1804660727242757470, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1804660727242757470, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1804660727242757470, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1804660727242757470, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
@@ -187,12 +210,12 @@ PrefabInstance:
     - target: {fileID: 1804660727242757470, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 51.749817
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1804660727242757470, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 6.8814697
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1804660727242757470, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
@@ -208,6 +231,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2174787577744740921, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 962082493421946576}
+    - target: {fileID: 2174787577744740921, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CheckRequire
       objectReference: {fileID: 0}
     - target: {fileID: 3920847551157878750, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
@@ -363,7 +396,8 @@ PrefabInstance:
       propertyPath: reward.ids.Array.data[2]
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8514496679681433876, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

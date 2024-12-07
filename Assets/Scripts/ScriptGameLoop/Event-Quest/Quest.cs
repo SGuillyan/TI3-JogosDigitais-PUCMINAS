@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Quest : MonoBehaviour
 {
+    public string questName;
     public bool daily = true;
 
     //[Header("Access")]
@@ -39,6 +40,17 @@ public class Quest : MonoBehaviour
                 {
                     if (daily) GiveReward();
                     else manager.ResetEventQuest();
+
+                    foreach (Quest q in manager.activeQuests)
+                    {
+                        if (q.questName == this.questName)
+                        {
+                            manager.activeQuests.Remove(q);
+                            manager.availableQuests.Add(q);
+                            break;
+                        }
+                    }
+                    
                     Destroy(gameObject);
                 }
             }
