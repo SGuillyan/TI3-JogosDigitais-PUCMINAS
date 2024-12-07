@@ -2956,8 +2956,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ecologicoImage: {fileID: 1078897742}
+  ecologicoText: {fileID: 0}
   economicoImage: {fileID: 1678099160}
+  economicoText: {fileID: 0}
   socialImage: {fileID: 1645682321}
+  socialText: {fileID: 0}
+  IDS_Text: {fileID: 0}
 --- !u!1 &136431268
 GameObject:
   m_ObjectHideFlags: 0
@@ -29536,6 +29540,7 @@ GameObject:
   - component: {fileID: 1623626953}
   - component: {fileID: 1623626955}
   - component: {fileID: 1623626954}
+  - component: {fileID: 1623626956}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -29600,6 +29605,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1623626952}
   m_CullTransparentMesh: 1
+--- !u!114 &1623626956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623626952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 837f783413bc3854b93a02e5a3da7f68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 1623626954}
+  defaultIcon: {fileID: 0}
+  plowIcon: {fileID: 0}
+  flattenIcon: {fileID: 0}
+  harvestIcon: {fileID: 0}
+  infoIcon: {fileID: 0}
 --- !u!1 &1627052364
 GameObject:
   m_ObjectHideFlags: 0

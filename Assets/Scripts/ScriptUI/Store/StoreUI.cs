@@ -248,7 +248,7 @@ public class StoreUI : MonoBehaviour
             quantityControls.SetActive(true);
 
             // Atualiza o texto da quantidade inicial para o controle selecionado
-            TextMeshProUGUI selectedQuantityText = quantityControls.transform.Find("SelectedQuantity").GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI selectedQuantityText = itemInstance.transform.Find("Icon").Find("ItemIcon").Find("ItemQuantity").GetComponent<TextMeshProUGUI>();
             if (selectedQuantityText != null)
             {
                 selectedQuantityText.text = selectedQuantity.ToString(); // Garante que começa em 1
