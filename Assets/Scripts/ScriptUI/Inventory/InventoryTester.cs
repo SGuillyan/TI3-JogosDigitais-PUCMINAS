@@ -8,7 +8,6 @@ public class InventoryTester : MonoBehaviour
     public Item apple;
 
     // Testa a adição de itens
-    
     public void TestAddSeeds()
     {
         for(int i = 0;i<seeds.Length; i++){

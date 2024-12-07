@@ -25,6 +25,8 @@ public class AmbientManager : MonoBehaviour
 
     private int lastUpdate = 0;
 
+    public static bool ambientChange = true;
+
     private void Start()
     {
         currentSeason = Season.Summer;
@@ -36,23 +38,26 @@ public class AmbientManager : MonoBehaviour
 
     private void Update()
     {
-        if ((int)Time.realtimeSinceStartup % temperatureUpdateTime == 0 && (int)Time.realtimeSinceStartup != lastUpdate)
+        if (ambientChange)
         {
-            if (Random.Range(0, updateChange) == 0)
+            if ((int)Time.realtimeSinceStartup % temperatureUpdateTime == 0 && (int)Time.realtimeSinceStartup != lastUpdate)
             {
-                UpdateTemperature();
+                if (Random.Range(0, updateChange) == 0)
+                {
+                    UpdateTemperature();
+                }
+
+                UpdateClimate();
+                lastUpdate = (int)Time.realtimeSinceStartup;
+            }
+            else if ((int)Time.realtimeSinceStartup % Mathf.RoundToInt(temperatureUpdateTime / 2) == 0 && (int)Time.realtimeSinceStartup != lastUpdate)
+            {
+                UpdateClimate();
+                lastUpdate = (int)Time.realtimeSinceStartup;
             }
 
-            UpdateClimate();
-            lastUpdate = (int)Time.realtimeSinceStartup;
+            //Debug.Log(Time.realtimeSinceStartup);
         }
-        else if ((int)Time.realtimeSinceStartup % Mathf.RoundToInt(temperatureUpdateTime / 2) == 0 && (int)Time.realtimeSinceStartup != lastUpdate)
-        {
-            UpdateClimate();
-            lastUpdate = (int)Time.realtimeSinceStartup;
-        }
-
-        //Debug.Log(Time.realtimeSinceStartup);
     }
 
     #region // Get & Set

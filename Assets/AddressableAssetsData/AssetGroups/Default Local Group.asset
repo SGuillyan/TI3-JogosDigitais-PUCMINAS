@@ -16,12 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: a6d403ea89ffaed4aa82be971fa8cf1b
-  m_SerializeEntries:
-  - m_GUID: 9ec5a59d02d4ab24aacf09d79f0c8e12
-    m_Address: Assets/UI/UIFonts/Coffee Town.ttf
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 7b32d46aacfc2e34f8130e36b282782c, type: 2}
   m_SchemaSet:

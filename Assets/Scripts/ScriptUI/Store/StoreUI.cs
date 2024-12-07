@@ -156,10 +156,12 @@ public class StoreUI : MonoBehaviour
         GameObject itemInstance = Instantiate(storeItemPrefab, contentParent);
         storeItemInstances.Add(itemInstance);
 
-        Image itemIcon = itemInstance.transform.Find("ItemIcon").GetComponent<Image>();
+        Image itemIcon = itemInstance.transform.Find("Icon").Find("ItemIcon").GetComponent<Image>();
+        //var itemIcon = itemInstance;
+        //Debug.Log(itemIcon);
         TextMeshProUGUI itemName = itemInstance.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI itemPrice = itemInstance.transform.Find("ItemPrice").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI itemQuantity = itemInstance.transform.Find("ItemQuantity").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI itemPrice = itemInstance.transform.Find("Price").Find("text_Price").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI itemQuantity = itemIcon.transform.Find("ItemQuantity").GetComponent<TextMeshProUGUI>();
         GameObject quantityControls = itemInstance.transform.Find("QuantityControls").gameObject;
 
         // Exibe as informações do item
@@ -168,22 +170,22 @@ public class StoreUI : MonoBehaviour
 
         if (isBuyTab)
         {
-            itemPrice.text = item.price.ToString() + " coins";
+            itemPrice.text = item.price.ToString();
             itemQuantity.text = "";
         }
         else
         {
             int quantity = playerInventory.GetItemQuantity(item);
-            itemPrice.text = "$" + item.price.ToString();
+            itemPrice.text = item.price.ToString();
             itemQuantity.text = "x" + quantity.ToString();
         }
 
         // Configura os botões
         Button selectButton = itemInstance.GetComponentInChildren<Button>();
-        Button leftArrow = quantityControls.transform.Find("Lefty").GetComponent<Button>();
-        Button rightArrow = quantityControls.transform.Find("RightArrow").GetComponent<Button>();
+        Button leftArrow = quantityControls.transform.Find("Quantity").Find("LeftArrow").GetComponent<Button>();
+        Button rightArrow = quantityControls.transform.Find("Quantity").Find("RightArrow").GetComponent<Button>();
         Button confirmButton = quantityControls.transform.Find("ConfirmButton").GetComponent<Button>();
-        TextMeshProUGUI selectedQuantityText = quantityControls.transform.Find("SelectedQuantity").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI selectedQuantityText = quantityControls.transform.Find("Quantity").Find("SelectedQuantity").GetComponent<TextMeshProUGUI>();
 
         int itemID = item.itemID;
 
@@ -198,12 +200,14 @@ public class StoreUI : MonoBehaviour
         {
             // Debug.Log("Botão LeftArrow pressionado para o item " + item.itemName); // Log para verificar o clique
             AdjustQuantity(-1, selectedQuantityText);
+            itemPrice.text = (item.price * selectedQuantity).ToString();
         });
 
         rightArrow.onClick.AddListener(() =>
         {
             // Debug.Log("Botão RightArrow pressionado para o item " + item.itemName); // Log para verificar o clique
             AdjustQuantity(1, selectedQuantityText);
+            itemPrice.text = (item.price * selectedQuantity).ToString();
         });
 
         confirmButton.onClick.AddListener(() =>
@@ -244,7 +248,7 @@ public class StoreUI : MonoBehaviour
             quantityControls.SetActive(true);
 
             // Atualiza o texto da quantidade inicial para o controle selecionado
-            TextMeshProUGUI selectedQuantityText = quantityControls.transform.Find("SelectedQuantity").GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI selectedQuantityText = itemInstance.transform.Find("Icon").Find("ItemIcon").Find("ItemQuantity").GetComponent<TextMeshProUGUI>();
             if (selectedQuantityText != null)
             {
                 selectedQuantityText.text = selectedQuantity.ToString(); // Garante que começa em 1
@@ -282,7 +286,7 @@ public class StoreUI : MonoBehaviour
         // Atualiza o texto no controle de quantidade
         if (selectedQuantityText != null)
         {
-            Debug.Log("Ajustando a quanidade para " + selectedQuantity);
+            //Debug.Log("Ajustando a quanidade para " + selectedQuantity);
             selectedQuantityText.text = selectedQuantity.ToString();
         }
     }
