@@ -97,9 +97,9 @@ public class InventoryUI : MonoBehaviour
         GameObject itemInstance = Instantiate(inventoryItemPrefab, contentParent);
         inventoryItemInstances.Add(itemInstance);
 
-        Image itemIcon = itemInstance.transform.Find("ItemIcon").GetComponent<Image>();
+        Image itemIcon = itemInstance.transform.Find("Icon").Find("img_Item").GetComponent<Image>();
         TextMeshProUGUI itemName = itemInstance.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI itemQuantity = itemInstance.transform.Find("ItemQuantity").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI itemQuantity = itemInstance.transform.Find("Icon").Find("img_Item").Find("text_Quantity").GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI ItemInfoN = itemInstance.transform.Find("Panel/ItemInfoN").GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI ItemInfoP = itemInstance.transform.Find("Panel/ItemInfoP").GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI ItemInfoK = itemInstance.transform.Find("Panel/ItemInfoK").GetComponent<TextMeshProUGUI>();
