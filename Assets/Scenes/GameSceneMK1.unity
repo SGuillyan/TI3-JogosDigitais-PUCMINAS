@@ -31524,7 +31524,7 @@ MonoBehaviour:
   menuManager: {fileID: 1762352557}
   shopButton: {fileID: 213822525}
   stopPlantingButton: {fileID: 1904608415}
-  plantingFeedback: {fileID: 1865351065}
+  plantingFeedback: {fileID: 1865351066}
 --- !u!1 &1811072589
 GameObject:
   m_ObjectHideFlags: 0
@@ -32409,12 +32409,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1865351065 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7488625595533866460, guid: 44bcd98be0a6b7045a8cfe6214839fca,
+--- !u!114 &1865351066 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4461128861045664126, guid: 44bcd98be0a6b7045a8cfe6214839fca,
     type: 3}
   m_PrefabInstance: {fileID: 82030107}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13dd9e81c3b816443a73a6b08c91d09d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1865994816
 GameObject:
   m_ObjectHideFlags: 0
