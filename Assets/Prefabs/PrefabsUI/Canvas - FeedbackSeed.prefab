@@ -142,9 +142,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 12
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 69815f74ea4f92243829c2d5c41d2e48, type: 2}
-  m_sharedMaterial: {fileID: 405417084970718904, guid: 69815f74ea4f92243829c2d5c41d2e48,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -222,8 +221,9 @@ GameObject:
   - component: {fileID: 6671240843979539240}
   - component: {fileID: 6266913691795191892}
   - component: {fileID: 6992951479968897112}
+  - component: {fileID: 4461128861045664126}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: FeedbackSeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -314,6 +314,21 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &4461128861045664126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7488625595533866460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13dd9e81c3b816443a73a6b08c91d09d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManager: {fileID: 0}
+  display: {fileID: 1101585293329565361}
+  image: {fileID: 627301628001887889}
 --- !u!1 &9200960778208141841
 GameObject:
   m_ObjectHideFlags: 0
