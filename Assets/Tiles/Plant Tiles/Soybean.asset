@@ -34,12 +34,16 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  growthPrefabs: []
+  growthPrefabs:
+  - {fileID: 4925785748164349182, guid: bf2c49c0c05332247b9f3fc3b3dd22aa, type: 3}
+  - {fileID: 4925785748164349182, guid: e23db09832269e24a8ee773bbd2117b9, type: 3}
+  - {fileID: 4925785748164349182, guid: 76130f610033e4c4a829feff1a487e90, type: 3}
+  - {fileID: 4925785748164349182, guid: ec8b57863040a6042b4d170bd14febdd, type: 3}
+  - {fileID: 4925785748164349182, guid: 705e8a78a66096d42935c380627b0c28, type: 3}
   growthTimes:
   - 5
   - 5
   - 3
-  ambient: {fileID: 11400000, guid: e8f591b14a3ddde4da61770979152007, type: 2}
   idealTemperature: 6
   idealClimate: 4
   greenTolerance: 0
@@ -48,6 +52,7 @@ MonoBehaviour:
     type: 3}
   isPlanted: 0
   isFullyGrown: 0
+  isRotten: 0
   harvestedItem:
     itemName: Soja
     itemIcon: {fileID: 0}
@@ -55,6 +60,9 @@ MonoBehaviour:
     itemType: 0
     itemID: 103
     price: 80
+    reqNitro: 0
+    reqPhosf: 0
+    reqK: 0
   soilTile: {fileID: 11400000, guid: fb4802db5e5b9c94db6eda50fd1dd23d, type: 2}
   requiredNitrogen: 50
   requiredPhosphorus: 70
