@@ -14,7 +14,7 @@ public class InventoryManager : MonoBehaviour
     public Button stopPlantingButton;  // Referência ao botão Stop Planting
 
     [Header("Feedback")]
-    [SerializeField] private GameObject plantingFeedback;
+    [SerializeField] private PlantingFeeback plantingFeedback;
 
     void Start()
     {
@@ -23,7 +23,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     // Método para selecionar uma semente
-    public void SelectSeed(int seedID)
+    public void SelectSeed(int seedID, int itemID)
     {
         // Verifica se o item selecionado é uma semente (ID entre 0 e 99)
         if (seedID >= 0 && seedID <= 99)
@@ -32,7 +32,7 @@ public class InventoryManager : MonoBehaviour
             ToolsManager.SetActiveTool(ToolsManager.Tools.None);
             selectedSeedID = seedID;
             menuManager.CloseInventoryToPlant();  // Fecha o inventário ao selecionar uma semente
-            plantingFeedback.SetActive(true);
+            plantingFeedback.ActiveFeedback(itemID);
             isPlanting = true;  // Ativa o modo de plantio
 
             // Troca os botões
@@ -106,6 +106,6 @@ public class InventoryManager : MonoBehaviour
     public void StopPlanting()
     {
         DeselectSeed();  // Deseleciona a semente e volta ao inventário
-        plantingFeedback.SetActive(false);
+        plantingFeedback.DisableFeedback();
     }
 }

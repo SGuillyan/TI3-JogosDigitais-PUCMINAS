@@ -59,9 +59,9 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void OnSeedSelected(int itemID)
+    public void OnSeedSelected(int itemID, int inventoryID)
     {
-        inventoryManager.SelectSeed(itemID);
+        inventoryManager.SelectSeed(itemID, inventoryID);
         //CloseInventory();
     }
 
@@ -123,7 +123,7 @@ public class InventoryUI : MonoBehaviour
         if (selectButton != null)
         {
             int itemID = inventoryItem.item.itemID;
-            selectButton.onClick.AddListener(() => OnSeedSelected(itemID));
+            selectButton.onClick.AddListener(() => OnSeedSelected(itemID, playerInventory.items.IndexOf(inventoryItem)));
         }
         else
         {
