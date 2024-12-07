@@ -29618,11 +29618,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 1623626954}
-  defaultIcon: {fileID: 0}
-  plowIcon: {fileID: 0}
-  flattenIcon: {fileID: 0}
-  harvestIcon: {fileID: 0}
-  infoIcon: {fileID: 0}
+  defaultIcon: {fileID: 21300000, guid: 80ba41df4ee46d14daf9704599c1a92e, type: 3}
+  plowIcon: {fileID: 21300000, guid: 79e6d9e8238ac6045bd456ee2a983065, type: 3}
+  flattenIcon: {fileID: 21300000, guid: efb228fdb596ad644be27aa32a145aa3, type: 3}
+  harvestIcon: {fileID: 21300000, guid: 85b69996d2925cd4e9638ccf142b24f9, type: 3}
+  infoIcon: {fileID: 21300000, guid: 0aeb7fc7c3b8356419934ce0b8e4068f, type: 3}
 --- !u!1 &1627052364
 GameObject:
   m_ObjectHideFlags: 0
@@ -30038,7 +30038,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.81700003}
-  m_AnchoredPosition: {x: 0, y: 0.044006348}
+  m_AnchoredPosition: {x: 0, y: 0.043945312}
   m_SizeDelta: {x: 0, y: -1.0309982}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1662327254
