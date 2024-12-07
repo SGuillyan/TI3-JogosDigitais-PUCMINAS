@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1804660727242757470}
   m_Layer: 5
-  m_Name: ObjEventPrefab
+  m_Name: OLDObjEventPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
