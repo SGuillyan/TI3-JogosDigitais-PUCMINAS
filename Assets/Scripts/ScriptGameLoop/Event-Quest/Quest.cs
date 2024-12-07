@@ -12,9 +12,9 @@ public class Quest : MonoBehaviour
     private QuestManager manager;
 
     [Header("Components")]
-    public string title;
-    [TextArea] public string description;
-    public Sprite image;
+    //public string title;
+    //[TextArea] public string description;
+    //public Sprite image;
     public PlantTile require;
     public int quantityRequire;
     public Reward reward;
