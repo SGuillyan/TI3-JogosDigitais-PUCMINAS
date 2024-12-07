@@ -170,7 +170,7 @@ public class StoreUI : MonoBehaviour
 
         if (isBuyTab)
         {
-            itemPrice.text = item.price.ToString() + " coins";
+            itemPrice.text = item.price.ToString();
             itemQuantity.text = "";
         }
         else
@@ -200,12 +200,14 @@ public class StoreUI : MonoBehaviour
         {
             // Debug.Log("Botão LeftArrow pressionado para o item " + item.itemName); // Log para verificar o clique
             AdjustQuantity(-1, selectedQuantityText);
+            itemPrice.text = "$" + (item.price * selectedQuantity).ToString();
         });
 
         rightArrow.onClick.AddListener(() =>
         {
             // Debug.Log("Botão RightArrow pressionado para o item " + item.itemName); // Log para verificar o clique
             AdjustQuantity(1, selectedQuantityText);
+            itemPrice.text = "$" + (item.price * selectedQuantity).ToString();
         });
 
         confirmButton.onClick.AddListener(() =>
@@ -284,7 +286,7 @@ public class StoreUI : MonoBehaviour
         // Atualiza o texto no controle de quantidade
         if (selectedQuantityText != null)
         {
-            Debug.Log("Ajustando a quanidade para " + selectedQuantity);
+            //Debug.Log("Ajustando a quanidade para " + selectedQuantity);
             selectedQuantityText.text = selectedQuantity.ToString();
         }
     }
