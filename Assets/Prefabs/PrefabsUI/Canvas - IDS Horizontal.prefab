@@ -1499,8 +1499,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ecologicoImage: {fileID: 6809655952212369954}
+  ecologicoText: {fileID: 9161599856878995709}
   economicoImage: {fileID: 8420909858373719078}
+  economicoText: {fileID: 7254715391680844951}
   socialImage: {fileID: 6818492144930348903}
+  socialText: {fileID: 7347378802067104485}
   IDS_Text: {fileID: 69431539584237881}
 --- !u!114 &301460056902345267
 MonoBehaviour:
