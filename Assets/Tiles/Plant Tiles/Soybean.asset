@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 136b335a369405b4da23ee97a938482c, type: 3}
   m_Name: Soybean
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: aed8d36bf52fb7246ac65b2ee644ff13, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f376d0eb74f559842a7eaa8220c95906, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -40,6 +40,7 @@ MonoBehaviour:
   - {fileID: 4925785748164349182, guid: 76130f610033e4c4a829feff1a487e90, type: 3}
   - {fileID: 4925785748164349182, guid: ec8b57863040a6042b4d170bd14febdd, type: 3}
   - {fileID: 4925785748164349182, guid: 705e8a78a66096d42935c380627b0c28, type: 3}
+  rotPrefab: {fileID: 0}
   growthTimes:
   - 5
   - 5
