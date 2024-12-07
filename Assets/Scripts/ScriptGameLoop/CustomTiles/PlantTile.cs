@@ -347,9 +347,9 @@ public class PlantTile : Tile
             }
 
             // Devolve os nutrientes ao solo após a colheita
-            currentTileInfo.nitrogen += returnNitrogen/2;
-            currentTileInfo.phosphorus += returnPhosphorus/2;
-            currentTileInfo.potassium += returnPotassium/2;
+            currentTileInfo.nitrogen += returnNitrogen;
+            currentTileInfo.phosphorus += returnPhosphorus;
+            currentTileInfo.potassium += returnPotassium;
 
             // Atualiza o estado para plantável após a colheita
             currentTileInfo.isPlantable = true;

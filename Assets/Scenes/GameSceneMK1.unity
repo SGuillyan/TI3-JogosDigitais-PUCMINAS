@@ -450,7 +450,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1762352557}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: TabToolBox
+        m_MethodName: CloseToolBox
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1791,6 +1791,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7885567372696775112, guid: 7dd00eca6d00ff24b861960d7a9b06a1,
     type: 3}
   m_PrefabInstance: {fileID: 90239775}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &93503566 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3181534104518182854, guid: 99fe0b5b782ead34094d2835abbae21b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2141833698}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &96985638
 PrefabInstance:
@@ -7294,7 +7300,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 2141833698}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 93503566}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 474cafcdbe644ce4a84d4bc1aad329a5, type: 3}
@@ -9423,6 +9429,42 @@ MonoBehaviour:
     reqNitro: 80
     reqPhosf: 70
     reqK: 90
+  - itemName: Fertilizante - N
+    itemIcon: {fileID: 21300000, guid: 80ba41df4ee46d14daf9704599c1a92e, type: 3}
+    maxStackSize: 99
+    itemType: 2
+    itemID: 200
+    price: 50
+    reqNitro: 100
+    reqPhosf: 0
+    reqK: 0
+  - itemName: Fertilizante - P
+    itemIcon: {fileID: 21300000, guid: 80ba41df4ee46d14daf9704599c1a92e, type: 3}
+    maxStackSize: 99
+    itemType: 2
+    itemID: 201
+    price: 50
+    reqNitro: 0
+    reqPhosf: 100
+    reqK: 0
+  - itemName: Fertilizante - K
+    itemIcon: {fileID: 21300000, guid: 80ba41df4ee46d14daf9704599c1a92e, type: 3}
+    maxStackSize: 99
+    itemType: 2
+    itemID: 202
+    price: 50
+    reqNitro: 0
+    reqPhosf: 0
+    reqK: 100
+  - itemName: Fertilizante Premium
+    itemIcon: {fileID: 21300000, guid: 80ba41df4ee46d14daf9704599c1a92e, type: 3}
+    maxStackSize: 99
+    itemType: 2
+    itemID: 203
+    price: 50
+    reqNitro: 75
+    reqPhosf: 75
+    reqK: 75
   playerInventory: {fileID: 1807522566}
   moneyManager: {fileID: 917966509}
 --- !u!4 &473759902
@@ -18844,7 +18886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dacc4e6d8b388f2458da5e1f7a7140f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
+  type: 2
 --- !u!114 &1106898734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18906,7 +18948,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1762352557}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: TabToolBox
+        m_MethodName: CloseToolBox
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -31996,12 +32038,63 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 2141833698}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 93503566}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a39379f12562fe941a9b3e59fdc34abf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1838739720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93503566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d758bae5e65a5644ae288137fea479a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 1342796939}
+  fertilizers:
+  - itemName: Fertilizante - N
+    itemIcon: {fileID: 21300000, guid: 80ba41df4ee46d14daf9704599c1a92e, type: 3}
+    maxStackSize: 99
+    itemType: 2
+    itemID: 200
+    price: 50
+    reqNitro: 100
+    reqPhosf: 0
+    reqK: 0
+  - itemName: Fertilizante - P
+    itemIcon: {fileID: 21300000, guid: 80ba41df4ee46d14daf9704599c1a92e, type: 3}
+    maxStackSize: 99
+    itemType: 2
+    itemID: 201
+    price: 50
+    reqNitro: 0
+    reqPhosf: 100
+    reqK: 0
+  - itemName: Fertilizante - K
+    itemIcon: {fileID: 21300000, guid: 80ba41df4ee46d14daf9704599c1a92e, type: 3}
+    maxStackSize: 99
+    itemType: 2
+    itemID: 202
+    price: 50
+    reqNitro: 0
+    reqPhosf: 0
+    reqK: 100
+  - itemName: Fertilizante Premium
+    itemIcon: {fileID: 21300000, guid: 80ba41df4ee46d14daf9704599c1a92e, type: 3}
+    maxStackSize: 99
+    itemType: 2
+    itemID: 203
+    price: 50
+    reqNitro: 75
+    reqPhosf: 75
+    reqK: 75
+  tilemapManager: {fileID: 1838739717}
 --- !u!1001 &1839641119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36064,7 +36157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dacc4e6d8b388f2458da5e1f7a7140f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 4
+  type: 3
 --- !u!114 &2062697994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36126,7 +36219,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1762352557}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: TabToolBox
+        m_MethodName: CloseToolBox
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -37305,6 +37398,11 @@ PrefabInstance:
       objectReference: {fileID: 973043131}
     - target: {fileID: 1022065325439666699, guid: 99fe0b5b782ead34094d2835abbae21b,
         type: 3}
+      propertyPath: tilemapFertilize
+      value: 
+      objectReference: {fileID: 1838739720}
+    - target: {fileID: 1022065325439666699, guid: 99fe0b5b782ead34094d2835abbae21b,
+        type: 3}
       propertyPath: debugObjectPrefab
       value: 
       objectReference: {fileID: 5596873383589714348, guid: f17673461ee7a2748bd633ddad22d8c1,
@@ -37426,7 +37524,11 @@ PrefabInstance:
     - {fileID: 6820444140835852034, guid: 99fe0b5b782ead34094d2835abbae21b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3181534104518182854, guid: 99fe0b5b782ead34094d2835abbae21b,
+        type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 1838739720}
   m_SourcePrefab: {fileID: 100100000, guid: 99fe0b5b782ead34094d2835abbae21b, type: 3}
 --- !u!1 &2147123121 stripped
 GameObject:

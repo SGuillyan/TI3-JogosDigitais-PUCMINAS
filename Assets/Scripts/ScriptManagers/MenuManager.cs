@@ -161,7 +161,7 @@ public class MenuManager : MonoBehaviour
 
     #region // Close
 
-    private void CloseToolBox()
+    public void CloseToolBox()
     {
         ToolsManager.ToolBoxAnim();
 

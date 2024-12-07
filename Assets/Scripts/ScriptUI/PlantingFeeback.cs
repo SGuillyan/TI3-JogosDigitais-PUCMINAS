@@ -16,7 +16,7 @@ public class PlantingFeeback : MonoBehaviour
     {
         if (id > -1)
         {
-            if (inventoryManager.HasSelectedSeed())
+            if (inventoryManager.HasSelectedItem())
             {
                 Debug.Log(id);
                 display.text = inventoryManager.playerInventory.items[id].quantity.ToString();
