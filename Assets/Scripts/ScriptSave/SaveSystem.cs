@@ -134,6 +134,11 @@ public class SaveSystem : MonoBehaviour
         return save;
 	}
 
+	public static bool isFirstTime()
+	{
+		return !File.Exists(Application.persistentDataPath + "/SaveData.json");
+    }
+
 	#region // Data Classes
 
 	[Serializable]

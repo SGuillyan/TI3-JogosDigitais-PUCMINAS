@@ -31,7 +31,22 @@ public class TutorialManager : MonoBehaviour
     public bool tutirialCompleted = false;
 
     void Start()
+    {      
+        if (SaveSystem.isFirstTime())
+        {
+            Inicialize(false);
+            //SaveSystem.Save();
+        }
+        else
+        {
+
+        }
+    }
+
+    public void Inicialize(bool teste)
     {
+        tutirialCompleted = teste;
+
         // Inicializa o tutorial mostrando o primeiro passo
         if (tutorialSteps.Length > 0 && !tutirialCompleted)
         {
@@ -48,6 +63,7 @@ public class TutorialManager : MonoBehaviour
         // Adiciona listener ao botão "Próximo"
         nextButton.onClick.AddListener(NextStep);
     }
+
 
     // Método para mostrar um passo específico do tutorial
     void ShowStep(int index)

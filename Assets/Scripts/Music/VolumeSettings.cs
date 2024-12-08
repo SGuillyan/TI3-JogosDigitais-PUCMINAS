@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using System.IO;
 
 public class VolumeSettings : MonoBehaviour
 {
@@ -25,6 +26,11 @@ public class VolumeSettings : MonoBehaviour
         sfxSlider.value = PlayerPrefs.GetFloat(AudioManager.SFX_KEY, 0.5f);
     }
 
+    public void Inicialize(float musicVolume, float sfxValue)
+    {
+        musicSlider.value = PlayerPrefs.GetFloat(AudioManager.MUSIC_KEY, musicVolume);
+        sfxSlider.value = PlayerPrefs.GetFloat(AudioManager.SFX_KEY, sfxValue);
+    }
 
 
     void OnDisable()
