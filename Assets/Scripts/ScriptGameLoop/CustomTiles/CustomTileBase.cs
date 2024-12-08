@@ -17,6 +17,9 @@ public class CustomTileBase : TileBase
     public int potassium = 1000;
     public int humidity = 1000;
 
+    // Estado de rotação (0 = 0°, 1 = 90°, 2 = 180°, 3 = 270°)
+    public int rotationState = 0;
+
     public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
     {
         if (!Application.isPlaying)
@@ -44,7 +47,10 @@ public class CustomTileBase : TileBase
 
                 Transform parent = tilemapManager.parentTransform != null ? tilemapManager.parentTransform : tilemapManager.transform;
 
-                GameObject instantiatedTile = Instantiate(customTilePrefab, worldPosition, Quaternion.identity, parent);
+                // Determina a rotação com base no estado de rotação
+                Quaternion rotation = Quaternion.Euler(0, rotationState * 90f, 0);
+
+                GameObject instantiatedTile = Instantiate(customTilePrefab, worldPosition, rotation, parent);
                 instantiatedTile.transform.position = worldPosition;
                 instantiatedTile.name = $"CustomTile_{position.x}_{position.y}_{position.z}";
 
@@ -98,7 +104,10 @@ public class CustomTileBase : TileBase
 
             Transform parent = tilemapManager.parentTransform != null ? tilemapManager.parentTransform : tilemapManager.transform;
 
-            GameObject plowedTile = Instantiate(plowedTilePrefab, worldPosition, Quaternion.identity, parent);
+            // Determina a rotação com base no estado de rotação
+            Quaternion rotation = Quaternion.Euler(0, rotationState * 90f, 0);
+
+            GameObject plowedTile = Instantiate(plowedTilePrefab, worldPosition, rotation, parent);
             plowedTile.transform.position = worldPosition;
             plowedTile.name = $"PlowedTile_{position.x}_{position.y}_{position.z}";
 
@@ -146,6 +155,4 @@ public class CustomTileBase : TileBase
 
         return false;
     }
-
-
 }
