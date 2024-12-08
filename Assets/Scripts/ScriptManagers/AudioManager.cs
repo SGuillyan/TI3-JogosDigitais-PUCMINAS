@@ -3,39 +3,60 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
+public enum SoundType
+{
+    LIGHTRAIN,
+    HEAVYRAIN,
+    THUNDER,
+    IDSINCREASE,
+    FINISHQUEST,
+    SCREENCLICK,
+    HARVESTABLEPLANT,
+    EVENTSTART,
+    BUY,
+    HARVEST,
+    SELL,
+    PLANT,
+    HOE
+}
+
+[RequireComponent(typeof(AudioSource))]
+
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] AudioSource soundSource;
-    [SerializeField] AudioMixer mixer;
-    //[SerializeField] List<AudioClip> clips = new List<AudioClip>();
+    [SerializeField] private AudioClip[] soundList;
+    [SerializeField] private AudioMixer mixer;
 
-    public static AudioManager instance;
+    private static AudioManager instance;
+    private AudioSource audioSource;
 
-    public const string MUSIC_KEY = "VolumeBGM";
-    public const string SFX_KEY = "VolumeSFX";
+    public const string MUSIC_KEY = "MusicVolume";
+    public const string SFX_KEY = "SFXVolume";
+
+    private static float lastSoundTime = -1f;
+    private static float soundCooldown = 1f;
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-        LoadVolume();
+        instance = this;
     }
 
-    void LoadVolume()
+    private void Start()
     {
-        float musicVolume = PlayerPrefs.GetFloat(MUSIC_KEY, 1f);
-        float sfxVolume = PlayerPrefs.GetFloat(SFX_KEY, 1f);
-
-        mixer.SetFloat(VolumeSettings.MIXER_MUSIC, Mathf.Log10(musicVolume) * 20);
-        mixer.SetFloat(VolumeSettings.MIXER_SFX, Mathf.Log10(sfxVolume) * 20);
+        audioSource = GetComponent<AudioSource>();
     }
 
+    public static void PlaySound(SoundType sound, float baseVolume = 1)
+    {
+        if (Time.time - AudioManager.lastSoundTime >= soundCooldown)
+        {
+            AudioManager.instance.mixer.GetFloat(VolumeSettings.MIXER_SFX, out float mixerVolume);
+
+            float adjustedVolume = baseVolume * Mathf.Pow(10, mixerVolume / 20);
+
+            AudioManager.instance.audioSource.PlayOneShot(AudioManager.instance.soundList[(int)sound], adjustedVolume);
+
+            AudioManager.lastSoundTime = Time.time;
+        }
+    }
 }

@@ -8,15 +8,17 @@ public class TileSelector : MonoBehaviour
     public Tilemap tilemap;
     public GameObject debugObjectPrefab;
     public InventoryManager inventoryManager;
+    public MoneyManager moneyManager;
     public TilemapPlant tilemapPlant;
     public TilemapFertilize tilemapFertilize;
     public InventoryUI inventoryUI;
     public TilemapManager tilemapManager;
+    public RewardManager rewardManager;
     public UIManager uiManager;
     [SerializeField] private List<GameObject> uiPanels;
     public Inventory playerInventory;
     public Animator tileInfoAnimator;  // Animator para a janela de informações
-
+    public CustomTileBase soilTile;
     private bool isTouchProcessed = false;  // Variável para controlar o processamento do toque
     private float continuoMenuTimer = 0.3f; // Verifica se o toque processado está ativo desde o memonto em que algum menu estava ativo
     private float continuott;
@@ -76,6 +78,10 @@ public class TileSelector : MonoBehaviour
                         UseInfoTool(gridPosition);
                         //Debug.Log("USING INFO");
                         break;
+                    case ToolsManager.Tools.CutDown:
+                        UseCutDownTool(gridPosition);
+                        //Debug.Log("USING INFO");
+                        break;
                     case ToolsManager.Tools.Plant:
                         UsePlantTool(gridPosition);
                         break;
@@ -123,6 +129,8 @@ public class TileSelector : MonoBehaviour
             customTile.ChangeToPlowedState(gridPosition);
             Debug.Log($"Solo arado na posição: {gridPosition}");
 
+            AudioManager.PlaySound(SoundType.HOE);
+
             // Analytics
             AnalyticsSystem.AddAnalyticLands_Plowed(this.name, gridPosition);
         }
@@ -136,12 +144,60 @@ public class TileSelector : MonoBehaviour
         }       
     }
 
+    void UseCutDownTool(Vector3Int gridPosition)
+    {
+        // Obtém o tile na posição
+        TileBase tile = tilemap.GetTile(gridPosition);
+
+        if (tile is TreeTile treeTile)
+        {
+            // Deduz dinheiro do jogador antes de qualquer transformação
+            int costToCutDown = 50; // Quantidade de dinheiro a ser deduzida
+            if (!moneyManager.SpendMoney(costToCutDown))
+            {
+                //Debug.Log("Dinheiro insuficiente para cortar a árvore.");
+                return; // Interrompe se o jogador não tiver dinheiro suficiente
+            }
+
+            // Remove a árvore atual e transforma o tile em CustomTileBase
+            TilemapManager tilemapManager = Object.FindObjectOfType<TilemapManager>();
+            
+            if (tilemapManager != null)
+            {
+                treeTile.CutDown(gridPosition);
+
+                IDS.ReduceEcologico(1);
+
+
+                tilemap.SetTile(gridPosition, soilTile);
+
+                // Atualiza o TileInfo no TilemapManager
+                TileInfo tileInfo = new TileInfo(
+                    soilTile.isPlantable,
+                    soilTile.nitrogen,
+                    soilTile.phosphorus,
+                    soilTile.potassium,
+                    soilTile.humidity
+                );
+                tilemapManager.SetTileInfo(gridPosition, tileInfo);
+
+                //Debug.Log($"Árvore cortada e tile transformado na posição: {gridPosition}");
+            }
+
+        }
+        else
+        {
+           // Debug.Log("O tile selecionado não é uma árvore.");
+        }
+    }
+
+
     void UseFlattenTool(TileBase tile, Vector3Int gridPosition)
     {
         if (tile is CustomTileBase customTile)
         {
             customTile.RevertToCustomTileState(gridPosition);
-            Debug.Log($"Solo alisado na posição: {gridPosition}");
+            //Debug.Log($"Solo alisado na posição: {gridPosition}");
 
             // Analytics
             // AnalyticsSystem.AddAnalyticLands_Plowed(this.name, gridPosition);
@@ -166,7 +222,7 @@ public class TileSelector : MonoBehaviour
 
                     else
                     {
-                        Debug.Log("O tile na posição " + gridPosition + " não é plantável.");
+                        //Debug.Log("O tile na posição " + gridPosition + " não é plantável.");
                     } 
                 }          
             }
@@ -184,7 +240,7 @@ public class TileSelector : MonoBehaviour
         }
         else
         {
-            Debug.Log("Tile Não Harvestable");
+            //Debug.Log("Tile Não Harvestable");
         }
     }
 
@@ -205,7 +261,7 @@ public class TileSelector : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("O tile na posição " + gridPosition + " não é plantável.");
+                       // Debug.Log("O tile na posição " + gridPosition + " não é plantável.");
                     } 
                 }          
             }
@@ -220,11 +276,11 @@ public class TileSelector : MonoBehaviour
 
         if (clickedTile != null)
         {
-            //Debug.Log("Tipo de tile clicado: " + clickedTile.GetType().Name);
+           // Debug.Log("Tipo de tile clicado: " + clickedTile.GetType().FullName);
 
             TileInfo tileInfo = tilemapManager.GetTileInfo(gridPosition);
 
-            if (tileInfo != null)
+            if (tileInfo != null || clickedTile is TreeTile)
             {
                 if (clickedTile is CustomTileBase tileData)
                 {
@@ -234,13 +290,19 @@ public class TileSelector : MonoBehaviour
                 {
                     uiManager.UpdateTileInfo(tileData2.sprite, tileInfo.nitrogen, tileInfo.phosphorus, tileInfo.potassium, tileInfo.humidity, tileInfo.isPlantable);
                 }
+                else if (clickedTile is TreeTile tileData3)
+                {
+                    uiManager.UpdateTileInfo(tileData3.sprite, 1000, 1000, 1000, 1000, false);
+                }
 
                 tileInfoAnimator.SetBool("OpenInfo", true);  // Ativa a animação de abertura
                 //Debug.Log("Setting openinfo true");
                 //ToolsManager.SetActiveTool(ToolsManager.Tools.None);
 
                 // Analytics
-                AnalyticsSystem.AddAnalyticInfo(this.name, "Consult INFO", new int[4] { tileInfo.nitrogen, tileInfo.phosphorus, tileInfo.potassium, tileInfo.humidity });
+                if(tileInfo != null){
+                    AnalyticsSystem.AddAnalyticInfo(this.name, "Consult INFO", new int[4] { tileInfo.nitrogen, tileInfo.phosphorus, tileInfo.potassium, tileInfo.humidity });
+                }
             }
         }
         else

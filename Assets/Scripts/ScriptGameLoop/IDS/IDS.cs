@@ -6,12 +6,12 @@ using UnityEngine;
 
 public static class IDS
 {
-    [Header("Índicie de Desenvolvimento Sustentável")]
+    [Header("ï¿½ndicie de Desenvolvimento Sustentï¿½vel")]
     [SerializeField] private static int ids;
 
     [Space(10)]
 
-    [Header("Índicies")]
+    [Header("ï¿½ndicies")]
     [Range(0, 100)]
     [SerializeField] private static int ecologico = 20;
     [Range(0, 100)]
@@ -129,13 +129,13 @@ public static class IDS
         // Soma Ponderada: soma considerando o peso de cada termo
         float indiciesSoma = IndiciesSoma();
 
-        // Desvio padrão: média da disperção termos
+        // Desvio padrï¿½o: mï¿½dia da disperï¿½ï¿½o termos
         float desvioPadrao = DesvioPadrao();
 
-        // Equilíbrio: usando o desvio padrão dividido pelo valor máximo possível de um termo pode-se determinar o quão próximos, equilibrados, eles estão
+        // Equilï¿½brio: usando o desvio padrï¿½o dividido pelo valor mï¿½ximo possï¿½vel de um termo pode-se determinar o quï¿½o prï¿½ximos, equilibrados, eles estï¿½o
         float penalizacao = 1 - (desvioPadrao / 50);
 
-        // a soma ponderada indica o quanto o jogador consegue deixar os índicies altos e a penalização o quanto ele deixou os índicies equilibrados, multiplicando os dois nós temos o IDS
+        // a soma ponderada indica o quanto o jogador consegue deixar os ï¿½ndicies altos e a penalizaï¿½ï¿½o o quanto ele deixou os ï¿½ndicies equilibrados, multiplicando os dois nï¿½s temos o IDS
         ids = (int)(indiciesSoma * penalizacao);
     }
 
@@ -155,7 +155,7 @@ public static class IDS
 
     public static float DesvioPadrao()
     {
-        // Desvio padrão: média da disperção termos
+        // Desvio padrï¿½o: mï¿½dia da disperï¿½ï¿½o termos
         float media = (ecologico + economico + social) / 3f;
         float de = Mathf.Pow(ecologico - media, 2);
         float dc = Mathf.Pow(economico - media, 2);

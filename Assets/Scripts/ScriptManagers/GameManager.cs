@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         MoneyManager moneyManager = FindObjectOfType<MoneyManager>();
-        moneyManager.InitializeMoney(1000);
+        moneyManager.InitializeMoney(65);
     }
 
     void Update()

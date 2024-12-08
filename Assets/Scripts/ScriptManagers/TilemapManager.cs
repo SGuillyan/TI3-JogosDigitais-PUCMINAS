@@ -37,6 +37,8 @@ public class TilemapManager : MonoBehaviour
     public CustomTileBase cornerLarge;
     public CustomTileBase cornerSmall;
 
+    public TreeTile treeTile;
+
     private Dictionary<Vector3Int, TileInfo> tileInfoDictionary = new Dictionary<Vector3Int, TileInfo>();
     private Dictionary<Vector3Int, GameObject> instantiatedTileDictionary = new Dictionary<Vector3Int, GameObject>(); // Adiciona controle de objetos instanciados
 
@@ -66,31 +68,71 @@ public class TilemapManager : MonoBehaviour
                 {
                     tilemap.SetTile(position, riverTile);
                 }
-                else if (y <= -5 && x == 19) // Curva do rio na metade do tile Sul
+                else if (y < -16 && x <= 11) 
+                {
+                    tilemap.SetTile(position, treeTile);
+                }
+                else if (y < -7 && x <= 3) 
+                {
+                    tilemap.SetTile(position, treeTile);
+                }
+                else if (y == -16 && x < 11) 
+                {
+                    tilemap.SetTile(position, treeTile);
+                }
+                else if (y == -17 && x < 12) 
+                {
+                    tilemap.SetTile(position, treeTile);
+                }
+                else if (y == -18 && x < 13) 
+                {
+                    tilemap.SetTile(position, treeTile);
+                }
+                else if (y == -19 && x < 13) 
+                {
+                    tilemap.SetTile(position, treeTile);
+                }
+                else if (y == -20 && x < 14) 
+                {
+                    tilemap.SetTile(position, treeTile);
+                }
+                else if (y == -21 && x < 14) 
+                {
+                    tilemap.SetTile(position, treeTile);
+                }
+                else if (y == -22 && x < 15) 
+                {
+                    tilemap.SetTile(position, treeTile);
+                }
+                else if (y == -23 && x < 16) 
+                {
+                    tilemap.SetTile(position, treeTile);
+                }
+                else if (y <= -5 && x == 19) 
                 {
                     tilemap.SetTile(position, riverTile);
                 }
-                else if (y == -4 && x == 20) // Curva do rio na metade do tile Sul
+                else if (y == -4 && x == 20) 
                 {
                     tilemap.SetTile(position, cornerSmall);
                 }
-                else if (y == -6 && x == 18) // Curva do rio na metade do tile Sul
+                else if (y == -6 && x == 18) 
                 {
                     tilemap.SetTile(position, cornerLarge);
                 }
-                else if (y == -4 && x <= 19) // Curva do rio na metade do tile Sul
+                else if (y == -4 && x <= 19) 
                 {
                     tilemap.SetTile(position, borderTileRight);
                 }
-                else if (y == -6 && x <= 19) // Curva do rio na metade do tile Sul
+                else if (y == -6 && x <= 19) 
                 {
                     tilemap.SetTile(position, borderTileLeft);
                 }
-                else if (y < -4 && x == 18) // Curva do rio na metade do tile Sul
+                else if (y < -4 && x == 18) 
                 {
                     tilemap.SetTile(position, borderTileDown);
                 }
-                else if (y <= -5 && x == 20) // Curva do rio na metade do tile Sul
+                else if (y <= -5 && x == 20) 
                 {
                     tilemap.SetTile(position, borderTileUp);
                 }
