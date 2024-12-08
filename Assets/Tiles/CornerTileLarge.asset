@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57b50668be67c68478b08011377c301f, type: 3}
+  m_Name: CornerTileLarge
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 278116827, guid: 491c0073997f225469d1d6b910f92083, type: 3}
+  customTilePrefab: {fileID: 5596873383589714348, guid: 022afb2ccb87a19488e6637aae576435,
+    type: 3}
+  plowedTilePrefab: {fileID: 5596873383589714348, guid: 5cb4c98cc619fc548b9a935f1aa534d1,
+    type: 3}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  isPlantable: 0
+  nitrogen: 1000
+  phosphorus: 1000
+  potassium: 1000
+  humidity: 1000
+  rotationState: 0

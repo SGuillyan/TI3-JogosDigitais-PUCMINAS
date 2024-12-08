@@ -24948,6 +24948,10 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 02f860db4af337f4db725712fa44a8af, type: 2}
   - m_RefCount: 14
     m_Data: {fileID: 11400000, guid: c406eb23034cf044faf220c33bb67b79, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 14
     m_Data: {fileID: 21300000, guid: 524180a3893097149b03af740aa92f5e, type: 3}
@@ -24955,6 +24959,10 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: ef22b3989e073ef4799e6485426710b2, type: 3}
   - m_RefCount: 28
     m_Data: {fileID: 223643941, guid: 491c0073997f225469d1d6b910f92083, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 210
     m_Data:
@@ -37358,9 +37366,45 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 5547882219821402839, guid: 99fe0b5b782ead34094d2835abbae21b,
         type: 3}
+      propertyPath: cornerLarge
+      value: 
+      objectReference: {fileID: 11400000, guid: 859f5b55ef6b3ba48b6b1cc2c98acd03,
+        type: 2}
+    - target: {fileID: 5547882219821402839, guid: 99fe0b5b782ead34094d2835abbae21b,
+        type: 3}
+      propertyPath: cornerSmall
+      value: 
+      objectReference: {fileID: 11400000, guid: 5005f2e02a06f9d4991827ce62c714d5,
+        type: 2}
+    - target: {fileID: 5547882219821402839, guid: 99fe0b5b782ead34094d2835abbae21b,
+        type: 3}
       propertyPath: defaultTile
       value: 
       objectReference: {fileID: 11400000, guid: fb4802db5e5b9c94db6eda50fd1dd23d,
+        type: 2}
+    - target: {fileID: 5547882219821402839, guid: 99fe0b5b782ead34094d2835abbae21b,
+        type: 3}
+      propertyPath: borderTileUp
+      value: 
+      objectReference: {fileID: 11400000, guid: 94a8f3a261c07ae43bf868eeced3bbfa,
+        type: 2}
+    - target: {fileID: 5547882219821402839, guid: 99fe0b5b782ead34094d2835abbae21b,
+        type: 3}
+      propertyPath: borderTileDown
+      value: 
+      objectReference: {fileID: 11400000, guid: 686525600035838498ef20a5a6f79d7e,
+        type: 2}
+    - target: {fileID: 5547882219821402839, guid: 99fe0b5b782ead34094d2835abbae21b,
+        type: 3}
+      propertyPath: borderTileLeft
+      value: 
+      objectReference: {fileID: 11400000, guid: c406eb23034cf044faf220c33bb67b79,
+        type: 2}
+    - target: {fileID: 5547882219821402839, guid: 99fe0b5b782ead34094d2835abbae21b,
+        type: 3}
+      propertyPath: borderTileRight
+      value: 
+      objectReference: {fileID: 11400000, guid: 02f860db4af337f4db725712fa44a8af,
         type: 2}
     - target: {fileID: 5547882219821402839, guid: 99fe0b5b782ead34094d2835abbae21b,
         type: 3}
