@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba33eb41498f8f84d817cbf251d953b4, type: 3}
   m_Name: HouseTile
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
-  treePrefab: {fileID: 0}
-  groundPrefab: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 0c68414a97b53af468aa0ebc259e949f, type: 3}
+  groundPrefab: {fileID: 5596873383589714348, guid: f17673461ee7a2748bd633ddad22d8c1,
+    type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}

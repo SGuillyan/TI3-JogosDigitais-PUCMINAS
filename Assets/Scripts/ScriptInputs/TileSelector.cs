@@ -14,6 +14,7 @@ public class TileSelector : MonoBehaviour
     public InventoryUI inventoryUI;
     public TilemapManager tilemapManager;
     public ExpansionPanelManager expansionManager;
+    public PlowNearbyRiver plowNearbyRiver;
     public UIManager uiManager;
     [SerializeField] private List<GameObject> uiPanels;
     public Inventory playerInventory;
@@ -132,6 +133,7 @@ public class TileSelector : MonoBehaviour
             // Verifica se há WaterTile adjacente
             if (customTile.HasNearbyWaterTile(gridPosition))
             {
+                plowNearbyRiver.ShowPopup();
                 Debug.Log($"Há um rio próximo à posição {gridPosition}. Solo não pode ser arado.");
                 return; 
                 // Aqui precisa de um feedback pro jogador //

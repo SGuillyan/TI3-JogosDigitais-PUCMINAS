@@ -47,7 +47,7 @@ public class TreeTile : TileBase
             // Registra a árvore no TilemapManager
             tilemapManager.SetInstantiatedTile(position, tree);
 
-            Debug.Log($"Chão e árvore instanciados em {position} com escala {randomScale} e rotação {randomRotation}");
+            //Debug.Log($"Chão e árvore instanciados em {position} com escala {randomScale} e rotação {randomRotation}");
         }
         else
         {
@@ -90,7 +90,7 @@ public class TreeTile : TileBase
             if (groundObject != null)
             {
                 tilemapManager.SetInstantiatedTile(position, groundObject);
-                Debug.Log($"Árvore cortada e referência atualizada para chão na posição: {position}");
+               // Debug.Log($"Árvore cortada e referência atualizada para chão na posição: {position}");
             }
             else
             {

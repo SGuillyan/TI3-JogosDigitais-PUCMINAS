@@ -20,9 +20,11 @@ public class ToolsManager : MonoBehaviour
 
     [SerializeField] public static Tools activeTool = Tools.None;
     private static Toggle[] toolList;
-
     public static bool isToolBoxOpen = false;
     private static Animator animator;
+
+    [Header("Referências")]
+    public TreeCutWarning treeCutWarning; // Referência ao TreeCutWarning
 
     private void Start()
     {
@@ -34,7 +36,14 @@ public class ToolsManager : MonoBehaviour
         }
 
         animator = GetComponent<Animator>();
+
+        // Verifica se o TreeCutWarning foi atribuído
+        if (treeCutWarning == null)
+        {
+            Debug.LogWarning("TreeCutWarning não foi atribuído no Inspector.");
+        }
     }
+
     // Método para desmarcar todos os toggles, exceto o que foi passado
     public static void ChangeTool(ToolController currentToolController)
     {
@@ -51,11 +60,16 @@ public class ToolsManager : MonoBehaviour
     // Método para ativar ou desativar a ferramenta
     public static void SetActiveTool(Tools tool)
     {
-        // Se a ferramenta ativa for diferente da ferramenta que está sendo ativada/desativada
         if (activeTool != tool)
         {
             activeTool = tool;
             Debug.Log("Ferramenta Ativada: " + activeTool);
+
+            // Verifica se a ferramenta selecionada é CutDown
+            if (tool == Tools.CutDown && FindObjectOfType<ToolsManager>().treeCutWarning != null)
+            {
+                FindObjectOfType<ToolsManager>().treeCutWarning.ShowPopup();
+            }
         }
     }
 
