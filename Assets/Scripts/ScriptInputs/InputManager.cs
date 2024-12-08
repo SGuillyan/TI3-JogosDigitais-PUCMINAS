@@ -29,7 +29,7 @@ public class InputManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (ToolsManager.activeTool == ToolsManager.Tools.None)
+        if (ToolsManager.activeTool == ToolsManager.Tools.None && !MenuManager.openedMenu)
         {
             cameraController.CameraInput();
         }

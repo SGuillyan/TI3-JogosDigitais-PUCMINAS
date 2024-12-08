@@ -22,14 +22,88 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+    <IsFolder>k__BackingField: 0
+    <BundleFileId>k__BackingField: 
+    <IsInResources>k__BackingField: 0
+    <IsInSceneList>k__BackingField: 0
+    <IsSubAsset>k__BackingField: 0
+    m_CheckedIsScene: 0
+    m_IsScene: 0
+    m_CurrentHash:
+      bytes[0]: 48
+      bytes[1]: 117
+      bytes[2]: 174
+      bytes[3]: 93
+      bytes[4]: 68
+      bytes[5]: 12
+      bytes[6]: 63
+      bytes[7]: 79
+      bytes[8]: 67
+      bytes[9]: 163
+      bytes[10]: 185
+      bytes[11]: 40
+      bytes[12]: 49
+      bytes[13]: 29
+      bytes[14]: 111
+      bytes[15]: 166
+    m_cachedAssetPath: Assets/Localization/TutorialTable Shared Data.asset
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 87c431e7c0b998a44ba3b9fd93ab40a9
     m_Address: Assets/Localization/MenusTable Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+    <IsFolder>k__BackingField: 0
+    <BundleFileId>k__BackingField: 
+    <IsInResources>k__BackingField: 0
+    <IsInSceneList>k__BackingField: 0
+    <IsSubAsset>k__BackingField: 0
+    m_CheckedIsScene: 0
+    m_IsScene: 0
+    m_CurrentHash:
+      bytes[0]: 215
+      bytes[1]: 22
+      bytes[2]: 53
+      bytes[3]: 155
+      bytes[4]: 33
+      bytes[5]: 57
+      bytes[6]: 142
+      bytes[7]: 184
+      bytes[8]: 77
+      bytes[9]: 105
+      bytes[10]: 131
+      bytes[11]: 234
+      bytes[12]: 200
+      bytes[13]: 199
+      bytes[14]: 63
+      bytes[15]: 141
+    m_cachedAssetPath: Assets/Localization/MenusTable Shared Data.asset
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 7b32d46aacfc2e34f8130e36b282782c, type: 2}
   m_SchemaSet:
     m_Schemas:
     - {fileID: 11400000, guid: e449ef58c3d3e4d43b3ceee2af8bdedb, type: 2}
     - {fileID: 11400000, guid: 326d1159eb98cd14db0a022b1f860ead, type: 2}
+  m_FolderEntryCache: []
+  m_AssetCollectionEntryCache: []
+  <FlaggedDuringContentUpdateRestriction>k__BackingField: 0
+  m_CurrentHash:
+    bytes[0]: 251
+    bytes[1]: 247
+    bytes[2]: 153
+    bytes[3]: 222
+    bytes[4]: 156
+    bytes[5]: 233
+    bytes[6]: 166
+    bytes[7]: 85
+    bytes[8]: 117
+    bytes[9]: 100
+    bytes[10]: 151
+    bytes[11]: 57
+    bytes[12]: 117
+    bytes[13]: 157
+    bytes[14]: 211
+    bytes[15]: 117

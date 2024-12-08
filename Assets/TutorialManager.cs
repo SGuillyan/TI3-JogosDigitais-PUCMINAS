@@ -2,9 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
-using UnityEngine.Localization.Components;
-using UnityEngine.Localization.Tables;
-using UnityEngine.Localization;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -12,7 +9,6 @@ public class TutorialManager : MonoBehaviour
     public class TutorialStep
     {
         public string dialogueText;           // Texto que será exibido para o jogador
-        public LocalizedString localizeKey;   // Chave de localização
         public RectTransform targetUIElement; // Elemento de UI que será o alvo do passo
         public List<Button> buttonsToClick = new List<Button>();   // Lista de botões que devem ser clicados antes de prosseguir
         public List<Toggle> togglesToActivate = new List<Toggle>(); // Lista de toggles que devem ser ativados antes de prosseguir
@@ -26,27 +22,31 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] public TutorialStep[] tutorialSteps;       // Lista dos passos do tutorial
     public GameObject tutorialGameObject;
     public TextMeshProUGUI dialogueTextUI;     // UI do texto do tutorial (pode ser um Text ou TextMeshProUGUI)
-    public LocalizeStringEvent localizeText;
     public RectTransform arrowImage;           // Referência para a imagem da seta
     public Button nextButton;                  // Botão para avançar no tutorial
 
     private int currentStepIndex = 0;          // Índice do passo atual
     public float arrowOffsetY = 50f;           // Offset vertical da seta (quantos pixels acima do elemento alvo)
 
+    public bool tutirialCompleted = false;
+
     void Start()
     {
         // Inicializa o tutorial mostrando o primeiro passo
-        if (tutorialSteps.Length > 0)
+        if (tutorialSteps.Length > 0 && !tutirialCompleted)
         {
             ShowStep(currentStepIndex);
             tutorialGameObject.SetActive(true);
+
+            // Analytics
+            AnalyticsManager.SetStartTutorial(true);
+
+            // MenuManager
+            MenuManager.openedMenu = true;
         }
 
         // Adiciona listener ao botão "Próximo"
         nextButton.onClick.AddListener(NextStep);
-
-        // Analytics
-        AnalyticsManager.SetStartTutorial(true);
     }
 
     // Método para mostrar um passo específico do tutorial
@@ -57,7 +57,7 @@ public class TutorialManager : MonoBehaviour
             TutorialStep currentStep = tutorialSteps[index];
 
             // Atualiza o texto do tutorial
-            localizeText.StringReference = currentStep.localizeKey;
+            dialogueTextUI.text = currentStep.dialogueText;
 
             // Atualiza a posição do pop-up do tutorial
             if (currentStep.popupPosition == Vector2.zero)
@@ -217,10 +217,15 @@ public class TutorialManager : MonoBehaviour
         nextButton.gameObject.SetActive(false);
         tutorialGameObject.SetActive(false);
 
+        tutirialCompleted = true;
+
         // Alalytics
         AnalyticsManager.SetStartTutorial(false);
         AnalyticsSystem.AddAnalyticTutorialTime_Seconds(this.name, "End tutorial", AnalyticsManager.GetTutorialTime());
         AnalyticsSystem.AddAnalyticTutorialTime_Formated(this.name, "End tutorial", AnalyticsManager.GetTutorialTime());
+
+        // MenuManager
+        MenuManager.openedMenu = false;
     }
 
     // Método para encerrar o tutorial completamente, para ser chamado por um botão
@@ -264,10 +269,15 @@ public class TutorialManager : MonoBehaviour
         // Redefine o progresso do tutorial
         currentStepIndex = 0;
 
+        tutirialCompleted = true;
+
         // Alalytics
         AnalyticsManager.SetStartTutorial(false);
         AnalyticsSystem.AddAnalyticTutorialTime_Seconds(this.name, "Tutorial skiped", AnalyticsManager.GetTutorialTime());
         AnalyticsSystem.AddAnalyticTutorialTime_Formated(this.name, "Tutorial skiped", AnalyticsManager.GetTutorialTime());
+
+        // MenuManager
+        MenuManager.openedMenu = false;
 
         Debug.Log("Tutorial encerrado completamente.");
     }
