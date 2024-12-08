@@ -174,24 +174,28 @@ public class CustomTileBase : TileBase
             return false;
         }
 
-        // Verifica 2 tiles acima e abaixo no eixo Y
-        for (int yOffset = -2; yOffset <= 2; yOffset++)
+        // Verifica em um raio de 2 tiles em torno da posição (X e Y)
+        for (int xOffset = -2; xOffset <= 2; xOffset++)
         {
-            if (yOffset == 0) continue; // Ignora a posição central
-
-            Vector3Int checkPosition = new Vector3Int(position.x, position.y + yOffset, position.z);
-            TileBase nearbyTile = tilemapManager.tilemap.GetTile(checkPosition);
-
-            if (nearbyTile is CustomTileBase customTile)
+            for (int yOffset = -2; yOffset <= 2; yOffset++)
             {
-                // Verifica se é um "WaterTile" com base no nome ou em outro critério
-                if (customTile.name == "WaterTile") // Substitua "WaterTile" pelo critério que identifica os tiles de água
+                if (xOffset == 0 && yOffset == 0) continue; // Ignora a posição central
+
+                Vector3Int checkPosition = new Vector3Int(position.x + xOffset, position.y + yOffset, position.z);
+                TileBase nearbyTile = tilemapManager.tilemap.GetTile(checkPosition);
+
+                if (nearbyTile is CustomTileBase customTile)
                 {
-                    return true;
+                    // Verifica se é um "WaterTile" com base no nome ou em outro critério
+                    if (customTile.name == "WaterTile") // Substitua "WaterTile" pelo critério que identifica os tiles de água
+                    {
+                        return true;
+                    }
                 }
             }
         }
 
         return false;
     }
+
 }

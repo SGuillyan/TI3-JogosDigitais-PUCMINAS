@@ -62,35 +62,35 @@ public class TilemapManager : MonoBehaviour
 
                 // Verifica se a expansão é para o Sul e ajusta o rio
 
-                if (y == -5 &&  x <= 18) // Parte inicial do rio (reta)
+                if (y == -5 &&  x <= 19) // Parte inicial do rio (reta)
                 {
                     tilemap.SetTile(position, riverTile);
                 }
-                else if (y <= -5 && x == 18) // Curva do rio na metade do tile Sul
+                else if (y <= -5 && x == 19) // Curva do rio na metade do tile Sul
                 {
                     tilemap.SetTile(position, riverTile);
                 }
-                else if (y == -4 && x == 19) // Curva do rio na metade do tile Sul
+                else if (y == -4 && x == 20) // Curva do rio na metade do tile Sul
                 {
                     tilemap.SetTile(position, cornerSmall);
                 }
-                else if (y == -6 && x == 17) // Curva do rio na metade do tile Sul
+                else if (y == -6 && x == 18) // Curva do rio na metade do tile Sul
                 {
                     tilemap.SetTile(position, cornerLarge);
                 }
-                else if (y == -4 && x <= 18) // Curva do rio na metade do tile Sul
+                else if (y == -4 && x <= 19) // Curva do rio na metade do tile Sul
                 {
                     tilemap.SetTile(position, borderTileRight);
                 }
-                else if (y == -6 && x <= 18) // Curva do rio na metade do tile Sul
+                else if (y == -6 && x <= 19) // Curva do rio na metade do tile Sul
                 {
                     tilemap.SetTile(position, borderTileLeft);
                 }
-                else if (y < -4 && x == 17) // Curva do rio na metade do tile Sul
+                else if (y < -4 && x == 18) // Curva do rio na metade do tile Sul
                 {
                     tilemap.SetTile(position, borderTileDown);
                 }
-                else if (y <= -5 && x == 19) // Curva do rio na metade do tile Sul
+                else if (y <= -5 && x == 20) // Curva do rio na metade do tile Sul
                 {
                     tilemap.SetTile(position, borderTileUp);
                 }
