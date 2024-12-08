@@ -1,5 +1,7 @@
 using System;
+using System.Data;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class AmbientVFX_Controller : MonoBehaviour
 {
@@ -14,12 +16,12 @@ public class AmbientVFX_Controller : MonoBehaviour
     [SerializeField] private float drizzleIntensity = 5;
 
     [Header("Light Colors")]
-    [SerializeField, Tooltip("Cor de tempo comum")] private Color defaultColor = new Color(1f, 0.9568627450980392f, 0.8392156862745098f);
+    [SerializeField, Tooltip("Cor de tempo comum")] private Color defaultColor = new Color(1f, 0.9568627450980392f, 0.8392156862745098f, 1f);
     [Space(5)]
-    [SerializeField, Tooltip("Cor de tempestade")] private Color heavyRainColor = new Color(0.4117647058823529f, 0.4705882352941176f, 0.607843137254902f);
-    [SerializeField, Tooltip("Cor de garoa")] private Color drizzleColor = new Color(0.7254901960784314f, 0.7450980392156863f, 0.8823529411764706f);
-    [SerializeField, Tooltip("Cor de levemente ensolarado")] private Color lowSunsetColor = new Color(1f, 0.9215686274509804f, 0.7254901960784314f);
-    [SerializeField, Tooltip("Cor de muito ensolarado")] private Color hightSunsetColor = new Color(0.9803921568627451f, 0.9607843137254902f, 0.5294117647058824f);
+    [SerializeField, Tooltip("Cor de tempestade")] private Color heavyRainColor = new Color(0.4117647058823529f, 0.4705882352941176f, 0.607843137254902f, 1f);
+    [SerializeField, Tooltip("Cor de garoa")] private Color drizzleColor = new Color(0.7254901960784314f, 0.7450980392156863f, 0.8823529411764706f, 1f);
+    [SerializeField, Tooltip("Cor de levemente ensolarado")] private Color lowSunsetColor = new Color(1f, 0.9215686274509804f, 0.7254901960784314f, 1f);
+    [SerializeField, Tooltip("Cor de muito ensolarado")] private Color hightSunsetColor = new Color(0.9803921568627451f, 0.9607843137254902f, 0.5294117647058824f, 1f);
 
     [Header("Timer")]
     [SerializeField, Min(10)] private float changeTime = 10;
@@ -32,12 +34,25 @@ public class AmbientVFX_Controller : MonoBehaviour
     private float newRateOverTime;
     private Color newLightColor;
 
+    // Day Time
+    [SerializeField, Min(1.5f)] private float maxDayLightIntensity = 1.5f;
+    private float realTimeNow;
+    private bool isAM;
+
     private void Start()
     {
-        //ModifyWeather();
-
         emission = _particleSystem.emission;
         change_tt = changeTime;
+
+        //ModifyWeather(defaultColor);
+        currentRateOverTime = 0;
+        currentLightColor = defaultColor;
+        emission.rateOverTime = currentRateOverTime;
+        _light.color = currentLightColor;
+
+        realTimeNow = (((int)DateTime.Now.TimeOfDay.TotalMinutes) / 60f);
+        if (realTimeNow < 12) isAM = true;
+        else isAM = false;
     }
 
     private void Update()
@@ -46,19 +61,36 @@ public class AmbientVFX_Controller : MonoBehaviour
         { 
             if (changeTime > 0)
             {
-                //var emission = _particleSystem.emission;
-                emission.rateOverTime = rainIntensity;
+                emission.rateOverTime = Mathf.Lerp(currentRateOverTime, newRateOverTime, 1f - (changeTime/ change_tt));
+                _light.color = Color.Lerp(currentLightColor, newLightColor, 1f - (changeTime / change_tt));
+                _light.color = new Color(_light.color.r, _light.color.g, _light.color.b, 1f);
 
                 changeTime -= Time.deltaTime;
             }
             else
             {
+                emission.rateOverTime = newRateOverTime;
+                _light.color = newLightColor;
+
                 currentRateOverTime = newRateOverTime;
                 currentLightColor = newLightColor;
 
                 isChanging = false;
-                changeTime = change_tt;
             }
+        }
+
+        ;
+        //Debug.Log(((int)DateTime.Now.AddHours(12).TimeOfDay.TotalMinutes) / 60f);
+        //Debug.Log(realTimeNow);
+        realTimeNow = (((int)DateTime.Now.TimeOfDay.TotalMinutes) / 60f);
+
+        _light.transform.rotation = Quaternion.Euler(_light.transform.rotation.eulerAngles.x, realTimeNow * 30f, _light.transform.rotation.eulerAngles.z);
+
+        if (realTimeNow > 1 && realTimeNow < 11)
+        {
+            float t = (realTimeNow - 1) / 10;
+            if (isAM) _light.intensity = Mathf.Lerp(0f, maxDayLightIntensity, t);
+            else _light.intensity = Mathf.Lerp(maxDayLightIntensity, 0f, t);
         }
     }
 
@@ -97,13 +129,13 @@ public class AmbientVFX_Controller : MonoBehaviour
                 ModifyWeather(defaultColor);
                 break;
         }
+
+        changeTime = change_tt;
+        isChanging = true;
     }
 
     private void ModifyWeather(Color lightColor, float rateOverTime = 0)
     {
-        /*var emission = _particleSystem.emission;
-        emission.rateOverTime = rainIntensity;*/
-
         newLightColor = lightColor;
         newRateOverTime = rateOverTime;
     }

@@ -27,6 +27,8 @@ public class AmbientManager : MonoBehaviour
 
     public static bool ambientChange = true;
 
+    [SerializeField] private AmbientVFX_Controller weatherController;
+
     private void Start()
     {
         currentSeason = Season.Summer;
@@ -165,6 +167,7 @@ public class AmbientManager : MonoBehaviour
         }
 
         //Debug.Log("Agora está " + Ambient.GetCurrentClimate());
+        weatherController.ChangeWeather();
     }
 
     private void UpdateSeasonalFactor()
