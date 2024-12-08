@@ -13,6 +13,8 @@ public class StoreUI : MonoBehaviour
     public GameObject storeUI;  // Referência à UI da loja
     public Animator storeAnimator;  // Animações para abrir/fechar a loja
 
+    public MoneyManager moneyManager;
+
     private List<GameObject> storeItemInstances = new List<GameObject>();
     private bool isVisible = true;
 
@@ -198,17 +200,17 @@ public class StoreUI : MonoBehaviour
 
         leftArrow.onClick.AddListener(() =>
         {
-            // Debug.Log("Botão LeftArrow pressionado para o item " + item.itemName); // Log para verificar o clique
-            AdjustQuantity(-1, selectedQuantityText);
+            AdjustQuantity(-1, selectedQuantityText, item, isBuyTab); // Passa o item diretamente
             itemPrice.text = (item.price * selectedQuantity).ToString();
         });
 
         rightArrow.onClick.AddListener(() =>
         {
-            // Debug.Log("Botão RightArrow pressionado para o item " + item.itemName); // Log para verificar o clique
-            AdjustQuantity(1, selectedQuantityText);
+            AdjustQuantity(1, selectedQuantityText, item, isBuyTab); // Passa o item diretamente
             itemPrice.text = (item.price * selectedQuantity).ToString();
         });
+
+
 
         confirmButton.onClick.AddListener(() =>
         {
@@ -278,18 +280,36 @@ public class StoreUI : MonoBehaviour
 
 
 
-   private void AdjustQuantity(int amount, TextMeshProUGUI selectedQuantityText)
+    private void AdjustQuantity(int amount, TextMeshProUGUI selectedQuantityText, Item item, bool isBuyTab)
     {
-        // Ajusta a quantidade, mas nunca permite que seja menor que 1
-        selectedQuantity = Mathf.Max(1, selectedQuantity + amount);
+        // Ajusta a quantidade inicial, mas nunca permite que seja menor que 1
+        int maxQuantity = int.MaxValue;
+
+        if (item != null)
+        {
+            if (isBuyTab)
+            {
+                // Aba de compra: restrição com base no dinheiro disponível
+                maxQuantity = Mathf.FloorToInt((float)moneyManager.GetCurrentMoney() / item.price);
+            }
+            else
+            {
+                // Aba de venda: restrição com base na quantidade no inventário
+                maxQuantity = playerInventory.GetItemQuantity(item);
+            }
+        }
+
+        // Restringe a quantidade ajustada ao intervalo permitido
+        selectedQuantity = Mathf.Clamp(selectedQuantity + amount, 1, maxQuantity);
 
         // Atualiza o texto no controle de quantidade
         if (selectedQuantityText != null)
         {
-            //Debug.Log("Ajustando a quanidade para " + selectedQuantity);
             selectedQuantityText.text = selectedQuantity.ToString();
         }
     }
+
+
 
 
     private void OnBuyItemConfirmed(int itemID, int quantity)

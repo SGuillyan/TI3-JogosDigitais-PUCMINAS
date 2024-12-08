@@ -9501,6 +9501,7 @@ MonoBehaviour:
   contentParent: {fileID: 2019204313}
   storeUI: {fileID: 1065880391}
   storeAnimator: {fileID: 1065880394}
+  moneyManager: {fileID: 917966509}
 --- !u!1 &487781070
 GameObject:
   m_ObjectHideFlags: 0
