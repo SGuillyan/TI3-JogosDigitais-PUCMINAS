@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Quest : MonoBehaviour
 {
+    public string questName;
     public bool daily = true;
 
     //[Header("Access")]
@@ -39,8 +40,77 @@ public class Quest : MonoBehaviour
                 {
                     if (daily) GiveReward();
                     else manager.ResetEventQuest();
+
+                    foreach (Quest q in manager.activeQuests)
+                    {
+                        if (q.questName == this.questName)
+                        {
+                            manager.activeQuests.Remove(q);
+                            manager.availableQuests.Add(q);
+                            break;
+                        }
+                    }
+                    
                     Destroy(gameObject);
                 }
+            }
+        }
+    }
+
+    public void CompostingRequire()
+    {
+        InventoryItem[] aux = manager.inventoryManager.playerInventory.items.ToArray();
+        int quantity = 0;
+
+        for (int i = 0; i < aux.Length; i++)
+        {
+            quantity += aux[i].quantity;
+
+            if (quantity >= quantityRequire)
+            {
+                quantity = quantityRequire;
+                for (int j = 0; j < aux.Length; j++)
+                {
+                    /*if (quantity - aux[j].quantity >= 0)
+                    {
+                        manager.inventoryManager.playerInventory.items.Remove(aux[j]);
+                        quantity -= aux[j].quantity;
+                    }
+                    else
+                    {
+                        aux[j].quantity -= quantity;
+                        break;
+                    }*/
+
+                    if (quantity >= aux[j].quantity)
+                    {
+                        quantity -= aux[j].quantity;
+                        manager.inventoryManager.playerInventory.items.Remove(aux[j]);
+
+                        Debug.Log("(1) " + quantity.ToString() + " " + aux[j].quantity.ToString());
+                    }
+                    else if (quantity < aux[j].quantity)
+                    {
+                        aux[j].quantity -= quantity;
+                        quantity = 0;
+                        Debug.Log("(2) " + quantity.ToString() + " " + aux[j].quantity.ToString());
+                        break;
+                    }
+                }
+
+                GiveReward();
+
+                foreach (Quest q in manager.activeQuests)
+                {
+                    if (q.questName == this.questName)
+                    {
+                        manager.activeQuests.Remove(q);
+                        manager.availableQuests.Add(q);
+                        break;
+                    }
+                }
+
+                Destroy(gameObject);
             }
         }
     }

@@ -60,7 +60,7 @@ MonoBehaviour:
     maxStackSize: 99
     itemType: 0
     itemID: 103
-    price: 80
+    price: 20
     reqNitro: 0
     reqPhosf: 0
     reqK: 0

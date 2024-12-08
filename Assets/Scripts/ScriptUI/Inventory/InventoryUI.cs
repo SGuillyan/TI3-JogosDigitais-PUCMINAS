@@ -59,9 +59,9 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void OnSeedSelected(int itemID)
+    public void OnSeedSelected(int itemID, int inventoryID)
     {
-        inventoryManager.SelectSeed(itemID);
+        inventoryManager.SelectSeed(itemID, inventoryID);
         //CloseInventory();
     }
 
@@ -97,12 +97,12 @@ public class InventoryUI : MonoBehaviour
         GameObject itemInstance = Instantiate(inventoryItemPrefab, contentParent);
         inventoryItemInstances.Add(itemInstance);
 
-        Image itemIcon = itemInstance.transform.Find("ItemIcon").GetComponent<Image>();
-        TextMeshProUGUI itemName = itemInstance.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI itemQuantity = itemInstance.transform.Find("ItemQuantity").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI ItemInfoN = itemInstance.transform.Find("Panel/ItemInfoN").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI ItemInfoP = itemInstance.transform.Find("Panel/ItemInfoP").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI ItemInfoK = itemInstance.transform.Find("Panel/ItemInfoK").GetComponent<TextMeshProUGUI>();
+        Image itemIcon = itemInstance.transform.Find("Icon").Find("img_Item").GetComponent<Image>();
+        TextMeshProUGUI itemName = itemInstance.transform.Find("text_ItemName").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI itemQuantity = itemInstance.transform.Find("Icon").Find("img_Item").Find("text_Quantity").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI ItemInfoN = itemInstance.transform.Find("Panel/text_InfoN").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI ItemInfoP = itemInstance.transform.Find("Panel/text_InfoP").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI ItemInfoK = itemInstance.transform.Find("Panel/text_InfoK").GetComponent<TextMeshProUGUI>();
 
 
         if (itemIcon != null && itemName != null && itemQuantity != null)
@@ -123,7 +123,7 @@ public class InventoryUI : MonoBehaviour
         if (selectButton != null)
         {
             int itemID = inventoryItem.item.itemID;
-            selectButton.onClick.AddListener(() => OnSeedSelected(itemID));
+            selectButton.onClick.AddListener(() => OnSeedSelected(itemID, playerInventory.items.IndexOf(inventoryItem)));
         }
         else
         {

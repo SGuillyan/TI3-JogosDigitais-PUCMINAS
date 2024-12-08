@@ -49,6 +49,7 @@ public class QuestManager : MonoBehaviour
     {
         int rand = UnityEngine.Random.Range(0, availableQuests.Count);
 
+        activeQuests.Add(availableQuests[rand]);
         Instantiate(availableQuests[rand].gameObject, questButtomContent.transform);
     }
 

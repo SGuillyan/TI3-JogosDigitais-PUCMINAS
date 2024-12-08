@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08820d22aa7a813458e27bf17d72df5d, type: 3}
+  m_Name: Event_Boldo
+  m_EditorClassIdentifier: 
+  warning: 0
+  description: The elementary school's nurse is in dire need of medicial herbs to
+    help the sick students!
+  text1: Boldo leaves
+  text2: 15
+  eventQuest: {fileID: 5949323907447680471, guid: 54a6c81fc3cdc6e4db8026f65f5650de,
+    type: 3}
+  warningTime: 0
+  warningTemperature: 0
+  warningClimate: 0
