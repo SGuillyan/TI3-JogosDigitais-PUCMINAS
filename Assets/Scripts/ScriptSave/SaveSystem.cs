@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SaveSystem : MonoBehaviour
@@ -28,9 +29,8 @@ public class SaveSystem : MonoBehaviour
 	private static Transform tilesParent;
 	private static InventoryManager inventoryManager;
 	private static QuestManager questManager;
-	
 
-	private void Start()
+	private void Awake()
 	{
 		volumeSettings = accesses.volumeSettings;
         tutorialManager = accesses.tutorialManager;
@@ -97,7 +97,7 @@ public class SaveSystem : MonoBehaviour
         {
             questManager.activeQuests.Add(load.questData.activeQuests[i]);
         }
-        #endregion
+		#endregion
     }
 
 
@@ -106,6 +106,7 @@ public class SaveSystem : MonoBehaviour
 		string json = JsonUtility.ToJson(GenerateSaveData(), true);
 
 		File.WriteAllText(path, json);
+		Debug.Log("Save concluido!");
 	}
 
 	private static SaveData GenerateLoadData(string path)
@@ -117,7 +118,7 @@ public class SaveSystem : MonoBehaviour
 
 	public static SaveData GenerateSaveData()
 	{
-		SaveData save = new SaveData();
+		SaveData save = new SaveData();		
 
 		save.configData = new ConfigData(volumeSettings.musicSlider.value, volumeSettings.sfxSlider.value);
         save.tutorialData = new TutorialData(tutorialManager.tutirialCompleted);
@@ -125,7 +126,7 @@ public class SaveSystem : MonoBehaviour
         save.moneyData = new MoneyData(moneyManager.GetCurrentMoney());
         save.ambientData = new AmbientData(Ambient.GetCurrentTemperature(), Ambient.GetCurrentClimate(), AmbientManager.GetCurrentSeason(), AmbientManager.GetSeasonalFactor());
         save.idsData = new IDS_Data(IDS.GetIDS(), IDS.GetEcologico(), IDS.GetEconomico(), IDS.GetSocial());
-		save.tileData = new TileData(tilesParent);
+		//save.tileData = new TileData(tilesParent);
         save.inventoryData = new InventoryData(inventoryManager.playerInventory.items);
 		save.questData = new QuestData(questManager.availableQuests, questManager.activeQuests);
 
@@ -146,8 +147,8 @@ public class SaveSystem : MonoBehaviour
         public IDS_Data idsData;
         public TileData tileData;
         public InventoryData inventoryData;
-		public QuestData questData;		
-	}
+		public QuestData questData;
+    }
 
     [Serializable]
     public class ConfigData
