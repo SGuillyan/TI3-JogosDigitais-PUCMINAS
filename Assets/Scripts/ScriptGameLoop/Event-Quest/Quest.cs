@@ -71,17 +71,6 @@ public class Quest : MonoBehaviour
                 quantity = quantityRequire;
                 for (int j = 0; j < aux.Length; j++)
                 {
-                    /*if (quantity - aux[j].quantity >= 0)
-                    {
-                        manager.inventoryManager.playerInventory.items.Remove(aux[j]);
-                        quantity -= aux[j].quantity;
-                    }
-                    else
-                    {
-                        aux[j].quantity -= quantity;
-                        break;
-                    }*/
-
                     if (quantity >= aux[j].quantity)
                     {
                         quantity -= aux[j].quantity;

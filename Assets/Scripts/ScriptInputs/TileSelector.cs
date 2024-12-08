@@ -31,7 +31,7 @@ public class TileSelector : MonoBehaviour
         // Verifica se algum painel de UI está ativo ou se o painel de informações está aberto
         if (IsAnyUIPanelActive() )//|| tileInfoAnimator.GetBool("OpenInfo"))
         {
-            Debug.Log("UI ABERTA TOQUE INTERROMPIDO");
+            //Debug.Log("UI ABERTA TOQUE INTERROMPIDO");
             return;
         }
 
@@ -39,13 +39,13 @@ public class TileSelector : MonoBehaviour
         {
             if (MenuManager.openedMenu)
             {
-                Debug.Log("UI ABERTA TOQUE INTERROMPIDO 2");
+                //Debug.Log("UI ABERTA TOQUE INTERROMPIDO 2");
                 continuoMenuTimer = continuott;
                 return;
             }
             if (continuoMenuTimer > 0f)
             {
-                Debug.Log("UI ABERTA TOQUE INTERROMPIDO 3");
+                //Debug.Log("UI ABERTA TOQUE INTERROMPIDO 3");
                 continuoMenuTimer -= Time.deltaTime;
                 return;
             }

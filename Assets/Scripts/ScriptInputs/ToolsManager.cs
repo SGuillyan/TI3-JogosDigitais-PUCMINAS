@@ -35,9 +35,9 @@ public class ToolsManager : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void Update(){
+    /*public void Update(){
         Debug.Log(activeTool);
-    }
+    }*/
 
     // Método para desmarcar todos os toggles, exceto o que foi passado
     public static void ChangeTool(ToolController currentToolController)
