@@ -14,6 +14,7 @@ public class ToolsManager : MonoBehaviour
         Plant,
         Fertilize,
         Flatten,
+        CutDown,
         Water,
     }
 
@@ -36,7 +37,7 @@ public class ToolsManager : MonoBehaviour
     }
 
     public void Update(){
-        Debug.Log(activeTool);
+        // Debug.Log(activeTool);
     }
 
     // Método para desmarcar todos os toggles, exceto o que foi passado

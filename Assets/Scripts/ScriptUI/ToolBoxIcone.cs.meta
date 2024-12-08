@@ -3,7 +3,13 @@ guid: 837f783413bc3854b93a02e5a3da7f68
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - image: {instanceID: 0}
+  - defaultIcon: {instanceID: 0}
+  - plowIcon: {instanceID: 0}
+  - flattenIcon: {instanceID: 0}
+  - harvestIcon: {instanceID: 0}
+  - infoIcon: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

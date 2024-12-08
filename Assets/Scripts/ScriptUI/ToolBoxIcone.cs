@@ -12,6 +12,7 @@ public class ToolBoxIcone : MonoBehaviour
     [SerializeField] private Sprite plowIcon;
     [SerializeField] private Sprite flattenIcon;
     [SerializeField] private Sprite harvestIcon;
+    [SerializeField] private Sprite cutDownIcon;
     [SerializeField] private Sprite infoIcon;
 
     private void Update()
@@ -29,6 +30,9 @@ public class ToolBoxIcone : MonoBehaviour
                 break;
             case ToolsManager.Tools.Harvest:
                 image.sprite = harvestIcon;
+                break;
+            case ToolsManager.Tools.CutDown:
+                image.sprite = cutDownIcon;
                 break;
             case ToolsManager.Tools.Info:
                 image.sprite = infoIcon;
