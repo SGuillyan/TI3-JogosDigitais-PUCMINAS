@@ -284,7 +284,7 @@ public class PlantTile : Tile
 
    public void Collect(Tilemap tilemap, Vector3Int position, Inventory playerInventory)
     {
-        if (isFullyGrown)
+        if (isFullyGrown && !isRotten)
         {
             isCollected = true; // Sinaliza que a planta foi colhida
 
