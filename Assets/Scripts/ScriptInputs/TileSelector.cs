@@ -13,7 +13,7 @@ public class TileSelector : MonoBehaviour
     public TilemapFertilize tilemapFertilize;
     public InventoryUI inventoryUI;
     public TilemapManager tilemapManager;
-    public RewardManager rewardManager;
+    public ExpansionPanelManager expansionManager;
     public UIManager uiManager;
     [SerializeField] private List<GameObject> uiPanels;
     public Inventory playerInventory;
@@ -88,7 +88,9 @@ public class TileSelector : MonoBehaviour
                     case ToolsManager.Tools.Fertilize:
                         UseFertilizeTool(gridPosition);
                         break;
-                    
+                    case ToolsManager.Tools.None:
+                        UseNoneTool(clickedTile);
+                        break;                    
                 }
             }
 
@@ -114,6 +116,15 @@ public class TileSelector : MonoBehaviour
         return false; // Caso nenhum painel esteja ativo, retorna false
     }
 
+    void UseNoneTool(TileBase tile){
+        if(tile is HouseTile){
+            Debug.Log("clicked an house tile");
+            if(expansionManager != null){
+                Debug.Log("expansion manager open");
+                expansionManager.ShowExpansionPanel();
+            }
+        }
+    }
     void UsePlowTool(TileBase tile, Vector3Int gridPosition)
     {
         if (tile is CustomTileBase customTile)
