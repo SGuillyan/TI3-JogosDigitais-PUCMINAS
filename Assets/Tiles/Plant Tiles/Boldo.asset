@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 136b335a369405b4da23ee97a938482c, type: 3}
+  m_Name: Boldo
+  m_EditorClassIdentifier: 
+  m_Sprite: {fileID: 21300000, guid: 5c46b31364a63d349b3eda9f78083abe, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Transform:
+    e00: 1
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 1
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 1
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+  m_InstancedGameObject: {fileID: 0}
+  m_Flags: 1
+  m_ColliderType: 1
+  growthPrefabs:
+  - {fileID: 5285384602107226842, guid: 6eae9e80bc68f3d48bc3defe57a32956, type: 3}
+  - {fileID: 5285384602107226842, guid: 8257585f3c4c0d04c9e2cbfc1dd7e862, type: 3}
+  - {fileID: 5285384602107226842, guid: 1813a1d8f65c682409dc6b32e75d75e9, type: 3}
+  - {fileID: 5285384602107226842, guid: 1509ee0f4512ab843878019854a79d0f, type: 3}
+  - {fileID: 5285384602107226842, guid: 2232617aefc0a3d43a13197d66f44591, type: 3}
+  rotPrefab: {fileID: 0}
+  growthTimes: []
+  idealTemperature: 0
+  idealClimate: 0
+  greenTolerance: 0
+  yellowTolerance: 2
+  progressBarPrefab: {fileID: 0}
+  isPlanted: 0
+  isFullyGrown: 0
+  isRotten: 0
+  harvestedItem:
+    itemName: 
+    itemIcon: {fileID: 0}
+    maxStackSize: 0
+    itemType: 0
+    itemID: 0
+    price: 0
+    reqNitro: 0
+    reqPhosf: 0
+    reqK: 0
+  soilTile: {fileID: 0}
+  requiredNitrogen: 10
+  requiredPhosphorus: 5
+  requiredPotassium: 5
+  returnNitrogen: 5
+  returnPhosphorus: 3
+  returnPotassium: 4
