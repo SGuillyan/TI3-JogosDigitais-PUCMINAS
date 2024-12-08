@@ -84,6 +84,8 @@ public class EventManager : MonoBehaviour
         description.text = evento.description;
         bottomText1.text = evento.text1;
         bottomText2.text = evento.text2;
+
+        AudioManager.PlaySound(SoundType.EVENTSTART);
     }
 
     public void DesableEventUI()

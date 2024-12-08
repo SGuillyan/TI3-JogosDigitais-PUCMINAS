@@ -76,6 +76,7 @@ public static class IDS
         if (ecologico < 100)
         {
             ecologico += value;
+            AudioManager.PlaySound(SoundType.IDSINCREASE);
         }
         CalcularIDS();
     }
@@ -93,6 +94,7 @@ public static class IDS
         if (economico < 100)
         {
             economico += value;
+            AudioManager.PlaySound(SoundType.IDSINCREASE);
         }
         CalcularIDS();
     }
@@ -110,6 +112,7 @@ public static class IDS
         if (social < 100)
         {
             social += value;
+            AudioManager.PlaySound(SoundType.IDSINCREASE);
         }
         CalcularIDS();
     }

@@ -51,42 +51,56 @@ public class MenuManager : MonoBehaviour
             OpenToolBox();
             //isToolBoxOpen = true;
         }
+
+        AudioManager.PlaySound(SoundType.SCREENCLICK);
     }
 
     public void TabQuestList()
     {
         if (questCanvas.activeSelf) CloseQuestList(); 
-        else OpenQuestList(); 
+        else OpenQuestList();
+
+        AudioManager.PlaySound(SoundType.SCREENCLICK);
     }
 
     public void TabInventory()
     {
         if (inventory.activeSelf) CloseInventory(); 
-        else OpenInventory(); 
+        else OpenInventory();
+
+        AudioManager.PlaySound(SoundType.SCREENCLICK);
     }
 
     public void TabShop()
     {
         if (shop.activeSelf) CloseShop(); 
         else OpenShop(); 
+
+        AudioManager.PlaySound(SoundType.SCREENCLICK);
     }
 
     public void TabIDS_Menu()
     {
         if (idsMenu.activeSelf) CloseIDS_Menu();
         else OpenIDS_Menu();
+
+        AudioManager.PlaySound(SoundType.SCREENCLICK);
     }
 
     public void TabConfig()
     {
         if (config.activeSelf) CloseConfig();
         else OpenConfig();
+
+        AudioManager.PlaySound(SoundType.SCREENCLICK);
     }
 
     public void TabCredit()
     {
         if (credit.activeSelf) CloseCredit();
         else OpenCredit();
+
+        AudioManager.PlaySound(SoundType.SCREENCLICK);
     }
 
     #endregion

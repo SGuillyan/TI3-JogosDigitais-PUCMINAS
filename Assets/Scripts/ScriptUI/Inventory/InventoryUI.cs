@@ -176,6 +176,8 @@ public class InventoryUI : MonoBehaviour
         {
             UpdateInventoryUIByType(ItemType.CollectedItem);
         }
+
+        AudioManager.PlaySound(SoundType.SCREENCLICK);
     }
 
     public void ShowSeeds(Toggle toggle)
@@ -184,6 +186,8 @@ public class InventoryUI : MonoBehaviour
         {
             UpdateInventoryUIByType(ItemType.Seed);
         }
+
+        AudioManager.PlaySound(SoundType.SCREENCLICK);
     }
 
     public void ShowFertilizers(Toggle toggle)
@@ -192,6 +196,8 @@ public class InventoryUI : MonoBehaviour
         {
             UpdateInventoryUIByType(ItemType.Fertilizer);
         }
+
+        AudioManager.PlaySound(SoundType.SCREENCLICK);
     }
 
     #endregion

@@ -91,6 +91,8 @@ public class StoreUI : MonoBehaviour
         {
             CreateStoreItemUI(item, true);  // Passa true para indicar que estamos na aba de compra
         }
+
+        AudioManager.PlaySound(SoundType.SCREENCLICK);
     }
 
     public void ShowSellItems()
@@ -105,6 +107,8 @@ public class StoreUI : MonoBehaviour
             // Usamos a função de criação de UI para mostrar os itens à venda
             CreateStoreItemUI(item, false);  // Passa false para indicar que estamos na aba de venda
         }
+
+        AudioManager.PlaySound(SoundType.SCREENCLICK);
     }
 
     #region // Toggle
@@ -196,18 +200,24 @@ public class StoreUI : MonoBehaviour
         selectButton.onClick.AddListener(() =>
         {
             SelectItem(itemInstance, itemID, isBuyTab);
+
+            AudioManager.PlaySound(SoundType.SCREENCLICK);
         });
 
         leftArrow.onClick.AddListener(() =>
         {
             AdjustQuantity(-1, selectedQuantityText, item, isBuyTab); // Passa o item diretamente
             itemPrice.text = (item.price * selectedQuantity).ToString();
+
+            AudioManager.PlaySound(SoundType.SCREENCLICK);
         });
 
         rightArrow.onClick.AddListener(() =>
         {
             AdjustQuantity(1, selectedQuantityText, item, isBuyTab); // Passa o item diretamente
             itemPrice.text = (item.price * selectedQuantity).ToString();
+
+            AudioManager.PlaySound(SoundType.SCREENCLICK);
         });
 
 
