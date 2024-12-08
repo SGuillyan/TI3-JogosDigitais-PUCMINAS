@@ -7,7 +7,7 @@ public class QuestManager : MonoBehaviour
 {
     public List<Quest> availableQuests = new List<Quest>();
     public List<Quest> activeQuests = new List<Quest>();
-    public List<Quest> completedQuests = new List<Quest>();
+    //public List<Quest> completedQuests = new List<Quest>();
 
     private const int maxActiveQuests = 3;
 
