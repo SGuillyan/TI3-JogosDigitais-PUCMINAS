@@ -52,8 +52,13 @@ public class TilemapManager : MonoBehaviour
             {
                 Vector3Int position = new Vector3Int(x, y, 0);
 
-                // Verifica a faixa onde o rio deve ser instanciado
-                if (y == -5) // Exemplo: Coluna fixa para o rio
+                // Verifica se a expansão é para o Sul e ajusta o rio
+
+                if (y == -5 &&  x <= 20) // Parte inicial do rio (reta)
+                {
+                    tilemap.SetTile(position, riverTile);
+                }
+                else if (y <= -5 && x == 20) // Curva do rio na metade do tile Sul
                 {
                     tilemap.SetTile(position, riverTile);
                 }
@@ -62,7 +67,6 @@ public class TilemapManager : MonoBehaviour
                     tilemap.SetTile(position, defaultTile);
                 }
 
-                // Atualiza as informações no dicionário do TilemapManager
                 TileInfo tileInfo = new TileInfo(
                     defaultTile.isPlantable,
                     defaultTile.nitrogen,
