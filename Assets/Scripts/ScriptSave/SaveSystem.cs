@@ -106,7 +106,7 @@ public class SaveSystem : MonoBehaviour
 		SaveData save = new SaveData();
 
 		save.configData = new ConfigData("nome", "lingua", 5.3f, 8.1f);
-        save.tutorialData = new TutorialData(false);
+        save.tutorialData = new TutorialData(tutorialManager.tutirialCompleted);
         save.cameraData = new CameraData(mainCamera.transform.position, mainCamera.orthographicSize);
         save.moneyData = new MoneyData(moneyManager.GetCurrentMoney());
         save.ambientData = new AmbientData(Ambient.GetCurrentTemperature(), Ambient.GetCurrentClimate(), AmbientManager.GetCurrentSeason(), AmbientManager.GetSeasonalFactor());
