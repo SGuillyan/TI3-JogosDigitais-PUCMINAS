@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63d3b67965f546b4fbca9b315f98627a, type: 3}
+  m_Name: TreeTile
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 8f911c4c18146804ca9c309e32fe9786, type: 3}
+  treePrefab: {fileID: 7750464074450678695, guid: 7dd00eca6d00ff24b861960d7a9b06a1,
+    type: 3}
+  groundPrefab: {fileID: 5596873383589714348, guid: f17673461ee7a2748bd633ddad22d8c1,
+    type: 3}
+  color: {r: 1, g: 1, b: 1, a: 1}

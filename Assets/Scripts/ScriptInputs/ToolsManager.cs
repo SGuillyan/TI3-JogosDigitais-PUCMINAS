@@ -14,6 +14,7 @@ public class ToolsManager : MonoBehaviour
         Plant,
         Fertilize,
         Flatten,
+        CutDown,
         Water,
     }
 
@@ -34,11 +35,6 @@ public class ToolsManager : MonoBehaviour
 
         animator = GetComponent<Animator>();
     }
-
-    /*public void Update(){
-        Debug.Log(activeTool);
-    }*/
-
     // Método para desmarcar todos os toggles, exceto o que foi passado
     public static void ChangeTool(ToolController currentToolController)
     {
