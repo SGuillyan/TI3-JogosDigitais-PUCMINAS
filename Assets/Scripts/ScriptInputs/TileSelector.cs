@@ -123,6 +123,8 @@ public class TileSelector : MonoBehaviour
             customTile.ChangeToPlowedState(gridPosition);
             Debug.Log($"Solo arado na posição: {gridPosition}");
 
+            AudioManager.PlaySound(SoundType.HOE);
+
             // Analytics
             AnalyticsSystem.AddAnalyticLands_Plowed(this.name, gridPosition);
         }
