@@ -50,7 +50,8 @@ public class Quest : MonoBehaviour
                             break;
                         }
                     }
-                    
+
+                    AudioManager.PlaySound(SoundType.FINISHQUEST);
                     Destroy(gameObject);
                 }
             }
@@ -76,13 +77,13 @@ public class Quest : MonoBehaviour
                         quantity -= aux[j].quantity;
                         manager.inventoryManager.playerInventory.items.Remove(aux[j]);
 
-                        Debug.Log("(1) " + quantity.ToString() + " " + aux[j].quantity.ToString());
+                        //Debug.Log("(1) " + quantity.ToString() + " " + aux[j].quantity.ToString());
                     }
                     else if (quantity < aux[j].quantity)
                     {
                         aux[j].quantity -= quantity;
                         quantity = 0;
-                        Debug.Log("(2) " + quantity.ToString() + " " + aux[j].quantity.ToString());
+                        //Debug.Log("(2) " + quantity.ToString() + " " + aux[j].quantity.ToString());
                         break;
                     }
                 }
@@ -99,6 +100,7 @@ public class Quest : MonoBehaviour
                     }
                 }
 
+                AudioManager.PlaySound(SoundType.FINISHQUEST);
                 Destroy(gameObject);
             }
         }

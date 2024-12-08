@@ -23,7 +23,7 @@ public enum SoundType
 [RequireComponent(typeof(AudioSource))]
 
 public class AudioManager : MonoBehaviour
-{
+{   
     [SerializeField] private AudioClip[] soundList;
     [SerializeField] private AudioMixer mixer;
 

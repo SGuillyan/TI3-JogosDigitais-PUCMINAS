@@ -17,7 +17,7 @@ public class Store : MonoBehaviour
     // Inicializa a loja com os itens configurados no Inspector
     private void InitializeStore()
     {
-        Debug.Log("Loja inicializada com " + defaultShopItems.Count + " itens.");
+        //Debug.Log("Loja inicializada com " + defaultShopItems.Count + " itens.");
     }
 
     // Método para obter todos os itens da loja
@@ -36,7 +36,9 @@ public class Store : MonoBehaviour
         if (shopItem != null && moneyManager.SpendMoney(totalCost))  // Usar o MoneyManager como singleton
         {
             playerInventory.AddItem(shopItem, quantity);  // Adiciona o item ao inventário do jogador
-            Debug.Log("Item comprado: " + shopItem.itemName + " x" + quantity);
+            //Debug.Log("Item comprado: " + shopItem.itemName + " x" + quantity);
+
+            AudioManager.PlaySound(SoundType.BUY);
 
             // Analytics
             AnalyticsSystem.AddAnalyticPlants_Bought(this.name, shopItem.itemName, quantity);
@@ -45,7 +47,7 @@ public class Store : MonoBehaviour
         }
         else
         {
-            Debug.Log("Dinheiro insuficiente ou item não encontrado.");
+            //Debug.Log("Dinheiro insuficiente ou item não encontrado.");
             return false;
         }
     }
@@ -66,15 +68,17 @@ public class Store : MonoBehaviour
                 // Adiciona o dinheiro ao jogador usando o MoneyManager
                 moneyManager.AddMoney(totalSaleValue);
 
+                AudioManager.PlaySound(SoundType.SELL);
+
                 // Analytics
                 AnalyticsSystem.AddAnalyticPlants_Sold(this.name, inventoryItem.item.itemName, quantity);
 
-                Debug.Log("Item vendido: " + inventoryItem.item.itemName + " x" + quantity);
+                //Debug.Log("Item vendido: " + inventoryItem.item.itemName + " x" + quantity);
                 return true;
             }
         }
 
-        Debug.Log("Não foi possível vender o item ou quantidade insuficiente.");
+        //Debug.Log("Não foi possível vender o item ou quantidade insuficiente.");
         return false;
     }
 

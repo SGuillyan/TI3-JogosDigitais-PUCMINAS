@@ -141,6 +141,7 @@ public class TileSelector : MonoBehaviour
         if (!tileInfoAnimator.GetBool("OpenInfo") && !isTouchProcessed)
         {
             DisplayTileInfo(gridPosition);
+            AudioManager.PlaySound(SoundType.SCREENCLICK);
         }       
     }
 
@@ -217,7 +218,9 @@ public class TileSelector : MonoBehaviour
                     if (tileInfo != null && tileInfo.isPlantable)
                     {
                         tilemapFertilize.FertilizeAt(gridPosition, itemID);
-                        inventoryManager.UseItemAt(gridPosition);                   
+                        inventoryManager.UseItemAt(gridPosition);
+
+                        AudioManager.PlaySound(SoundType.HARVESTABLEPLANT);
                     }
 
                     else
@@ -234,6 +237,8 @@ public class TileSelector : MonoBehaviour
         if (tile is PlantTile plantTile && plantTile.isFullyGrown)
         {
             plantTile.Collect(tilemap, gridPosition, playerInventory);
+
+            AudioManager.PlaySound(SoundType.HARVEST);
 
             // Analytics
             AnalyticsSystem.AddAnalyticPlants_Harvested(this.name, plantTile.name, 1);
@@ -258,6 +263,8 @@ public class TileSelector : MonoBehaviour
                     {
                         tilemapPlant.PlantSeedAt(gridPosition, itemID);
                         inventoryManager.UseItemAt(gridPosition);
+
+                        AudioManager.PlaySound(SoundType.PLANT);
                     }
                     else
                     {
@@ -317,6 +324,8 @@ public class TileSelector : MonoBehaviour
         tileInfoAnimator.SetBool("OpenInfo", false);  // Ativa a animação de fechamento
         //ToolsManager.SetActiveTool(ToolsManager.Tools.Info);
         uiManager.HideTileInfo();
+
+        AudioManager.PlaySound(SoundType.SCREENCLICK);
     }
 
     /*private void Update()
