@@ -29,6 +29,14 @@ public class TilemapManager : MonoBehaviour
     public Transform parentTransform;  // Referência ao objeto pai na hierarquia
     public CustomTileBase defaultTile;  // Tile padrão para o terreno expandido
     public CustomTileBase riverTile;  // Tile padrão para o terreno expandido
+
+    public CustomTileBase borderTileLeft;
+    public CustomTileBase borderTileRight;
+    public CustomTileBase borderTileUp;
+    public CustomTileBase borderTileDown;
+    public CustomTileBase cornerLarge;
+    public CustomTileBase cornerSmall;
+
     private Dictionary<Vector3Int, TileInfo> tileInfoDictionary = new Dictionary<Vector3Int, TileInfo>();
     private Dictionary<Vector3Int, GameObject> instantiatedTileDictionary = new Dictionary<Vector3Int, GameObject>(); // Adiciona controle de objetos instanciados
 
@@ -52,17 +60,45 @@ public class TilemapManager : MonoBehaviour
             {
                 Vector3Int position = new Vector3Int(x, y, 0);
 
-                // Verifica a faixa onde o rio deve ser instanciado
-                if (y == -5) // Exemplo: Coluna fixa para o rio
+                // Verifica se a expansão é para o Sul e ajusta o rio
+
+                if (y == -5 &&  x <= 18) // Parte inicial do rio (reta)
                 {
                     tilemap.SetTile(position, riverTile);
+                }
+                else if (y <= -5 && x == 18) // Curva do rio na metade do tile Sul
+                {
+                    tilemap.SetTile(position, riverTile);
+                }
+                else if (y == -4 && x == 19) // Curva do rio na metade do tile Sul
+                {
+                    tilemap.SetTile(position, cornerSmall);
+                }
+                else if (y == -6 && x == 17) // Curva do rio na metade do tile Sul
+                {
+                    tilemap.SetTile(position, cornerLarge);
+                }
+                else if (y == -4 && x <= 18) // Curva do rio na metade do tile Sul
+                {
+                    tilemap.SetTile(position, borderTileRight);
+                }
+                else if (y == -6 && x <= 18) // Curva do rio na metade do tile Sul
+                {
+                    tilemap.SetTile(position, borderTileLeft);
+                }
+                else if (y < -4 && x == 17) // Curva do rio na metade do tile Sul
+                {
+                    tilemap.SetTile(position, borderTileDown);
+                }
+                else if (y <= -5 && x == 19) // Curva do rio na metade do tile Sul
+                {
+                    tilemap.SetTile(position, borderTileUp);
                 }
                 else
                 {
                     tilemap.SetTile(position, defaultTile);
                 }
 
-                // Atualiza as informações no dicionário do TilemapManager
                 TileInfo tileInfo = new TileInfo(
                     defaultTile.isPlantable,
                     defaultTile.nitrogen,
