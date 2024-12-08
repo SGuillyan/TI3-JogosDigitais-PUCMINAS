@@ -10,29 +10,35 @@ public class SaveSystem : MonoBehaviour
 	[Serializable]
 	public class SaveAccesses
 	{
+		public VolumeSettings volumeSettings;
         public TutorialManager tutorialManager;
         public Camera mainCamera;
         public MoneyManager moneyManager;
 		public Transform tilesParent;
-        public InventoryManager inventoryManager;      
+        public InventoryManager inventoryManager;
+		public QuestManager questManager;
 	}
 
 	[SerializeField] private SaveAccesses accesses;
 
+	private static VolumeSettings volumeSettings;
     private static TutorialManager tutorialManager;
     private static Camera mainCamera;
     private static MoneyManager moneyManager;
 	private static Transform tilesParent;
 	private static InventoryManager inventoryManager;
+	private static QuestManager questManager;
 	
 
 	private void Start()
 	{
+		volumeSettings = accesses.volumeSettings;
         tutorialManager = accesses.tutorialManager;
         mainCamera = accesses.mainCamera;
         moneyManager = accesses.moneyManager;
 		tilesParent = accesses.tilesParent;
 		inventoryManager = accesses.inventoryManager;
+		questManager = accesses.questManager;
 		
 		//Save("Assets/Scripts/ScriptSave/SaveData.json");
 	}
@@ -47,11 +53,12 @@ public class SaveSystem : MonoBehaviour
 	{
 		SaveData load = GenerateLoadData(Application.persistentDataPath + "/SaveData.json");
 
-        #region // ConfigData
-
-        #endregion
-        #region // TutorialData
-
+		#region // ConfigData
+		volumeSettings.musicSlider.value = load.configData.musicVolume;
+		volumeSettings.sfxSlider.value = load.configData.sfxVolume;
+		#endregion
+		#region // TutorialData
+		tutorialManager.tutirialCompleted = load.tutorialData.isDone;
         #endregion
         #region // CameraData
 		mainCamera.transform.position = load.cameraData.position;
@@ -82,7 +89,14 @@ public class SaveSystem : MonoBehaviour
 		}
         #endregion
         #region // QuestData
-
+        for (int i = 0; i < load.questData.availableQuests.Count; i++)
+        {
+            questManager.availableQuests.Add(load.questData.availableQuests[i]);
+        }
+        for (int i = 0; i < load.questData.activeQuests.Count; i++)
+        {
+            questManager.activeQuests.Add(load.questData.activeQuests[i]);
+        }
         #endregion
     }
 
@@ -105,7 +119,7 @@ public class SaveSystem : MonoBehaviour
 	{
 		SaveData save = new SaveData();
 
-		save.configData = new ConfigData("nome", "lingua", 5.3f, 8.1f);
+		save.configData = new ConfigData(volumeSettings.musicSlider.value, volumeSettings.sfxSlider.value);
         save.tutorialData = new TutorialData(tutorialManager.tutirialCompleted);
         save.cameraData = new CameraData(mainCamera.transform.position, mainCamera.orthographicSize);
         save.moneyData = new MoneyData(moneyManager.GetCurrentMoney());
@@ -113,7 +127,7 @@ public class SaveSystem : MonoBehaviour
         save.idsData = new IDS_Data(IDS.GetIDS(), IDS.GetEcologico(), IDS.GetEconomico(), IDS.GetSocial());
 		save.tileData = new TileData(tilesParent);
         save.inventoryData = new InventoryData(inventoryManager.playerInventory.items);
-        // QuestData
+		save.questData = new QuestData(questManager.availableQuests, questManager.activeQuests);
 
         Debug.Log("Relatório de salvamento gerado!");
         return save;
@@ -132,22 +146,18 @@ public class SaveSystem : MonoBehaviour
         public IDS_Data idsData;
         public TileData tileData;
         public InventoryData inventoryData;
-		//public QuestData questData;		
+		public QuestData questData;		
 	}
 
     [Serializable]
     public class ConfigData
     {
-        public string name;
-        public string lengague;
         public float musicVolume;
         public float sfxVolume;
 
         // Construtor
-        public ConfigData(string name, string lenguage, float musicVolume, float sfxVolume)
+        public ConfigData(float musicVolume, float sfxVolume)
         {
-            this.name = name;
-            this.lengague = lenguage;
             this.musicVolume = musicVolume;
             this.sfxVolume = sfxVolume;
         }
@@ -227,8 +237,8 @@ public class SaveSystem : MonoBehaviour
         }
     }
 
-    //implement
-	public class TileData
+    [Serializable]
+    public class TileData
 	{
 		public List<GameObject> tiles;
 
@@ -242,7 +252,6 @@ public class SaveSystem : MonoBehaviour
 		}
 	}
 
-    //implement
     [Serializable]
 	public class InventoryData
 	{
@@ -261,12 +270,20 @@ public class SaveSystem : MonoBehaviour
 		}*/
 	}
 
-	/*implement
-	public class QuestData
+    [Serializable]
+    public class QuestData
 	{
-		
-	}
-	*/
+        public List<Quest> availableQuests;
+        public List<Quest> activeQuests;
+
+		// Construtor
+		public QuestData(List<Quest> availableQuests, List<Quest> activeQuests)
+		{
+			this.availableQuests = availableQuests;
+			this.activeQuests = activeQuests;
+		}
+    }
+	
 
 
 
