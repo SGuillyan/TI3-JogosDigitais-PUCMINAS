@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 282190097460664112}
-  - component: {fileID: 7949352275456481334}
+  - component: {fileID: 7371652944598274234}
   m_Layer: 5
-  m_Name: QuestStrawberrie
+  m_Name: QuestStrawberryEcologic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +37,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 840, y: 428}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7949352275456481334
+--- !u!114 &7371652944598274234
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,13 +49,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 760b04de0efb8d649aa489174327b9f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questName: QuestStrawberrie
+  questName: QuestStrawberryEcologic
   daily: 1
   require: {fileID: 11400000, guid: 5f032dfee3eb1284b8c765149d025455, type: 2}
   quantityRequire: 10
   reward:
-    money: 800
-    ids: 000000000000000000000000
+    money: 300
+    ids: 0a0000000000000000000000
     plant: {fileID: 0}
     quantity: 0
   gapTime: 10
@@ -236,7 +236,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 7949352275456481334}
+      objectReference: {fileID: 7371652944598274234}
     - target: {fileID: 2174787577744740921, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -322,27 +322,37 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6084584016326658490, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
+    - target: {fileID: 4981762072800119927, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
       propertyPath: m_text
-      value: + 800
+      value: A Plant's Life Cycle
       objectReference: {fileID: 0}
     - target: {fileID: 6084584016326658490, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
-      propertyPath: m_fontSize
-      value: 65.95
+      propertyPath: m_text
+      value: + 10
       objectReference: {fileID: 0}
     - target: {fileID: 6271194660264164097, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
       propertyPath: m_text
-      value: Farmer Joe wants 10 strawberries to make some jam for his wife. Such
-        a nice guy!
+      value: Farmer Jeff wants 10 strawberries to make a special fertilizer.
       objectReference: {fileID: 0}
+    - target: {fileID: 6271194660264164097, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 41.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847652457961384972, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: efb228fdb596ad644be27aa32a145aa3,
+        type: 3}
     - target: {fileID: 7121990996841498913, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d2352ee7da370bd4d9167d0888e018de,
+      objectReference: {fileID: 21300000, guid: 43c43c411a530474fa18d0b6b5663c62,
         type: 3}
     - target: {fileID: 8427188289168594843, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
@@ -368,7 +378,7 @@ PrefabInstance:
         type: 3}
       propertyPath: require
       value: 
-      objectReference: {fileID: 11400000, guid: 5f032dfee3eb1284b8c765149d025455,
+      objectReference: {fileID: 11400000, guid: 77472794d692fc642bd925818c5aa5c4,
         type: 2}
     - target: {fileID: 8514496679681433876, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
@@ -377,13 +387,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8514496679681433876, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
+      propertyPath: reward.plant
+      value: 
+      objectReference: {fileID: 11400000, guid: 3f31ca6d06f7ae34cb01b5f6996212ec,
+        type: 2}
+    - target: {fileID: 8514496679681433876, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
+        type: 3}
       propertyPath: quantityRequire
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8514496679681433876, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad,
         type: 3}
-      propertyPath: reward.ids.Array.data[2]
-      value: 10
+      propertyPath: reward.quantity
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8514496679681433876, guid: e3adf26bc80cd3a44aaf8bcbbe3ae9ad, type: 3}

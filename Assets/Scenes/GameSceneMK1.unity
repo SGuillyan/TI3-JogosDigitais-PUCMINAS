@@ -9465,7 +9465,7 @@ MonoBehaviour:
     reqPhosf: 80
     reqK: 85
   - itemName: Soybean Seed
-    itemIcon: {fileID: 0}
+    itemIcon: {fileID: 21300000, guid: b9cf82213e1cda94ca8a1cc8b02ba23a, type: 3}
     maxStackSize: 99
     itemType: 1
     itemID: 3
@@ -9492,7 +9492,7 @@ MonoBehaviour:
     reqPhosf: 70
     reqK: 90
   - itemName: Fertilizante - N
-    itemIcon: {fileID: 21300000, guid: 80ba41df4ee46d14daf9704599c1a92e, type: 3}
+    itemIcon: {fileID: 21300000, guid: 79ed22d7d04cf0345b109c8f6a653809, type: 3}
     maxStackSize: 99
     itemType: 2
     itemID: 200
@@ -9501,7 +9501,7 @@ MonoBehaviour:
     reqPhosf: 0
     reqK: 0
   - itemName: Fertilizante - P
-    itemIcon: {fileID: 21300000, guid: 80ba41df4ee46d14daf9704599c1a92e, type: 3}
+    itemIcon: {fileID: 21300000, guid: 3f8d95afa8b3b914984a83e510c2b3a9, type: 3}
     maxStackSize: 99
     itemType: 2
     itemID: 201
@@ -9510,7 +9510,7 @@ MonoBehaviour:
     reqPhosf: 100
     reqK: 0
   - itemName: Fertilizante - K
-    itemIcon: {fileID: 21300000, guid: 80ba41df4ee46d14daf9704599c1a92e, type: 3}
+    itemIcon: {fileID: 21300000, guid: 24717d51a1e525543be3c6283014b271, type: 3}
     maxStackSize: 99
     itemType: 2
     itemID: 202
