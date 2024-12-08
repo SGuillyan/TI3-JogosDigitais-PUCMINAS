@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Warning!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 57fbd9ac81ca1414e9be0ae7642d2124, type: 2}
-  m_sharedMaterial: {fileID: 8797214641300981556, guid: 57fbd9ac81ca1414e9be0ae7642d2124,
+  m_fontAsset: {fileID: 11400000, guid: 5ae2a8779ab7cbb42b84a032f481869f, type: 2}
+  m_sharedMaterial: {fileID: -4263441212726749353, guid: 5ae2a8779ab7cbb42b84a032f481869f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1594223429976046000
@@ -202,8 +202,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Help!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 57fbd9ac81ca1414e9be0ae7642d2124, type: 2}
-  m_sharedMaterial: {fileID: 8797214641300981556, guid: 57fbd9ac81ca1414e9be0ae7642d2124,
+  m_fontAsset: {fileID: 11400000, guid: 5ae2a8779ab7cbb42b84a032f481869f, type: 2}
+  m_sharedMaterial: {fileID: -4263441212726749353, guid: 5ae2a8779ab7cbb42b84a032f481869f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -337,8 +337,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 15
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 69815f74ea4f92243829c2d5c41d2e48, type: 2}
-  m_sharedMaterial: {fileID: 405417084970718904, guid: 69815f74ea4f92243829c2d5c41d2e48,
+  m_fontAsset: {fileID: 11400000, guid: a17dba0d1d48e8243a4db758560e4c5e, type: 2}
+  m_sharedMaterial: {fileID: 1648470971860560227, guid: a17dba0d1d48e8243a4db758560e4c5e,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -472,8 +472,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Close
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 69815f74ea4f92243829c2d5c41d2e48, type: 2}
-  m_sharedMaterial: {fileID: 405417084970718904, guid: 69815f74ea4f92243829c2d5c41d2e48,
+  m_fontAsset: {fileID: 11400000, guid: a17dba0d1d48e8243a4db758560e4c5e, type: 2}
+  m_sharedMaterial: {fileID: 1648470971860560227, guid: a17dba0d1d48e8243a4db758560e4c5e,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -607,8 +607,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Boldo leaves:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 69815f74ea4f92243829c2d5c41d2e48, type: 2}
-  m_sharedMaterial: {fileID: 405417084970718904, guid: 69815f74ea4f92243829c2d5c41d2e48,
+  m_fontAsset: {fileID: 11400000, guid: a17dba0d1d48e8243a4db758560e4c5e, type: 2}
+  m_sharedMaterial: {fileID: 1648470971860560227, guid: a17dba0d1d48e8243a4db758560e4c5e,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -711,7 +711,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.21271645}
   m_AnchorMax: {x: 1, y: 0.42727855}
-  m_AnchoredPosition: {x: 0, y: -90.50006}
+  m_AnchoredPosition: {x: 0, y: 30}
   m_SizeDelta: {x: -700, y: -341}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7598036990258202934
@@ -936,7 +936,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 908.0141, y: 551.412}
+  m_SizeDelta: {x: 908.0141, y: 427.1639}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4532534027373818563
 CanvasRenderer:
@@ -968,8 +968,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Someone's in need of crops that can be used in medicinal recipes.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 69815f74ea4f92243829c2d5c41d2e48, type: 2}
-  m_sharedMaterial: {fileID: 405417084970718904, guid: 69815f74ea4f92243829c2d5c41d2e48,
+  m_fontAsset: {fileID: 11400000, guid: a17dba0d1d48e8243a4db758560e4c5e, type: 2}
+  m_sharedMaterial: {fileID: 1648470971860560227, guid: a17dba0d1d48e8243a4db758560e4c5e,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1177,7 +1177,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.21271645}
   m_AnchorMax: {x: 1, y: 0.7942836}
-  m_AnchoredPosition: {x: -7.2874756, y: -288.5}
+  m_AnchoredPosition: {x: -7.2874756, y: -216}
   m_SizeDelta: {x: -253.46558, y: -1201.5701}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3787027751175357633

@@ -38,8 +38,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.000091552734, y: -6.5592957}
+  m_SizeDelta: {x: -26.2378, y: -28.112}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7491179454575162671
 CanvasRenderer:
@@ -122,7 +122,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &694838079926926629
 RectTransform:
   m_ObjectHideFlags: 0
@@ -137,10 +137,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4130545094059432517}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 586.715, y: 281.019}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 266.365, y: -140.5095}
+  m_SizeDelta: {x: 532.73, y: 281.019}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4574448926464948334
 CanvasRenderer:
@@ -173,8 +173,9 @@ MonoBehaviour:
   m_text: 'Ciliary forest grows along rivers and lakes, acting as a natural shield
     for water bodies. '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a17dba0d1d48e8243a4db758560e4c5e, type: 2}
+  m_sharedMaterial: {fileID: 1648470971860560227, guid: a17dba0d1d48e8243a4db758560e4c5e,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -198,7 +199,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 56.85
+  m_fontSize: 50.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -510,7 +511,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 830, y: 337.1733}
+  m_SizeDelta: {x: 763.3602, y: 297.3304}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5007507184084769284
 CanvasRenderer:
@@ -643,8 +644,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Close
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a17dba0d1d48e8243a4db758560e4c5e, type: 2}
+  m_sharedMaterial: {fileID: 1648470971860560227, guid: a17dba0d1d48e8243a4db758560e4c5e,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -668,7 +670,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 54.3
+  m_fontSize: 45.35
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -745,7 +747,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 830, y: 100}
+  m_SizeDelta: {x: 751.9781, y: 111.2448}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8308889009073629267
 CanvasRenderer:
@@ -777,8 +779,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Warning: Ciliary Forest '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5ae2a8779ab7cbb42b84a032f481869f, type: 2}
+  m_sharedMaterial: {fileID: -4263441212726749353, guid: 5ae2a8779ab7cbb42b84a032f481869f,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -802,7 +805,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 61.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -881,7 +884,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 586.715, y: 281.019}
+  m_SizeDelta: {x: 532.7344, y: 281.019}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3868065955442032995
 MonoBehaviour:
@@ -943,8 +946,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 293.3575, y: -140.5095}
-  m_SizeDelta: {x: 586.715, y: 281.019}
+  m_AnchoredPosition: {x: 266.37, y: -140.5095}
+  m_SizeDelta: {x: 532.74, y: 281.019}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3081962220797029949
 CanvasRenderer:
@@ -977,8 +980,9 @@ MonoBehaviour:
   m_text: Deforestation of these areas leads to sedimentation, water pollution, biodiversity
     loss, and ecosystem imbalances.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a17dba0d1d48e8243a4db758560e4c5e, type: 2}
+  m_sharedMaterial: {fileID: 1648470971860560227, guid: a17dba0d1d48e8243a4db758560e4c5e,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1002,7 +1006,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 47.3
+  m_fontSize: 42
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1078,8 +1082,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 293.3575, y: -140.5095}
-  m_SizeDelta: {x: 586.715, y: 281.019}
+  m_AnchoredPosition: {x: 266.37003, y: -140.5095}
+  m_SizeDelta: {x: 532.74, y: 281.019}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &223664982220267808
 CanvasRenderer:
@@ -1112,8 +1116,9 @@ MonoBehaviour:
   m_text: Ciliary forest prevents erosion, maintains water quality, controls floods,
     and provides habitats for various species.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a17dba0d1d48e8243a4db758560e4c5e, type: 2}
+  m_sharedMaterial: {fileID: 1648470971860560227, guid: a17dba0d1d48e8243a4db758560e4c5e,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1137,7 +1142,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 49.15
+  m_fontSize: 42
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
