@@ -39,11 +39,12 @@ MonoBehaviour:
   - {fileID: 4925785748164349182, guid: e23db09832269e24a8ee773bbd2117b9, type: 3}
   - {fileID: 4925785748164349182, guid: 76130f610033e4c4a829feff1a487e90, type: 3}
   - {fileID: 4925785748164349182, guid: ec8b57863040a6042b4d170bd14febdd, type: 3}
-  - {fileID: 4925785748164349182, guid: 705e8a78a66096d42935c380627b0c28, type: 3}
-  rotPrefab: {fileID: 0}
+  rotPrefab: {fileID: 4925785748164349182, guid: 705e8a78a66096d42935c380627b0c28,
+    type: 3}
   growthTimes:
   - 5
   - 5
+  - 3
   - 3
   idealTemperature: 6
   idealClimate: 4

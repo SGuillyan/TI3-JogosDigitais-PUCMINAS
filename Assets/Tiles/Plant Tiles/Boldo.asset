@@ -39,9 +39,13 @@ MonoBehaviour:
   - {fileID: 5285384602107226842, guid: 8257585f3c4c0d04c9e2cbfc1dd7e862, type: 3}
   - {fileID: 5285384602107226842, guid: 1813a1d8f65c682409dc6b32e75d75e9, type: 3}
   - {fileID: 5285384602107226842, guid: 1509ee0f4512ab843878019854a79d0f, type: 3}
-  - {fileID: 5285384602107226842, guid: 2232617aefc0a3d43a13197d66f44591, type: 3}
-  rotPrefab: {fileID: 0}
-  growthTimes: []
+  rotPrefab: {fileID: 5285384602107226842, guid: 2232617aefc0a3d43a13197d66f44591,
+    type: 3}
+  growthTimes:
+  - 5
+  - 4
+  - 3
+  - 2
   idealTemperature: 0
   idealClimate: 0
   greenTolerance: 0
@@ -60,7 +64,7 @@ MonoBehaviour:
     reqNitro: 0
     reqPhosf: 0
     reqK: 0
-  soilTile: {fileID: 0}
+  soilTile: {fileID: 11400000, guid: fb4802db5e5b9c94db6eda50fd1dd23d, type: 2}
   requiredNitrogen: 10
   requiredPhosphorus: 5
   requiredPotassium: 5
