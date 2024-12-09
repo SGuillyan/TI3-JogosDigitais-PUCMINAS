@@ -13,13 +13,14 @@ public class SaveManager : MonoBehaviour
         _periodicSavingTime = periodicSavingTime;
         periodicSaving_tt = _periodicSavingTime;
 
-        SaveSystem.Save();
+        //
+        //SaveSystem.Save();
         Debug.Log(Application.persistentDataPath + "/SaveData.json");
     }
 
     private void Update()
     {
-        if (_periodicSavingTime <= 0)
+        /*if (_periodicSavingTime <= 0)
         {
             SaveSystem.Save();
 
@@ -28,7 +29,7 @@ public class SaveManager : MonoBehaviour
         else
         {
             _periodicSavingTime -= Time.deltaTime;
-        }
+        }*/
     }
 
     public void SaveAndSendAnalytics()
@@ -42,6 +43,13 @@ public class SaveManager : MonoBehaviour
     public void LoadGame()
     {
         SaveSystem.Load();
+        Debug.Log("Jogo carregado com sucesso!");
+    }
+
+    [ContextMenu("Save Game")]
+    public void SaveGame()
+    {
+        SaveSystem.Save();
         Debug.Log("Jogo carregado com sucesso!");
     }
 }

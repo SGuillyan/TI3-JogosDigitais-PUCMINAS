@@ -127,7 +127,7 @@ public class TileSelector : MonoBehaviour
             }
 
             customTile.ChangeToPlowedState(gridPosition);
-            Debug.Log($"Solo arado na posição: {gridPosition}");
+            //Debug.Log($"Solo arado na posição: {gridPosition}");
 
             AudioManager.PlaySound(SoundType.HOE);
 
@@ -170,7 +170,7 @@ public class TileSelector : MonoBehaviour
                 IDS.ReduceEcologico(1);
 
 
-                tilemap.SetTile(gridPosition, soilTile);
+                /*tilemap.SetTile(gridPosition, soilTile);
 
                 // Atualiza o TileInfo no TilemapManager
                 TileInfo tileInfo = new TileInfo(
@@ -180,7 +180,7 @@ public class TileSelector : MonoBehaviour
                     soilTile.potassium,
                     soilTile.humidity
                 );
-                tilemapManager.SetTileInfo(gridPosition, tileInfo);
+                tilemapManager.SetTileInfo(gridPosition, tileInfo);*/
 
                 //Debug.Log($"Árvore cortada e tile transformado na posição: {gridPosition}");
             }
@@ -299,7 +299,7 @@ public class TileSelector : MonoBehaviour
                 }
                 else if (clickedTile is TreeTile tileData3)
                 {
-                    uiManager.UpdateTileInfo(tileData3.sprite, 1000, 1000, 1000, 1000, false);
+                    uiManager.UpdateTileInfo(tileData3.sprite, tileData3.nitrogen, tileData3.phosphorus, tileData3.potassium, tileData3.humidity, tileData3.isPlantable);
                 }
 
                 tileInfoAnimator.SetBool("OpenInfo", true);  // Ativa a animação de abertura

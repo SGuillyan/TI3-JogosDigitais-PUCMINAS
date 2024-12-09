@@ -40,7 +40,7 @@ public class TilemapManager : MonoBehaviour
     public TreeTile treeTile;
 
     public Dictionary<Vector3Int, TileInfo> tileInfoDictionary = new Dictionary<Vector3Int, TileInfo>();
-    private Dictionary<Vector3Int, GameObject> instantiatedTileDictionary = new Dictionary<Vector3Int, GameObject>(); // Adiciona controle de objetos instanciados
+    public Dictionary<Vector3Int, GameObject> instantiatedTileDictionary = new Dictionary<Vector3Int, GameObject>(); // Adiciona controle de objetos instanciados
 
     void Start()
     {
@@ -175,8 +175,11 @@ public class TilemapManager : MonoBehaviour
     {
         // Definir o Tile no Tilemap
         TileBase tile = GetTileByName(tileType);
+        SetTileInfo(position, tileInfo);
         tilemap.SetTile(position, tile);
+        tile.RefreshTile(position, tilemap);
 
+        /*
         // Restaurar o TileInfo no dicionário
         SetTileInfo(position, tileInfo);
 
@@ -216,6 +219,7 @@ public class TilemapManager : MonoBehaviour
                 SetInstantiatedTile(position, instantiatedObject);
             }
         }
+        */
     }
 
 
@@ -233,7 +237,6 @@ public class TilemapManager : MonoBehaviour
             case "RiverTileRight": return borderTileRight;
             case "RiverTileUp": return borderTileUp;
             case "RiverTile": return borderTileDown;
-
             default: return null;
         }
     }
@@ -268,6 +271,11 @@ public class TilemapManager : MonoBehaviour
     public void SetInstantiatedTile(Vector3Int position, GameObject tileObject)
     {
         instantiatedTileDictionary[position] = tileObject;
+    }
+
+    public void RemoveInstantiatedTile(Vector3Int position)
+    {
+        instantiatedTileDictionary[position] = null;
     }
 
     // Obtém o objeto instanciado em uma posição de tile

@@ -168,7 +168,7 @@ public class SaveSystem : MonoBehaviour
 			}
 		}
 
-        Debug.Log("Relat�rio de salvamento gerado!");
+        Debug.Log("Relatorio de salvamento gerado!");
         return save;
 	}
 
