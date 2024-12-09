@@ -7548,7 +7548,7 @@ MonoBehaviour:
     maxStackSize: 99
     itemType: 1
     itemID: 3
-    price: 10
+    price: 30
     reqNitro: 50
     reqPhosf: 70
     reqK: 60
@@ -7575,7 +7575,7 @@ MonoBehaviour:
     maxStackSize: 99
     itemType: 1
     itemID: 6
-    price: 50
+    price: 100
     reqNitro: 60
     reqPhosf: 40
     reqK: 100

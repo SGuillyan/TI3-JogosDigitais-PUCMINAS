@@ -42,14 +42,14 @@ MonoBehaviour:
   rotPrefab: {fileID: 4895000988734243222, guid: 8ba5c6f0763e38d4f9a8b693f6468be2,
     type: 3}
   growthTimes:
-  - 2
-  - 2
-  - 2
-  - 2
-  idealTemperature: 4
-  idealClimate: 5
-  greenTolerance: 0
-  yellowTolerance: 1
+  - 20
+  - 40
+  - 40
+  - 20
+  idealTemperature: 0
+  idealClimate: 0
+  greenTolerance: 1
+  yellowTolerance: 2
   progressBarPrefab: {fileID: 5926695452129876053, guid: 583fdf575a31b6e4986acc39a145fea3,
     type: 3}
   isPlanted: 0
