@@ -15340,6 +15340,7 @@ MonoBehaviour:
     tilesParent: {fileID: 1342796937}
     inventoryManager: {fileID: 1807522567}
     questManager: {fileID: 1230067510}
+    tilemapManager: {fileID: 1838739717}
 --- !u!4 &875290591
 Transform:
   m_ObjectHideFlags: 0
@@ -15362,12 +15363,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875290589}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e6c228d9edbf6540820ce2bf6e76bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  periodicSavingTime: 300
+  periodicSavingTime: 5
 --- !u!1 &883283245
 GameObject:
   m_ObjectHideFlags: 0
