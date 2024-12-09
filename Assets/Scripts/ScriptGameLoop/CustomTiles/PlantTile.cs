@@ -29,6 +29,7 @@ public class PlantTile : Tile
 
     [Header("Progress Bar")]
     public GameObject progressBarPrefab;  // Prefab da barra de progresso
+    public GameObject plowedTilePrefab;
     private GameObject progressBarInstance;  // Instância da barra de progresso
     private Image progressBarFill;  // Referência ao preenchimento da barra de progresso
     private TMP_Text progressBarText;  // Referência ao texto da barra de progresso
@@ -57,6 +58,169 @@ public class PlantTile : Tile
     public int returnPotassium = 4;
 
     private GameObject currentGrowthInstance; // Instância atual do estágio de crescimento
+
+    public void RecreatePlantInstance(Tilemap tilemap, Vector3Int position, string tileType, string instantiatedObjectName)
+    {
+        TilemapManager tilemapManager = Object.FindObjectOfType<TilemapManager>();
+
+        if (tilemapManager == null)
+        {
+            Debug.LogError("TilemapManager não encontrado!");
+            return;
+        }
+
+        TileInfo tileInfo = tilemapManager.GetTileInfo(position);
+        if (tileInfo == null)
+        {
+            Debug.LogWarning($"TileInfo não encontrado na posição {position}. Não é possível recriar a planta.");
+            return;
+        }
+
+        string groundObjectName = $"Ground_{position.x}_{position.y}_{position.z}";
+        GameObject groundObject = GameObject.Find(groundObjectName);
+        if (groundObject != null)
+        {
+            // Transformar o Ground em um PlowedTile
+            Destroy(groundObject); // Remove o objeto Ground
+            Vector3 worldPosition = tilemap.CellToWorld(position) + new Vector3(0.5f, 0, 0.5f);
+            GameObject plowedTile = Instantiate(plowedTilePrefab, worldPosition, Quaternion.identity, tilemap.transform);
+            plowedTile.name = $"PlowedTile_{position.x}_{position.y}_{position.z}";
+
+            // Atualizar o dicionário de objetos instanciados
+            tilemapManager.SetInstantiatedTile(position, plowedTile);
+
+            Debug.Log($"Ground transformado em PlowedTile na posição {position}");
+        }
+        else
+        {
+            Debug.LogWarning($"Ground não encontrado na posição {position}. Continuando sem transformá-lo.");
+        }
+
+
+
+
+        // Extrair o estágio de crescimento do nome do objeto
+        int savedGrowthStage = 0;
+        float savedGrowthTime = 0f;
+        if (instantiatedObjectName != null && instantiatedObjectName.Contains("Stage"))
+        {
+            string[] parts = instantiatedObjectName.Split('_');
+            foreach (string part in parts)
+            {
+                if (part.StartsWith("Stage"))
+                {
+                    int.TryParse(part.Replace("Stage", ""), out savedGrowthStage);
+                    break;
+                }
+            }
+        }
+
+        // Recriar a instância da planta
+        if (growthPrefabs != null && savedGrowthStage < growthPrefabs.Length)
+        {
+            UpdateGrowthInstance(tilemap, position, growthPrefabs[savedGrowthStage]);
+            ResumeGrowth(tilemap, position, savedGrowthStage, savedGrowthTime, tilemapManager);
+        }
+    }
+
+
+    public void ResumeGrowth(Tilemap tilemap, Vector3Int position, int savedGrowthStage, float savedGrowthTime, MonoBehaviour caller)
+    {
+        TilemapManager tilemapManager = Object.FindObjectOfType<TilemapManager>();
+
+        if (tilemapManager == null)
+        {
+            Debug.LogError("TilemapManager não encontrado!");
+            return;
+        }
+
+        if (savedGrowthStage >= growthPrefabs.Length)
+        {
+            Debug.LogWarning($"GrowthStage inválido ({savedGrowthStage}) para a planta na posição {position}. Definindo como totalmente crescida.");
+            isFullyGrown = true;
+            UpdateGrowthInstance(tilemap, position, growthPrefabs[growthPrefabs.Length - 1]);
+            return;
+        }
+
+        // Configura os valores salvos
+        growthStage = savedGrowthStage;
+        currentGrowthTime = savedGrowthTime;
+        isPlanted = true;
+        isFullyGrown = growthStage == growthPrefabs.Length - 1;
+        isRotten = false; // Reset apodrecimento ao carregar
+
+        // Atualiza a instância da planta para o estágio salvo
+        UpdateGrowthInstance(tilemap, position, growthPrefabs[growthStage]);
+
+        // Se não estiver completamente crescida, retoma o crescimento
+        if (!isFullyGrown)
+        {
+            caller.StartCoroutine(GrowFromStage(tilemap, position, caller));
+        }
+
+        Debug.Log($"Crescimento retomado na posição {position}. Estágio: {growthStage}, Tempo: {currentGrowthTime}s.");
+    }
+
+    private IEnumerator GrowFromStage(Tilemap tilemap, Vector3Int position, MonoBehaviour caller)
+    {
+        float totalElapsedTime = currentGrowthTime;
+
+        while (growthStage < growthTimes.Length)
+        {
+            float stageGrowthTime = growthTimes[growthStage];
+
+            while (totalElapsedTime < stageGrowthTime)
+            {
+                yield return null;
+
+                float additionalTime = Time.deltaTime * VerifyAmbient();
+                totalElapsedTime += additionalTime;
+                currentGrowthTime += additionalTime;
+
+                UpdateProgressBarUI(totalElapsedTime);
+            }
+
+            growthStage++;
+
+            // Atualiza o prefab do estágio atual
+            if (growthStage < growthPrefabs.Length)
+            {
+                UpdateGrowthInstance(tilemap, position, growthPrefabs[growthStage]);
+            }
+
+            tilemap.RefreshTile(position);
+
+            if (growthStage == growthPrefabs.Length - 1)
+            {
+                isFullyGrown = true;
+
+                // Após o crescimento completo, inicia o apodrecimento
+                caller.StartCoroutine(Rot(tilemap, position));
+                yield break;
+            }
+        }
+    }
+
+
+
+
+
+    private int ParseGrowthStageFromName(string name)
+    {
+        if (string.IsNullOrEmpty(name)) return 0;
+
+        string[] parts = name.Split('_');
+        foreach (var part in parts)
+        {
+            if (part.StartsWith("Stage") && int.TryParse(part.Substring(5), out int stage))
+            {
+                return stage;
+            }
+        }
+        return 0; // Retorna 0 como padrão caso o estágio não seja encontrado
+    }
+
+
 
 
     public void Plant(Tilemap tilemap, Vector3Int position, MonoBehaviour caller)
@@ -278,8 +442,40 @@ public class PlantTile : Tile
         {
             Vector3 worldPos = tilemap.CellToWorld(position) + new Vector3(0.5f, 0, 0.5f);  // Ajuste a posição do prefab
             currentGrowthInstance = Instantiate(growthPrefab, worldPos, Quaternion.identity);
+
+            // Atualiza o nome do objeto para refletir o tipo de planta e estágio de crescimento
+            string plantName = harvestedItem != null ? harvestedItem.itemName : "UnknownPlant";
+            currentGrowthInstance.name = $"{plantName}_Stage{growthStage}_{position.x}_{position.y}_{position.z}";
+
+            // Atualiza o dicionário do TilemapManager
+            UpdateInstantiatedTileDictionary(position, currentGrowthInstance);
         }
     }
+
+
+
+    private void UpdateInstantiatedTileDictionary(Vector3Int position, GameObject growthInstance)
+    {
+        TilemapManager tilemapManager = Object.FindObjectOfType<TilemapManager>();
+
+        if (tilemapManager == null)
+        {
+            Debug.LogError("TilemapManager não encontrado!");
+            return;
+        }
+
+        // Atualiza o objeto instanciado no dicionário
+        if (growthInstance != null)
+        {
+            tilemapManager.SetInstantiatedTile(position, growthInstance);
+            Debug.Log($"Objeto atualizado no dicionário para {growthInstance.name} na posição {position}");
+        }
+        else
+        {
+            Debug.LogWarning($"Nenhuma instância de crescimento encontrada para a posição {position}");
+        }
+    }
+
 
 
    public void Collect(Tilemap tilemap, Vector3Int position, Inventory playerInventory)

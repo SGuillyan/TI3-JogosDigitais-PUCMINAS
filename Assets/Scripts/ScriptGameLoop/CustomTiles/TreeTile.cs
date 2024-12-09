@@ -45,7 +45,7 @@ public class TreeTile : TileBase
                     // Atualizar a referência do objeto instanciado no dicionário
                     tilemapManager.SetInstantiatedTile(position, savedTree);
                     savedTree.transform.position = tilemapManager.tilemap.CellToWorld(position) + new Vector3(0.5f, 0, 0.5f);
-                    Debug.Log($"Árvore restaurada na posição: {position}");
+                    //Debug.Log($"Árvore restaurada na posição: {position}");
                     return true;
                 }
                 else

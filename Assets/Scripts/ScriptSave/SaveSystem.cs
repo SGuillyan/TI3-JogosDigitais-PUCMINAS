@@ -137,19 +137,20 @@ public class SaveSystem : MonoBehaviour
 
 	public static SaveData GenerateSaveData()
 	{
-		SaveData save = new SaveData();		
+		SaveData save = new SaveData();
 
 		save.tilesData = new TileList();
 
 		save.configData = new ConfigData(volumeSettings.musicSlider.value, volumeSettings.sfxSlider.value);
-        save.tutorialData = new TutorialData(tutorialManager.tutirialCompleted);
-        save.cameraData = new CameraData(mainCamera.transform.position, mainCamera.orthographicSize);
-        save.moneyData = new MoneyData(moneyManager.GetCurrentMoney());
-        save.ambientData = new AmbientData(Ambient.GetCurrentTemperature(), Ambient.GetCurrentClimate(), AmbientManager.GetCurrentSeason(), AmbientManager.GetSeasonalFactor());
-        save.idsData = new IDS_Data(IDS.GetIDS(), IDS.GetEcologico(), IDS.GetEconomico(), IDS.GetSocial());
-        save.inventoryData = new InventoryData(inventoryManager.playerInventory.items);
+		save.tutorialData = new TutorialData(tutorialManager.tutirialCompleted);
+		save.cameraData = new CameraData(mainCamera.transform.position, mainCamera.orthographicSize);
+		save.moneyData = new MoneyData(moneyManager.GetCurrentMoney());
+		save.ambientData = new AmbientData(Ambient.GetCurrentTemperature(), Ambient.GetCurrentClimate(), AmbientManager.GetCurrentSeason(), AmbientManager.GetSeasonalFactor());
+		save.idsData = new IDS_Data(IDS.GetIDS(), IDS.GetEcologico(), IDS.GetEconomico(), IDS.GetSocial());
+		save.inventoryData = new InventoryData(inventoryManager.playerInventory.items);
 		save.questData = new QuestData(questManager.availableQuests, questManager.activeQuests);
 
+		// Iterar pelos tiles no dicionário
 		foreach (var tilePosition in tilemapManager.tileInfoDictionary.Keys)
 		{
 			TileInfo tileInfo = tilemapManager.GetTileInfo(tilePosition);
@@ -158,19 +159,36 @@ public class SaveSystem : MonoBehaviour
 
 			if (tile != null && tileInfo != null)
 			{
+				// Ajuste para salvar o tipo correto de tile/planta
+				string tileTypeName;
+
+				if (tile is PlantTile plantTile && plantTile.harvestedItem != null)
+				{
+					// Usa o nome da planta colhida como tipo
+					tileTypeName = plantTile.harvestedItem.itemName;
+				}
+				else
+				{
+					// Usa o nome do tile como fallback
+					tileTypeName = tile.name ?? "Unknown";
+				}
+
+				// Criar o TileData com os dados atualizados
 				TileData tileData = new TileData(
 					tilePosition,
-					tile.name,
+					tileTypeName,
 					tileInfo,
 					instantiatedObject
 				);
+
 				save.tilesData.tiles.Add(tileData);
 			}
 		}
 
-        Debug.Log("Relatorio de salvamento gerado!");
-        return save;
+		Debug.Log("Relatório de salvamento gerado!");
+		return save;
 	}
+
 
 	public static bool isFirstTime()
 	{

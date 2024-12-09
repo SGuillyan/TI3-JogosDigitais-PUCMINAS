@@ -8,9 +8,9 @@ public class TilemapPlant : MonoBehaviour
 
     public void PlantSeedAt(Vector3Int position, int seedIndex)
     {
-        if (seedIndex >= 0 && seedIndex < plantTilePrefabs.Length)
+        if (seedIndex >= 0 && seedIndex-1 < plantTilePrefabs.Length)
         {
-            PlantTile selectedPlantTile = Instantiate(plantTilePrefabs[seedIndex]);
+            PlantTile selectedPlantTile = Instantiate(plantTilePrefabs[seedIndex-1]);
             tilemap.SetTile(position, selectedPlantTile);
             selectedPlantTile.Plant(tilemap, position, this);  // Passa o MonoBehaviour (TilemapPlant) como 'caller'
             tilemap.RefreshTile(position);

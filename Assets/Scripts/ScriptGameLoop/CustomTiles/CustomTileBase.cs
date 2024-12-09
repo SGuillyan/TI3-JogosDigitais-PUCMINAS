@@ -71,10 +71,10 @@ public class CustomTileBase : TileBase
                 // Verificar se há um objeto instanciado salvo e atualizá-lo
                 if (tilemapManager.instantiatedTileDictionary.TryGetValue(position, out GameObject savedObject) && savedObject != null)
                 {
-                    Debug.Log($"Tile guardado na posicao {position} eh {savedObject}");
+                    //Debug.Log($"Tile guardado na posicao {position} eh {savedObject}");
                     tilemapManager.SetInstantiatedTile(position, savedObject);
                     savedObject.transform.position = tilemapManager.tilemap.CellToWorld(position) + new Vector3(0.5f, 0, 0.5f);
-                    Debug.Log($"Tile restaurado na posição {position}");
+                    //Debug.Log($"Tile restaurado na posição {position}");
                     return true;
                 }
             }
@@ -100,10 +100,10 @@ public class CustomTileBase : TileBase
 
                 GameObject instantiatedTile = Instantiate(customTilePrefab, worldPosition, rotation, parent);
                 instantiatedTile.transform.position = worldPosition;
-                instantiatedTile.name = $"CustomTile_{position.x}_{position.y}_{position.z}";
+                instantiatedTile.name = $"Ground_{position.x}_{position.y}_{position.z}";
 
                 tilemapManager.SetInstantiatedTile(position, instantiatedTile);
-                Debug.Log($"Novo tile criado na posição: {position}");
+                //Debug.Log($"Novo tile criado na posição: {position}");
             }
         }
         else
@@ -201,7 +201,7 @@ public class CustomTileBase : TileBase
             // Cria o tile customizado novamente
             GameObject customTile = Instantiate(customTilePrefab, worldPosition, Quaternion.identity, parent);
             customTile.transform.position = worldPosition;
-            customTile.name = $"CustomTile_{position.x}_{position.y}_{position.z}";
+            customTile.name = $"Ground_{position.x}_{position.y}_{position.z}";
 
             tilemapManager.SetInstantiatedTile(position, customTile);
 

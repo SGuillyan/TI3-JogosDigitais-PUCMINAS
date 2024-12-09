@@ -37,6 +37,8 @@ public class TilemapManager : MonoBehaviour
     public CustomTileBase cornerLarge;
     public CustomTileBase cornerSmall;
 
+    public PlantTile[] plants;
+
     public TreeTile treeTile;
 
     public Dictionary<Vector3Int, TileInfo> tileInfoDictionary = new Dictionary<Vector3Int, TileInfo>();
@@ -173,73 +175,75 @@ public class TilemapManager : MonoBehaviour
 
     public void LoadTile(Vector3Int position, string tileType, TileInfo tileInfo, string instantiatedObjectName)
     {
-        // Definir o Tile no Tilemap
+        // Obtém o Tile correspondente ao tipo salvo
         TileBase tile = GetTileByName(tileType);
+        if (tile == null)
+        {
+            Debug.LogWarning($"Nenhum Tile encontrado para o tipo '{tileType}' na posição {position}.");
+            return;
+        }
+
+        // Define o Tile no Tilemap e atualiza o TileInfo
         SetTileInfo(position, tileInfo);
         tilemap.SetTile(position, tile);
+
+        // Se o Tile for um PlantTile, chama o método de recriação da planta
+        if (tile is PlantTile plantTile)
+        {
+            Debug.Log($"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            Debug.Log($"Recriando planta '{tileType}' na posição {position} com objeto instanciado '{instantiatedObjectName}'.");
+            plantTile.RecreatePlantInstance(tilemap, position, tileType, instantiatedObjectName);
+        }
+        else
+        {
+            Debug.Log($"Nao reconhido {tile} como PlantTile");
+        }	
+
+        // Atualiza o tile visualmente no Tilemap
         tile.RefreshTile(position, tilemap);
-
-        /*
-        // Restaurar o TileInfo no dicionário
-        SetTileInfo(position, tileInfo);
-
-        // Verificar se o tile é plantável e alterar para o estado arado, se necessário
-        if (tile is CustomTileBase customTile && tileInfo.isPlantable)
-        {
-            customTile.ChangeToPlowedState(position);
-        }
-
-        if (tile is CustomTileBase customTile2)
-        {
-            Debug.Log("CUSTOMTIEL2");
-            customTile2.RecreateTileObjects(position);
-        }
-
-        // Verificar e limpar objetos antigos antes de instanciar novos
-        GameObject existingObject = GetInstantiatedTile(position);
-        if (existingObject != null)
-        {
-            Destroy(existingObject); // Remove o objeto antigo
-        }
-
-        // Restaurar o objeto instanciado, se aplicável
-        if (!string.IsNullOrEmpty(instantiatedObjectName))
-        {
-            GameObject prefab = GetPrefabForTile(tileType);
-            if (prefab != null)
-            {
-                // Instancia o objeto como filho do Tilemap
-                Transform parent = tilemap.transform;
-
-                GameObject instantiatedObject = Instantiate(prefab, parent);
-                instantiatedObject.name = instantiatedObjectName;
-                instantiatedObject.transform.position = tilemap.CellToWorld(position);
-
-                // Atualiza o dicionário com o novo objeto
-                SetInstantiatedTile(position, instantiatedObject);
-            }
-        }
-        */
     }
+
 
 
 
     public TileBase GetTileByName(string tileType)
     {
+        Debug.Log($"Procurando pelo tile {tileType}");
         switch (tileType)
         {
-            case "FarmTile": return defaultTile;
-            case "TreeTile": return treeTile;
-            case "WaterTile": return riverTile;
-            case "CornerTileSmall": return riverTile;
-            case "CornerTileLarge": return riverTile;
-            case "RiverTileLeft": return borderTileLeft;
-            case "RiverTileRight": return borderTileRight;
-            case "RiverTileUp": return borderTileUp;
-            case "RiverTile": return borderTileDown;
-            default: return null;
+            case "FarmTile": 
+                return defaultTile;
+            case "TreeTile": 
+                return treeTile;
+            case "WaterTile": 
+                return riverTile;
+            case "CornerTileSmall": 
+                return riverTile;
+            case "CornerTileLarge": 
+                return riverTile;
+            case "RiverTileLeft": 
+                return borderTileLeft;
+            case "RiverTileRight": 
+                return borderTileRight;
+            case "RiverTileUp": 
+                return borderTileUp;
+            case "RiverTile": 
+                return borderTileDown;
+            default:
+                // Verifica no array de plantas se há uma correspondência
+                foreach (PlantTile plant in plants)
+                {
+                    if (tileType == $"{plant.name}")
+                    {
+                        Debug.Log($"Planta {plant} encontrada!");
+                        return plant;
+                    }
+                }
+                Debug.LogWarning($"TileType '{tileType}' não encontrado no array de plantas ou no mapeamento padrão.");
+                return null;
         }
     }
+
 
     public GameObject GetPrefabForTile(string tileType)
     {

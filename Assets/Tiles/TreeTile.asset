@@ -17,4 +17,10 @@ MonoBehaviour:
     type: 3}
   groundPrefab: {fileID: 5596873383589714348, guid: f17673461ee7a2748bd633ddad22d8c1,
     type: 3}
+  defaultTile: {fileID: 0}
   color: {r: 1, g: 1, b: 1, a: 1}
+  isPlantable: 0
+  nitrogen: 2000
+  phosphorus: 2000
+  potassium: 2000
+  humidity: 50
