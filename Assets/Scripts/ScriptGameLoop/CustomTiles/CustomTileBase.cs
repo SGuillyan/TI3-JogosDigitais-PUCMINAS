@@ -19,9 +19,27 @@ public class CustomTileBase : TileBase
 
     // Estado de rotação (0 = 0°, 1 = 90°, 2 = 180°, 3 = 270°)
     public int rotationState = 0;
+    public Vector3Int tilePosition;
+
+
+    // Construtor
+    public void Initialize(GameObject customTilePrefab, GameObject plowedTilePrefab, bool isPlantable, 
+        int nitrogen, int phosphorus, int potassium, int humidity, int rotationState)
+    {
+        this.customTilePrefab = customTilePrefab;
+        this.plowedTilePrefab = plowedTilePrefab;
+        this.isPlantable = isPlantable;
+        this.nitrogen = nitrogen;
+        this.phosphorus = phosphorus;
+        this.potassium = potassium;
+        this.humidity = humidity;
+        this.rotationState = rotationState;
+    }
 
     public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
     {
+        this.tilePosition = position;
+
         if (!Application.isPlaying)
         {
             return true;
@@ -40,8 +58,9 @@ public class CustomTileBase : TileBase
             );
 
             tilemapManager.SetTileInfo(position, info);
+            
 
-            if (!tilemapManager.HasInstantiatedTile(position) && customTilePrefab != null)
+            if (/*!tilemapManager.HasInstantiatedTile(position) && */customTilePrefab != null)
             {
                 Vector3 worldPosition = tilemapManager.tilemap.CellToWorld(position) + new Vector3(0.5f, 0, 0.5f);
 
@@ -50,11 +69,17 @@ public class CustomTileBase : TileBase
                 // Determina a rotação com base no estado de rotação
                 Quaternion rotation = Quaternion.Euler(0, rotationState * 90f, 0);
 
-                GameObject instantiatedTile = Instantiate(customTilePrefab, worldPosition, rotation, parent);
+                // Instancia modelo
+                GameObject instantiatedTile;
+                if (!isPlantable) instantiatedTile = Instantiate(customTilePrefab, worldPosition, rotation, parent);
+                else instantiatedTile = Instantiate(plowedTilePrefab, worldPosition, rotation, parent);
+
                 instantiatedTile.transform.position = worldPosition;
                 instantiatedTile.name = $"CustomTile_{position.x}_{position.y}_{position.z}";
 
                 tilemapManager.SetInstantiatedTile(position, instantiatedTile);
+
+                tilemapManager.SetTilesDicy(instantiatedTile.transform.position, this);
             }
         }
         else
@@ -175,9 +200,9 @@ public class CustomTileBase : TileBase
         }
 
         // Verifica em um raio de 2 tiles em torno da posição (X e Y)
-        for (int xOffset = -2; xOffset <= 2; xOffset++)
+        for (int xOffset = -1; xOffset <= 1; xOffset++)
         {
-            for (int yOffset = -2; yOffset <= 2; yOffset++)
+            for (int yOffset = -1; yOffset <= 1; yOffset++)
             {
                 if (xOffset == 0 && yOffset == 0) continue; // Ignora a posição central
 

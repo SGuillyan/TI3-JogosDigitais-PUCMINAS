@@ -14,7 +14,7 @@ public class SaveManager : MonoBehaviour
 
         if (!SaveSystem.isFirstTime())
         {
-            SaveSystem.Load();
+            //SaveSystem.Load();
             Debug.Log("Deu load corretamente!");
         }
 
@@ -25,7 +25,7 @@ public class SaveManager : MonoBehaviour
     {
         if (_periodicSavingTime <= 0)
         {
-            SaveSystem.Save();
+            //SaveSystem.Save();
 
             _periodicSavingTime = periodicSaving_tt;
         }

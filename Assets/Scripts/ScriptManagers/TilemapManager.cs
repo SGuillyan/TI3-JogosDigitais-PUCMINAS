@@ -41,6 +41,7 @@ public class TilemapManager : MonoBehaviour
 
     private Dictionary<Vector3Int, TileInfo> tileInfoDictionary = new Dictionary<Vector3Int, TileInfo>();
     private Dictionary<Vector3Int, GameObject> instantiatedTileDictionary = new Dictionary<Vector3Int, GameObject>(); // Adiciona controle de objetos instanciados
+    public Dictionary<TileBase, Vector3> tilesDictionary = new Dictionary<TileBase, Vector3>();
 
     void Start()
     {
@@ -175,6 +176,11 @@ public class TilemapManager : MonoBehaviour
         tileInfoDictionary[position] = info;
     }
 
+    public void SetTilesDicy(Vector3 position, TileBase tile)
+    {
+        tilesDictionary[tile] = position;
+    }
+
     // Associa um objeto instanciado a uma posição de tile
     public void SetInstantiatedTile(Vector3Int position, GameObject tileObject)
     {
@@ -226,6 +232,75 @@ public class TilemapManager : MonoBehaviour
         else
         {
             Debug.LogWarning("Nenhum dado encontrado para o tile na posição " + position);
+        }
+    }
+
+
+    public void LoadTile(Vector3Int position, string tileType, TileInfo tileInfo, string instantiatedObjectName)
+    {
+        // Definir o Tile no Tilemap
+        TileBase tile = GetTileByName(tileType);
+        tilemap.SetTile(position, tile);
+
+
+
+        // Restaurar o TileInfo no dicionário
+        /*SetTileInfo(position, tileInfo);
+
+        // Verificar se o tile é plantável e alterar para o estado arado, se necessário
+        if (tile is CustomTileBase customTile && tileInfo.isPlantable)
+        {
+            customTile.ChangeToPlowedState(position);
+        }
+
+        if (tile is CustomTileBase customTile2)
+        {
+            Debug.Log("CUSTOMTIEL2");
+            customTile2.RecreateTileObjects(position);
+        }
+
+        // Verificar e limpar objetos antigos antes de instanciar novos
+        GameObject existingObject = GetInstantiatedTile(position);
+        if (existingObject != null)
+        {
+            Destroy(existingObject); // Remove o objeto antigo
+        }
+
+        // Restaurar o objeto instanciado, se aplicável
+        if (!string.IsNullOrEmpty(instantiatedObjectName))
+        {
+            GameObject prefab = GetPrefabForTile(tileType);
+            if (prefab != null)
+            {
+                // Instancia o objeto como filho do Tilemap
+                Transform parent = tilemap.transform;
+
+                GameObject instantiatedObject = Instantiate(prefab, parent);
+                instantiatedObject.name = instantiatedObjectName;
+                instantiatedObject.transform.position = tilemap.CellToWorld(position);
+
+                // Atualiza o dicionário com o novo objeto
+                SetInstantiatedTile(position, instantiatedObject);
+            }
+        }*/
+    }
+
+
+    public TileBase GetTileByName(string tileType)
+    {
+        switch (tileType)
+        {
+            case "FarmTile": return defaultTile;
+            case "TreeTile": return treeTile;
+            case "WaterTile": return riverTile;
+            case "CornerTileSmall": return riverTile;
+            case "CornerTileLarge": return riverTile;
+            case "RiverTileLeft": return borderTileLeft;
+            case "RiverTileRight": return borderTileRight;
+            case "RiverTileUp": return borderTileUp;
+            case "RiverTile": return borderTileDown;
+
+            default: return null;
         }
     }
 }

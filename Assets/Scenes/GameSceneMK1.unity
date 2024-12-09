@@ -12114,6 +12114,8 @@ MonoBehaviour:
     mainCamera: {fileID: 1566377471}
     moneyManager: {fileID: 917966509}
     tilesParent: {fileID: 1342796937}
+    tilemapManager: {fileID: 1838739717}
+    grid: {fileID: 561282020}
     inventoryManager: {fileID: 1807522567}
     questManager: {fileID: 1230067510}
 --- !u!4 &875290591

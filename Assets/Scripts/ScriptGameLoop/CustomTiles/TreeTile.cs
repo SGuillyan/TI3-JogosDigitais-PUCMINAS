@@ -9,14 +9,30 @@ public class TreeTile : TileBase
     public GameObject groundPrefab;        // Prefab do chão a ser instanciado
     public Color color = Color.white;      // Cor do tile (opcional)
 
+    public bool wasCuted = false;
+
+    public Vector3Int tilePosition;
+
+
+    // Construtor
+    public void Initialize(GameObject treePrefab, GameObject groundPrefab, bool wasCuted)
+    {
+        this.treePrefab = treePrefab;
+        this.groundPrefab = groundPrefab;
+        this.wasCuted = wasCuted;
+    }
+
     public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
     {
+        tilePosition = position;
+
         if (!Application.isPlaying || treePrefab == null || groundPrefab == null)
         {
             return true;
         }
 
         TilemapManager tilemapManager = Object.FindObjectOfType<TilemapManager>();
+        
 
         if (tilemapManager != null)
         {
@@ -30,22 +46,27 @@ public class TreeTile : TileBase
             GameObject ground = Instantiate(groundPrefab, worldPosition, Quaternion.identity, parent);
             ground.name = $"Ground_{position.x}_{position.y}_{position.z}";
 
-            // Instancia a árvore acima do chão, com randomização de escala e rotação
-            Vector3 treePosition = worldPosition + new Vector3(0, 0.5f, 0);
-            GameObject tree = Instantiate(treePrefab, treePosition, Quaternion.identity, parent);
+            tilemapManager.SetTilesDicy(ground.transform.position, this);
 
-            // Randomiza a escala da árvore
-            float randomScale = Random.Range(0.85f, 1.15f);
-            tree.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
+            if (!wasCuted)
+            {
+                // Instancia a árvore acima do chão, com randomização de escala e rotação
+                Vector3 treePosition = worldPosition + new Vector3(0, 0.5f, 0);
+                GameObject tree = Instantiate(treePrefab, treePosition, Quaternion.identity, parent);
 
-            // Randomiza a rotação da árvore
-            float randomRotation = Random.Range(0f, 360f); // Rotação aleatória no eixo Y
-            tree.transform.rotation = Quaternion.Euler(0, randomRotation, 0);
+                // Randomiza a escala da árvore
+                float randomScale = Random.Range(0.85f, 1.15f);
+                tree.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
 
-            tree.name = $"Tree_{position.x}_{position.y}_{position.z}";
+                // Randomiza a rotação da árvore
+                float randomRotation = Random.Range(0f, 360f); // Rotação aleatória no eixo Y
+                tree.transform.rotation = Quaternion.Euler(0, randomRotation, 0);
 
-            // Registra a árvore no TilemapManager
-            tilemapManager.SetInstantiatedTile(position, tree);
+                tree.name = $"Tree_{position.x}_{position.y}_{position.z}";
+
+                // Registra a árvore no TilemapManager
+                tilemapManager.SetInstantiatedTile(position, tree);
+            }            
 
             //Debug.Log($"Chão e árvore instanciados em {position} com escala {randomScale} e rotação {randomRotation}");
         }
@@ -81,6 +102,7 @@ public class TreeTile : TileBase
             if (treeObject != null)
             {
                 Destroy(treeObject); // Remove o objeto da árvore
+                wasCuted = true;
             }
 
             // Atualiza a referência para o chão no TilemapManager

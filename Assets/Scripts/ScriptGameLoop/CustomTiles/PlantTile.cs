@@ -40,7 +40,7 @@ public class PlantTile : Tile
 
 
     public Item harvestedItem;
-    public TileBase soilTile;
+    public CustomTileBase soilTile;
 
     private int growthStage = 0;
     private float totalGrowthTime;
@@ -58,6 +58,91 @@ public class PlantTile : Tile
 
     private GameObject currentGrowthInstance; // Instância atual do estágio de crescimento
 
+
+    // Construtor
+    public void Initialize(GameObject[] growthPrefabs, GameObject rotPrefab, float[] growthTimes, 
+        Ambient.Temperature idealTemperature, Ambient.Climate idealClimate, int greenTolerance, int yellowTolerance,
+        bool isPlanted, bool isFullyGrown, bool isRotten, Item harvestedItem, CustomTileBase soilTile,
+        int growthStage, float totalGrowthTime, float currentGrowthTime, GameObject currentGrowthInstance,
+        int requiredNitrogen, int requiredPhosphorus, int requiredPotassium, int returnNitrogen, int returnPhosphorus, int returnPotassium)
+    {
+        this.growthPrefabs = growthPrefabs;
+        this.rotPrefab = rotPrefab;
+        this.growthTimes = growthTimes;
+        this.idealTemperature = idealTemperature;
+        this.idealClimate = idealClimate;
+        this.greenTolerance = greenTolerance;
+        this.yellowTolerance = yellowTolerance;
+        this.isPlanted = isPlanted;
+        this.isFullyGrown = isFullyGrown;
+        this.isRotten = isRotten;
+        this.harvestedItem = harvestedItem;
+        this.soilTile = soilTile;
+        this.growthStage = growthStage;
+        this.totalGrowthTime = totalGrowthTime;
+        this.currentGrowthTime = currentGrowthTime;
+        this.currentGrowthInstance = currentGrowthInstance;
+        this.requiredNitrogen = requiredNitrogen;
+        this.requiredPhosphorus = requiredPhosphorus;
+        this.requiredPotassium = requiredPotassium;
+        this.returnNitrogen = returnNitrogen;
+        this.returnPhosphorus = returnPhosphorus;
+        this.returnPotassium = returnPotassium;
+    }
+
+    #region // Get & Set
+
+    public Ambient.Temperature GetIdealTemperature()
+    {
+        return idealTemperature;
+    }
+
+    public Ambient.Climate GetIdealClimate()
+    {
+        return idealClimate;
+    }
+
+    public int GetGreenTolerance()
+    {
+        return greenTolerance;
+    }
+
+    public int GetYellowTolerance() 
+    {
+        return yellowTolerance;
+    }
+
+    public int GetGrowthStage()
+    {
+        return growthStage;
+    }
+
+    public float GetTotalGrowthTime()
+    {
+        return totalGrowthTime;
+    }
+
+    public float GetCurrentGrowthTime()
+    {
+        return currentGrowthTime;
+    }
+
+    public GameObject GetCurrentGrowthInstance()
+    {
+        return currentGrowthInstance;
+    }
+
+
+    #endregion
+
+
+    public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
+    {
+        //TilemapManager tilemapManager = Object.FindObjectOfType<TilemapManager>();
+        //tilemapManager.SetTilesDicy(position.ToString(), this);
+
+        return true;
+    }
 
     public void Plant(Tilemap tilemap, Vector3Int position, MonoBehaviour caller)
     {

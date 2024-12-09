@@ -8,8 +8,19 @@ public class HouseTile : TileBase
     public GameObject groundPrefab;        // Prefab do chão a ser instanciado
     public Color color = Color.white;      // Cor do tile (opcional)
 
+    public Vector3Int tilePosition;
+
+
+    // Construtor
+    public void Initialize(GameObject groundPrefab)
+    {
+        this.groundPrefab = groundPrefab;
+    }
+
     public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
     {
+        tilePosition = position;
+
         if (!Application.isPlaying || groundPrefab == null)
         {
             return true; // Retorna imediatamente se o jogo não está em execução ou o prefab não está configurado
@@ -32,7 +43,9 @@ public class HouseTile : TileBase
             // Registra o chão no TilemapManager
             tilemapManager.SetInstantiatedTile(position, ground);
 
-            Debug.Log($"Chão instanciado em {position}");
+            //Debug.Log($"Chão instanciado em {position}");
+
+            tilemapManager.SetTilesDicy(ground.transform.position, this);
         }
         else
         {
