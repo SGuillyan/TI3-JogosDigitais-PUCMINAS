@@ -56,7 +56,7 @@ MonoBehaviour:
   isFullyGrown: 0
   isRotten: 0
   harvestedItem:
-    itemName: Soja
+    itemName: Soybean
     itemIcon: {fileID: 0}
     maxStackSize: 99
     itemType: 0

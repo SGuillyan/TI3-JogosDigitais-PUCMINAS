@@ -7530,7 +7530,7 @@ MonoBehaviour:
     maxStackSize: 99
     itemType: 1
     itemID: 1
-    price: 15
+    price: 0
     reqNitro: 40
     reqPhosf: 60
     reqK: 15

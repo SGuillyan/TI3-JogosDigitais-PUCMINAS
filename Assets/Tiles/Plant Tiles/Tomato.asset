@@ -56,7 +56,7 @@ MonoBehaviour:
   isFullyGrown: 0
   isRotten: 0
   harvestedItem:
-    itemName: Tomate
+    itemName: Tomato
     itemIcon: {fileID: 0}
     maxStackSize: 99
     itemType: 0

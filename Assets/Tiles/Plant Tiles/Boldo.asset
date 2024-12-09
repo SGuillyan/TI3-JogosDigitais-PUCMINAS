@@ -55,19 +55,19 @@ MonoBehaviour:
   isFullyGrown: 0
   isRotten: 0
   harvestedItem:
-    itemName: 
+    itemName: Boldo
     itemIcon: {fileID: 0}
-    maxStackSize: 0
+    maxStackSize: 99
     itemType: 0
-    itemID: 0
-    price: 0
+    itemID: 106
+    price: 150
     reqNitro: 0
     reqPhosf: 0
     reqK: 0
   soilTile: {fileID: 11400000, guid: fb4802db5e5b9c94db6eda50fd1dd23d, type: 2}
-  requiredNitrogen: 10
-  requiredPhosphorus: 5
-  requiredPotassium: 5
-  returnNitrogen: 5
-  returnPhosphorus: 3
-  returnPotassium: 4
+  requiredNitrogen: 60
+  requiredPhosphorus: 40
+  requiredPotassium: 100
+  returnNitrogen: 0
+  returnPhosphorus: 0
+  returnPotassium: 0
