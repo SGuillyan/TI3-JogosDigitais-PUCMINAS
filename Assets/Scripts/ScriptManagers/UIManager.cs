@@ -47,20 +47,20 @@ public class UIManager : MonoBehaviour
         }
 
         // Atualiza os textos dos nutrientes NPK e umidade
-        nitrogenText.text = "Nitrogênio (N): " + nitrogen.ToString();
-        phosphorusText.text = "Fósforo (P): " + phosphorus.ToString();
-        potassiumText.text = "Potássio (K): " + potassium.ToString();
-        humidityText.text = "Umidade: " + humidity.ToString();
+        nitrogenText.text = "Nitrogen (N): " + nitrogen.ToString();
+        phosphorusText.text = "Phosphorus (P): " + phosphorus.ToString();
+        potassiumText.text = "Potassium (K): " + potassium.ToString();
+        //humidityText.text = "Humidity: " + humidity.ToString();
 
         // Atualiza o status de plantabilidade
         if (isPlantable)
         {
-            plantableText.text = "Plantável";
+            plantableText.text = "Plantable";
             plantableText.color = Color.green;  // Cor verde se o tile for plantável
         }
         else
         {
-            plantableText.text = "Não Plantável";
+            plantableText.text = "Not Plantable";
             plantableText.color = Color.red;  // Cor vermelha se o tile não for plantável
         }
     }

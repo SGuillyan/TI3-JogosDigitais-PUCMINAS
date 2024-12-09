@@ -504,14 +504,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialSteps:
-  - dialogueText: Bem vindo ao tutorial, vamos ensinar como adminstrar sua fazenda!
+  - dialogueText: Welcome to the tutorial. Here we'll show you how to run your own
+      farm!
     targetUIElement: {fileID: 0}
     buttonsToClick: []
     togglesToActivate: []
     popupPosition: {x: 0, y: 0}
     buttonsClicked: 0
     togglesActivated: 0
-  - dialogueText: Para interagir com o solo, selecione a caixa de ferramentas!
+  - dialogueText: To interact with the soil please select the toolbox.
     targetUIElement: {fileID: 886458208}
     buttonsToClick:
     - {fileID: 886458209}
@@ -519,7 +520,7 @@ MonoBehaviour:
     popupPosition: {x: 0, y: 0}
     buttonsClicked: 0
     togglesActivated: 0
-  - dialogueText: "Selecione para obter informa\xE7\xE3o sobre o solo"
+  - dialogueText: Select the magnifier to see the soil infos.
     targetUIElement: {fileID: 2062697992}
     buttonsToClick: []
     togglesToActivate:
@@ -527,7 +528,7 @@ MonoBehaviour:
     popupPosition: {x: 0, y: 0}
     buttonsClicked: 0
     togglesActivated: 0
-  - dialogueText: Vamos comprar algumas sementes! Clique na loja
+  - dialogueText: Let's buy some seeds! First open the shop.
     targetUIElement: {fileID: 213822524}
     buttonsToClick:
     - {fileID: 213822525}
@@ -535,14 +536,14 @@ MonoBehaviour:
     popupPosition: {x: 0, y: 0}
     buttonsClicked: 0
     togglesActivated: 0
-  - dialogueText: "Compre algumas sementes de cenoura para come\xE7armos a plantar!"
+  - dialogueText: Buy some carrot seeds so we can start planting!
     targetUIElement: {fileID: 213822524}
     buttonsToClick: []
     togglesToActivate: []
     popupPosition: {x: 0, y: -825}
     buttonsClicked: 0
     togglesActivated: 0
-  - dialogueText: "Ok, vamos voltar \xE0 caixa de ferramentas!"
+  - dialogueText: Well done! Now lets return to the toolbox.
     targetUIElement: {fileID: 886458208}
     buttonsToClick:
     - {fileID: 886458209}
@@ -550,7 +551,7 @@ MonoBehaviour:
     popupPosition: {x: 0, y: 325}
     buttonsClicked: 0
     togglesActivated: 0
-  - dialogueText: Selecione a enxada para preparar o solo para plantio
+  - dialogueText: Pick the hoe to make the soil plantable.
     targetUIElement: {fileID: 9845568}
     buttonsToClick: []
     togglesToActivate:
@@ -558,8 +559,8 @@ MonoBehaviour:
     popupPosition: {x: 0, y: 0}
     buttonsClicked: 0
     togglesActivated: 0
-  - dialogueText: "Excelente! Agora, abra seu invent\xE1rio e selecione a semente
-      desejada para plantar!"
+  - dialogueText: Excelent! Now open the inventory and pick the purchased seed you
+      want to plant.
     targetUIElement: {fileID: 823962373}
     buttonsToClick:
     - {fileID: 823962374}
@@ -567,31 +568,29 @@ MonoBehaviour:
     popupPosition: {x: 0, y: 0}
     buttonsClicked: 0
     togglesActivated: 0
-  - dialogueText: Selecione a semente de Cenoura que compramos!
+  - dialogueText: Pick the carrot seed you just bought.
     targetUIElement: {fileID: 0}
     buttonsToClick: []
     togglesToActivate: []
     popupPosition: {x: 0, y: -825}
     buttonsClicked: 0
     togglesActivated: 0
-  - dialogueText: "Por fim, selecione um peda\xE7o de terra plant\xE1vel para acomodarmos
-      nossas cenouras."
+  - dialogueText: Now choose a plantable spot so your little carrots can start growing!
     targetUIElement: {fileID: 0}
     buttonsToClick: []
     togglesToActivate: []
     popupPosition: {x: 0, y: 325}
     buttonsClicked: 0
     togglesActivated: 0
-  - dialogueText: Quando a planta crescer, a colha com a ferramenta adequada na caixa
-      de ferramentas.
+  - dialogueText: When fully growth you can use the harvest tool to get your fresh
+      crop.
     targetUIElement: {fileID: 886458208}
     buttonsToClick: []
     togglesToActivate: []
     popupPosition: {x: 0, y: 0}
     buttonsClicked: 0
     togglesActivated: 0
-  - dialogueText: Depois de colher a planta com a ferramenta adequada, venda-a na
-      loja!
+  - dialogueText: After all this you can sell the crop in the shop!
     targetUIElement: {fileID: 213822524}
     buttonsToClick:
     - {fileID: 213822525}
@@ -7571,7 +7570,16 @@ MonoBehaviour:
     reqNitro: 80
     reqPhosf: 70
     reqK: 90
-  - itemName: Fertilizante - N
+  - itemName: Boldo Seed
+    itemIcon: {fileID: 21300000, guid: 4cf9dad6e80700b449620e0e2e1d29fc, type: 3}
+    maxStackSize: 99
+    itemType: 1
+    itemID: 6
+    price: 50
+    reqNitro: 60
+    reqPhosf: 40
+    reqK: 100
+  - itemName: Fertilizer - N
     itemIcon: {fileID: 21300000, guid: 79ed22d7d04cf0345b109c8f6a653809, type: 3}
     maxStackSize: 99
     itemType: 2
@@ -7580,7 +7588,7 @@ MonoBehaviour:
     reqNitro: 100
     reqPhosf: 0
     reqK: 0
-  - itemName: Fertilizante - P
+  - itemName: Fertilizer - P
     itemIcon: {fileID: 21300000, guid: 3f8d95afa8b3b914984a83e510c2b3a9, type: 3}
     maxStackSize: 99
     itemType: 2
@@ -7589,7 +7597,7 @@ MonoBehaviour:
     reqNitro: 0
     reqPhosf: 100
     reqK: 0
-  - itemName: Fertilizante - K
+  - itemName: Fertilizer - K
     itemIcon: {fileID: 21300000, guid: 24717d51a1e525543be3c6283014b271, type: 3}
     maxStackSize: 99
     itemType: 2
@@ -7598,12 +7606,12 @@ MonoBehaviour:
     reqNitro: 0
     reqPhosf: 0
     reqK: 100
-  - itemName: Fertilizante Premium
-    itemIcon: {fileID: 21300000, guid: 80ba41df4ee46d14daf9704599c1a92e, type: 3}
+  - itemName: Premium Fertilizer
+    itemIcon: {fileID: 21300000, guid: 4f18e62d5876cf44ba4c6347ccd22dda, type: 3}
     maxStackSize: 99
     itemType: 2
     itemID: 203
-    price: 50
+    price: 120
     reqNitro: 75
     reqPhosf: 75
     reqK: 75
@@ -12053,11 +12061,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   accesses:
+    volumeSettings: {fileID: 0}
     tutorialManager: {fileID: 18571957}
     mainCamera: {fileID: 1566377471}
     moneyManager: {fileID: 917966509}
     tilesParent: {fileID: 1342796937}
     inventoryManager: {fileID: 1807522567}
+    questManager: {fileID: 0}
 --- !u!4 &875290591
 Transform:
   m_ObjectHideFlags: 0
@@ -15553,8 +15563,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.11389355}
   m_AnchorMax: {x: 1, y: 0.8313194}
-  m_AnchoredPosition: {x: 4.270874, y: -1.1600952}
-  m_SizeDelta: {x: -51.7823, y: -1.9279022}
+  m_AnchoredPosition: {x: 4.270874, y: 6.4834}
+  m_SizeDelta: {x: -51.7823, y: -17.215}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1206776053
 MonoBehaviour:
@@ -15920,7 +15930,6 @@ MonoBehaviour:
   - {fileID: 7949352275456481334, guid: 94c8f60e17371f446bcffb86a0762262, type: 3}
   - {fileID: 7371652944598274234, guid: 628a40bceb967c547aa5cb976c95821e, type: 3}
   activeQuests: []
-  completedQuests: []
   inventoryManager: {fileID: 1807522567}
   questButtomContent: {fileID: 1230067506}
 --- !u!1 &1247635353
