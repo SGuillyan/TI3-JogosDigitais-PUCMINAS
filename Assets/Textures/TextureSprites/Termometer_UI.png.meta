@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bfe6d8f0c8f1bb44c8e2c4d5386e5fd9
+guid: df9a8c5fe89b7274891afb67fc25d040
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -94,19 +94,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -123,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Termometer UI_0
+      name: Termometer_UI_0
       rect:
         serializedVersion: 2
-        x: 225
-        y: 126
-        width: 228
-        height: 768
+        x: 143
+        y: 108
+        width: 210
+        height: 819
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51c099bb255ac8c47b83c93293071286
-      internalID: -185638487
+      spriteID: 806cd0a4f1db2f24ba206553f1693dfc
+      internalID: -821675841
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Termometer UI_1
+      name: Termometer_UI_1
       rect:
         serializedVersion: 2
-        x: 526
-        y: 137
-        width: 181
-        height: 757
+        x: 377
+        y: 62
+        width: 295
+        height: 910
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4724a9c71e146e8458db9f5847aba936
-      internalID: -728394496
+      spriteID: 2525e0de040ccad41b90e77e616a3a39
+      internalID: 183456033
       vertices: []
       indices: 
       edges: []
@@ -167,7 +154,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: e17a4584df6cc454e98230d43c0535de
+    spriteID: 0b60a269301b9bd4ea91a5e2f3181df5
     internalID: 0
     vertices: []
     indices: 
@@ -175,8 +162,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Termometer UI_0: -185638487
-      Termometer UI_1: -728394496
+      Termometer_UI_0: -821675841
+      Termometer_UI_1: 183456033
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
