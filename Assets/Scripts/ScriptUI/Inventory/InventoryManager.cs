@@ -71,6 +71,7 @@ public class InventoryManager : MonoBehaviour
         stopPlantingButton.gameObject.SetActive(false);
 
         menuManager.OpenInventory();  // Reabre o inventário
+        plantingFeedback.DisableFeedback();
     }
 
     // Verifica se um item está selecionado
@@ -152,7 +153,6 @@ public class InventoryManager : MonoBehaviour
     // Método para parar o plantio (associado ao botão Stop Planting)
     public void StopPlanting()
     {
-        DeselectItem();  // Deseleciona o item e volta ao inventário
-        plantingFeedback.DisableFeedback();
+        DeselectItem();  // Deseleciona o item e volta ao inventário       
     }
 }
