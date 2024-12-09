@@ -198,4 +198,56 @@ public class CustomTileBase : TileBase
         return false;
     }
 
+    public void RecreateTileObjects(Vector3Int position)
+    {
+        TilemapManager tilemapManager = Object.FindObjectOfType<TilemapManager>();
+
+        if (tilemapManager == null)
+        {
+            Debug.LogWarning("TilemapManager não encontrado!");
+            return;
+        }
+
+        // Verifica se o TileInfo já existe na posição
+        TileInfo tileInfo = tilemapManager.GetTileInfo(position);
+        if (tileInfo == null)
+        {
+            Debug.LogWarning($"TileInfo não encontrado para a posição {position}.");
+            return;
+        }
+
+        // Determina qual objeto recriar com base no estado do TileInfo
+        GameObject prefabToInstantiate = tileInfo.isPlantable ? plowedTilePrefab : customTilePrefab;
+        if (prefabToInstantiate == null)
+        {
+            Debug.LogWarning("Prefab não atribuído para este estado do tile.");
+            return;
+        }
+
+        // Limpa o objeto existente na posição (se houver)
+        GameObject existingObject = tilemapManager.GetInstantiatedTile(position);
+        if (existingObject != null)
+        {
+            Destroy(existingObject);
+        }
+
+        // Calcula a posição no mundo com base na posição do tilemap
+        Vector3 worldPosition = tilemapManager.tilemap.CellToWorld(position) + new Vector3(0.5f, 0, 0.5f);
+
+        // Define o pai para organização hierárquica na cena
+        Transform parent = tilemapManager.tilemap.transform;
+
+        // Instancia o objeto apropriado
+        GameObject instantiatedObject = Instantiate(prefabToInstantiate, worldPosition, Quaternion.identity, parent);
+        instantiatedObject.name = prefabToInstantiate == plowedTilePrefab
+            ? $"PlowedTile_{position.x}_{position.y}_{position.z}"
+            : $"CustomTile_{position.x}_{position.y}_{position.z}";
+
+        // Registra o novo objeto no TilemapManager
+        tilemapManager.SetInstantiatedTile(position, instantiatedObject);
+
+        Debug.Log($"Tile recriado na posição {position}. Estado atual: {(tileInfo.isPlantable ? "Plantável" : "Não Plantável")}");
+    }
+
+
 }

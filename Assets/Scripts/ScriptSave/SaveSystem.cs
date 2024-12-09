@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class SaveSystem : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class SaveSystem : MonoBehaviour
 		public Transform tilesParent;
         public InventoryManager inventoryManager;
 		public QuestManager questManager;
+		public TilemapManager tilemapManager;
 	}
 
 	[SerializeField] private SaveAccesses accesses;
@@ -29,6 +31,7 @@ public class SaveSystem : MonoBehaviour
 	private static Transform tilesParent;
 	private static InventoryManager inventoryManager;
 	private static QuestManager questManager;
+	private static TilemapManager tilemapManager;
 
 	private void Awake()
 	{
@@ -39,6 +42,7 @@ public class SaveSystem : MonoBehaviour
 		tilesParent = accesses.tilesParent;
 		inventoryManager = accesses.inventoryManager;
 		questManager = accesses.questManager;
+		tilemapManager = accesses.tilemapManager;
 		
 		//Save("Assets/Scripts/ScriptSave/SaveData.json");
 	}
@@ -80,8 +84,23 @@ public class SaveSystem : MonoBehaviour
 		IDS.CalcularIDS();
         #endregion
         #region // TileData
+		foreach (var tileData in load.tilesData.tiles)
+		{
+			// Reconstruir o TileInfo
+			TileInfo tileInfo = new TileInfo(
+				tileData.isPlantable,
+				tileData.nitrogen,
+				tileData.phosphorus,
+				tileData.potassium,
+				tileData.humidity
+			);
 
-        #endregion
+			// Delega todo o processamento para o TilemapManager
+			tilemapManager.LoadTile(tileData.position, tileData.tileType, tileInfo, tileData.instantiatedObjectName);
+		}
+
+		#endregion
+
         #region // InventoryData
 		for (int i = 0; i < load.inventoryData.itens.Count; i++)
 		{
@@ -120,17 +139,36 @@ public class SaveSystem : MonoBehaviour
 	{
 		SaveData save = new SaveData();		
 
+		save.tilesData = new TileList();
+
 		save.configData = new ConfigData(volumeSettings.musicSlider.value, volumeSettings.sfxSlider.value);
         save.tutorialData = new TutorialData(tutorialManager.tutirialCompleted);
         save.cameraData = new CameraData(mainCamera.transform.position, mainCamera.orthographicSize);
         save.moneyData = new MoneyData(moneyManager.GetCurrentMoney());
         save.ambientData = new AmbientData(Ambient.GetCurrentTemperature(), Ambient.GetCurrentClimate(), AmbientManager.GetCurrentSeason(), AmbientManager.GetSeasonalFactor());
         save.idsData = new IDS_Data(IDS.GetIDS(), IDS.GetEcologico(), IDS.GetEconomico(), IDS.GetSocial());
-		//save.tileData = new TileData(tilesParent);
         save.inventoryData = new InventoryData(inventoryManager.playerInventory.items);
 		save.questData = new QuestData(questManager.availableQuests, questManager.activeQuests);
 
-        Debug.Log("Relat�rio de salvamento gerado!");
+		foreach (var tilePosition in tilemapManager.tileInfoDictionary.Keys)
+		{
+			TileInfo tileInfo = tilemapManager.GetTileInfo(tilePosition);
+			TileBase tile = tilemapManager.tilemap.GetTile(tilePosition);
+			GameObject instantiatedObject = tilemapManager.GetInstantiatedTile(tilePosition);
+
+			if (tile != null && tileInfo != null)
+			{
+				TileData tileData = new TileData(
+					tilePosition,
+					tile.name,
+					tileInfo,
+					instantiatedObject
+				);
+				save.tilesData.tiles.Add(tileData);
+			}
+		}
+
+        Debug.Log("Relat�rio de salvamento gerado!");
         return save;
 	}
 
@@ -150,10 +188,16 @@ public class SaveSystem : MonoBehaviour
         public MoneyData moneyData;
         public AmbientData ambientData;
         public IDS_Data idsData;
-        public TileData tileData;
+        public TileList tilesData;
         public InventoryData inventoryData;
 		public QuestData questData;
     }
+
+	[Serializable]
+	public class TileList
+	{
+		public List<TileData> tiles = new List<TileData>();
+	}
 
     [Serializable]
     public class ConfigData
@@ -246,17 +290,28 @@ public class SaveSystem : MonoBehaviour
     [Serializable]
     public class TileData
 	{
-		public List<GameObject> tiles;
+		public Vector3Int position;          // Posição do tile
+		public string tileType;              // Tipo do tile (ex.: "CustomTileBase", "TreeTile")
+		public bool isPlantable;             // Se o tile é plantável
+		public int nitrogen;                 // Valor de nitrogênio
+		public int phosphorus;               // Valor de fósforo
+		public int potassium;                // Valor de potássio
+		public int humidity;                 // Valor de umidade
+		public string instantiatedObjectName; // Nome do objeto instanciado (se houver)
 
-		//Construtor
-		public TileData(Transform tilesParent)
+		// Construtor
+		public TileData(Vector3Int position, string tileType, TileInfo tileInfo, GameObject instantiatedObject)
 		{
-			for(int i = 0; i < tilesParent.childCount; i++)
-			{
-				tiles.Add(tilesParent.GetChild(i).gameObject);
-			}
+			this.position = position;
+			this.tileType = tileType;
+			this.isPlantable = tileInfo.isPlantable;
+			this.nitrogen = tileInfo.nitrogen;
+			this.phosphorus = tileInfo.phosphorus;
+			this.potassium = tileInfo.potassium;
+			this.humidity = tileInfo.humidity;
+			this.instantiatedObjectName = instantiatedObject != null ? instantiatedObject.name : null;
 		}
-	}
+	}	
 
     [Serializable]
 	public class InventoryData

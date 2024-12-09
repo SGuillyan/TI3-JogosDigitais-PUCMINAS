@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
-    [SerializeField, Tooltip("Tempo para o salvamento peri�dico (segundos)"), Min(30)] private int periodicSavingTime = 60;
+    [SerializeField, Tooltip("Tempo para o salvamento periódico (segundos)"), Min(15)]
+    private int periodicSavingTime = 60;
     private float _periodicSavingTime;
     private float periodicSaving_tt;
 
@@ -12,7 +13,8 @@ public class SaveManager : MonoBehaviour
         _periodicSavingTime = periodicSavingTime;
         periodicSaving_tt = _periodicSavingTime;
 
-        //SaveSystem.Load();
+        SaveSystem.Save();
+        Debug.Log(Application.persistentDataPath + "/SaveData.json");
     }
 
     private void Update()
@@ -33,5 +35,13 @@ public class SaveManager : MonoBehaviour
     {
         SaveSystem.Save();
         AnalyticsSystem.SendEmail(AnalyticsSystem.GenerateAnalyticsJsonReport());
+    }
+
+    // Adiciona um botão no Inspector para chamar Load()
+    [ContextMenu("Load Game")]
+    public void LoadGame()
+    {
+        SaveSystem.Load();
+        Debug.Log("Jogo carregado com sucesso!");
     }
 }

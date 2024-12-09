@@ -9,6 +9,13 @@ public class TreeTile : TileBase
     public GameObject groundPrefab;        // Prefab do chão a ser instanciado
     public Color color = Color.white;      // Cor do tile (opcional)
 
+    // Propriedades para TileInfo
+    public bool isPlantable = false;
+    public int nitrogen = 2000;
+    public int phosphorus = 2000;
+    public int potassium = 2000;
+    public int humidity = 50;
+
     public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
     {
         if (!Application.isPlaying || treePrefab == null || groundPrefab == null)
@@ -20,6 +27,10 @@ public class TreeTile : TileBase
 
         if (tilemapManager != null)
         {
+            // Configura o TileInfo para este tile
+            TileInfo tileInfo = new TileInfo(isPlantable, nitrogen, phosphorus, potassium, humidity);
+            tilemapManager.SetTileInfo(position, tileInfo); // Adiciona ao dicionário do TilemapManager
+
             // Calcula a posição no mundo com base no tilemap
             Vector3 worldPosition = tilemapManager.tilemap.CellToWorld(position) + new Vector3(0.5f, 0, 0.5f);
 
@@ -27,8 +38,11 @@ public class TreeTile : TileBase
             Transform parent = tilemapManager.parentTransform != null ? tilemapManager.parentTransform : tilemapManager.transform;
 
             // Instancia o chão na posição do tile
-            GameObject ground = Instantiate(groundPrefab, worldPosition, Quaternion.identity, parent);
-            ground.name = $"Ground_{position.x}_{position.y}_{position.z}";
+            if (!tilemapManager.HasInstantiatedTile(position) && groundPrefab != null){
+                GameObject ground = Instantiate(groundPrefab, worldPosition, Quaternion.identity, parent);
+                ground.name = $"Ground_{position.x}_{position.y}_{position.z}";
+            }
+
 
             // Instancia a árvore acima do chão, com randomização de escala e rotação
             Vector3 treePosition = worldPosition + new Vector3(0, 0.5f, 0);
