@@ -18,7 +18,7 @@ public class PlantingFeeback : MonoBehaviour
         {
             if (inventoryManager.HasSelectedItem())
             {
-                Debug.Log(id);
+                //Debug.Log(id);
                 display.text = inventoryManager.playerInventory.items[id].quantity.ToString();
                 image.sprite = inventoryManager.playerInventory.items[id].item.itemIcon;
                 
