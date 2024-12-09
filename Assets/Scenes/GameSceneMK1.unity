@@ -7530,19 +7530,10 @@ MonoBehaviour:
     maxStackSize: 99
     itemType: 1
     itemID: 1
-    price: 0
+    price: 5
     reqNitro: 40
     reqPhosf: 60
     reqK: 15
-  - itemName: Corn Seed
-    itemIcon: {fileID: 21300000, guid: 4217bcb8d4f2a26468a0ce6624749f85, type: 3}
-    maxStackSize: 99
-    itemType: 1
-    itemID: 2
-    price: 70
-    reqNitro: 90
-    reqPhosf: 80
-    reqK: 85
   - itemName: Soybean Seed
     itemIcon: {fileID: 21300000, guid: b9cf82213e1cda94ca8a1cc8b02ba23a, type: 3}
     maxStackSize: 99
@@ -7552,24 +7543,15 @@ MonoBehaviour:
     reqNitro: 50
     reqPhosf: 70
     reqK: 60
-  - itemName: Strawberry Seed
-    itemIcon: {fileID: 21300000, guid: 2fdb5fb6414519e4ea844aa3246e456c, type: 3}
+  - itemName: Corn Seed
+    itemIcon: {fileID: 21300000, guid: 4217bcb8d4f2a26468a0ce6624749f85, type: 3}
     maxStackSize: 99
     itemType: 1
-    itemID: 4
-    price: 250
-    reqNitro: 60
-    reqPhosf: 65
-    reqK: 70
-  - itemName: Tomato Seed
-    itemIcon: {fileID: 21300000, guid: 7b6b6a3080adb974d81123417e254a77, type: 3}
-    maxStackSize: 99
-    itemType: 1
-    itemID: 5
-    price: 150
-    reqNitro: 80
-    reqPhosf: 70
-    reqK: 90
+    itemID: 2
+    price: 70
+    reqNitro: 90
+    reqPhosf: 80
+    reqK: 85
   - itemName: Boldo Seed
     itemIcon: {fileID: 21300000, guid: 4cf9dad6e80700b449620e0e2e1d29fc, type: 3}
     maxStackSize: 99
@@ -7579,6 +7561,24 @@ MonoBehaviour:
     reqNitro: 60
     reqPhosf: 40
     reqK: 100
+  - itemName: Tomato Seed
+    itemIcon: {fileID: 21300000, guid: 7b6b6a3080adb974d81123417e254a77, type: 3}
+    maxStackSize: 99
+    itemType: 1
+    itemID: 5
+    price: 150
+    reqNitro: 80
+    reqPhosf: 70
+    reqK: 90
+  - itemName: Strawberry Seed
+    itemIcon: {fileID: 21300000, guid: 2fdb5fb6414519e4ea844aa3246e456c, type: 3}
+    maxStackSize: 99
+    itemType: 1
+    itemID: 4
+    price: 250
+    reqNitro: 60
+    reqPhosf: 65
+    reqK: 70
   - itemName: Fertilizer - N
     itemIcon: {fileID: 21300000, guid: 79ed22d7d04cf0345b109c8f6a653809, type: 3}
     maxStackSize: 99
