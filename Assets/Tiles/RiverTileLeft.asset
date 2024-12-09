@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b50668be67c68478b08011377c301f, type: 3}
   m_Name: RiverTileLeft
   m_EditorClassIdentifier: 
-  sprite: {fileID: 223643941, guid: 491c0073997f225469d1d6b910f92083, type: 3}
+  sprite: {fileID: 21300000, guid: 6934e7e7b9794be498fe374c9768754a, type: 3}
   customTilePrefab: {fileID: 5596873383589714348, guid: fb8a2b77d785ca24abe6498723457cfc,
     type: 3}
   plowedTilePrefab: {fileID: 5596873383589714348, guid: 5cb4c98cc619fc548b9a935f1aa534d1,

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b50668be67c68478b08011377c301f, type: 3}
   m_Name: WaterTile
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 524180a3893097149b03af740aa92f5e, type: 3}
+  sprite: {fileID: 21300000, guid: 6934e7e7b9794be498fe374c9768754a, type: 3}
   customTilePrefab: {fileID: 5596873383589714348, guid: 0758034d024d2b845a8945251312531f,
     type: 3}
   plowedTilePrefab: {fileID: 0}
@@ -22,3 +22,4 @@ MonoBehaviour:
   phosphorus: 0
   potassium: 0
   humidity: 1000
+  rotationState: 0

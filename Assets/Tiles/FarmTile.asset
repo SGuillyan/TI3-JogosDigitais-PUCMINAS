@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b50668be67c68478b08011377c301f, type: 3}
   m_Name: FarmTile
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: ef22b3989e073ef4799e6485426710b2, type: 3}
+  sprite: {fileID: 21300000, guid: 70235b978b48d7046ab4ab55cc811588, type: 3}
   customTilePrefab: {fileID: 5596873383589714348, guid: f17673461ee7a2748bd633ddad22d8c1,
     type: 3}
   plowedTilePrefab: {fileID: 5596873383589714348, guid: 5cb4c98cc619fc548b9a935f1aa534d1,

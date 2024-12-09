@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 760b04de0efb8d649aa489174327b9f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questName: 
   daily: 1
   require: {fileID: 0}
   quantityRequire: 0
@@ -401,8 +402,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Reward:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a17dba0d1d48e8243a4db758560e4c5e, type: 2}
+  m_sharedMaterial: {fileID: 1648470971860560227, guid: a17dba0d1d48e8243a4db758560e4c5e,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -535,8 +537,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: + 2
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a17dba0d1d48e8243a4db758560e4c5e, type: 2}
+  m_sharedMaterial: {fileID: 1648470971860560227, guid: a17dba0d1d48e8243a4db758560e4c5e,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -670,8 +673,9 @@ MonoBehaviour:
   m_text: Farmer Joe wants 15 strawberries to make some jam for his wife. Such a
     nice guy!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a17dba0d1d48e8243a4db758560e4c5e, type: 2}
+  m_sharedMaterial: {fileID: 1648470971860560227, guid: a17dba0d1d48e8243a4db758560e4c5e,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -695,7 +699,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 41.85
+  m_fontSize: 35.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -804,8 +808,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Does Jam Shake?
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5ae2a8779ab7cbb42b84a032f481869f, type: 2}
+  m_sharedMaterial: {fileID: -4263441212726749353, guid: 5ae2a8779ab7cbb42b84a032f481869f,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
