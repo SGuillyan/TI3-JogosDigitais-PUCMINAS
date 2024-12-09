@@ -210,9 +210,13 @@ public class TileSelector : MonoBehaviour
     {
         if (tile is CustomTileBase customTile)
         {
-            customTile.RevertToCustomTileState(gridPosition);
-            //Debug.Log($"Solo alisado na posição: {gridPosition}");
 
+            if (!customTile.HasNearbyWaterTile(gridPosition))
+            {
+                customTile.RevertToCustomTileState(gridPosition);
+            }
+
+            //Debug.Log($"Solo alisado na posição: {gridPosition}")
             // Analytics
             // AnalyticsSystem.AddAnalyticLands_Plowed(this.name, gridPosition);
         }    

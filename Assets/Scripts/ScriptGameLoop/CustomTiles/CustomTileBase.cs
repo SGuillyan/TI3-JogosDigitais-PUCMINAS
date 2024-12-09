@@ -175,9 +175,9 @@ public class CustomTileBase : TileBase
         }
 
         // Verifica em um raio de 2 tiles em torno da posição (X e Y)
-        for (int xOffset = -2; xOffset <= 2; xOffset++)
+        for (int xOffset = -1; xOffset <= 1; xOffset++)
         {
-            for (int yOffset = -2; yOffset <= 2; yOffset++)
+            for (int yOffset = -1; yOffset <= 1; yOffset++)
             {
                 if (xOffset == 0 && yOffset == 0) continue; // Ignora a posição central
 
