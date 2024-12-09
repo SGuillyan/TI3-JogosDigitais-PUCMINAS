@@ -31,11 +31,11 @@ public class AmbientManager : MonoBehaviour
 
     private void Start()
     {
-        currentSeason = Season.Summer;
-        seasonalFactor = 0f;
-
-        //Debug.Log("Está " + Ambient.GetCurrentTemperature());
-        //Debug.Log("Está " + Ambient.GetCurrentClimate());
+        if (SaveSystem.isFirstTime())
+        {
+            currentSeason = Season.Summer;
+            seasonalFactor = 0f;
+        }       
     }
 
     private void Update()

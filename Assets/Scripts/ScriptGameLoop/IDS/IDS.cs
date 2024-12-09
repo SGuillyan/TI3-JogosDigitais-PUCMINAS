@@ -4,30 +4,39 @@ using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public static class IDS
+public class IDS : MonoBehaviour
 {
-    [Header("�ndicie de Desenvolvimento Sustent�vel")]
-    [SerializeField] private static int ids;
+    [SerializeField] private int _ecologico;
+    [SerializeField] private int _economico;
+    [SerializeField] private int _social;
 
-    [Space(10)]
+    // Índicie de Desenvolvimento Sustent�vel"
+    private static int ids;
 
-    [Header("�ndicies")]
-    [Range(0, 100)]
-    [SerializeField] private static int ecologico = 20;
-    [Range(0, 100)]
-    [SerializeField] private static int economico = 20;
-    [Range(0, 100)]
-    [SerializeReference] private static int social = 20;
+    // Índicies
+    [Range(0, 100)] private static int ecologico = 20;
+    [Range(0, 100)] private static int economico = 20;
+    [Range(0, 100)] private static int social = 20;
 
-    [Space(5)]
+    // Pesos
+    [Range(0, 10)] private static int pesoEcologico;
+    [Range(0, 10)] private static int pesoEconomico;
+    [Range(0, 10)] private static int pesoSocial;
 
-    [Header("Pesos")]
-    [Range(0, 10)]
-    [SerializeField] private static int pesoEcologico;
-    [Range(0, 10)]
-    [SerializeField] private static int pesoEconomico;
-    [Range(0, 10)]
-    [SerializeField] private static int pesoSocial;
+    private void Start()
+    {
+        if (SaveSystem.isFirstTime())
+        {
+            Inicialize(_ecologico, _economico, _social);
+        }
+    }
+
+    public void Inicialize(int _ecologico, int _economico, int _social)
+    {
+        ecologico = _ecologico;
+        economico = _economico;
+        social = _social;
+    }
 
     #region // Get & Set
 

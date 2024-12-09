@@ -22,10 +22,10 @@ public class QuestManager : MonoBehaviour
 
     private void Start()
     {
-        //if (SaveSystem.isFirstTime())
-        //{
+        if (SaveSystem.isFirstTime())
+        {
             Inicialize();
-        //}
+        }
     }
 
     public void Inicialize()

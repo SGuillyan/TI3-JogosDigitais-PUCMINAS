@@ -32,10 +32,10 @@ public class TutorialManager : MonoBehaviour
 
     void Start()
     {
-        //if (SaveSystem.isFirstTime())
-        //{
+        if (SaveSystem.isFirstTime())
+        {
             Inicialize(false);
-        //}
+        }
     }
 
     public void Inicialize(bool tutirialCompleted)
