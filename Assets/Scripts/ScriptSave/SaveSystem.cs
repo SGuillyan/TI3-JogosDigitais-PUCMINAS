@@ -30,7 +30,7 @@ public class SaveSystem : MonoBehaviour
 	private static QuestManager questManager;
 	
 
-	private void Start()
+	private void Awake()
 	{
 		volumeSettings = accesses.volumeSettings;
         tutorialManager = accesses.tutorialManager;
@@ -54,11 +54,11 @@ public class SaveSystem : MonoBehaviour
 		SaveData load = GenerateLoadData(Application.persistentDataPath + "/SaveData.json");
 
 		#region // ConfigData
-		volumeSettings.musicSlider.value = load.configData.musicVolume;
-		volumeSettings.sfxSlider.value = load.configData.sfxVolume;
+		//volumeSettings.SetMusicVolume(load.configData.musicVolume);
+		//volumeSettings.SetSFXVolume(load.configData.sfxVolume);
 		#endregion
 		#region // TutorialData
-		tutorialManager.tutirialCompleted = load.tutorialData.isDone;
+		tutorialManager.Inicialize(load.tutorialData.isDone);
         #endregion
         #region // CameraData
 		mainCamera.transform.position = load.cameraData.position;
@@ -78,17 +78,21 @@ public class SaveSystem : MonoBehaviour
 		IDS.SetEconomico(load.idsData.economico);
 		IDS.SetSocial(load.idsData.social);
 		IDS.CalcularIDS();
-        #endregion
-        #region // TileData
+		#endregion
+		#region // TileData
 
-        #endregion
-        #region // InventoryData
+		#endregion
+		#region // InventoryData
+		/*
 		for (int i = 0; i < load.inventoryData.itens.Count; i++)
 		{
 			inventoryManager.playerInventory.items.Add(load.inventoryData.itens[i]);
 		}
-        #endregion
-        #region // QuestData
+		*/
+		inventoryManager.playerInventory.items = load.inventoryData.itens;
+		#endregion
+		#region // QuestData
+		/*
         for (int i = 0; i < load.questData.availableQuests.Count; i++)
         {
             questManager.availableQuests.Add(load.questData.availableQuests[i]);
@@ -97,9 +101,12 @@ public class SaveSystem : MonoBehaviour
         {
             questManager.activeQuests.Add(load.questData.activeQuests[i]);
         }
+		*/
+		questManager.availableQuests = load.questData.availableQuests;
+		questManager.activeQuests = load.questData.activeQuests;
+		questManager.CompleteActiveQuests();
         #endregion
     }
-
 
     private static void Save(string path)
 	{
@@ -125,12 +132,17 @@ public class SaveSystem : MonoBehaviour
         save.moneyData = new MoneyData(moneyManager.GetCurrentMoney());
         save.ambientData = new AmbientData(Ambient.GetCurrentTemperature(), Ambient.GetCurrentClimate(), AmbientManager.GetCurrentSeason(), AmbientManager.GetSeasonalFactor());
         save.idsData = new IDS_Data(IDS.GetIDS(), IDS.GetEcologico(), IDS.GetEconomico(), IDS.GetSocial());
-		save.tileData = new TileData(tilesParent);
+		//save.tileData = new TileData(tilesParent);
         save.inventoryData = new InventoryData(inventoryManager.playerInventory.items);
 		save.questData = new QuestData(questManager.availableQuests, questManager.activeQuests);
 
         Debug.Log("Relatório de salvamento gerado!");
         return save;
+	}
+
+	public static bool isFirstTime()
+	{
+		return !File.Exists(Application.persistentDataPath + "/SaveData.json");
 	}
 
 	#region // Data Classes
@@ -144,7 +156,7 @@ public class SaveSystem : MonoBehaviour
         public MoneyData moneyData;
         public AmbientData ambientData;
         public IDS_Data idsData;
-        public TileData tileData;
+        //public TileData tileData;
         public InventoryData inventoryData;
 		public QuestData questData;		
 	}

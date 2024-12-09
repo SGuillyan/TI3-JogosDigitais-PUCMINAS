@@ -21,8 +21,11 @@ public class VolumeSettings : MonoBehaviour
 
     void Start()
     {
-        musicSlider.value = PlayerPrefs.GetFloat(AudioManager.MUSIC_KEY, 0.5f);
-        sfxSlider.value = PlayerPrefs.GetFloat(AudioManager.SFX_KEY, 0.5f);
+        if (SaveSystem.isFirstTime())
+        {
+            musicSlider.value = PlayerPrefs.GetFloat(AudioManager.MUSIC_KEY, 0.5f);
+            sfxSlider.value = PlayerPrefs.GetFloat(AudioManager.SFX_KEY, 0.5f);
+        }        
     }
 
     void OnDisable()

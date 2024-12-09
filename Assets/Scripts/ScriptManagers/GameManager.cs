@@ -9,10 +9,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //if (SaveSystem.isFirstTime())
-        //{
-        Inicialize(65);
-        //}
+        if (SaveSystem.isFirstTime())
+        {
+            Inicialize(65);
+        }
     }
 
     public void Inicialize(int money)

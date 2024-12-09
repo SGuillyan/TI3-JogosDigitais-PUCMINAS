@@ -12,7 +12,13 @@ public class SaveManager : MonoBehaviour
         _periodicSavingTime = periodicSavingTime;
         periodicSaving_tt = _periodicSavingTime;
 
-        //SaveSystem.Load();
+        if (!SaveSystem.isFirstTime())
+        {
+            SaveSystem.Load();
+            Debug.Log("Deu load corretamente!");
+        }
+
+        //Debug.Log(Application.persistentDataPath + "/SaveData.json");
     }
 
     private void Update()
@@ -33,5 +39,16 @@ public class SaveManager : MonoBehaviour
     {
         SaveSystem.Save();
         //AnalyticsSystem.SendEmail(AnalyticsSystem.GenerateAnalyticsJsonReport());
+    }
+
+    [ContextMenu("Save")]
+    private void TestSave()
+    {
+        SaveSystem.Save();
+    }
+    [ContextMenu("Load")]
+    private void TestLoad()
+    {
+        SaveSystem.Load();
     }
 }
