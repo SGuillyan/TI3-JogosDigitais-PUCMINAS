@@ -22,6 +22,14 @@ public class QuestManager : MonoBehaviour
 
     private void Start()
     {
+        //if (SaveSystem.isFirstTime())
+        //{
+            Inicialize();
+        //}
+    }
+
+    public void Inicialize()
+    {
         CompleteActiveQuests();
     }
 

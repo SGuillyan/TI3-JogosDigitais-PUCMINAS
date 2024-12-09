@@ -5251,7 +5251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0af27be08a5698745bc4591da810933d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  temperatureUpdateTime: 60
+  temperatureUpdateTime: 3600
   updateChange: 1
   weatherController: {fileID: 297704448}
 --- !u!4 &297704446
@@ -10761,7 +10761,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749886867}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 723a046309cd00b4f97c81bab1c127de, type: 3}
   m_Name: 
@@ -10773,7 +10773,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749886867}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb237abe721fbff42b17f39e2369ffde, type: 3}
   m_Name: 
@@ -12055,7 +12055,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875290589}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41522f05f54505c4cbbf285a0b267b2d, type: 3}
   m_Name: 
@@ -15926,9 +15926,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   availableQuests:
   - {fileID: 962082493421946576, guid: 84f22bb3009c387469a362ac34030d4d, type: 3}
+  - {fileID: 7371652944598274234, guid: de9126b755785de4b93b81fb68157eb3, type: 3}
   - {fileID: 3050964784897884486, guid: 5d58121be1a473c48b1babd595cfe40c, type: 3}
   - {fileID: 7949352275456481334, guid: 94c8f60e17371f446bcffb86a0762262, type: 3}
+  - {fileID: 7371652944598274234, guid: e8e2a2e9025891146b51f11697798520, type: 3}
   - {fileID: 7371652944598274234, guid: 628a40bceb967c547aa5cb976c95821e, type: 3}
+  - {fileID: 7371652944598274234, guid: d1691a785cc2f704cbdbd6753e4b66c5, type: 3}
   activeQuests: []
   inventoryManager: {fileID: 1807522567}
   questButtomContent: {fileID: 1230067506}
@@ -26956,7 +26959,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1946661188}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e22dd9df148088e4bbb19810c23a869d, type: 3}
   m_Name: 
@@ -26970,11 +26973,12 @@ MonoBehaviour:
   bottomText2: {fileID: 1590376940}
   eventsWarning:
   - {fileID: 11400000, guid: 5a4998be306cf83489c08e63ea8a60ee, type: 2}
+  - {fileID: 11400000, guid: c0ec9c437595d3d4eb3b976eca25864d, type: 2}
   eventsTask:
-  - {fileID: 11400000, guid: 7149fa9bd5f9e4a4fba9232b9fb45e9e, type: 2}
-  - {fileID: 11400000, guid: 6d1f7c671d6f7b14e91ca23a407d991f, type: 2}
-  - {fileID: 11400000, guid: 61ddb557d682c2a4395d454a5df5f1df, type: 2}
   - {fileID: 11400000, guid: d03caf75d1c55364b8365089d620965e, type: 2}
+  - {fileID: 11400000, guid: 61ddb557d682c2a4395d454a5df5f1df, type: 2}
+  - {fileID: 11400000, guid: 6d1f7c671d6f7b14e91ca23a407d991f, type: 2}
+  - {fileID: 11400000, guid: 7149fa9bd5f9e4a4fba9232b9fb45e9e, type: 2}
   eventCallTimer: 2400
 --- !u!1 &1949110643
 GameObject:

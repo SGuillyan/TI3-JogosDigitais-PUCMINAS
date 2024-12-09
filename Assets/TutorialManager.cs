@@ -32,6 +32,16 @@ public class TutorialManager : MonoBehaviour
 
     void Start()
     {
+        //if (SaveSystem.isFirstTime())
+        //{
+            Inicialize(false);
+        //}
+    }
+
+    public void Inicialize(bool tutirialCompleted)
+    {
+        this.tutirialCompleted = tutirialCompleted;
+
         // Inicializa o tutorial mostrando o primeiro passo
         if (tutorialSteps.Length > 0 && !tutirialCompleted)
         {
