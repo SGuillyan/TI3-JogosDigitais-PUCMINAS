@@ -146,11 +146,11 @@ public class TilemapManager : MonoBehaviour
                 }
 
                 TileInfo tileInfo = new TileInfo(
-                    defaultTile.isPlantable,
-                    defaultTile.nitrogen,
-                    defaultTile.phosphorus,
-                    defaultTile.potassium,
-                    defaultTile.humidity
+                    defaultTile.IsPlantable,
+                    defaultTile.Nitrogen,
+                    defaultTile.Phosphorus,
+                    defaultTile.Potassium,
+                    defaultTile.Humidity
                 );
                 SetTileInfo(position, tileInfo);
             }
@@ -196,7 +196,7 @@ public class TilemapManager : MonoBehaviour
         }
         else
         {
-            Debug.Log($"Nao reconhido {tile} como PlantTile");
+           // Debug.Log($"Nao reconhido {tile} como PlantTile");
         }	
 
         // Atualiza o tile visualmente no Tilemap
@@ -272,10 +272,19 @@ public class TilemapManager : MonoBehaviour
     }
 
     // Associa um objeto instanciado a uma posição de tile
-    public void SetInstantiatedTile(Vector3Int position, GameObject tileObject)
+    public void SetInstantiatedTile(Vector3Int position, GameObject tileInstance)
     {
-        instantiatedTileDictionary[position] = tileObject;
+        if (instantiatedTileDictionary.ContainsKey(position))
+        {
+            Debug.LogWarning($"Substituindo instância existente na posição {position}. Verifique se isso é esperado.");
+            instantiatedTileDictionary[position] = tileInstance; // Substituir instância existente
+        }
+        else
+        {
+            instantiatedTileDictionary.Add(position, tileInstance); // Adicionar nova instância
+        }
     }
+
 
     public void RemoveInstantiatedTile(Vector3Int position)
     {

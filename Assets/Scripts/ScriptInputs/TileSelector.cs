@@ -234,7 +234,7 @@ public class TileSelector : MonoBehaviour
 
     void UseHarvestTool(TileBase tile, Vector3Int gridPosition)
     {
-        if (tile is PlantTile plantTile && plantTile.isFullyGrown)
+        if (tile is PlantTile plantTile && plantTile.IsFullyGrown)
         {
             plantTile.Collect(tilemap, gridPosition, playerInventory);
 
@@ -257,7 +257,7 @@ public class TileSelector : MonoBehaviour
             {
                 if(itemID>= 0 && itemID <= 99){
                     TileInfo tileInfo = tilemapManager.GetTileInfo(gridPosition);
-
+                    //Debug.Log(tileInfo.isPlantable);
                     // Verifica se o tile é plantável
                     if (tileInfo != null && tileInfo.isPlantable)
                     {
@@ -291,7 +291,7 @@ public class TileSelector : MonoBehaviour
             {
                 if (clickedTile is CustomTileBase tileData)
                 {
-                    uiManager.UpdateTileInfo(tileData.sprite, tileInfo.nitrogen, tileInfo.phosphorus, tileInfo.potassium, tileInfo.humidity, tileInfo.isPlantable);
+                    uiManager.UpdateTileInfo(tileData.Sprite, tileData.Nitrogen, tileData.Phosphorus, tileData.Potassium, tileData.Humidity, tileData.IsPlantable);
                 }
                 else if (clickedTile is PlantTile tileData2)
                 {
@@ -299,7 +299,7 @@ public class TileSelector : MonoBehaviour
                 }
                 else if (clickedTile is TreeTile tileData3)
                 {
-                    uiManager.UpdateTileInfo(tileData3.sprite, tileData3.nitrogen, tileData3.phosphorus, tileData3.potassium, tileData3.humidity, tileData3.isPlantable);
+                    uiManager.UpdateTileInfo(tileData3.Sprite, tileData3.Nitrogen, tileData3.Phosphorus, tileData3.Potassium, tileData3.Humidity, tileData3.IsPlantable);
                 }
 
                 tileInfoAnimator.SetBool("OpenInfo", true);  // Ativa a animação de abertura

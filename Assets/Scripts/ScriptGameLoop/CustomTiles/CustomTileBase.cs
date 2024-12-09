@@ -5,20 +5,32 @@ using UnityEngine.Tilemaps;
 public class CustomTileBase : TileBase
 {
     // Propriedades personalizadas
-    public Sprite sprite;
-    public GameObject customTilePrefab;  // Prefab do GameObject associado ao tile
-    public GameObject plowedTilePrefab;  // Prefab do GameObject associado ao solo arado
-    public Color color = Color.white;
-    public bool isPlantable = false;  // O tile começa não plantável
+    [SerializeField] private Sprite sprite;
+    [SerializeField] private GameObject customTilePrefab;  // Prefab do GameObject associado ao tile
+    [SerializeField] private GameObject plowedTilePrefab;  // Prefab do GameObject associado ao solo arado
+    [SerializeField] private Color color = Color.white;
+    [SerializeField] private bool isPlantable = false;  // O tile começa não plantável
 
     // Nutrientes NPK no tile
-    public int nitrogen = 1000;
-    public int phosphorus = 1000;
-    public int potassium = 1000;
-    public int humidity = 1000;
+    [SerializeField] private int nitrogen = 1000;
+    [SerializeField] private int phosphorus = 1000;
+    [SerializeField] private int potassium = 1000;
+    [SerializeField] private int humidity = 1000;
 
     // Estado de rotação (0 = 0°, 1 = 90°, 2 = 180°, 3 = 270°)
-    public int rotationState = 0;
+    [SerializeField] private int rotationState = 0;
+
+    // Propriedades públicas somente leitura
+    public Sprite Sprite => sprite;
+    public GameObject CustomTilePrefab => customTilePrefab;
+    public GameObject PlowedTilePrefab => plowedTilePrefab;
+    public Color TileColor => color;
+    public bool IsPlantable => isPlantable;
+    public int Nitrogen => nitrogen;
+    public int Phosphorus => phosphorus;
+    public int Potassium => potassium;
+    public int Humidity => humidity;
+    public int RotationState => rotationState;
 
     public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
     {
@@ -57,7 +69,7 @@ public class CustomTileBase : TileBase
                 if (groundObject != null)
                 {
                     tilemapManager.SetInstantiatedTile(position,groundObject);
-                    Debug.Log($"Adicionando ground em {position}, ao dicionario");
+                    // Debug.Log($"Adicionando ground em {position}, ao dicionario");
                 }
 
                 // Verificar se o tile é plantável e transformar em estado arado

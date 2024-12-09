@@ -22,5 +22,5 @@ MonoBehaviour:
   nitrogen: 1000
   phosphorus: 1000
   potassium: 1000
-  humidity: 1000
+  humidity: 50
   rotationState: 0

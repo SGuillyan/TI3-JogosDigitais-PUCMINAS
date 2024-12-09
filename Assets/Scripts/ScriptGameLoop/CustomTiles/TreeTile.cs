@@ -4,18 +4,31 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenu(fileName = "New Tree Tile", menuName = "Tiles/Tree Tile")]
 public class TreeTile : TileBase
 {
-    public Sprite sprite;                  // Sprite do tile
-    public GameObject treePrefab;          // Prefab da árvore a ser instanciada
-    public GameObject groundPrefab;        // Prefab do chão a ser instanciado
-    public CustomTileBase defaultTile;
-    public Color color = Color.white;      // Cor do tile (opcional)
+    // Propriedades personalizadas
+    [SerializeField] private Sprite sprite;                  
+    [SerializeField] private GameObject treePrefab;          
+    [SerializeField] private GameObject groundPrefab;        
+    [SerializeField] private CustomTileBase defaultTile;
+    [SerializeField] private Color color = Color.white;      
 
     // Propriedades para TileInfo
-    public bool isPlantable = false;
-    public int nitrogen = 2000;
-    public int phosphorus = 2000;
-    public int potassium = 2000;
-    public int humidity = 50;
+    [SerializeField] private bool isPlantable = false;
+    [SerializeField] private int nitrogen = 2000;
+    [SerializeField] private int phosphorus = 2000;
+    [SerializeField] private int potassium = 2000;
+    [SerializeField] private int humidity = 50;
+
+    // Propriedades públicas somente leitura
+    public Sprite Sprite => sprite;
+    public GameObject TreePrefab => treePrefab;
+    public GameObject GroundPrefab => groundPrefab;
+    public CustomTileBase DefaultTile => defaultTile;
+    public Color TileColor => color;
+    public bool IsPlantable => isPlantable;
+    public int Nitrogen => nitrogen;
+    public int Phosphorus => phosphorus;
+    public int Potassium => potassium;
+    public int Humidity => humidity;
 
     public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
     {

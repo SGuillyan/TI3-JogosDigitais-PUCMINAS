@@ -7,57 +7,72 @@ using TMPro;
 [CreateAssetMenu(menuName = "Tiles/Plant Tile2")]
 public class PlantTile : Tile
 {
-    public GameObject[] growthPrefabs;  // Prefabs para cada fase de crescimento da planta]
-    public GameObject rotPrefab;
-    public float[] growthTimes;  // Array para armazenar o tempo necessário para cada fase de crescimento
+    [Header("Growth Settings")]
+    [SerializeField] private GameObject[] growthPrefabs;  // Prefabs para cada fase de crescimento da planta
+    [SerializeField] private GameObject rotPrefab;
+    [SerializeField] private float[] growthTimes;  // Array para armazenar o tempo necessário para cada fase de crescimento
+
+    public GameObject[] GrowthPrefabs => growthPrefabs;
+    public GameObject RotPrefab => rotPrefab;
+    public float[] GrowthTimes => growthTimes;
 
     [Header("Ambient")]
-    //[Tooltip("Ambiente em que a planta está")]
-    //[SerializeField] private Ambient ambient;
-    [Tooltip("Temperatura ideal para o crescimento da planta")]
-    [SerializeField] private Ambient.Temperature idealTemperature;
-    [Tooltip("Clima ideal para o crescimento da planta")]
-    [SerializeField] private Ambient.Climate idealClimate;
-    [Tooltip("Tolerância máxima para o buff de crescimento, deve ser menor que a 'yellowTolerance'")]
-    [Range(0, 2)]
-    [SerializeField] private int greenTolerance = 0;
-    [Tooltip("Tolerância máxima para o crescimento normal, deve ser maior que a 'greenTolerance'")]
-    [Range(1, 4)]
-    [SerializeField] private int yellowTolerance = 2;
+    [SerializeField] private Ambient.Temperature idealTemperature;  // Temperatura ideal para o crescimento da planta
+    [SerializeField] private Ambient.Climate idealClimate;          // Clima ideal para o crescimento da planta
+    [SerializeField] [Range(0, 2)] private int greenTolerance = 0;  // Tolerância máxima para o buff de crescimento
+    [SerializeField] [Range(1, 4)] private int yellowTolerance = 2; // Tolerância máxima para crescimento normal
 
-    [Space(5)]
+    public Ambient.Temperature IdealTemperature => idealTemperature;
+    public Ambient.Climate IdealClimate => idealClimate;
+    public int GreenTolerance => greenTolerance;
+    public int YellowTolerance => yellowTolerance;
 
     [Header("Progress Bar")]
-    public GameObject progressBarPrefab;  // Prefab da barra de progresso
-    public GameObject plowedTilePrefab;
-    private GameObject progressBarInstance;  // Instância da barra de progresso
-    private Image progressBarFill;  // Referência ao preenchimento da barra de progresso
-    private TMP_Text progressBarText;  // Referência ao texto da barra de progresso
+    [SerializeField] private GameObject progressBarPrefab;
+    [SerializeField] private GameObject plowedTilePrefab;
 
-    public bool isPlanted = false;
-    public bool isFullyGrown = false;
-    public bool isRotten = false;
-    private bool isCollected = false; // Indica se a planta foi colhida
+    public GameObject ProgressBarPrefab => progressBarPrefab;
+    public GameObject PlowedTilePrefab => plowedTilePrefab;
 
+    [Header("Harvest Settings")]
+    [SerializeField] public Item harvestedItem;
+    [SerializeField] private TileBase soilTile;
+    [SerializeField] private int requiredNitrogen = 10;
+    [SerializeField] private int requiredPhosphorus = 5;
+    [SerializeField] private int requiredPotassium = 5;
+    [SerializeField] private int returnNitrogen = 5;
+    [SerializeField] private int returnPhosphorus = 3;
+    [SerializeField] private int returnPotassium = 4;
 
-    public Item harvestedItem;
-    public TileBase soilTile;
+    public Item HarvestedItem => harvestedItem;
+    public TileBase SoilTile => soilTile;
+    public int RequiredNitrogen => requiredNitrogen;
+    public int RequiredPhosphorus => requiredPhosphorus;
+    public int RequiredPotassium => requiredPotassium;
+    public int ReturnNitrogen => returnNitrogen;
+    public int ReturnPhosphorus => returnPhosphorus;
+    public int ReturnPotassium => returnPotassium;
 
+    // Private fields to store runtime data (not serialized)
+    private GameObject currentGrowthInstance;  // Instância atual do estágio de crescimento
+    private bool isPlanted = false;
+    private bool isFullyGrown = false;
+    private bool isRotten = false;
+    private bool isCollected = false;
     private int growthStage = 0;
     private float totalGrowthTime;
     private float currentGrowthTime;
+    private GameObject progressBarInstance; // Instância da barra de progresso
+    private Image progressBarFill;          // Referência ao preenchimento da barra de progresso
+    private TMP_Text progressBarText;       // Referência ao texto da barra de progresso
 
-    // Requisitos de Nutrientes NPK para crescer
-    public int requiredNitrogen = 10;
-    public int requiredPhosphorus = 5;
-    public int requiredPotassium = 5;
-
-    // Valores de NPK que a planta devolve ao solo após ser colhida
-    public int returnNitrogen = 5;
-    public int returnPhosphorus = 3;
-    public int returnPotassium = 4;
-
-    private GameObject currentGrowthInstance; // Instância atual do estágio de crescimento
+    public bool IsPlanted => isPlanted;
+    public bool IsFullyGrown => isFullyGrown;
+    public bool IsRotten => isRotten;
+    public bool IsCollected => isCollected;
+    public int GrowthStage => growthStage;
+    public float TotalGrowthTime => totalGrowthTime;
+    public float CurrentGrowthTime => currentGrowthTime;
 
     public void RecreatePlantInstance(Tilemap tilemap, Vector3Int position, string tileType, string instantiatedObjectName)
     {
@@ -87,9 +102,9 @@ public class PlantTile : Tile
             plowedTile.name = $"PlowedTile_{position.x}_{position.y}_{position.z}";
 
             // Atualizar o dicionário de objetos instanciados
-            tilemapManager.SetInstantiatedTile(position, plowedTile);
+            // tilemapManager.SetInstantiatedTile(position, plowedTile);
 
-            Debug.Log($"Ground transformado em PlowedTile na posição {position}");
+            //Debug.Log($"Ground transformado em PlowedTile na posição {position}");
         }
         else
         {
@@ -100,29 +115,36 @@ public class PlantTile : Tile
 
 
         // Extrair o estágio de crescimento do nome do objeto
-        int savedGrowthStage = 0;
-        float savedGrowthTime = 0f;
-        if (instantiatedObjectName != null && instantiatedObjectName.Contains("Stage"))
+        int savedGrowthStage = ParseGrowthStageFromName(instantiatedObjectName);
+
+    // Recriar a instância da planta com base no prefab correto
+        if (growthPrefabs != null && savedGrowthStage < growthPrefabs.Length)
+        {
+            GameObject newPlantInstance = Instantiate(growthPrefabs[savedGrowthStage],
+                tilemap.CellToWorld(position) + new Vector3(0.5f, 0, 0.5f),
+                Quaternion.identity,
+                tilemap.transform);
+            newPlantInstance.name = $"{tileType}_Stage{savedGrowthStage}_{position.x}_{position.y}_{position.z}";
+            tilemapManager.SetInstantiatedTile(position, newPlantInstance);
+            ResumeGrowth(tilemap, position, savedGrowthStage, 0, tilemapManager);
+        }
+    }
+
+    private int ParseGrowthStageFromName(string instantiatedObjectName)
+    {
+        if (!string.IsNullOrEmpty(instantiatedObjectName) && instantiatedObjectName.Contains("Stage"))
         {
             string[] parts = instantiatedObjectName.Split('_');
             foreach (string part in parts)
             {
-                if (part.StartsWith("Stage"))
+                if (part.StartsWith("Stage") && int.TryParse(part.Replace("Stage", ""), out int stage))
                 {
-                    int.TryParse(part.Replace("Stage", ""), out savedGrowthStage);
-                    break;
+                    return stage;
                 }
             }
         }
-
-        // Recriar a instância da planta
-        if (growthPrefabs != null && savedGrowthStage < growthPrefabs.Length)
-        {
-            UpdateGrowthInstance(tilemap, position, growthPrefabs[savedGrowthStage]);
-            ResumeGrowth(tilemap, position, savedGrowthStage, savedGrowthTime, tilemapManager);
-        }
+        return 0; // Retorna 0 se o estágio não puder ser determinado
     }
-
 
     public void ResumeGrowth(Tilemap tilemap, Vector3Int position, int savedGrowthStage, float savedGrowthTime, MonoBehaviour caller)
     {
@@ -200,27 +222,6 @@ public class PlantTile : Tile
             }
         }
     }
-
-
-
-
-
-    private int ParseGrowthStageFromName(string name)
-    {
-        if (string.IsNullOrEmpty(name)) return 0;
-
-        string[] parts = name.Split('_');
-        foreach (var part in parts)
-        {
-            if (part.StartsWith("Stage") && int.TryParse(part.Substring(5), out int stage))
-            {
-                return stage;
-            }
-        }
-        return 0; // Retorna 0 como padrão caso o estágio não seja encontrado
-    }
-
-
 
 
     public void Plant(Tilemap tilemap, Vector3Int position, MonoBehaviour caller)
@@ -437,20 +438,21 @@ public class PlantTile : Tile
             Destroy(currentGrowthInstance);
         }
 
-        // Instancia o prefab correspondente ao estágio de crescimento
+        // Instanciar o prefab correspondente ao estágio de crescimento
         if (growthPrefab != null)
         {
-            Vector3 worldPos = tilemap.CellToWorld(position) + new Vector3(0.5f, 0, 0.5f);  // Ajuste a posição do prefab
+            Vector3 worldPos = tilemap.CellToWorld(position) + new Vector3(0.5f, 0, 0.5f); // Ajuste a posição do prefab
             currentGrowthInstance = Instantiate(growthPrefab, worldPos, Quaternion.identity);
 
-            // Atualiza o nome do objeto para refletir o tipo de planta e estágio de crescimento
+            // Atualiza o nome do objeto para refletir o tipo de planta, estágio de crescimento e posição
             string plantName = harvestedItem != null ? harvestedItem.itemName : "UnknownPlant";
             currentGrowthInstance.name = $"{plantName}_Stage{growthStage}_{position.x}_{position.y}_{position.z}";
 
-            // Atualiza o dicionário do TilemapManager
+            // Atualiza o dicionário do TilemapManager com a nova instância
             UpdateInstantiatedTileDictionary(position, currentGrowthInstance);
         }
     }
+
 
 
 
