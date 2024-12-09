@@ -32,6 +32,6 @@ public class SaveManager : MonoBehaviour
     public void SaveAndSendAnalytics()
     {
         SaveSystem.Save();
-        AnalyticsSystem.SendEmail(AnalyticsSystem.GenerateAnalyticsJsonReport());
+        //AnalyticsSystem.SendEmail(AnalyticsSystem.GenerateAnalyticsJsonReport());
     }
 }
