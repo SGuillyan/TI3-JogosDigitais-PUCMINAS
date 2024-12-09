@@ -9,8 +9,16 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        //if (SaveSystem.isFirstTime())
+        //{
+        Inicialize(65);
+        //}
+    }
+
+    public void Inicialize(int money)
+    {
         MoneyManager moneyManager = FindObjectOfType<MoneyManager>();
-        moneyManager.InitializeMoney(65);
+        moneyManager.InitializeMoney(money);
     }
 
     void Update()

@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08820d22aa7a813458e27bf17d72df5d, type: 3}
-  m_Name: Event_Heatwave
+  m_Name: Event_Storm
   m_EditorClassIdentifier: 
   warning: 1
-  description: A heatwave is in progress. Take care of yourself and your crops!!
+  description: A huge storm is on its way. Take cover!
   text1: 'Duration: '
   text2: 2 hours
   eventQuest: {fileID: 0}
   warningTime: 7200
-  warningTemperature: 9
-  warningClimate: 9
+  warningTemperature: 1
+  warningClimate: 1
