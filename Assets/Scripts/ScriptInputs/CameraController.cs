@@ -16,12 +16,15 @@ public class CameraController : MonoBehaviour
     [Tooltip("'Size' da c�mera m�nimo alcan�ado pelo zoom-in")]
     [SerializeField] private float minZoom;
 
+    private Vector3 initialPosition;
+
     private Vector2 lastPosition;
 
     private void Start()
     {
         m_camera = GetComponent<Camera>();
         m_camera.orthographicSize = (minZoom + maxZoom) / 2;
+        initialPosition = transform.position;
     }
 
     public void CameraInput()
@@ -95,5 +98,10 @@ public class CameraController : MonoBehaviour
             // Proje��o em perspectiva: ajusta o campo de vis�o
             m_camera.fieldOfView = Mathf.Clamp(m_camera.fieldOfView - zoomChange * zoomRate, minZoom, maxZoom);
         }
+    }
+
+    public void ResetCameraPosition()
+    {
+        transform.position = initialPosition;
     }
 }
