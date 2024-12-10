@@ -36,6 +36,7 @@ public class PlantTile : Tile
     public bool isPlanted = false;
     public bool isFullyGrown = false;
     public bool isRotten = false;
+    public float rotTime;
     private bool isCollected = false; // Indica se a planta foi colhida
 
 
@@ -207,18 +208,9 @@ public class PlantTile : Tile
 
     private IEnumerator Rot(Tilemap tilemap, Vector3Int position)
     {
-        // Soma o tempo total de crescimento
-        float totalGrowthTime = 0f;
-        foreach (float time in growthTimes)
-        {
-            totalGrowthTime += time;
-        }
-
-        // Define o tempo de apodrecimento (após o crescimento completo)
-        float timeToRot = totalGrowthTime;
 
         // Aguarda o tempo de apodrecimento após o crescimento completo
-        while (timeToRot > 0)
+        while (rotTime > 0)
         {
             if (isCollected)
             {
@@ -227,7 +219,7 @@ public class PlantTile : Tile
             }
 
             yield return null;
-            timeToRot -= Time.deltaTime;  // Reduz o tempo restante até apodrecer
+            rotTime -= Time.deltaTime;  // Reduz o tempo restante até apodrecer
         }
 
         // Se o tempo de apodrecimento passar, a planta apodrece

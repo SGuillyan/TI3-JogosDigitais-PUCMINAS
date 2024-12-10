@@ -41,6 +41,11 @@ public class SaveManager : MonoBehaviour
         //AnalyticsSystem.SendEmail(AnalyticsSystem.GenerateAnalyticsJsonReport());
     }
 
+    public void ButtomSave()
+    {
+        SaveSystem.Save();
+    }
+
     [ContextMenu("Save")]
     private void TestSave()
     {

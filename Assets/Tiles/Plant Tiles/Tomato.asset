@@ -55,6 +55,7 @@ MonoBehaviour:
   isPlanted: 0
   isFullyGrown: 0
   isRotten: 0
+  rotTime: 3600
   harvestedItem:
     itemName: Tomato
     itemIcon: {fileID: 0}

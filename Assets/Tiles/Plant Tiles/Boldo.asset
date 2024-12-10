@@ -46,14 +46,15 @@ MonoBehaviour:
   - 160
   - 160
   - 80
-  idealTemperature: 0
-  idealClimate: 0
+  idealTemperature: 5
+  idealClimate: 5
   greenTolerance: 1
   yellowTolerance: 2
   progressBarPrefab: {fileID: 0}
   isPlanted: 0
   isFullyGrown: 0
   isRotten: 0
+  rotTime: 3600
   harvestedItem:
     itemName: Boldo
     itemIcon: {fileID: 0}

@@ -46,8 +46,8 @@ MonoBehaviour:
   - 40
   - 40
   - 20
-  idealTemperature: 0
-  idealClimate: 0
+  idealTemperature: 4
+  idealClimate: 5
   greenTolerance: 1
   yellowTolerance: 2
   progressBarPrefab: {fileID: 5926695452129876053, guid: 583fdf575a31b6e4986acc39a145fea3,
@@ -55,6 +55,7 @@ MonoBehaviour:
   isPlanted: 0
   isFullyGrown: 0
   isRotten: 0
+  rotTime: 3600
   harvestedItem:
     itemName: Carrot
     itemIcon: {fileID: 21300000, guid: 9f47d9ee527c1d742b4f6961994f3028, type: 3}

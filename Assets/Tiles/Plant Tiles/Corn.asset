@@ -46,8 +46,8 @@ MonoBehaviour:
   - 140
   - 140
   - 70
-  idealTemperature: 0
-  idealClimate: 0
+  idealTemperature: 6
+  idealClimate: 5
   greenTolerance: 1
   yellowTolerance: 2
   progressBarPrefab: {fileID: 5926695452129876053, guid: 583fdf575a31b6e4986acc39a145fea3,
@@ -55,6 +55,7 @@ MonoBehaviour:
   isPlanted: 0
   isFullyGrown: 0
   isRotten: 0
+  rotTime: 3600
   harvestedItem:
     itemName: Corn
     itemIcon: {fileID: 21300000, guid: ff6bc2994a328a345a5f712910d5e2f5, type: 3}
